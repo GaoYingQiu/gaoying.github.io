@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="首先，产品经理应该做什么？ 帮助企业/用户为用户打造有价值的产品。  产品经理思维包括哪些？ 抓住需求的本质 - 人性 （一个优秀的产品经理需要具备抓住用户欲望的能力，而不是仅仅在产品上增加一个功能这么简单） 核心需求的把控能力。(无论功能如何增加和外界给予任何干扰，都需要时刻保证产品的核心不被影响) 时刻描画产品的蓝图 - 未来 （走一步，看百步。需要时刻心中明白产品的将来会是如何，最重要的是在">
+<meta name="description" content="消息布局观察：周边头像，昵称，间距  ，气泡 及其他统一，内容视图挖空； 采取自定义注入视图配置； 从CellFor 方法说起；聊天消息页面，我们看到 有 聊天消息 还有时间戳；根据 ModelItem项 的 class类型 分别去创建 两种cell ; 只里只讲 聊天消息cell;    流程：当为聊天消息Model 时候，名  messageModel（messageModel 里面 大致有以">
 <meta name="keywords" content="NewStyle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你是个合格的产品经理？">
-<meta property="og:url" content="http://gaoyingqiu.github.io/2017/09/04/你是个合格的产品经理？/index.html">
+<meta property="og:title" content="【聊聊关于聊天页面的设计风格与自定义】">
+<meta property="og:url" content="http://gaoyingqiu.github.io/2018/07/21/【聊聊关于聊天页面的设计风格与自定义】/index.html">
 <meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
-<meta property="og:description" content="首先，产品经理应该做什么？ 帮助企业/用户为用户打造有价值的产品。  产品经理思维包括哪些？ 抓住需求的本质 - 人性 （一个优秀的产品经理需要具备抓住用户欲望的能力，而不是仅仅在产品上增加一个功能这么简单） 核心需求的把控能力。(无论功能如何增加和外界给予任何干扰，都需要时刻保证产品的核心不被影响) 时刻描画产品的蓝图 - 未来 （走一步，看百步。需要时刻心中明白产品的将来会是如何，最重要的是在">
-<meta property="og:updated_time" content="2017-09-04T02:13:32.000Z">
+<meta property="og:description" content="消息布局观察：周边头像，昵称，间距  ，气泡 及其他统一，内容视图挖空； 采取自定义注入视图配置； 从CellFor 方法说起；聊天消息页面，我们看到 有 聊天消息 还有时间戳；根据 ModelItem项 的 class类型 分别去创建 两种cell ; 只里只讲 聊天消息cell;    流程：当为聊天消息Model 时候，名  messageModel（messageModel 里面 大致有以">
+<meta property="og:updated_time" content="2018-07-21T01:28:44.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你是个合格的产品经理？">
-<meta name="twitter:description" content="首先，产品经理应该做什么？ 帮助企业/用户为用户打造有价值的产品。  产品经理思维包括哪些？ 抓住需求的本质 - 人性 （一个优秀的产品经理需要具备抓住用户欲望的能力，而不是仅仅在产品上增加一个功能这么简单） 核心需求的把控能力。(无论功能如何增加和外界给予任何干扰，都需要时刻保证产品的核心不被影响) 时刻描画产品的蓝图 - 未来 （走一步，看百步。需要时刻心中明白产品的将来会是如何，最重要的是在">
+<meta name="twitter:title" content="【聊聊关于聊天页面的设计风格与自定义】">
+<meta name="twitter:description" content="消息布局观察：周边头像，昵称，间距  ，气泡 及其他统一，内容视图挖空； 采取自定义注入视图配置； 从CellFor 方法说起；聊天消息页面，我们看到 有 聊天消息 还有时间戳；根据 ModelItem项 的 class类型 分别去创建 两种cell ; 只里只讲 聊天消息cell;    流程：当为聊天消息Model 时候，名  messageModel（messageModel 里面 大致有以">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://gaoyingqiu.github.io/2017/09/04/你是个合格的产品经理？/"/>
+  <link rel="canonical" href="http://gaoyingqiu.github.io/2018/07/21/【聊聊关于聊天页面的设计风格与自定义】/"/>
 
 
 
 
 
-  <title>你是个合格的产品经理？ | Qyan's Blog  高颖</title>
+  <title>【聊聊关于聊天页面的设计风格与自定义】 | Qyan's Blog  高颖</title>
   
 
 
@@ -283,7 +283,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/04/你是个合格的产品经理？/">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/07/21/【聊聊关于聊天页面的设计风格与自定义】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuGaoYing">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">你是个合格的产品经理？</h1>
+          <h1 class="post-title" itemprop="name headline">【聊聊关于聊天页面的设计风格与自定义】</h1>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T10:05:34+08:00">
-                2017-09-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T09:25:29+08:00">
+                2018-07-21
               </time>
             
 
@@ -369,19 +369,13 @@
       
 
       
-        <h4 id="首先，产品经理应该做什么？"><a href="#首先，产品经理应该做什么？" class="headerlink" title="首先，产品经理应该做什么？"></a>首先，产品经理应该做什么？</h4><p><strong> <font color="orange">帮助企业/用户为用户打造有价值的产品。</font> </strong></p>
-<h4 id="产品经理思维包括哪些？"><a href="#产品经理思维包括哪些？" class="headerlink" title="产品经理思维包括哪些？"></a>产品经理思维包括哪些？</h4><ol>
-<li>抓住需求的本质 - 人性 （一个优秀的产品经理需要具备抓住用户欲望的能力，而不是仅仅在产品上增加一个功能这么简单）<br><br></li>
-<li>核心需求的把控能力。(无论功能如何增加和外界给予任何干扰，都需要时刻保证产品的核心不被影响)<br><br></li>
-<li>时刻描画产品的蓝图 - 未来 （走一步，看百步。需要时刻心中明白产品的将来会是如何，最重要的是在走向未来的过程中又需要哪些助力）<br><br></li>
-<li>不断复盘产品的现在 - 总结 （这个决定做的对吗？有什么数据支撑？ 产品人需一日三省，不断总结，不断修正，给自己日后决策更加充足的依据）<br><br></li>
-<li>无懈可击的思维 - 逻辑思维 （慎密的思维能力，对整个业务流程要非常熟悉。）<br><br></li>
-<li>产品的终极价值 - 商业盈利 （不断迭代的过程中，我们需要懂得如何帮助产品走到商业实现）<br><br></li>
-<li>做减法如同做加法 - 极简 （做产品不是做功能，产品不是功能的不断累加，我们需要给产品瘦身的机会，给用户极简的体验，设问：每个版本要上的功能，你能删掉一个吗？）<br><br></li>
-<li>懂得和不同的人打交道 - 沟通（应该好好思考如何与不同岗位的同学打交道，知道大家的性格特点，懂得如何把信息有效地传递。）<br><br></li>
-<li>管理好自己的时间和任务 - todolist (对时间管理要更加细分化，多用TodoList ，会有不少的帮助。)<br><br></li>
-<li>宰相肚里能撑船  - 抗压 （产品经理的特殊位置，导致了人人可喷的境遇。在如此逆境中，需要有一个广阔的胸怀和极强的抗压能力，其实这些都不是什么，因为我们眼里只有产品。）</li>
-</ol>
+        <p>消息布局观察：周边头像，昵称，间距  ，气泡 及其他统一，内容视图挖空； 采取自定义注入视图配置；</p>
+<p>从CellFor 方法说起；聊天消息页面，我们看到 有 聊天消息 还有时间戳；根据 ModelItem项 的 class类型 分别去创建 两种cell ; 只里只讲 聊天消息cell;   </p>
+<p>流程：当为聊天消息Model 时候，名  messageModel（messageModel 里面 大致有以下属性:   记录消息模型，消息布局，头像，昵称 显示控制，消息内容size; （不足 后补））； 取得消息布局； 相对应的content类字符串；根据 identify = content 去重用cell (不同消息类型重用标识不同 );   创建MessageCell 根据 content 去创建 对应的内容视图 即可；再刷新视图数据 赋值； </p>
+<p>布局来源：定义 一个 layoutconfigInterface;<br>layoutconfig 配置包含：{<br>1）message的内容大小；<br>2）需要创建显示的CellContent 类名<br>3）气泡的配置间距等<br>4）控制是否显示头像<br>5）控制是否 显示昵称<br>6）控制消息显示在左边还是在右边 （是否是自己发的）<br>}</p>
+<p>Content来源<br>1、contentConfigInterface 接口：<br>考虑到message的内容大小 和 cellContent 类名 是 属于 CellContent 配置； 于是 考虑用一个 cellConentConfigFactory 的工厂来生产这些配置 ； </p>
+<p>2、contentConfigInterface 实列<br>message的内容大小 和 cellContent 类名 抽出来 定义一个接口 ContentConfigInterface；<br>（考虑到有文本配置，图片配置，以及图文配置，后期 的扩展 声音配置，红包配置 ， 好友分享配置） 准备一个超级父类<br>BaseContentConfig （具有message属性，方便计算message内容的大小）；   后期配置只需继承 BaseContentConfig、实现ContentConfigInterface 接口 方法即可；</p>
+<p>3、最终要把配置contentConfigInterface 这样的实列 反馈给 布局管理器;  为了不暴露太多的详细contentConfig 细节 以及 低耦合；用一个<br>ConentConfigFactory 工厂生产这些配置玩意 ，根据消息类型  返回 消息内容配置 contentConfig （工厂单列，实列化的时候 创建了一个Map或者字典， 记录了消息类型 对应的 消息contentConfig;） </p>
 
       
     </div>
@@ -424,8 +418,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/04/营销六心理/" rel="next" title="营销六心理">
-                <i class="fa fa-chevron-left"></i> 营销六心理
+              <a href="/2018/07/20/【从极简聊聊客户端请求的设计】/" rel="next" title="【从极简聊聊客户端请求的设计】">
+                <i class="fa fa-chevron-left"></i> 【从极简聊聊客户端请求的设计】
               </a>
             
           </div>
@@ -433,10 +427,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/04/何为运营？/" rel="prev" title="何为运营？">
-                何为运营？ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,17 +476,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -558,22 +539,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先，产品经理应该做什么？"><span class="nav-number">1.</span> <span class="nav-text">首先，产品经理应该做什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#产品经理思维包括哪些？"><span class="nav-number">2.</span> <span class="nav-text">产品经理思维包括哪些？</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
