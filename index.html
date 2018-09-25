@@ -283,6 +283,142 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/25/【【HTTPS连接过程】】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/25/【【HTTPS连接过程】】/" itemprop="url">【HTTPS连接过程】</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T14:03:27+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
+                    <span itemprop="name">NewStyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>【HTTPS连接过程】<br>https协议就是http+ssl协议，如下图所示为其连接过程：<br>￼<img src="http://7xqhpe.com1.z0.glb.clouddn.com/20170509100144426.jpg" alt="图片"></p>
+<p>1.https请求<br>客户端向服务端发送https请求；<br>2.生成公钥和私钥<br>服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；<br>3.返回公钥<br>服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；<br>4.客户端验证公钥<br>客户端收到公钥之后，首先会验证其是否有效，如颁发机构或者过期时间等，如果发现有问题就会抛出异常，提示证书存在问题。如果没有问题，那么就生成一个随机值，作为客户端的密钥，然后用服务端的公钥加密；<br>5.发送客户端密钥<br>客户端用服务端的公钥加密密钥，然后发送给服务端。<br>6.服务端收取密钥，对称加密内容<br>服务端收到经过加密的密钥，然后用私钥将其解密，得到客户端的密钥，然后服务端把要传输的内容和客户端的密钥进行对称加密，这样除非知道密钥，否则无法知道传输的内容。<br>7.加密传输<br>服务端将经过加密的内容传输给客户端。<br>8.获取加密内容，解密<br>客户端获取加密内容后，用之前生成的密钥对其进行解密，获取到内容。<br>中间人劫持攻击<br>https也不是绝对安全的，如下图所示为中间人劫持攻击，中间人可以获取到客户端与服务器之间所有的通信内容。<br>￼￼<img src="http://7xqhpe.com1.z0.glb.clouddn.com/20170509104722086.jpg" alt="图片"></p>
+<p>中间人截取客户端发送给服务器的请求，然后伪装成客户端与服务器进行通信；将服务器返回给客户端的内容发送给客户端，伪装成服务器与客户端进行通信。<br>通过这样的手段，便可以获取客户端和服务器之间通信的所有内容。<br>使用中间人攻击手段，必须要让客户端信任中间人的证书，如果客户端不信任，则这种攻击手段也无法发挥作用。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/25/【新浪微博-推和拉】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1834,151 +1970,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/04/创业前的几点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/04/创业前的几点/" itemprop="url">创业前的几点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T11:37:44+08:00">
-                2017-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
-                    <span itemprop="name">NewStyle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="创业建议"><a href="#创业建议" class="headerlink" title="创业建议"></a>创业建议</h4><p>在合作方面不一定要找和自己相差不多的，因为这样彼此的眼光或者视野都比较短浅，合伙本来就是一种互助和学习的机会！我认为找合适的是必须的，同时先要了解对方的为人，因为合伙很容易出纠纷的！</p>
-<p>　　至于真正的合伙创业，我建议你慎重，至于网络工作室的想法是好的，一来你没有技术、没有太多的资金都不是最主要的问题，关键是，能否找到合适的人选！比如技术不到位下面的工作是无法继续的，同时技术需要专业，不然谈判的过程中没有说服力！</p>
-<p>　　至于资金，网络工作室的起步资金不需要太高，再加上合伙创业要给对方希望，大家有共同兴趣和目标这样才行，不然一切都是空谈！生意如此，合作也是如此！</p>
-<p>　　个人认为，一个网站的发展好坏，更多的取决于推广和管理运营，再好的商业模式，没有强有力的执行力也只不过是泡影而已。在这个过程中也认识不少做技术的朋友，开发了不少在技术上非常过硬的产品出来，做出不少有新概念的网站或者产品出来，但是我不知道他们在做的时候有没有考虑过市场的需求，或者有没有想过东西做出来谁会花钱买？</p>
-<p>　　一个不懂技术的人，不一定就一定不懂互联网，试问当今的互联网创业的大亨们，有几个是正统科班出身的？马云、朱俊、史玉柱。。。。。。他们懂得更多的是什么东西赚钱，怎么去做能赚钱。比起追求理想和境界的技术大师们，显得更现实了一些，更铜臭味了一些。</p>
-<h4 id="创业准备易犯的错误"><a href="#创业准备易犯的错误" class="headerlink" title="创业准备易犯的错误"></a>创业准备易犯的错误</h4><ol>
-<li>准备不足。（认真思考和对待自己的创业，是不是能聚合做这件事需要的要素，包括经验积累，团队，启动资金，资质牌照，商务渠道等，最基本的是经验和团队，另外最起码要有团队领导力等）</li>
-<li>过于重视点子，忽视执行。（创业的核心在执行。过于追求点子，一味求新求变，追求不同，反而导致一堆没有可执行性的计划。）</li>
-<li>选择过于复杂，超出创业公司能力的项目。</li>
-<li>长时间兼职创业。（创业准备，和研究时间不辞职是可以的，但长时间兼职创业是不可取的。兼职往往导致执行力低下，思考不深入，团队无法正真组建，不能吸引好的人加入。无法融资，最重要的是轻易放弃了市场机会。）</li>
-<li>多线开发，同时想做太多的事情。希望产品功能丰富，堆砌功能，没有抓住核心需求和核心价值。不注意政策和限制，选择太狭窄的方向，不去考虑推广的渠道，盈利模式等。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2029,7 +2020,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
