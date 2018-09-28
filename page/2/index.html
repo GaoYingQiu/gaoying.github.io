@@ -283,6 +283,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/06/21/HTTP协议详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/21/HTTP协议详解/" itemprop="url">HTTP 详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T11:16:39+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p><strong>请求头</strong> </p>
+<blockquote>
+<p>请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息，如<strong>Host</strong>: 主机名， <strong>Use-Agent</strong>: 浏览器基本资料， <strong>Accept</strong>: 浏览器能够识别的响应类型， <strong>Accept-Language</strong>: 浏览器默认语言， <strong>Accept-Encoding</strong>: 浏览器能够识别的压缩方式， <strong>Referer</strong>: 来路页面，<strong> Connecton</strong>：是否保持连接。</p>
+</blockquote>
+</li>
+<li><p>GET</p>
+<blockquote>
+<p>GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），如果数据是英文字母/数字，原样发送；如果是空格，转换为+；如果是中文/其他字符，则直接把字符串用BASE64加密，得出如： %E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><p>GET:特定浏览器和服务器对URL长度有限制.</p>
+<p>POST:由于不是通过URL传值，理论上数据不受 限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置</p>
+<h3 id="http请求content-Type"><a href="#http请求content-Type" class="headerlink" title="http请求content-Type"></a>http请求content-Type</h3><p>application/x-www-form-urlencoded：数据被编码为名称/值对。这是标准的编码格式。这种方式用的比较多。</p>
+<p>multipart/form-data： 数据被编码为一条消息，页上的每个控件对应消息中的一个部分。一般上传文件才会使用这种方式。</p>
+<p>text/plain： 数据以纯文本形式(text/json/xml/html)进行编码，其中不含任何控件或格式字符。一般向服务端发送json数据会使用这种方式。</p>
+<h3 id="HTTPS数据加密"><a href="#HTTPS数据加密" class="headerlink" title="HTTPS数据加密"></a>HTTPS数据加密</h3><p> HTTP协议传输的数据都是未加密的，也就是明文的，因此使用HTTP协议传输隐私信息非常不安全，为了保证这些隐私数据能加密传输，于是网景公司设计了SSL（Secure Sockets Layer）协议用于对HTTP协议传输的数据进行加密，从而就诞生了HTTPS</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/14/Runtime 到底是个什么鬼？/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1647,182 +1798,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/03/用户体验/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/03/用户体验/" itemprop="url">用户体验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-03T10:56:37+08:00">
-                2017-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
-                    <span itemprop="name">NewStyle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="优质的用户体验通常是怎样表达？"><a href="#优质的用户体验通常是怎样表达？" class="headerlink" title="优质的用户体验通常是怎样表达？"></a><font color="orange">优质的用户体验通常是怎样表达？</font></h3><ol>
-<li>传统方式可通过观察用户，用户访谈，问卷，面对面沟通，可以得到很多的细节之处。</li>
-<li>互联网时代，利用数据驱动设计，大数据量来分析用户体验。</li>
-</ol>
-<p>现实实例：网购，选产品，购物过程是否畅通，支付流程方便快捷？买家好不好，物流快不快等。这就是用户体验。</p>
-<h3 id="用户体验包括具体哪些角色？"><a href="#用户体验包括具体哪些角色？" class="headerlink" title="用户体验包括具体哪些角色？"></a><font color="orange">用户体验包括具体哪些角色？</font></h3><ol>
-<li>用户体验由产品经理，用户体验人员，设计师，运营人员和市场人员，商务拓展人员。用户在意的是最终的体验如何，而不是具体的中间流程。 </li>
-</ol>
-<h3 id="用户体验由谁来做？"><a href="#用户体验由谁来做？" class="headerlink" title="用户体验由谁来做？"></a><font color="orange">用户体验由谁来做？</font></h3><ol>
-<li>用户体验一定是由整个团队来实现，而不是靠单几个专业人员。任何一个环节出了问题，都会给用户体验带来灾难性的后果。</li>
-<li>用户体验要靠大家的集思广益，更多的讨论，更多的方案，和探索实验。</li>
-<li>用户体验，要靠快速把想法表达出来，快速尝试尽可能多的可能性。</li>
-<li>用户体验是典型自上而下的事情。这件事情必须是公司最高层，公司的创始人很在意的，才有可能用好。</li>
-<li>用户体验靠研发的每一个环节重点切入，尽早开始，快速设计，快速检验，充分利用数据反馈，请专业人士进行评审。</li>
-</ol>
-<h3 id="用户体验要在哪些方面提高？"><a href="#用户体验要在哪些方面提高？" class="headerlink" title="用户体验要在哪些方面提高？"></a><font color="orange">用户体验要在哪些方面提高？</font></h3><ol>
-<li>用户体验包括产品性能（使用起来快不快，是否流畅），产品的功能（能够实现哪些方面的功能），合适的价格（能不亏本的情况下，又能让人买得起）。</li>
-<li>用户体验最重要的一点就是你的产品针对核心用户是谁。把握用户的特点和使用习惯。就是要站在用户的角度去开发产品（用户思维）。</li>
-</ol>
-<h3 id="公司什么样的人适合做用户体验？"><a href="#公司什么样的人适合做用户体验？" class="headerlink" title="公司什么样的人适合做用户体验？"></a><font color="orange">公司什么样的人适合做用户体验？</font></h3><ol>
-<li>有一定的研发背景，然后又是个开放，愿意学习新东西，愿意接受用户体验，能够带领团队，能够从点点滴滴的细节做起。</li>
-</ol>
-<h3 id="什么才是好的用户体验？"><a href="#什么才是好的用户体验？" class="headerlink" title="什么才是好的用户体验？"></a><font color="orange">什么才是好的用户体验？</font></h3><ol>
-<li>最基础，有用，实用，很容易理解。</li>
-<li>易用（前提：针对某些合适的产品，如果是游戏或者企业级的应用的话，可能就不同了，反而比较复杂，可能还要经过培训或者较长的一段时间后才能了解）。</li>
-</ol>
-<ol>
-<li>使用后不容易遗忘，容易操作不容易犯错，有及时的反馈，有很好的一致性。有很多具体的元素。</li>
-<li>在用户体验的前提下，看是不是美观，是不是适合自己公司的品牌，氛围，气质。</li>
-<li>具有激发性。能够激发用户。</li>
-</ol>
-<p>现实实例：微博。我们之所以使用微博，最主要的原因是因为我们能看到好朋友的一些分享，动态等。看到关注我的人是不是又增加了几个，看看谁又转发了我的微博等。根据这点，我们做的产品可以根据用户产生的内容加上社交元素，使产品和用户的关系转向用户和用户的关系，点赞等，使得用户之间相互激励。</p>
-<ol>
-<li>具有漂亮的图标。尤其是消费者类型的产品。用户可能看到漂亮的图标就下载了。</li>
-<li>在消费领域的产品，一定要拿起就可以用。</li>
-<li>用户体验，产品一开始是针对种子用户，而后是调整面向大众。同时也不会影响种子用户的体验。</li>
-</ol>
-<p>总结一点：产品做得好了，挣钱，名誉所有的其他东西都会随之而来。不然的话，即便是获得了，也只是短暂的获得。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1868,7 +1848,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
