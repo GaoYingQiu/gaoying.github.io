@@ -283,6 +283,278 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/MVC设计模式见解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/28/MVC设计模式见解/" itemprop="url">MVC设计模式见解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T14:34:52+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
+                    <span itemprop="name">NewStyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>（控制器Controller）- 负责转发请求，网络处理，控制业务逻辑。</p>
+<p>（视图View） - 页面视图UI交互； 模型与视图不能通信，需通过控制器controller来实现；</p>
+<p>（模型Model） -  数据业务模型的呈现； 涉及到的UI 改动，数据驱动UI，改动数据即可；</p>
+<p>（ViewModel模型） - 在原有MVC 基础上多了一层，Controller不直接控制Model,   直接操作ViewModel 来管理； ViewModel （NSObject）的职责：数据逻辑处理,控制，算法，解析，网络处理等等；  不直接管理View;</p>
+<p>三层模式可有效降低项目偶尔度，有效业务规整，分类； 大大提高项目开发效率；</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/【几种典型的设计模式】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/28/【几种典型的设计模式】/" itemprop="url">【几种典型的设计模式】</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T14:07:37+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
+                    <span itemprop="name">NewStyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">----------  简单工厂模式：---------- </div><div class="line"></div><div class="line">定义一个计算接口。 </div><div class="line"></div><div class="line">定义四个加减乘除 的具有该接口功能 的类。</div><div class="line"></div><div class="line">定义一个工厂类。 用来创建 不同的 接口功能类。 </div><div class="line"></div><div class="line">根据不同的需要，通过 接口 接收对象， 调用不同的功能操作类的实现方法。</div><div class="line"></div><div class="line"></div><div class="line">----------  模板模式：---------- </div><div class="line"></div><div class="line">父类运行的时候，调用子类 重写的方法。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">----------  工厂模式：---------- </div><div class="line"></div><div class="line">定义一个接口功能。 两个数变量  ，有计算功能。 </div><div class="line"></div><div class="line">定义 不同的 功能接口实现类。 使用变量时候 用  @synthesize numberA = _numberA;</div><div class="line"></div><div class="line">定义一个类，定义创建工厂方法，不实现。改抽象工厂  具有计算接口功能。</div><div class="line"></div><div class="line">定义不同的工厂子类，实现创建工厂对象。 </div><div class="line"></div><div class="line">调用的时候，通过 不同的计算方法。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">----------  责任模式：---------- </div><div class="line"></div><div class="line">请假：</div><div class="line"></div><div class="line">定义一个 领导。 Manager  领导 具有批准请假功能。 内包含直属领导。</div><div class="line"></div><div class="line">领导有三级层次的领导。（内包含直属领导。如果自己审批时候发现 需要直属领导审批 则直接让直属领导操作）</div><div class="line"></div><div class="line">普通请假 普通领导批准，请假天数超过一定数需要更高级领导 批准。 普通领导 有直属 领导 。 普通领导处理时候 一级一级 处理上去 。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">----------  命令模式，享元模式：---------- </div><div class="line"></div><div class="line">定义一个菜单。Order . </div><div class="line"></div><div class="line">菜单有很多种菜单。 子类 order .  菜单中  厨师 cook  执行这个菜单。</div><div class="line"></div><div class="line">多个客户下单 。 waiter 统一接受 菜单。（不管点的什么菜）。</div><div class="line"></div><div class="line">watier 去传达给 cook 去 做不同的菜系。调用不同的子类菜单 让厨师去 做菜。</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/25/【【HTTPS连接过程】】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1660,316 +1932,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/14/Runtime 到底是个什么鬼？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/14/Runtime 到底是个什么鬼？/" itemprop="url">Runtime 到底是个什么鬼</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-14T09:44:28+08:00">
-                2017-09-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Runtime-到底是个什么鬼？"><a href="#Runtime-到底是个什么鬼？" class="headerlink" title="Runtime 到底是个什么鬼？"></a>Runtime 到底是个什么鬼？</h3><p>Runtime是Objective-C中底层的一套C语言API，是一个将C语言转化为面向对象语言的拓展。Runtime的一切都围绕两个中心：<strong>类的动态配置</strong> 和 <strong>消息传递</strong></p>
-<h4 id="能干啥？"><a href="#能干啥？" class="headerlink" title="能干啥？"></a>能干啥？</h4><ul>
-<li>动态的在内存中创建一个类</li>
-<li>给类增加一个属性</li>
-<li>给类增加一个协议实现</li>
-<li>给类增加一个方法实现IMP</li>
-<li>遍历一个类的所有成员变量、属性和方法等</li>
-</ul>
-<ul>
-<li>拦截系统自带的方法调用（Method Swizzling黑魔法）</li>
-<li>将某些OC代码转化为Runtime代码，探究底层。如block的实现原理</li>
-<li>实现给分类增加属性</li>
-<li>实现NSCoding的自动归档和接档</li>
-<li>实现字典的模型和自动转换</li>
-</ul>
-<h6 id="基本元素的认识"><a href="#基本元素的认识" class="headerlink" title="基本元素的认识"></a>基本元素的认识</h6><ol>
-<li>class 和 id  都被称为类对象。</li>
-<li>selector 可以理解为方法的ID, 通过 @selector 可以找到方法的地址。</li>
-<li>IMP是implementation  被称为 函数指针。</li>
-<li>Method 代表类中的某个方法类型。</li>
-<li>lvar 代表 实例变量类型。</li>
-<li>objc_property_t 是属性。 定义一个属性：typedef struct objc_property *objc_property_t;</li>
-<li>Category 分类。 可动态为已知类添加新的方法。</li>
-</ol>
-<h5 id="消息的传递过程"><a href="#消息的传递过程" class="headerlink" title="消息的传递过程"></a>消息的传递过程</h5><p>调用实例方法时，它会首先在自身isa指针指向的类（class）methodLists中查找该方法，如果找不到则会通过class的super_class指针找到父类的类对象结构体，然后从methodLists中查找该方法，如果仍找不到则继续通过super_class向上查找知道metaclass</p>
-<h5 id="实现例子"><a href="#实现例子" class="headerlink" title="实现例子"></a>实现例子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 遍历类中所有的变量</div><div class="line">-(void) getALLVariable&#123; </div><div class="line"></div><div class="line">    unsigned int count = 0;</div><div class="line">    Ivar *allVariables = class_copyIvarList([Student class], &amp;count);</div><div class="line"></div><div class="line">    for (int i = 0 ; i&lt; count; i++) &#123;</div><div class="line">            //遍历每一个变量,包括名称和类型</div><div class="line">        Ivar ivar = allVariables[i];</div><div class="line">        const char *VariableName = ivar_getName(ivar);</div><div class="line">        const char *VariableType = ivar_getTypeEncoding(ivar);</div><div class="line">        NSLog(@&quot;(Name:%s)-------(Type:%s)&quot;,VariableName,VariableType);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>若是想遍历属性列表可以将<code>class_copyIvarList</code>替换为<code>class_copyPropertyList</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//遍历类的方法</div><div class="line">-(void) getAllMethod&#123;</div><div class="line">    unsigned int count = 0;</div><div class="line">    Method *AllMethods = class_copyMethodList([Student class], &amp;count);</div><div class="line"></div><div class="line">    for (int i = 0 ; i&lt;count; i++) &#123;</div><div class="line"></div><div class="line">        Method method = AllMethods[i];</div><div class="line">        //获取SEL：SEL类型,即获取方法选择器@selector()</div><div class="line">        SEL sel = method_getName(method);</div><div class="line">        //得到sel的方法名：以字符串格式获取sel的name，也即@selector()中的方法名称</div><div class="line">        const char *methodName = sel_getName(sel);</div><div class="line">        NSLog(@&quot;-------the method :%s&quot;,methodName);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="动态改变一个类变量的数值"><a href="#动态改变一个类变量的数值" class="headerlink" title="动态改变一个类变量的数值"></a>动态改变一个类变量的数值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//改变Person变量的数值</div><div class="line">-(void) changeVariable&#123;</div><div class="line">    NSLog(@&quot;before change person : %@ -------&quot;,_person);</div><div class="line"></div><div class="line">    unsigned int count = 0;</div><div class="line">    Ivar *allList = class_copyIvarList([Person class], &amp;count);</div><div class="line">    for (int i = 0; i&lt; count; i++) &#123;</div><div class="line">        Ivar var = allList[i];</div><div class="line">        const char *varName = ivar_getName(var);</div><div class="line">        NSString *name = [NSString stringWithUTF8String:varName];</div><div class="line"></div><div class="line">        if ([name isEqualToString:@&quot;_name&quot;]) &#123;</div><div class="line">            object_setIvar(_person, var, @&quot;lannis&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    NSLog(@&quot;after change person : %@ -------&quot;,_person);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="动态添加方法"><a href="#动态添加方法" class="headerlink" title="动态添加方法"></a>动态添加方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">-(void) addMethod&#123;</div><div class="line">    class_addMethod([self class], @selector(addfunc3), (IMP)func3, &quot;v@:&quot;);</div><div class="line"></div><div class="line">    if ([self respondsToSelector:@selector(addfunc3)]) &#123;</div><div class="line">        [self performSelector:@selector(addfunc3)];</div><div class="line">    &#125;else&#123;</div><div class="line">        NSLog(@&quot;add method error&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void func3(id self,SEL _cmd)&#123;</div><div class="line">    NSLog(@&quot;%s&quot;,__func__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>调用<code>class_addMethod(__unsafe_unretained Class cls, SEL name, IMP imp, const char *types)</code>方法给指定类添加方法。<br>imp参数：实现被添加方法的函数，在本例中func3是指func3的地址指针；<br>types参数：一个定义该函数返回值类型和参数类型的字符串。本例中”v@:”意思是v代表无返回值void，@代表id sel；：代表SEL _cmd；<br>要注意的是：func3方法前的void不加+、-号，因为这是C的代码；必须有指定两个参数（id self，SEL _cmd）；</p>
-<h4 id="动态交换方法"><a href="#动态交换方法" class="headerlink" title="动态交换方法"></a>动态交换方法</h4><p>将存在的两个方法的实现进行交换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-(void) exchangeImplementations&#123;</div><div class="line">    Method m1 = class_getInstanceMethod([Person class], @selector(func1));</div><div class="line">    Method m2 = class_getInstanceMethod([Person class], @selector(func2));</div><div class="line"></div><div class="line">    method_exchangeImplementations(m1, m2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/04/Sale/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/04/Sale/" itemprop="url">Sale</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T11:53:54+08:00">
-                2017-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
-                    <span itemprop="name">NewStyle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="一个杯子的8种营销方案："><a href="#一个杯子的8种营销方案：" class="headerlink" title="一个杯子的8种营销方案："></a>一个杯子的8种营销方案：</h4><ol>
-<li>卖产品的本身使用价值，只能卖3元/个。</li>
-<li>卖产品的文化价值，可以卖5元/个。</li>
-<li>卖产品的品牌价值，可以卖7元/个。 （品牌标签）</li>
-<li>卖产品的组合价值，卖15元/个。（情侣，亲情套装）</li>
-<li>卖产品的延伸价值。（对人体有什么好处之类的）</li>
-<li>卖产品的细分市场价值 （情侣套装，12生肖，卡通动漫 之类的，精装礼盒）</li>
-<li>卖产品的包装价值。</li>
-<li>买产品的纪念价值。</li>
-</ol>
-<h4 id="营销解码："><a href="#营销解码：" class="headerlink" title="营销解码："></a>营销解码：</h4><p>消费者往往购买商品时，除了产品本身的使用价值外，更多的是购买一种感觉，文化，期望，面子，圈子，尊严，尊重，理解，地位等象征性的意义。<br>同样一个杯子，杯子里面的世界，它的功能，结构，作用，依然如故，随着外面的包装，它的价值就在提升。<br>采用不同的价值创新策略，精美的策划，就会让你的产品价值大大提升。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2020,7 +1982,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
