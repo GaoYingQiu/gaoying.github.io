@@ -372,8 +372,7 @@
 
       
         
-          <p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/WechatIMG253.jpeg!github" alt="图片"><br><img src="http://7xqhpe.com1.z0.glb.clouddn.com/WechatIMG252.jpeg!github" alt="图片2"></p>
-<p>当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；<br>当想收起时候，可用下拉，或者随着手势滑落下来；</p>
+          <p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/WechatIMG253.jpeg!github" alt="图片"><br><img src="http://7xqhpe.com1.z0.glb.clouddn.com/WechatIMG252.jpeg!github" alt="图片2"><br>当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；<br>当想收起时候，可用下拉，或者随着手势滑落下来；</p>
 <p>需解决的问题：<br>1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；<br>2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；<br>3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；</p>
 <p><strong>思考</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">手势开始：记录 开始点startY，</div><div class="line"></div><div class="line">手势移动：</div><div class="line">根据起始位置移动差  确定上滑动 ， 下滑动；  </div><div class="line"></div><div class="line">起点B 点 记录方向 0；</div><div class="line">B-A 正向， 记录方向符号 1；</div><div class="line">B-C 反向 ，记录方向 -1；</div><div class="line"></div><div class="line">偏移值 大于0 ， 上滑动； </div><div class="line">当B-A-C 后，立马记录 1 变成 -1；    记录标记状态前，</div><div class="line"></div><div class="line">正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；</div></pre></td></tr></table></figure>
