@@ -100,13 +100,13 @@
 <meta property="og:url" content="http://gaoyingqiu.github.io/2016/01/22/hexo-create-introduce/index.html">
 <meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
 <meta property="og:description" content="程序员都喜欢折腾，我也不列外。当然，用hexo 建博客也是当时碰巧在网上看到别人的博客，用来写技术，生活，读书，以及不一样的心情。当时我也很是好奇这样的博客是用什么搭建的。看到博尾有一行小字“Powered by Hexo.”, 于是，开始了自己的不断折腾。因为这段时间离职了，刚好也有空闲下来去做自己喜欢的事情。接下来，我大概按照我的思路记下来我搭建hexo的步骤。">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/avatar.jpg!qyanBlog">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/config_sshKey_success.png!qyanBlog">
-<meta property="og:updated_time" content="2016-01-26T07:43:39.000Z">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/avatar.jpg">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/config_sshKey_success.png">
+<meta property="og:updated_time" content="2019-01-26T08:12:13.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用 hexo 搭建属于自己的博客">
 <meta name="twitter:description" content="程序员都喜欢折腾，我也不列外。当然，用hexo 建博客也是当时碰巧在网上看到别人的博客，用来写技术，生活，读书，以及不一样的心情。当时我也很是好奇这样的博客是用什么搭建的。看到博尾有一行小字“Powered by Hexo.”, 于是，开始了自己的不断折腾。因为这段时间离职了，刚好也有空闲下来去做自己喜欢的事情。接下来，我大概按照我的思路记下来我搭建hexo的步骤。">
-<meta name="twitter:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/avatar.jpg!qyanBlog">
+<meta name="twitter:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/avatar.jpg">
 
 
 
@@ -373,11 +373,11 @@
 
       
         <p>程序员都喜欢折腾，我也不列外。当然，用hexo 建博客也是当时碰巧在网上看到别人的博客，用来写技术，生活，读书，以及不一样的心情。<br>当时我也很是好奇这样的博客是用什么搭建的。看到博尾有一行小字“Powered by Hexo.”, 于是，开始了自己的不断折腾。因为这段时间离职了，刚好也有空闲下来去做自己喜欢的事情。<br>接下来，我大概按照我的思路记下来我搭建hexo的步骤。<br><a id="more"></a></p>
-<p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/avatar.jpg!qyanBlog" alt="sea"></p>
+<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/avatar.jpg" alt="sea"></p>
 <h3 id="下载node-js"><a href="#下载node-js" class="headerlink" title="下载node.js"></a>下载node.js</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1) 在 Windows 环境下安装 Node.js 非常简单.到此处下载 [下载node.js](http://nodejs.org/)</div></pre></td></tr></table></figure>
 <h3 id="下载-Git稳定版"><a href="#下载-Git稳定版" class="headerlink" title="下载 Git稳定版"></a>下载 Git稳定版</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">由于git官网下载 可能比较缓慢，可通过其他途径如csdn下载。我下载的git版本是 2.6.2.windows.1</div></pre></td></tr></table></figure>
 <h3 id="配置Git-SSH-key。本地与github服务器链接。"><a href="#配置Git-SSH-key。本地与github服务器链接。" class="headerlink" title="配置Git SSH key。本地与github服务器链接。"></a>配置Git SSH key。本地与github服务器链接。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1)打开本地C:\Documents and Settings\Administrator.ssh\id_rsa.pub文件。此文件里面内容为刚才生成人密钥。</div><div class="line">如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。</div><div class="line">2)登陆github系统。点击右上角的 Account Settings---&gt;SSH Public keys ---&gt; add another public keys</div><div class="line">3)把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了</div><div class="line">4)测试是否配置成功  $ ssh -T git@github.com</div></pre></td></tr></table></figure>
-<p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/config_sshKey_success.png!qyanBlog" alt=""></p>
+<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/config_sshKey_success.png" alt=""></p>
 <h3 id="下载并安装-Hexo"><a href="#下载并安装-Hexo" class="headerlink" title="下载并安装 Hexo"></a>下载并安装 Hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1) 在任意位置打开 git bash .</div><div class="line">2) 运行以下命令 $ npm install -g hexo</div><div class="line">3) 下载完成后，在你喜欢的位置 如D:/hexo 下打开git bash 运行 hexo init  这个命令的意思是 Hexo 即会自动在目标</div><div class="line">文件夹建立网站所需要的所有文件</div><div class="line">4) 安装hexo 相关的依赖包 npm install</div><div class="line">5) 运行hexo g 编译静态文件 ，然后再hexo s 启动本地服务。检查安装是否成功 在浏览器地址输入 localhost:4000</div></pre></td></tr></table></figure>
 <h3 id="hexo-config的基本配置"><a href="#hexo-config的基本配置" class="headerlink" title="hexo config的基本配置"></a>hexo config的基本配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在hexo的根目录下配置 _config.yml 文件。</div></pre></td></tr></table></figure>
 <h3 id="下载并使用其他主题，主题的配置"><a href="#下载并使用其他主题，主题的配置" class="headerlink" title="下载并使用其他主题，主题的配置"></a>下载并使用其他主题，主题的配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1) 我使用的是next主题。进入你的hexo文件夹下，下载可以使用</div><div class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</div><div class="line">2) 下载安装，主题设置可参考 [Next主题](http://theme-next.iissnan.com/five-minutes-setup.html)</div></pre></td></tr></table></figure>
@@ -589,7 +589,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

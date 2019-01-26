@@ -99,25 +99,25 @@
 <meta property="og:url" content="http://gaoyingqiu.github.io/2016/11/11/Android-TableView/index.html">
 <meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
 <meta property="og:description" content="How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Stud">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get1.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get2.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get3.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get4.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab1.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab2.png!github">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab3.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab4.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab5.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_tableview.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_tableViewFragment.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_request1.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_request2.png">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_request3.png">
-<meta property="og:updated_time" content="2016-12-23T09:06:26.000Z">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get1.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get2.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get3.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get4.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab1.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab2.png!github">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab3.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab4.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab5.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableview.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableViewFragment.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request1.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request2.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request3.png">
+<meta property="og:updated_time" content="2019-01-26T08:10:32.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android-TableView">
 <meta name="twitter:description" content="How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Stud">
-<meta name="twitter:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/android_get1.png">
+<meta name="twitter:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get1.png">
 
 
 
@@ -366,33 +366,33 @@
 <p>when you push a new  Activity or back Activity, it’s due to the stack to manage the Activity status, but how to push a new Activity?</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(ReorderFour.this, ReorderTwo.class);    </div><div class="line"></div><div class="line">intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);</div><div class="line"></div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h4 id="Activity-Extented"><a href="#Activity-Extented" class="headerlink" title="Activity Extented"></a>Activity Extented</h4><h5 id="after-we-know-the-android-activity-i-want-tall-about-fragment"><a href="#after-we-know-the-android-activity-i-want-tall-about-fragment" class="headerlink" title="after we know the android activity, i want tall about fragment."></a>after we know the android activity, i want tall about fragment.</h5><h4 id="Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface"><a href="#Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface" class="headerlink" title="Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface."></a>Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface.</h4><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get1.png" alt="picture1"><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get2.png" alt="picture2"><br><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get3.png" alt="picture1"><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get4.png" alt="picture1"></p>
+<h4 id="Activity-Extented"><a href="#Activity-Extented" class="headerlink" title="Activity Extented"></a>Activity Extented</h4><h5 id="after-we-know-the-android-activity-i-want-tall-about-fragment"><a href="#after-we-know-the-android-activity-i-want-tall-about-fragment" class="headerlink" title="after we know the android activity, i want tall about fragment."></a>after we know the android activity, i want tall about fragment.</h5><h4 id="Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface"><a href="#Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface" class="headerlink" title="Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface."></a>Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface.</h4><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get1.png" alt="picture1"><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get2.png" alt="picture2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get3.png" alt="picture1"><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get4.png" alt="picture1"></p>
 <h6 id="so-what-about-the-fragment"><a href="#so-what-about-the-fragment" class="headerlink" title="so, what about the fragment ?"></a>so, what about the fragment ?</h6><ol>
 <li>tabbar interface is a activity contains one or more fragments.</li>
 <li>fragments lifecycle is rely one activity.   </li>
 </ol>
-<h6 id="what-did-I-do-to-make-layout-the-UITabarActivity"><a href="#what-did-I-do-to-make-layout-the-UITabarActivity" class="headerlink" title="what did I do to make layout the UITabarActivity?"></a>what did I do to make layout the UITabarActivity?</h6><h3 id="app-gradle-配置"><a href="#app-gradle-配置" class="headerlink" title="app gradle 配置"></a>app gradle 配置</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab1.png" alt="picture1"></p>
-<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab2.png!github" alt="picture2">  </p>
-<h3 id="Tabbar-Activity"><a href="#Tabbar-Activity" class="headerlink" title="Tabbar Activity"></a>Tabbar Activity</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab3.png" alt="picture1"></p>
-<h3 id="Layout-布局"><a href="#Layout-布局" class="headerlink" title="Layout 布局"></a>Layout 布局</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab4.png" alt="picture1"> </p>
-<h3 id="界面Fragment配置"><a href="#界面Fragment配置" class="headerlink" title="界面Fragment配置"></a>界面Fragment配置</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_tab5.png" alt="picture1"></p>
+<h6 id="what-did-I-do-to-make-layout-the-UITabarActivity"><a href="#what-did-I-do-to-make-layout-the-UITabarActivity" class="headerlink" title="what did I do to make layout the UITabarActivity?"></a>what did I do to make layout the UITabarActivity?</h6><h3 id="app-gradle-配置"><a href="#app-gradle-配置" class="headerlink" title="app gradle 配置"></a>app gradle 配置</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab1.png" alt="picture1"></p>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab2.png!github" alt="picture2">  </p>
+<h3 id="Tabbar-Activity"><a href="#Tabbar-Activity" class="headerlink" title="Tabbar Activity"></a>Tabbar Activity</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab3.png" alt="picture1"></p>
+<h3 id="Layout-布局"><a href="#Layout-布局" class="headerlink" title="Layout 布局"></a>Layout 布局</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab4.png" alt="picture1"> </p>
+<h3 id="界面Fragment配置"><a href="#界面Fragment配置" class="headerlink" title="界面Fragment配置"></a>界面Fragment配置</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab5.png" alt="picture1"></p>
 <p>ok,after you see my screenshots, you can know  , i use the ViewpagerIndicator to make a tabbar Activity . it can manager fragments. you can easy to change every fragment you need. </p>
 <h6 id="app-gradle-instroduce"><a href="#app-gradle-instroduce" class="headerlink" title="app gradle instroduce"></a>app gradle instroduce</h6><font color="#2D2D39" size="4.5px"><br>1. use the fastjson to make json parse.<br>2. use the butterknife replace the frequent findViewById.<br>3. use the ViewPagerIndicator to achieve a tabbarActivity interface.<br>4. use the android-smart-image-view to make the image cache.<br>5. use the android-async-http to make http request.<br>6. use the recycleView-v7 replace the android system listView.<br>7. use the bga-refreshlayout to make the pull refresh cool header.<br>8. finally, use cn.bingoogolapple:bga-adapter to make the recycleView cell Item can  right move delete, long press event ,ItemChildClickListener ,and so on .  all in all, bga-adapter is perfect !<br></font>
 
 <p><strong>For your convenience, i encapsulated a tableview like iOS UITableView , you can use the group style or plain style decide by youself; you can find it in the package com.lvj.bookoneday-&gt;widget.view</strong>   </p>
-<p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_tableview.png" alt="tableview like iOS UItableView">  </p>
+<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableview.png" alt="tableview like iOS UItableView">  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//定义表格的数据源接口</div><div class="line">public interface TableViewDataSource&lt;T&gt; &#123;</div><div class="line"></div><div class="line">    RecyclerViewCell&lt;T&gt;[]  getRecyclerCells(); //获取cell</div><div class="line">	int getItemViewType(int position);  //获取position: cell类型的tag</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//定义表格的事件委托源</div><div class="line"> public interface TableViewDelegate &#123;   </div><div class="line"> </div><div class="line">	void onTableViewDidSelectRow(int row);//点击单行   </div><div class="line">	void onTableViewDidLongClickRow(int row); //长按单行   </div><div class="line"> 	void onTableViewDidChangeCheckRow(int row, boolean isChecked); //选中行   </div><div class="line">	void onItemChildClick(View childView, int position); //item 点击</div><div class="line">	void onTableViewRefresh();//下拉刷新</div><div class="line">	void onTableViewLoadMore();  //加载更多</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>I create two java interface : TableViewDelete, TableViewDataSoucre. that you can easy<br>implements there’s methods .</li>
 <li>when you use the activity or fragment need tableView layout , you can easy and fast<br>layout ,and implements TableViewDelegate, TableViewDatasource.</li>
 </ul>
-<h4 id="for-examples"><a href="#for-examples" class="headerlink" title="for examples"></a>for examples</h4><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_tableViewFragment.png" alt="tableview like iOS UItableView"></p>
+<h4 id="for-examples"><a href="#for-examples" class="headerlink" title="for examples"></a>for examples</h4><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableViewFragment.png" alt="tableview like iOS UItableView"></p>
 <h3 id="Talk-about-Http-request"><a href="#Talk-about-Http-request" class="headerlink" title="Talk about Http request"></a>Talk about Http request</h3><p>you know, when your app ask a request, may be have two Design Patterns . it named “block”（anonymous inner classes） ,”delegate”(delegate is named by iOS. on java, it’s interface or ask “OOP” thoughts).</p>
 <h4 id="My-HttpRequest-Design"><a href="#My-HttpRequest-Design" class="headerlink" title="My HttpRequest Design"></a>My HttpRequest Design</h4><p>there is a abstract class named BaseDataService.  if you have a   new request . you just extend BaseDataService and @Override three methods. “getAPIRequestMethodName<br>, setRequestParams,parseResponse”. look these screenshots. And on your  Activity  or Fragments  , you just implemets RequestCallBackDelegate , and you can use your son of BaseDataService to make some request. </p>
-<h3 id="父类"><a href="#父类" class="headerlink" title="父类"></a>父类</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_request1.png" alt="tableview like iOS UItableView">   </p>
-<h3 id="子类继承父类"><a href="#子类继承父类" class="headerlink" title="子类继承父类"></a>子类继承父类</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_request2.png" alt="tableview like iOS UItableView">   </p>
-<h3 id="界面用子类请求实现"><a href="#界面用子类请求实现" class="headerlink" title="界面用子类请求实现"></a>界面用子类请求实现</h3><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/android_get_request3.png" alt="tableview like iOS UItableView"></p>
+<h3 id="父类"><a href="#父类" class="headerlink" title="父类"></a>父类</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request1.png" alt="tableview like iOS UItableView">   </p>
+<h3 id="子类继承父类"><a href="#子类继承父类" class="headerlink" title="子类继承父类"></a>子类继承父类</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request2.png" alt="tableview like iOS UItableView">   </p>
+<h3 id="界面用子类请求实现"><a href="#界面用子类请求实现" class="headerlink" title="界面用子类请求实现"></a>界面用子类请求实现</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request3.png" alt="tableview like iOS UItableView"></p>
 <p><em>For more info about the tableView how to work, you can find my   open source on my <a href="http://github.com/gaoyingqiu" target="_blank" rel="external">Github Android-TableView</a>,welcome make you suggestion. if you like this project, on my github, I hope you can click on the star in the upper right corner to give me more encouragement. thank you!</em></p>
 <h3 id="TO-Do-Introduce-Android-Service-components"><a href="#TO-Do-Introduce-Android-Service-components" class="headerlink" title="TO Do:  Introduce Android Service components"></a>TO Do:  Introduce Android Service components</h3>
       
@@ -597,7 +597,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

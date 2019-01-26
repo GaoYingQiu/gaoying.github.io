@@ -100,15 +100,15 @@
 <meta property="og:url" content="http://gaoyingqiu.github.io/2016/05/29/application-httpRequest-design/index.html">
 <meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
 <meta property="og:description" content="AFNetworking也被广泛使用。其它的ASIHttpRequest，MKNetworkKit啥的其实也都还不错，苹果对网络请求部分已经做了很好的封装。但不管如何，APP端还是要对网络进行一个封装。在实际的App开发中，Afnetworking已经成为了事实上各大App的标准配置。 iOS开发领域有很多对象间数据的传递方式，我看到的大多数App在网络层所采用的方案主要集中于这三种：Delega">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign1.png!qyanBlog">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign2.png!qyanBlog">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign3.png!qyanBlog">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign4.png!qyanBlog">
-<meta property="og:updated_time" content="2016-06-01T15:47:04.000Z">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign1.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign2.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign3.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign4.png">
+<meta property="og:updated_time" content="2019-01-26T08:13:14.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="application httpRequest design">
 <meta name="twitter:description" content="AFNetworking也被广泛使用。其它的ASIHttpRequest，MKNetworkKit啥的其实也都还不错，苹果对网络请求部分已经做了很好的封装。但不管如何，APP端还是要对网络进行一个封装。在实际的App开发中，Afnetworking已经成为了事实上各大App的标准配置。 iOS开发领域有很多对象间数据的传递方式，我看到的大多数App在网络层所采用的方案主要集中于这三种：Delega">
-<meta name="twitter:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign1.png!qyanBlog">
+<meta name="twitter:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign1.png">
 
 
 
@@ -378,10 +378,10 @@
 <p>iOS开发领域有很多对象间数据的传递方式，我看到的大多数App在网络层所采用的方案主要集中于这三种：Delegate，Notification，Block。我的意见是Delegate为主，Notification可以用在网络发生变化时候使用。<br><a id="more"></a></p>
 <h3 id="谈谈Notification"><a href="#谈谈Notification" class="headerlink" title="谈谈Notification"></a>谈谈Notification</h3><p>使用Notification来进行网络层和业务层之间数据的交换， 但是使用Notification给跨层数据交流开了一道口子，因为Notification的影响面不可控制，只要存在实例就存在被影响的可能。Notification因为支撑一对多的情况，这也给代码散落提供了条件。同时，Notification所对应的响应方法很难在编译层面作限制。</p>
 <h3 id="关于Block-之谈"><a href="#关于Block-之谈" class="headerlink" title="关于Block 之谈"></a>关于Block 之谈</h3><p>1、block很难追踪，难以维护。调试的时候有个block，如果想知道这个block里面都做了些什么事情，这时候就要从之前写的代码往回查了。。<br>2、block会延长相关对象的生命周期。block会给内部所有的对象引用计数加一，这一方面会带来潜在的retain cycle。这个时候在block块中需要使用weak self 修饰词。因为block会延长生命好周期，所以可能请求还在执行中，ViewController pop之后，请求还在飞。而delegate是弱引用，哪怕请求仍然在外面飞，ViewController还是能够及时被回收的，回收之后指针自动被置为了nil。</p>
-<h3 id="Delegate-委托"><a href="#Delegate-委托" class="headerlink" title="Delegate 委托"></a>Delegate 委托</h3><h4 id="封装请求基类-h-文件"><a href="#封装请求基类-h-文件" class="headerlink" title="封装请求基类 h 文件"></a>封装请求基类 h 文件</h4><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign1.png!qyanBlog" alt="封装请求基类"></p>
-<h4 id="BaseDataService-网络请求基类-m文件-初始化"><a href="#BaseDataService-网络请求基类-m文件-初始化" class="headerlink" title="BaseDataService 网络请求基类 m文件 初始化"></a>BaseDataService 网络请求基类 m文件 初始化</h4><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign2.png!qyanBlog" alt="封装请求基类"></p>
-<h4 id="BaseDataService-配置请求参数，调用具体业务请求子类"><a href="#BaseDataService-配置请求参数，调用具体业务请求子类" class="headerlink" title="BaseDataService 配置请求参数，调用具体业务请求子类"></a>BaseDataService 配置请求参数，调用具体业务请求子类</h4><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign3.png!qyanBlog" alt="封装请求基类"></p>
-<h4 id="BaseDataService-请求结束，通过委托调用viewController-所实现的成功-或失败的方法"><a href="#BaseDataService-请求结束，通过委托调用viewController-所实现的成功-或失败的方法" class="headerlink" title="BaseDataService 请求结束，通过委托调用viewController 所实现的成功 或失败的方法"></a>BaseDataService 请求结束，通过委托调用viewController 所实现的成功 或失败的方法</h4><p><img src="http://7xqhpe.com1.z0.glb.clouddn.com/netRequestDesign4.png!qyanBlog" alt="封装请求基类"></p>
+<h3 id="Delegate-委托"><a href="#Delegate-委托" class="headerlink" title="Delegate 委托"></a>Delegate 委托</h3><h4 id="封装请求基类-h-文件"><a href="#封装请求基类-h-文件" class="headerlink" title="封装请求基类 h 文件"></a>封装请求基类 h 文件</h4><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign1.png" alt="封装请求基类"></p>
+<h4 id="BaseDataService-网络请求基类-m文件-初始化"><a href="#BaseDataService-网络请求基类-m文件-初始化" class="headerlink" title="BaseDataService 网络请求基类 m文件 初始化"></a>BaseDataService 网络请求基类 m文件 初始化</h4><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign2.png" alt="封装请求基类"></p>
+<h4 id="BaseDataService-配置请求参数，调用具体业务请求子类"><a href="#BaseDataService-配置请求参数，调用具体业务请求子类" class="headerlink" title="BaseDataService 配置请求参数，调用具体业务请求子类"></a>BaseDataService 配置请求参数，调用具体业务请求子类</h4><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign3.png" alt="封装请求基类"></p>
+<h4 id="BaseDataService-请求结束，通过委托调用viewController-所实现的成功-或失败的方法"><a href="#BaseDataService-请求结束，通过委托调用viewController-所实现的成功-或失败的方法" class="headerlink" title="BaseDataService 请求结束，通过委托调用viewController 所实现的成功 或失败的方法"></a>BaseDataService 请求结束，通过委托调用viewController 所实现的成功 或失败的方法</h4><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/netRequestDesign4.png" alt="封装请求基类"></p>
 
       
     </div>
@@ -591,7 +591,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

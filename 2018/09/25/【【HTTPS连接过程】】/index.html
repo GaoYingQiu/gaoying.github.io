@@ -100,13 +100,13 @@
 <meta property="og:url" content="http://gaoyingqiu.github.io/2018/09/25/【【HTTPS连接过程】】/index.html">
 <meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
 <meta property="og:description" content="【HTTPS连接过程】https协议就是http+ssl协议，如下图所示为其连接过程：￼ 1.https请求客户端向服务端发送https请求；2.生成公钥和私钥服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；3.返回公钥服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；4.客户端验证公钥客户端收到公钥">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/20170509100144426.jpg">
-<meta property="og:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/20170509104722086.jpg">
-<meta property="og:updated_time" content="2018-09-25T06:08:20.638Z">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509100144426.jpg">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509104722086.jpg">
+<meta property="og:updated_time" content="2019-01-26T08:13:37.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【HTTPS连接过程】">
 <meta name="twitter:description" content="【HTTPS连接过程】https协议就是http+ssl协议，如下图所示为其连接过程：￼ 1.https请求客户端向服务端发送https请求；2.生成公钥和私钥服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；3.返回公钥服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；4.客户端验证公钥客户端收到公钥">
-<meta name="twitter:image" content="http://7xqhpe.com1.z0.glb.clouddn.com/20170509100144426.jpg">
+<meta name="twitter:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509100144426.jpg">
 
 
 
@@ -372,8 +372,8 @@
       
 
       
-        <p>【HTTPS连接过程】<br>https协议就是http+ssl协议，如下图所示为其连接过程：<br>￼<img src="http://7xqhpe.com1.z0.glb.clouddn.com/20170509100144426.jpg" alt="图片"></p>
-<p>1.https请求<br>客户端向服务端发送https请求；<br>2.生成公钥和私钥<br>服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；<br>3.返回公钥<br>服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；<br>4.客户端验证公钥<br>客户端收到公钥之后，首先会验证其是否有效，如颁发机构或者过期时间等，如果发现有问题就会抛出异常，提示证书存在问题。如果没有问题，那么就生成一个随机值，作为客户端的密钥，然后用服务端的公钥加密；<br>5.发送客户端密钥<br>客户端用服务端的公钥加密密钥，然后发送给服务端。<br>6.服务端收取密钥，对称加密内容<br>服务端收到经过加密的密钥，然后用私钥将其解密，得到客户端的密钥，然后服务端把要传输的内容和客户端的密钥进行对称加密，这样除非知道密钥，否则无法知道传输的内容。<br>7.加密传输<br>服务端将经过加密的内容传输给客户端。<br>8.获取加密内容，解密<br>客户端获取加密内容后，用之前生成的密钥对其进行解密，获取到内容。<br>中间人劫持攻击<br>https也不是绝对安全的，如下图所示为中间人劫持攻击，中间人可以获取到客户端与服务器之间所有的通信内容。<br>￼￼<img src="http://7xqhpe.com1.z0.glb.clouddn.com/20170509104722086.jpg" alt="图片"></p>
+        <p>【HTTPS连接过程】<br>https协议就是http+ssl协议，如下图所示为其连接过程：<br>￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509100144426.jpg" alt="图片"></p>
+<p>1.https请求<br>客户端向服务端发送https请求；<br>2.生成公钥和私钥<br>服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；<br>3.返回公钥<br>服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；<br>4.客户端验证公钥<br>客户端收到公钥之后，首先会验证其是否有效，如颁发机构或者过期时间等，如果发现有问题就会抛出异常，提示证书存在问题。如果没有问题，那么就生成一个随机值，作为客户端的密钥，然后用服务端的公钥加密；<br>5.发送客户端密钥<br>客户端用服务端的公钥加密密钥，然后发送给服务端。<br>6.服务端收取密钥，对称加密内容<br>服务端收到经过加密的密钥，然后用私钥将其解密，得到客户端的密钥，然后服务端把要传输的内容和客户端的密钥进行对称加密，这样除非知道密钥，否则无法知道传输的内容。<br>7.加密传输<br>服务端将经过加密的内容传输给客户端。<br>8.获取加密内容，解密<br>客户端获取加密内容后，用之前生成的密钥对其进行解密，获取到内容。<br>中间人劫持攻击<br>https也不是绝对安全的，如下图所示为中间人劫持攻击，中间人可以获取到客户端与服务器之间所有的通信内容。<br>￼￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509104722086.jpg" alt="图片"></p>
 <p>中间人截取客户端发送给服务器的请求，然后伪装成客户端与服务器进行通信；将服务器返回给客户端的内容发送给客户端，伪装成服务器与客户端进行通信。<br>通过这样的手段，便可以获取客户端和服务器之间通信的所有内容。<br>使用中间人攻击手段，必须要让客户端信任中间人的证书，如果客户端不信任，则这种攻击手段也无法发挥作用。</p>
 
       
@@ -559,7 +559,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
