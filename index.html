@@ -283,6 +283,148 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/02/09/转盘抽奖小功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/09/转盘抽奖小功能/" itemprop="url">转盘抽奖功能</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T21:02:48+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
+                    <span itemprop="name">NewStyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG8.jpeg" alt="图片"></p>
+<p><a href="https://github.com/GaoYingQiu/Rotary-Draw" target="_blank" rel="external">抽奖功能模块源码</a><br><strong><em>产品出发点</em></strong><br>1、通过动态抽奖数据和排行激发用户抽奖消费；<br>2、通过技能和宝石等以及转盘的燃爆值，中奖率翻倍等等吸引用户；<br>3、根本上是为了激发用户活跃性以及刺激消费</p>
+<p><strong><em>技术难点</em></strong><br>1、抽奖转盘分为两种转盘，业务逻辑分一个parentVC 管理两个 子 VC；<br>2、抽奖奖品服务端返回，显示在每一个扇形区域的中间，金额同似；<br>3、点击抽奖，拿到奖品id,  找出是在转盘中的哪个区域，让转盘指针停止在那一区域；<br>4、抽奖动态弹幕；<br>5、燃烧值 和 倒计时的控制；</p>
+<p><strong><em>业务操作说明</em></strong><br>1、两个转盘，某个转盘点击开始抽奖 互不影响； 黄金转盘具有宝箱和技能；<br>2、每抽取一次，扣除相应的金额，如有中奖，则弹出中奖奖品；抽奖分为单次，十连抽，三十连抽等；<br>3、抽奖后产生记录；在记录中可看到每次抽奖消费情况；<br>4、转盘有燃烧值，当满时候，触发倒计时3分钟，倒计时内 中奖率将翻倍；<br>5、燃烧值每3秒刷新一次，当中途离开再次打开，则拿到最新倒计时显示；<br>6、弹幕从最新100条记录 每隔2秒随机生成一条记录；</p>
+<p><strong><em>模块设计</em></strong><br>1、整个框架布局在一个  MainVC中控制转盘类型，请求余额，通知等刷新金额； 管理childVC ；<br>2、childVC 中 处理抽奖业务逻辑；UI 布局，抽奖请求，  燃烧值处理，弹幕处理；<br>3、其他功能性子View 单独自定义视图；   转盘视图，燃烧值进度视图，倒计时进度视图， 弹窗类视图；弹幕视图；<br>4、弹窗类视图 以一个ParentView公共视图容器 ，其中子视图由枚举参数值控制自定义；有玩法视图，记录视图，保险视图，技能视图，排行榜视图；<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/09/转盘抽奖小功能/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/地图多手势的应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1531,281 +1673,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/06/22/初级阶段/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/22/初级阶段/" itemprop="url">框架的学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-22T11:54:59+08:00">
-                2018-06-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
-                    <span itemprop="name">NewStyle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>苹果自带框架</li>
-<li><p>第三方框架</p>
-<ul>
-<li>AFNetworking</li>
-<li>SDAutoLayout</li>
-<li>YYKit</li>
-<li>SDWebImage</li>
-<li>MJRefresh</li>
-<li>MJExtension</li>
-<li>Bugly</li>
-<li></li>
-<li>Qiniu</li>
-<li>Masonry</li>
-<li>TZImagePickerController</li>
-<li>Hyphenate_CN</li>
-</ul>
-<p>基础UI控件</p>
-</li>
-<li><p>UILabel  标题栏</p>
-</li>
-<li>UIButton  按钮</li>
-<li>UIImageView  图片视图</li>
-<li>UITextField  文本输入框</li>
-<li>UITextView  文本展示视图</li>
-<li>UIProgressView  进度条</li>
-<li>UISlider  滑动开关</li>
-<li>UIGesture 手势</li>
-<li>UIActivityIndicator  菊花控件</li>
-<li>UIAlertView(iOS8废除) 警告框</li>
-<li>UIActionSheet(iOS8废除) 操作表单</li>
-<li>UIAlertController(iOS8出现) 警告视图控制器</li>
-<li>UIScrollView 滚动视图</li>
-<li>UIPageControl 页面控制器</li>
-<li>UISearchBar 搜索框</li>
-<li>UITableView 表视图</li>
-<li>UICollectionView集合视图</li>
-<li>UIWebView网页浏览器</li>
-<li>UISwitch开关</li>
-<li>UISegmentControl选择按钮</li>
-<li>UIPickerView选择器</li>
-<li>UIDatePicker日期选择器</li>
-<li>UIToolbar工具栏</li>
-<li>UINavigationBar通知栏</li>
-<li>UINavigationController通知视图控制器</li>
-<li>UITabbarController选择视图控制器</li>
-<li>UIImagePickerController相册</li>
-<li><p>UIImage图片</p>
-<p>Xcode的使用</p>
-</li>
-<li><p>基础操作 状态栏</p>
-</li>
-<li>偏好设置</li>
-<li>Xcode Source Control 源代码管理器</li>
-<li>Xcode workSpace工作组</li>
-<li>Xcode Scheme 计划</li>
-<li>Xcode AutoLayout 约束</li>
-<li>Xcode CoreData数据库</li>
-<li>LLDB 断点调试</li>
-<li>StoryBoard</li>
-<li>界面预览</li>
-<li>界面适配</li>
-<li>内存监测</li>
-<li>全局断点</li>
-<li><p>全局搜索替换</p>
-<p>数据存储</p>
-</li>
-<li><p>plist</p>
-</li>
-<li>NSKeyedArchiver</li>
-<li>SQLite</li>
-<li>FMDB</li>
-<li>CoreData</li>
-<li>NSUserDefault</li>
-<li>沙盒存储</li>
-<li><p>NSDictionary归档</p>
-<p>App生命周期</p>
-</li>
-<li><p>应用生命周期</p>
-</li>
-<li>控制器生命周期<ul>
-<li>alloc</li>
-<li>init</li>
-<li>创建View</li>
-<li>ViewDidLoad</li>
-<li>ViewWillAppear</li>
-<li>ViewDidAppear</li>
-<li>ViewWillDisappear<ul>
-<li>视图将要消失 (做一些视图将要消失时的UI的处理)</li>
-</ul>
-</li>
-<li>ViewDidDisappear<ul>
-<li>视图已经消失 (做一些视图消失之后数据的处理)</li>
-<li>viewDidDisappear销毁定时器</li>
-</ul>
-</li>
-<li>dealloc</li>
-<li>didReceiveMemoryWarning</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>通信</li>
-<li>NS系列</li>
-<li>宏定义</li>
-<li>视图层次</li>
-<li>切换视图</li>
-<li>深浅拷贝</li>
-<li>对象序列化</li>
-<li>写入文件</li>
-<li>获取沙盒路径</li>
-<li>翻转视图</li>
-<li>延伸视图</li>
-<li>九大基本数据类型</li>
-<li>九宫格</li>
-<li>坐标比较</li>
-<li>UIColor 、CIColor和CGColor 之间的关系</li>
-<li>画图</li>
-<li>静态变量</li>
-<li>tag值</li>
-<li>延时执行方法</li>
-<li>界面旋转+状态栏隐藏</li>
-<li>plist文件</li>
-<li>KVC/KVO</li>
-<li>谓词NSPredicate</li>
-<li>帧动画</li>
-<li>AutoLayout</li>
-<li>isKindOfClass 与 isMemberOfClass</li>
-<li>Return/Break/Continue</li>
-<li>Core Animation</li>
-<li>CALayer</li>
-<li>Quartz2D</li>
-<li>真机调试</li>
-<li>静态库</li>
-<li>内存管理</li>
-<li>iPad与iPhone的区别</li>
-<li>响应链</li>
-<li>异常捕捉</li>
-<li>国际化</li>
-<li>代码模块化</li>
-<li>类别/扩展</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1856,7 +1723,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
