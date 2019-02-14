@@ -283,6 +283,147 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/07/20/【从极简聊聊客户端请求的设计】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/【从极简聊聊客户端请求的设计】/" itemprop="url">【从极简聊聊客户端请求的设计】</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T09:28:50+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
+                    <span itemprop="name">NewStyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例；</p>
+<p>发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataRequest;  具体的请求，只需传 具体的子类request；</p>
+<p>一个APP 请求有很多，为了区分 及 维护方便 ，于是我定义了一个枚举；每个业务请求，只需给它表明一个标识；</p>
+<p>请求具有什么特性呢？ 1）有请求的API url地址，2）请求的参数，请求的标识（请求的枚举值）， 3）对请求回来的数据解析好封装（业务数据封装等处理）；   于是我定义了一个名叫APIInterface 的接口协议； 父类请求去实现这个APInterface接口协议； 子类去Override 这几个方法即可；</p>
+<p>发出一个请求，必然有 回答；要么成功，要么失败 （有的失败是业务码失败）； 于是 ，我定义了已一个请求回调的接口；RequestCallBackInterface ； （具有三个方法： 业务成功，业务失败，网络其他原因失败）</p>
+<p>我从VC 发出去的请求，相当于Android 的Activity; 熟称视图控制器；当然是希望请求回调 回到 视图控制器；<br>于是我 在 基类视图控制器 BaseViewController 或者BaseActivity(Android)  实现 请求回调 接口协议；实现其中的方法。<br>具体视图控制器 继承基类，  只需覆盖Override 这三个方法 （具体VC 实现回调后的业务）</p>
+<p>最后；页面逻辑就显示得比较简单了，一个单例 NetManager  执行一个 DataRequest (传具体请求子类) ； 视图控制器在具体RequestCallBackInterface  的回调方法 中处理 成功 ，失败后的数据； </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//登录请求</span></div><div class="line"><span class="keyword">self</span>.loginRequest.userLogin = <span class="keyword">self</span>.userName;</div><div class="line"><span class="keyword">self</span>.loginRequest.userPass =  <span class="keyword">self</span>.userPwd;</div><div class="line">[[GYNetworkingManager shareInstance] executeRequest:<span class="keyword">self</span>.loginRequest];</div><div class="line"></div><div class="line"><span class="comment">//朋友圈列表请求</span></div><div class="line"><span class="keyword">self</span>.dynamicListRequest.pageIndex = <span class="number">1</span>;</div><div class="line"><span class="keyword">self</span>.dynamicListRequest.pageSize = <span class="number">20</span>;</div><div class="line">[[GYNetworkingManager shareInstance] executeRequest:<span class="keyword">self</span>.dynamicListRequest];</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>) onRequestSuccess:(BaseResponse *)response</div><div class="line">&#123;</div><div class="line"><span class="keyword">switch</span> (response.requestAPICode ) &#123;  <span class="comment">//请求的枚举</span></div><div class="line"><span class="keyword">case</span> Http_Login:</div><div class="line">&#123;</div><div class="line"><span class="comment">//返回的登录对象</span></div><div class="line"><span class="comment">// LoginData *data  = response.responseObject;</span></div><div class="line"><span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">case</span> Http_DynamicList:</div><div class="line">&#123;</div><div class="line"><span class="comment">//如果是列表,则从取数组</span></div><div class="line"><span class="built_in">NSArray</span> *dataList  = response.tableList.dataList;</div><div class="line">[<span class="keyword">self</span> allLoadingCompleted:dataList];</div><div class="line"><span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">default</span>:</div><div class="line"><span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/06/22/中高级阶段/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1749,161 +1890,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/04/何为运营？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/04/何为运营？/" itemprop="url">何为运营？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T10:52:23+08:00">
-                2017-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
-                    <span itemprop="name">NewStyle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>产品运营往往是紧紧围绕三个目标： <font color="orange"> <strong>    产品，用户，渠道。</strong> </font></p>
-<h3 id="成功的运营能够挖掘用户的特点和需求。"><a href="#成功的运营能够挖掘用户的特点和需求。" class="headerlink" title="成功的运营能够挖掘用户的特点和需求。"></a>成功的运营能够挖掘用户的特点和需求。</h3><ol>
-<li>产品运营具体工作有哪些？</li>
-<li>运营策划： 主要是以数据为依据的产品运营方案策划，这块是重点。</li>
-<li>BD : 运营会接触到不同的渠道的转化效率，因此相对的需要和渠道商打交道或者公司内部的销售人员接触，这块实际也会涉及到一定的沟通协调公关的工作。</li>
-<li>媒介： 这里又包括文案的撰写，话题策划，软文发布等。</li>
-<li>活动营销： 结合产品推广和品牌宣传，策划活动营销方案并有力执行，促使达到提高产品和品牌知名度的目的，以及用户的调研奖励等。</li>
-<li>数据分析： 数据决定运营的执行。</li>
-<li>市场监控： 主要是战略层面，包括行业市场的监控以及竞争对手的监控。</li>
-</ol>
-<h3 id="产品运营有极为明确的目标。"><a href="#产品运营有极为明确的目标。" class="headerlink" title="产品运营有极为明确的目标。"></a>产品运营有极为明确的目标。</h3><ol>
-<li>营收：运营要找到商业模式，或者为现有的产品扩大营收。</li>
-<li>扩大用户群：让更多人知道，产品将更成功。</li>
-<li>用户活跃度：沉默的用户是没有多少商业价值的，只有活跃方能带来价值。</li>
-<li>好的产品是运营出来的。第一，它能在一个点上打动用户。第二， 它一定是靠持续改进，持续运营的东西。互联网本质就是服务，用户的需求不断在变，你就得随时调整。</li>
-</ol>
-<h3 id="目标决定数据取样，找到关键值并努力执行。"><a href="#目标决定数据取样，找到关键值并努力执行。" class="headerlink" title="目标决定数据取样，找到关键值并努力执行。"></a>目标决定数据取样，找到关键值并努力执行。</h3><ol>
-<li>看数据，分析数据，找到需要及时调整的数据。进行后续执行工作。</li>
-<li>首先是要有数据，其次是准确性，然后数据要有连贯性。再者，一切数据要有对比才能产生价值。最后得到结论。</li>
-<li>同时，关键数值是重要一环，可以省力高效；但真正每天围绕这个数值不断地努力执行下去才会有真正的提高。</li>
-<li>产品运营不要寄予希望最后一击命中用户需求，而重点应该稳定有效地一步步接触，引导，尝试，认知，渗透，熟悉 的过程。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1954,7 +1940,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
