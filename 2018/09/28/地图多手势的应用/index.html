@@ -102,7 +102,9 @@
 <meta property="og:description" content="当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来； 需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览； 思考 手势开始：记录 开始点startY， 手势移动：根据起始位置移">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG252.jpeg">
-<meta property="og:updated_time" content="2019-01-26T08:11:10.413Z">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide2OnView.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide1OnView.png">
+<meta property="og:updated_time" content="2019-02-18T09:49:42.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="地图多手势的应用">
 <meta name="twitter:description" content="当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来； 需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览； 思考 手势开始：记录 开始点startY， 手势移动：根据起始位置移">
@@ -383,6 +385,7 @@
 <p><strong><em>code :以下是重点逻辑代码；</em></strong></p>
 <a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">if(gestureRecognizer.state == UIGestureRecognizerStateChanged)&#123;</div><div class="line">    CGPoint point = [gestureRecognizer locationInView:self.view];</div><div class="line"></div><div class="line">    CGFloat topDistance = startSpanPoint.y - point.y;</div><div class="line">    if(topDistance &gt;0)&#123; //&gt;100 就是向上滑，但是要控制滑动的距离限制；</div><div class="line"></div><div class="line">        if(pointB1_Y == -1)&#123;</div><div class="line">        blChange = YES; //记录从往下变成往上；</div><div class="line">        &#125;else if(pointB1_Y == 0)&#123;</div><div class="line">        blChange = NO; //方向没有变更；</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        pointB1_Y = 1; //记录当前是往上推；</div><div class="line"></div><div class="line">        //往上推；</div><div class="line">        if(self.tableView.top == self.listViewMinTop)&#123;</div><div class="line">            self.tableView.scrollEnabled = YES;</div><div class="line">        &#125;else&#123;</div><div class="line">            if(self.datas.count &gt; 0)&#123; //无数据时候 不给往上推</div><div class="line">                //向上；上剩多少留多少 ;</div><div class="line">                if(bBottom_Top_Flag == NO)&#123;</div><div class="line">                    if(!blChange &amp;&amp; self.mapViewHeight - topDistance &gt;= self.listViewMinTop)&#123;</div><div class="line">                    self.tableView.top = self.mapViewHeight - topDistance;</div><div class="line">                    &#125;</div><div class="line">                &#125;else&#123;</div><div class="line">                    if(self.mapViewHeight - topDistance &gt;= self.listViewMinTop)&#123;</div><div class="line">                    self.tableView.top = self.mapViewHeight - topDistance;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;else if(topDistance&lt;0)&#123;</div><div class="line"></div><div class="line">        if(pointB1_Y == 1)&#123;</div><div class="line">        blChange = YES; //记录从往上变成往下；</div><div class="line">        &#125;else if(pointB1_Y == 0)&#123;</div><div class="line">        blChange = NO; //方向没有变更；</div><div class="line">        &#125;</div><div class="line">        pointB1_Y = -1; //记录当前是往下拉；</div><div class="line"></div><div class="line">        if(self.tableView.contentOffset.y&lt;=0 &amp;&amp; self.tableView.top &lt; self.mapViewHeight)&#123; //并且是在顶部小于0时候</div><div class="line"></div><div class="line">            self.tableView.contentOffset = CGPointMake(0, 0); //可写可不写；</div><div class="line">            self.tableView.scrollEnabled = NO;</div><div class="line"></div><div class="line">            if(bBottom_Top_Flag == YES)&#123;</div><div class="line">                if(!blChange &amp;&amp; self.listViewMinTop - topDistance &lt;= self.mapViewHeight)&#123;</div><div class="line">                self.tableView.top = self.listViewMinTop - topDistance;</div><div class="line">                &#125;</div><div class="line">            &#125;else&#123;</div><div class="line">                if(self.listViewMinTop - topDistance &lt;= self.mapViewHeight)&#123;</div><div class="line">                self.tableView.top = self.listViewMinTop - topDistance;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="单独写了个demo-，仿boss-直聘-查看更多职位，仿哈喽出现-app-扫码底部按钮-查看更多活动"><a href="#单独写了个demo-，仿boss-直聘-查看更多职位，仿哈喽出现-app-扫码底部按钮-查看更多活动" class="headerlink" title="单独写了个demo ，仿boss 直聘 查看更多职位，仿哈喽出现 app 扫码底部按钮 查看更多活动"></a>单独写了个demo ，仿boss 直聘 查看更多职位，仿哈喽出现 app 扫码底部按钮 查看更多活动</h3><p><a href="https://github.com/GaoYingQiu/GYSlideOnView" target="_blank" rel="external">Demo 源码</a><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide2OnView.png" alt="图片2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide1OnView.png" alt="图片"></p>
 
       
     </div>
@@ -487,8 +490,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -550,6 +562,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单独写了个demo-，仿boss-直聘-查看更多职位，仿哈喽出现-app-扫码底部按钮-查看更多活动"><span class="nav-number">1.</span> <span class="nav-text">单独写了个demo ，仿boss 直聘 查看更多职位，仿哈喽出现 app 扫码底部按钮 查看更多活动</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
