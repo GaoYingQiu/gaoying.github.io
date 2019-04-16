@@ -283,6 +283,146 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/07/21/【聊聊关于聊天页面的设计风格与自定义】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/21/【聊聊关于聊天页面的设计风格与自定义】/" itemprop="url">【聊聊关于聊天页面的设计风格与自定义】</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T09:25:29+08:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NewStyle/" itemprop="url" rel="index">
+                    <span itemprop="name">NewStyle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>消息布局观察：周边头像，昵称，间距  ，气泡 及其他统一，内容视图挖空； 采取自定义注入视图配置；</p>
+<p>从CellFor 方法说起；聊天消息页面，我们看到 有 聊天消息 还有时间戳；根据 ModelItem项 的 class类型 分别去创建 两种cell ; 只里只讲 聊天消息cell;   </p>
+<p>流程：当为聊天消息Model 时候，名  messageModel（messageModel 里面 大致有以下属性:   记录消息模型，消息布局，头像，昵称 显示控制，消息内容size; （不足 后补））； 取得消息布局； 相对应的content类字符串；根据 identify = content 去重用cell (不同消息类型重用标识不同 );   创建MessageCell 根据 content 去创建 对应的内容视图 即可；再刷新视图数据 赋值； </p>
+<p>布局来源：定义 一个 layoutconfigInterface;<br>layoutconfig 配置包含：{<br>1）message的内容大小；<br>2）需要创建显示的CellContent 类名<br>3）气泡的配置间距等<br>4）控制是否显示头像<br>5）控制是否 显示昵称<br>6）控制消息显示在左边还是在右边 （是否是自己发的）<br>}</p>
+<p>Content来源<br>1、contentConfigInterface 接口：<br>考虑到message的内容大小 和 cellContent 类名 是 属于 CellContent 配置； 于是 考虑用一个 cellConentConfigFactory 的工厂来生产这些配置 ； </p>
+<p>2、contentConfigInterface 实列<br>message的内容大小 和 cellContent 类名 抽出来 定义一个接口 ContentConfigInterface；<br>（考虑到有文本配置，图片配置，以及图文配置，后期 的扩展 声音配置，红包配置 ， 好友分享配置） 准备一个超级父类<br>BaseContentConfig （具有message属性，方便计算message内容的大小）；   后期配置只需继承 BaseContentConfig、实现ContentConfigInterface 接口 方法即可；</p>
+<p>3、最终要把配置contentConfigInterface 这样的实列 反馈给 布局管理器;  为了不暴露太多的详细contentConfig 细节 以及 低耦合；用一个<br>ConentConfigFactory 工厂生产这些配置玩意 ，根据消息类型  返回 消息内容配置 contentConfig （工厂单列，实列化的时候 创建了一个Map或者字典， 记录了消息类型 对应的 消息contentConfig;） </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/07/20/【从极简聊聊客户端请求的设计】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1746,150 +1886,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/04/提高执行力/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/04/提高执行力/" itemprop="url">提高执行力</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T11:13:02+08:00">
-                2017-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Teamer/" itemprop="url" rel="index">
-                    <span itemprop="name">Teamer</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="概念-什么是执行力"><a href="#概念-什么是执行力" class="headerlink" title="概念:什么是执行力?"></a>概念:什么是执行力?</h4><ul>
-<li>第一， 静态管理，也就是说，我们遵守制度。</li>
-<li>第二，指令如山。就是把所有的指令放在方向上，就是上司交代的事情，布置的任务如何尽快有效、高效地把它完成。</li>
-<li>第三，做事要有结果。所谓的做事就是一个工作流程，结果就是工作价值。</li>
-</ul>
-<h4 id="思考-怎样提高执行力"><a href="#思考-怎样提高执行力" class="headerlink" title="思考:怎样提高执行力?"></a>思考:怎样提高执行力?</h4><ol>
-<li>积极选拔合适的人到恰当的岗位上，还要锻炼员工队伍的执行能力.</li>
-<li>从服从开始抓，因为不服从怎么谈执行？服从也应当是员工的第一美德，任何<a href="http://info.ceo.hc360.com/list/qygl-zlgl-jzfz.shtml" target="_blank" rel="external">发展</a>战略、<a href="http://info.ceo.hc360.com/list/qygl-scyx.shtml" target="_blank" rel="external">营销</a>模式都要建立在员工服从的基础之上，每一位员工都必须服从上级领导的指挥安排，服从是执行的第一步。</li>
-<li>能够提高执行力的管理动作必须具备三个要素：标准、制约、责任。也就是说，事情怎么做必须要制订标准，要关注细节，要有人检查，形成监督和制约；最后，事情做的好与坏一定要追究责任，好的奖，坏的罚。 </li>
-<li>把工作项和任务进行排序。重要，紧要等。积极的态度去参与。  坚持。注重结果。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1940,7 +1936,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1951,7 +1947,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1962,7 +1958,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
