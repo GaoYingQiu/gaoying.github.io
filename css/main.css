@@ -1216,69 +1216,6 @@ pre .javascript .function {
 .use-motion .menu-item {
   opacity: 0;
 }
-.github-corner :hover .octo-arm {
-  animation: octocat-wave 560ms ease-in-out;
-}
-.github-corner > svg {
-  fill: #222;
-  color: #fff;
-  position: absolute;
-  top: 0;
-  border: 0;
-  right: 0;
-}
-@media (max-width: 991px) {
-  .github-corner .github-corner:hover .octo-arm {
-    animation: none;
-  }
-  .github-corner .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
-}
-@-moz-keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
-}
-@-webkit-keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
-}
-@-o-keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
-}
-@keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
-}
 .post-body {
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -1828,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fa33b3;
+  background: #e28f7d;
 }
 .feed-link,
 .chat {
@@ -2188,6 +2125,29 @@ pre .javascript .function {
   top: 50%;
   transform: translate(-50%, -50%);
   color: #ccc;
+}
+#needsharebutton-postbottom {
+  position: relative;
+  cursor: pointer;
+  height: 26px;
+}
+#needsharebutton-postbottom .btn {
+  display: initial;
+  padding: 1px 4px;
+  border: 1px solid #222;
+  border-radius: 3px;
+}
+#needsharebutton-float {
+  position: fixed;
+  bottom: 38px;
+  left: -8px;
+  z-index: 9999;
+  cursor: pointer;
+}
+#needsharebutton-float .btn {
+  padding: 0 10px 0 14px;
+  border: 1px solid #222;
+  border-radius: 4px;
 }
 .page-archive .archive-page-counter {
   position: relative;
