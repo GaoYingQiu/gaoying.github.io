@@ -15,16 +15,16 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-CN">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
 
   
   
-  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css"/>
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/css/main.css?v=7.1.0"/>
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
 
 
 
@@ -101,6 +101,7 @@
 <meta property="og:url" content="http://gaoyingqiu.github.io/2016/05/15/Iphone-XMPP-App-run-background/index.html">
 <meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
 <meta property="og:description" content="基于TCP的长连接。在使用 TCP 长连接的 IM 服务设计中，往往都会涉及到心跳。心跳一般是指某端(绝大多数情况下是客户端)每隔一定时间向对端发送自定义指令，以判断双方是否存活，因其按照一定间隔发送，类似于心跳，故被称为心跳指令。">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2016-05-15T15:22:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iphone XMPP IM">
@@ -112,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="http://gaoyingqiu.github.io/2016/05/15/Iphone-XMPP-App-run-background/"/>
+  <link rel="canonical" href="http://gaoyingqiu.github.io/2016/05/15/Iphone-XMPP-App-run-background/">
 
 
 
@@ -179,7 +180,7 @@
     
       <div class="site-meta-headline">
         <a>
-          <img class="custom-logo-image" src="/images/avatar.jpg" alt="Qyan's Blog  高颖"/>
+          <img class="custom-logo-image" src="/images/avatar.jpg" alt="Qyan's Blog  高颖">
         </a>
       </div>
     
@@ -228,7 +229,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -245,7 +246,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -262,7 +263,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -279,7 +280,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -296,7 +297,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -348,16 +349,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2016/05/15/Iphone-XMPP-App-run-background/"/>
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2016/05/15/Iphone-XMPP-App-run-background/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing"/>
-      <meta itemprop="description" content="坚定信念，相信美好。"/>
-      <meta itemprop="image" content="/images/avatar.jpg"/>
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖"/>
+      <meta itemprop="name" content="Qyan's Blog  高颖">
     </span>
 
     
@@ -484,7 +485,7 @@
 <p>EDIT<br>Newer versions of the XMPP Framework (specifically, GCDAsyncSocket) now support a call to make this easier, so you can just have:</p>
 <ul>
 <li>(void)xmppStream:(XMPPStream <em>)sender socketWillConnect:(GCDAsyncSocket </em>)socket<br>{<br>  // Tell the socket to stay around if the app goes to the background (only works on apps with the VoIP background flag set)<br>  [socket performBlock:^{<pre><code>[socket enableBackgroundingOnSocket];
-</code></pre>  }];<br>}<br><a href="http://stackoverflow.com/questions/5257580/iphone-xmpp-app-run-background" target="_blank" rel="external">在这篇文章中你或许能找到答案</a>  不得不说StackOverFlow真是个好东西。</li>
+</code></pre>  }];<br>}<br><a href="http://stackoverflow.com/questions/5257580/iphone-xmpp-app-run-background" target="_blank" rel="noopener">在这篇文章中你或许能找到答案</a>  不得不说StackOverFlow真是个好东西。</li>
 </ul>
 <h3 id="聊聊IOS后台"><a href="#聊聊IOS后台" class="headerlink" title="聊聊IOS后台"></a>聊聊IOS后台</h3><p>应用程序进入后台状态不久后转入暂停状态。在这种状态下，应用程序不执行任何代码，并有可能在任意时候从内存中删除。应用程序提供特定的服务，用户可以请求后台执行时间，以提供这些服务。<br>三种类型的可以运行在后以，<br>1.音乐<br>2.location<br>3.voip<br>声明你需要的后台任务<br>Info.plist中添加UIBackgroundModes键值，它包含一个或多个string的值，包括<br>audio:在后台提供声音播放功能，包括音频流和播放视频时的声音<br>location：在后台可以保持用户的位置信息<br>voip：在后台使用VOIP功能</p>
 <p>实现VOIP应用：<br>VOIP程序需要稳定的网络去连接和它相关的服务，这样它才能接到来电和其他相关的数据。系统允许VOIP程序被挂断并提供组件去监听它们的sockets，而不是在任意时候都处于唤醒状态。设置VOIP应用程序如下：<br>A、 添加UIBackgroundModes中的VOIP键值<br>B、 为VOIP设置一个应用程序socket<br>C、 在移出后台之前，调用setKeepAliveTimeout:handler:方法去建立一个定期执行的handler，你的应用程序可以运行这个handler来保持服务的连接。<br>(<br>BOOL backgroundAccepted = [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^{ [self backgroundHandler]; }];<br> if (backgroundAccepted)<br> {<br>      NSLog(@”VOIP backgrounding accepted”);<br> }<br>为了防止断连，voip程序需要定期被唤醒去检查它的服务。为了容易实现这个行为，IOS通过使用（UIApplication setKeepAliveTimeout:handler:）方法建立一个特殊的句柄。你可以在applicationDidEnterBackground方法中建立该句柄。一旦建立，系统至少会在超时之前调用该句柄一次，来唤醒你的应用程序。<br>这个keep-alive handler在后台执行，必须尽快的返回参数，它有最多30秒的时间来执行所需的任务，如果这段时间内句柄没有返回，那么系统将终止应用程序。<br>当你建立了handler之后，确定应用程序所需的最大超时。系统保证会在最大超时之前调用handler，但是这个时间是不确定的，所以你的handler必须在你申明的超时之前做好执行程序的准备<br>)<br>D、 设置你的audio session去处理这种切换</p>
@@ -493,9 +494,9 @@
 <li>(void)scheduleAlarmForDate:(NSDate<em>)theDate<br>{<br>UIApplication</em> app = [UIApplication sharedApplication];<br>NSArray<em> oldNotifications = [app scheduledLocalNotifications];<br>// Clear out the old notification before scheduling a new one.<br>if ([oldNotifications count] &gt; 0)<br>[app cancelAllLocalNotifications];<br>// Create a new notification.<br>UILocalNotification</em> alarm = [[[UILocalNotification alloc] init] autorelease];<br>if (alarm)<br>{<br>alarm.fireDate = theDate;<br>alarm.timeZone = [NSTimeZone defaultTimeZone];<br>alarm.repeatInterval = 0;<br>alarm.soundName = @”alarmsound.caf”;<br>alarm.alertBody = @”Time to wake up!”;<br>[app scheduleLocalNotification:alarm];<br>}<br>}<br>(可以最多包含128个 local notifications active at any given time, any of which can be configured to repeat at a specified interval.)如果在调用该notification的时候，程序已经处于前台，那么application：didReceiveLocalNotification：方法将取而代之。</li>
 </ul>
 <h3 id="voip与socket实现后台推送"><a href="#voip与socket实现后台推送" class="headerlink" title="voip与socket实现后台推送"></a>voip与socket实现后台推送</h3><h4 id="1-找到该文件-添加该项"><a href="#1-找到该文件-添加该项" class="headerlink" title="1.找到该文件,添加该项"></a>1.找到该文件,添加该项</h4><p>(1)蜗牛帮-Info.plist(2)Required background modes它的item：App provides Voice over IP services</p>
-<h4 id="2-在socket连接成功代理里面"><a href="#2-在socket连接成功代理里面" class="headerlink" title="2.在socket连接成功代理里面"></a>2.在socket连接成功代理里面</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port//建立连接成功后执行的代理</div><div class="line">&#123;</div><div class="line">    //后台挂起voip</div><div class="line">    [socket performBlock:^&#123;</div><div class="line">        [socket enableBackgroundingOnSocket];</div><div class="line">    &#125;];</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<h4 id="3-在收到socket消息代理里面"><a href="#3-在收到socket消息代理里面" class="headerlink" title="3.在收到socket消息代理里面"></a>3.在收到socket消息代理里面</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag//接收到消息执行的代理。</div><div class="line">&#123;</div><div class="line">    [socket readDataWithTimeout:-1 tag:0];//这句话太重要了</div><div class="line">    UIApplication *application=[UIApplication sharedApplication];</div><div class="line">    <span class="keyword">if</span> (application.applicationState==UIApplicationStateBackground||application.applicationState==UIApplicationStateInactive )</div><div class="line">    &#123;</div><div class="line">        NSArray *oldNotifications=[application scheduledLocalNotifications];</div><div class="line">        <span class="keyword">if</span> ([oldNotifications count]&gt;0)</div><div class="line">        &#123;</div><div class="line">            [application cancelAllLocalNotifications];</div><div class="line">        &#125;</div><div class="line">        UILocalNotification *alarm=[[UILocalNotification alloc] autorelease];</div><div class="line">        <span class="keyword">if</span> (alarm)</div><div class="line">        &#123;</div><div class="line">            alarm.fireDate=[NSDate date];</div><div class="line">            alarm.timeZone=[NSTimeZone defaultTimeZone];</div><div class="line">            alarm.repeatInterval=0;</div><div class="line">            [Single sharedSingle].iconNumber++;</div><div class="line">            alarm.applicationIconBadgeNumber=[Single sharedSingle].iconNumber;</div><div class="line">            alarm.soundName=@<span class="string">"alarmsound.caf"</span>;</div><div class="line">            alarm.alertBody=[jsonDictionary valueForKey:@<span class="string">"sendmsg"</span>];</div><div class="line">            [application scheduleLocalNotification:alarm];</div><div class="line">           </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<h4 id="4-挂起时，本操作是为了600秒重写连接一次socket，保持socket在线"><a href="#4-挂起时，本操作是为了600秒重写连接一次socket，保持socket在线" class="headerlink" title="4.//挂起时，本操作是为了600秒重写连接一次socket，保持socket在线"></a>4.//挂起时，本操作是为了600秒重写连接一次socket，保持socket在线</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">- (void)applicationDidEnterBackground:(UIApplication *)application</div><div class="line">&#123;</div><div class="line">    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^&#123; [[NSNotificationCenter defaultCenter]postNotificationName:@<span class="string">"CreatSocket"</span> object:nil userInfo:nil];&#125;];</div><div class="line">&#125;</div><div class="line">-(void)creatSocket</div><div class="line">&#123;</div><div class="line">   </div><div class="line">    <span class="keyword">if</span> (![[Single sharedSelfMemberID] isEqualToString:@<span class="string">""</span>]) &#123;//登陆了</div><div class="line">       </div><div class="line">        [Single sharedSingle].socket.delegate=self;</div><div class="line">        [Single sharedSingle].socket.delegateQueue=dispatch_get_main_queue();</div><div class="line"></div><div class="line">        NSError *err = nil;</div><div class="line">        <span class="keyword">if</span>(![socket connectToHost:socketURL onPort:socketPort error:&amp;err])</div><div class="line">        &#123;</div><div class="line">           </div><div class="line">            NSLog(@<span class="string">"%@"</span>,err);</div><div class="line">            [[Single sharedSingle].socket readDataWithTimeout:-1 tag:0];</div><div class="line">           </div><div class="line">        &#125;</div><div class="line">       </div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            [[Single sharedSingle].customStatueBar show];</div><div class="line">            [Single sharedSingle].customStatueBar.messageLabel.text=@<span class="string">"连接中..."</span>;</div><div class="line">            NSLog(@<span class="string">"ok"</span>);</div><div class="line">           </div><div class="line">        &#125;</div><div class="line">       </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-在socket连接成功代理里面"><a href="#2-在socket连接成功代理里面" class="headerlink" title="2.在socket连接成功代理里面"></a>2.在socket连接成功代理里面</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port//建立连接成功后执行的代理</span><br><span class="line">&#123;</span><br><span class="line">    //后台挂起voip</span><br><span class="line">    [socket performBlock:^&#123;</span><br><span class="line">        [socket enableBackgroundingOnSocket];</span><br><span class="line">    &#125;];</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-在收到socket消息代理里面"><a href="#3-在收到socket消息代理里面" class="headerlink" title="3.在收到socket消息代理里面"></a>3.在收到socket消息代理里面</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag//接收到消息执行的代理。</span><br><span class="line">&#123;</span><br><span class="line">    [socket readDataWithTimeout:-1 tag:0];//这句话太重要了</span><br><span class="line">    UIApplication *application=[UIApplication sharedApplication];</span><br><span class="line">    <span class="keyword">if</span> (application.applicationState==UIApplicationStateBackground||application.applicationState==UIApplicationStateInactive )</span><br><span class="line">    &#123;</span><br><span class="line">        NSArray *oldNotifications=[application scheduledLocalNotifications];</span><br><span class="line">        <span class="keyword">if</span> ([oldNotifications count]&gt;0)</span><br><span class="line">        &#123;</span><br><span class="line">            [application cancelAllLocalNotifications];</span><br><span class="line">        &#125;</span><br><span class="line">        UILocalNotification *alarm=[[UILocalNotification alloc] autorelease];</span><br><span class="line">        <span class="keyword">if</span> (alarm)</span><br><span class="line">        &#123;</span><br><span class="line">            alarm.fireDate=[NSDate date];</span><br><span class="line">            alarm.timeZone=[NSTimeZone defaultTimeZone];</span><br><span class="line">            alarm.repeatInterval=0;</span><br><span class="line">            [Single sharedSingle].iconNumber++;</span><br><span class="line">            alarm.applicationIconBadgeNumber=[Single sharedSingle].iconNumber;</span><br><span class="line">            alarm.soundName=@<span class="string">"alarmsound.caf"</span>;</span><br><span class="line">            alarm.alertBody=[jsonDictionary valueForKey:@<span class="string">"sendmsg"</span>];</span><br><span class="line">            [application scheduleLocalNotification:alarm];</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-挂起时，本操作是为了600秒重写连接一次socket，保持socket在线"><a href="#4-挂起时，本操作是为了600秒重写连接一次socket，保持socket在线" class="headerlink" title="4.//挂起时，本操作是为了600秒重写连接一次socket，保持socket在线"></a>4.//挂起时，本操作是为了600秒重写连接一次socket，保持socket在线</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">- (void)applicationDidEnterBackground:(UIApplication *)application</span><br><span class="line">&#123;</span><br><span class="line">    [[UIApplication sharedApplication] setKeepAliveTimeout:600 handler:^&#123; [[NSNotificationCenter defaultCenter]postNotificationName:@<span class="string">"CreatSocket"</span> object:nil userInfo:nil];&#125;];</span><br><span class="line">&#125;</span><br><span class="line">-(void)creatSocket</span><br><span class="line">&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">if</span> (![[Single sharedSelfMemberID] isEqualToString:@<span class="string">""</span>]) &#123;//登陆了</span><br><span class="line">       </span><br><span class="line">        [Single sharedSingle].socket.delegate=self;</span><br><span class="line">        [Single sharedSingle].socket.delegateQueue=dispatch_get_main_queue();</span><br><span class="line"></span><br><span class="line">        NSError *err = nil;</span><br><span class="line">        <span class="keyword">if</span>(![socket connectToHost:socketURL onPort:socketPort error:&amp;err])</span><br><span class="line">        &#123;</span><br><span class="line">           </span><br><span class="line">            NSLog(@<span class="string">"%@"</span>,err);</span><br><span class="line">            [[Single sharedSingle].socket readDataWithTimeout:-1 tag:0];</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            [[Single sharedSingle].customStatueBar show];</span><br><span class="line">            [Single sharedSingle].customStatueBar.messageLabel.text=@<span class="string">"连接中..."</span>;</span><br><span class="line">            NSLog(@<span class="string">"ok"</span>);</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -507,7 +508,7 @@
 
     
       <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
-  <img id="wechat_subscriber_qcode" src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechatRCode.PNG" alt="QiuGaoYing wechat" style="width: 200px; max-width: 100%;"/>
+  <img id="wechat_subscriber_qcode" src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechatRCode.PNG" alt="QiuGaoYing wechat" style="width: 200px; max-width: 100%;">
   <div></div>
 </div>
 
@@ -612,9 +613,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
-                alt="QiuGaoYing"/>
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="QiuGaoYing">
             
               <p class="site-author-name" itemprop="name">QiuGaoYing</p>
               <div class="site-description motion-element" itemprop="description">坚定信念，相信美好。</div>
@@ -627,7 +626,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -740,7 +739,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#保持心跳的必要"><span class="nav-number">1.</span> <span class="nav-text">保持心跳的必要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么TCP-KeepAlive-不能用于检测"><span class="nav-number">2.</span> <span class="nav-text">为什么TCP KeepAlive 不能用于检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#心跳的做法"><span class="nav-number">3.</span> <span class="nav-text">心跳的做法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息可达"><span class="nav-number"></span> <span class="nav-text">消息可达</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息加密"><span class="nav-number"></span> <span class="nav-text">消息加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IM协议包"><span class="nav-number"></span> <span class="nav-text">IM协议包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IM聊天App-登录后要做得事情"><span class="nav-number"></span> <span class="nav-text">IM聊天App  登录后要做得事情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用XMpp协议的一个聊天应用程序，当程序退到后台的时候，如果想要继续接收到聊天信息或icon显示badge-该怎么做？GCDAsyncSocket"><span class="nav-number"></span> <span class="nav-text">使用XMpp协议的一个聊天应用程序，当程序退到后台的时候，如果想要继续接收到聊天信息或icon显示badge, 该怎么做？GCDAsyncSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聊聊IOS后台"><span class="nav-number"></span> <span class="nav-text">聊聊IOS后台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安排Local-Notification的传递"><span class="nav-number">1.</span> <span class="nav-text">安排Local Notification的传递</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#voip与socket实现后台推送"><span class="nav-number"></span> <span class="nav-text">voip与socket实现后台推送</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-找到该文件-添加该项"><span class="nav-number">1.</span> <span class="nav-text">1.找到该文件,添加该项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在socket连接成功代理里面"><span class="nav-number">2.</span> <span class="nav-text">2.在socket连接成功代理里面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-在收到socket消息代理里面"><span class="nav-number">3.</span> <span class="nav-text">3.在收到socket消息代理里面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-挂起时，本操作是为了600秒重写连接一次socket，保持socket在线"><span class="nav-number">4.</span> <span class="nav-text">4.//挂起时，本操作是为了600秒重写连接一次socket，保持socket在线</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#保持心跳的必要"><span class="nav-number">1.</span> <span class="nav-text">保持心跳的必要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么TCP-KeepAlive-不能用于检测"><span class="nav-number">2.</span> <span class="nav-text">为什么TCP KeepAlive 不能用于检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#心跳的做法"><span class="nav-number">3.</span> <span class="nav-text">心跳的做法</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#消息可达"><span class="nav-number"></span> <span class="nav-text">消息可达</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息加密"><span class="nav-number"></span> <span class="nav-text">消息加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IM协议包"><span class="nav-number"></span> <span class="nav-text">IM协议包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IM聊天App-登录后要做得事情"><span class="nav-number"></span> <span class="nav-text">IM聊天App  登录后要做得事情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用XMpp协议的一个聊天应用程序，当程序退到后台的时候，如果想要继续接收到聊天信息或icon显示badge-该怎么做？GCDAsyncSocket"><span class="nav-number"></span> <span class="nav-text">使用XMpp协议的一个聊天应用程序，当程序退到后台的时候，如果想要继续接收到聊天信息或icon显示badge, 该怎么做？GCDAsyncSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聊聊IOS后台"><span class="nav-number"></span> <span class="nav-text">聊聊IOS后台</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安排Local-Notification的传递"><span class="nav-number">1.</span> <span class="nav-text">安排Local Notification的传递</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#voip与socket实现后台推送"><span class="nav-number"></span> <span class="nav-text">voip与socket实现后台推送</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-找到该文件-添加该项"><span class="nav-number">1.</span> <span class="nav-text">1.找到该文件,添加该项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在socket连接成功代理里面"><span class="nav-number">2.</span> <span class="nav-text">2.在socket连接成功代理里面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-在收到socket消息代理里面"><span class="nav-number">3.</span> <span class="nav-text">3.在收到socket消息代理里面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-挂起时，本操作是为了600秒重写连接一次socket，保持socket在线"><span class="nav-number">4.</span> <span class="nav-text">4.//挂起时，本操作是为了600秒重写连接一次socket，保持socket在线</span></a></li></ol></li></div>
             
 
           </div>

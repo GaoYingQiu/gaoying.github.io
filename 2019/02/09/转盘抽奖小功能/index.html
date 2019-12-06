@@ -15,16 +15,16 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-CN">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
 
   
   
-  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css"/>
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/css/main.css?v=7.1.0"/>
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
 
 
 
@@ -101,13 +101,14 @@
 <meta property="og:url" content="http://gaoyingqiu.github.io/2019/02/09/转盘抽奖小功能/index.html">
 <meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
 <meta property="og:description" content="抽奖功能模块源码产品出发点1、通过动态抽奖数据和排行激发用户抽奖消费；2、通过技能和宝石等以及转盘的燃爆值，中奖率翻倍等等吸引用户；3、根本上是为了激发用户活跃性以及刺激消费 技术难点1、抽奖转盘分为两种转盘，业务逻辑分一个parentVC 管理两个 子 VC；2、抽奖奖品服务端返回，显示在每一个扇形区域的中间，金额同似；3、点击抽奖，拿到奖品id,  找出是在转盘中的哪个区域，让转盘指针停止在">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG8.jpeg">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG9.jpeg">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_01.jpeg">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_02.jpeg">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_03.jpeg">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_04.jpeg">
-<meta property="og:updated_time" content="2019-02-09T14:42:12.200Z">
+<meta property="og:updated_time" content="2019-02-09T14:42:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="转盘抽奖功能">
 <meta name="twitter:description" content="抽奖功能模块源码产品出发点1、通过动态抽奖数据和排行激发用户抽奖消费；2、通过技能和宝石等以及转盘的燃爆值，中奖率翻倍等等吸引用户；3、根本上是为了激发用户活跃性以及刺激消费 技术难点1、抽奖转盘分为两种转盘，业务逻辑分一个parentVC 管理两个 子 VC；2、抽奖奖品服务端返回，显示在每一个扇形区域的中间，金额同似；3、点击抽奖，拿到奖品id,  找出是在转盘中的哪个区域，让转盘指针停止在">
@@ -119,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="http://gaoyingqiu.github.io/2019/02/09/转盘抽奖小功能/"/>
+  <link rel="canonical" href="http://gaoyingqiu.github.io/2019/02/09/转盘抽奖小功能/">
 
 
 
@@ -186,7 +187,7 @@
     
       <div class="site-meta-headline">
         <a>
-          <img class="custom-logo-image" src="/images/avatar.jpg" alt="Qyan's Blog  高颖"/>
+          <img class="custom-logo-image" src="/images/avatar.jpg" alt="Qyan's Blog  高颖">
         </a>
       </div>
     
@@ -235,7 +236,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -252,7 +253,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -269,7 +270,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -286,7 +287,7 @@
 
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -303,7 +304,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -355,16 +356,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/02/09/转盘抽奖小功能/"/>
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/02/09/转盘抽奖小功能/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing"/>
-      <meta itemprop="description" content="坚定信念，相信美好。"/>
-      <meta itemprop="image" content="/images/avatar.jpg"/>
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖"/>
+      <meta itemprop="name" content="Qyan's Blog  高颖">
     </span>
 
     
@@ -467,7 +468,7 @@
 
       
         <p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG8.jpeg" alt="图片"></p>
-<p><a href="https://github.com/GaoYingQiu/Rotary-Draw" target="_blank" rel="external">抽奖功能模块源码</a><br><strong><em>产品出发点</em></strong><br>1、通过动态抽奖数据和排行激发用户抽奖消费；<br>2、通过技能和宝石等以及转盘的燃爆值，中奖率翻倍等等吸引用户；<br>3、根本上是为了激发用户活跃性以及刺激消费</p>
+<p><a href="https://github.com/GaoYingQiu/Rotary-Draw" target="_blank" rel="noopener">抽奖功能模块源码</a><br><strong><em>产品出发点</em></strong><br>1、通过动态抽奖数据和排行激发用户抽奖消费；<br>2、通过技能和宝石等以及转盘的燃爆值，中奖率翻倍等等吸引用户；<br>3、根本上是为了激发用户活跃性以及刺激消费</p>
 <p><strong><em>技术难点</em></strong><br>1、抽奖转盘分为两种转盘，业务逻辑分一个parentVC 管理两个 子 VC；<br>2、抽奖奖品服务端返回，显示在每一个扇形区域的中间，金额同似；<br>3、点击抽奖，拿到奖品id,  找出是在转盘中的哪个区域，让转盘指针停止在那一区域；<br>4、抽奖动态弹幕；<br>5、燃烧值 和 倒计时的控制；</p>
 <p><strong><em>业务操作说明</em></strong><br>1、两个转盘，某个转盘点击开始抽奖 互不影响； 黄金转盘具有宝箱和技能；<br>2、每抽取一次，扣除相应的金额，如有中奖，则弹出中奖奖品；抽奖分为单次，十连抽，三十连抽等；<br>3、抽奖后产生记录；在记录中可看到每次抽奖消费情况；<br>4、转盘有燃烧值，当满时候，触发倒计时3分钟，倒计时内 中奖率将翻倍；<br>5、燃烧值每3秒刷新一次，当中途离开再次打开，则拿到最新倒计时显示；<br>6、弹幕从最新100条记录 每隔2秒随机生成一条记录；</p>
 <p><strong><em>模块设计</em></strong><br>1、整个框架布局在一个  MainVC中控制转盘类型，请求余额，通知等刷新金额； 管理childVC ；<br>2、childVC 中 处理抽奖业务逻辑；UI 布局，抽奖请求，  燃烧值处理，弹幕处理；<br>3、其他功能性子View 单独自定义视图；   转盘视图，燃烧值进度视图，倒计时进度视图， 弹窗类视图；弹幕视图；<br>4、弹窗类视图 以一个ParentView公共视图容器 ，其中子视图由枚举参数值控制自定义；有玩法视图，记录视图，保险视图，技能视图，排行榜视图；<br><a id="more"></a></p>
@@ -475,12 +476,12 @@
 <p><strong><em>倒计时处理</em></strong><br>在自定义视图中 ，drawRect 方法中 贝塞尔曲线 绘制 两个曲线园；clockwise 逆方向；  每次通过设置剩余时间 调用setNeedLayout 会触发drawRect ; 倒计时启动timer，每0.05秒 重复一次，改变剩余时间；剩余时间 小于 或 为0 时候，则倒计时走完，停止timer;</p>
 <p><strong><em>转盘处理</em></strong><br>一个点围绕 某个起点 旋转 n 度 后 的转标  通过这个公式计算 ： #define pointRotatedAroundAnchorPoint(point,anchorPoint,angle) CGPointMake((point.x-anchorPoint.x)<em>cos(angle) - (point.y-anchorPoint.y)</em>sin(angle) + anchorPoint.x, (point.x-anchorPoint.x)<em>sin(angle) + (point.y-anchorPoint.y)</em>cos(angle)+anchorPoint.y)</p>
 <p>拿到奖品后，根据扇形个数 计算每个扇形的角度，正起点方向  为原点 旋转角度以便设置每个奖品的中心位置point ； 和transform; </p>
-<p>转盘指针停在的位置： 指针不动，实际是转动底盘； 需将底盘视图 旋转到固定角度即可；顺时针是 360度 -  固定角度； 每次转动前，需将上一次转动角度归位；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CABasicAnimation *layer = [CABasicAnimation animationWithKeyPath:@&quot;transform.rotation&quot;];</div><div class="line"></div><div class="line">// 顺时针(所有这里需要用360-对应的角度) 逆时针不需要</div><div class="line">layer.toValue = @((M_PI*2 - (_perSection*index +_perSection*0.5)) + M_PI*2*4); //先转4圈</div><div class="line">layer.duration = 4;</div><div class="line">layer.removedOnCompletion = NO;</div><div class="line">layer.fillMode = kCAFillModeForwards;</div><div class="line">layer.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];</div><div class="line">layer.delegate = self;</div><div class="line"></div><div class="line">[self.gameBgView.layer addAnimation:layer forKey:nil];</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-(void)backToStartPosition&#123;</div><div class="line">    //归位</div><div class="line">    CABasicAnimation *layer = [CABasicAnimation animationWithKeyPath:@&quot;transform.rotation&quot;];</div><div class="line">    layer.toValue = @(0);</div><div class="line">    layer.duration = 0.001;</div><div class="line">    layer.removedOnCompletion = NO;</div><div class="line">    layer.fillMode = kCAFillModeForwards;</div><div class="line">    [self.gameBgView.layer addAnimation:layer forKey:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong><em>弹出视图</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line">#import &quot;PrizeRecord.h&quot;</div><div class="line"></div><div class="line">typedef void(^GYActionDateDoneBlock)(id selectedDate);</div><div class="line"></div><div class="line">typedef enum : NSInteger &#123;</div><div class="line">Prize_Ranking, //抽奖</div><div class="line">Prize_Gift, //奖品</div><div class="line">Prize_SkillDesc, //描述</div><div class="line">Prize_PlayDesc, //描述</div><div class="line">Prize_Record, //中奖记录</div><div class="line">Prize_RecordDetail //中奖详情</div><div class="line">&#125; PrizeStyle;</div><div class="line"></div><div class="line">@interface GYPrizeContairView : UIView</div><div class="line"></div><div class="line">- (instancetype)initSheetStyle:(PrizeStyle)prizeStyle actionBlock:(GYActionDateDoneBlock)actionDateDoneBlock;</div><div class="line"></div><div class="line">-(void)showInView;</div><div class="line"></div><div class="line">//中奖奖品；</div><div class="line">-(void)fetch_Prize_Gift:(NSArray *)datas;</div><div class="line"></div><div class="line">//默认选中查询的转盘</div><div class="line">-(void)fetch_Record_DefaultChooseSelect:(DrawPrizeType)drawType;</div><div class="line">-(void)fetch_Record_Detail:(PrizeRecord *)record;</div><div class="line"></div><div class="line">//排行榜</div><div class="line">-(void)fetch_Ranking_DrawType:(DrawPrizeType)drawType;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">if(_sheetCellStyle == Prize_Ranking)&#123;</div><div class="line">    [self createRankingView]; //排行榜；</div><div class="line">    titleLabel.text =  @&quot;排行榜&quot;;</div><div class="line">&#125;else if(_sheetCellStyle == Prize_Gift)&#123;</div><div class="line">    [self createPrizeGiftView]; //奖品</div><div class="line">    titleLabel.text =  @&quot;恭喜您获得以下奖品&quot;;</div><div class="line">&#125;else if(_sheetCellStyle == Prize_SkillDesc)&#123;</div><div class="line">    [self createSkillDescView]; //技能描述</div><div class="line">    titleLabel.text =  @&quot;技能&quot;;</div><div class="line">&#125;else if(_sheetCellStyle == Prize_PlayDesc)&#123;</div><div class="line">    [self createPlayPrizeDescView]; //技能描述</div><div class="line">    titleLabel.text =  @&quot;玩法说明&quot;;</div><div class="line">&#125;else if(_sheetCellStyle == Prize_Record)&#123;</div><div class="line">    [self createPlayPrizeRecordView]; //技能记录描述</div><div class="line">    titleLabel.text =  @&quot;抽奖记录&quot;;</div><div class="line">&#125;else if(_sheetCellStyle == Prize_RecordDetail)&#123;</div><div class="line">    [self createPlayPrizeDetailRecordView]; //奖品记录详情</div><div class="line">    titleLabel.text =  @&quot;抽奖详情&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>转盘指针停在的位置： 指针不动，实际是转动底盘； 需将底盘视图 旋转到固定角度即可；顺时针是 360度 -  固定角度； 每次转动前，需将上一次转动角度归位；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CABasicAnimation *layer = [CABasicAnimation animationWithKeyPath:@&quot;transform.rotation&quot;];</span><br><span class="line"></span><br><span class="line">// 顺时针(所有这里需要用360-对应的角度) 逆时针不需要</span><br><span class="line">layer.toValue = @((M_PI*2 - (_perSection*index +_perSection*0.5)) + M_PI*2*4); //先转4圈</span><br><span class="line">layer.duration = 4;</span><br><span class="line">layer.removedOnCompletion = NO;</span><br><span class="line">layer.fillMode = kCAFillModeForwards;</span><br><span class="line">layer.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];</span><br><span class="line">layer.delegate = self;</span><br><span class="line"></span><br><span class="line">[self.gameBgView.layer addAnimation:layer forKey:nil];</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-(void)backToStartPosition&#123;</span><br><span class="line">    //归位</span><br><span class="line">    CABasicAnimation *layer = [CABasicAnimation animationWithKeyPath:@&quot;transform.rotation&quot;];</span><br><span class="line">    layer.toValue = @(0);</span><br><span class="line">    layer.duration = 0.001;</span><br><span class="line">    layer.removedOnCompletion = NO;</span><br><span class="line">    layer.fillMode = kCAFillModeForwards;</span><br><span class="line">    [self.gameBgView.layer addAnimation:layer forKey:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>弹出视图</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line">#import &quot;PrizeRecord.h&quot;</span><br><span class="line"></span><br><span class="line">typedef void(^GYActionDateDoneBlock)(id selectedDate);</span><br><span class="line"></span><br><span class="line">typedef enum : NSInteger &#123;</span><br><span class="line">Prize_Ranking, //抽奖</span><br><span class="line">Prize_Gift, //奖品</span><br><span class="line">Prize_SkillDesc, //描述</span><br><span class="line">Prize_PlayDesc, //描述</span><br><span class="line">Prize_Record, //中奖记录</span><br><span class="line">Prize_RecordDetail //中奖详情</span><br><span class="line">&#125; PrizeStyle;</span><br><span class="line"></span><br><span class="line">@interface GYPrizeContairView : UIView</span><br><span class="line"></span><br><span class="line">- (instancetype)initSheetStyle:(PrizeStyle)prizeStyle actionBlock:(GYActionDateDoneBlock)actionDateDoneBlock;</span><br><span class="line"></span><br><span class="line">-(void)showInView;</span><br><span class="line"></span><br><span class="line">//中奖奖品；</span><br><span class="line">-(void)fetch_Prize_Gift:(NSArray *)datas;</span><br><span class="line"></span><br><span class="line">//默认选中查询的转盘</span><br><span class="line">-(void)fetch_Record_DefaultChooseSelect:(DrawPrizeType)drawType;</span><br><span class="line">-(void)fetch_Record_Detail:(PrizeRecord *)record;</span><br><span class="line"></span><br><span class="line">//排行榜</span><br><span class="line">-(void)fetch_Ranking_DrawType:(DrawPrizeType)drawType;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">if(_sheetCellStyle == Prize_Ranking)&#123;</span><br><span class="line">    [self createRankingView]; //排行榜；</span><br><span class="line">    titleLabel.text =  @&quot;排行榜&quot;;</span><br><span class="line">&#125;else if(_sheetCellStyle == Prize_Gift)&#123;</span><br><span class="line">    [self createPrizeGiftView]; //奖品</span><br><span class="line">    titleLabel.text =  @&quot;恭喜您获得以下奖品&quot;;</span><br><span class="line">&#125;else if(_sheetCellStyle == Prize_SkillDesc)&#123;</span><br><span class="line">    [self createSkillDescView]; //技能描述</span><br><span class="line">    titleLabel.text =  @&quot;技能&quot;;</span><br><span class="line">&#125;else if(_sheetCellStyle == Prize_PlayDesc)&#123;</span><br><span class="line">    [self createPlayPrizeDescView]; //技能描述</span><br><span class="line">    titleLabel.text =  @&quot;玩法说明&quot;;</span><br><span class="line">&#125;else if(_sheetCellStyle == Prize_Record)&#123;</span><br><span class="line">    [self createPlayPrizeRecordView]; //技能记录描述</span><br><span class="line">    titleLabel.text =  @&quot;抽奖记录&quot;;</span><br><span class="line">&#125;else if(_sheetCellStyle == Prize_RecordDetail)&#123;</span><br><span class="line">    [self createPlayPrizeDetailRecordView]; //奖品记录详情</span><br><span class="line">    titleLabel.text =  @&quot;抽奖详情&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如图：<br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG9.jpeg" alt="图片2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_01.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_02.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_03.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/prize_04.jpeg" alt="图片"></p>
-<p><a href="https://github.com/GaoYingQiu/Rotary-Draw" target="_blank" rel="external">抽奖功能模块源码</a> </p>
+<p><a href="https://github.com/GaoYingQiu/Rotary-Draw" target="_blank" rel="noopener">抽奖功能模块源码</a> </p>
 
       
     </div>
@@ -493,7 +494,7 @@
 
     
       <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
-  <img id="wechat_subscriber_qcode" src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechatRCode.PNG" alt="QiuGaoYing wechat" style="width: 200px; max-width: 100%;"/>
+  <img id="wechat_subscriber_qcode" src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechatRCode.PNG" alt="QiuGaoYing wechat" style="width: 200px; max-width: 100%;">
   <div></div>
 </div>
 
@@ -523,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/28/地图多手势的应用/" rel="next" title="地图多手势的应用">
-                <i class="fa fa-chevron-left"></i> 地图多手势的应用
+              <a href="/2019/01/26/PictureTextView/" rel="next" title="TextView 插入图片解析Demo">
+                <i class="fa fa-chevron-left"></i> TextView 插入图片解析Demo
               </a>
             
           </div>
@@ -589,9 +590,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.jpg"
-                alt="QiuGaoYing"/>
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="QiuGaoYing">
             
               <p class="site-author-name" itemprop="name">QiuGaoYing</p>
               <div class="site-description motion-element" itemprop="description">坚定信念，相信美好。</div>
@@ -604,7 +603,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
