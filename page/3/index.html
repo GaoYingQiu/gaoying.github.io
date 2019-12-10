@@ -348,6 +348,397 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/07/20/【从极简聊聊客户端请求的设计】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/07/20/【从极简聊聊客户端请求的设计】/" class="post-title-link" itemprop="url">【从极简聊聊客户端请求的设计】</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-20 09:28:50" itemprop="dateCreated datePublished" datetime="2018-07-20T09:28:50+08:00">2018-07-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-25 13:05:05" itemprop="dateModified" datetime="2018-09-25T13:05:05+08:00">2018-09-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2018/07/20/【从极简聊聊客户端请求的设计】/" class="leancloud_visitors" data-flag-title="【从极简聊聊客户端请求的设计】">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例；</p>
+<p>发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataRequest;  具体的请求，只需传 具体的子类request；</p>
+<p>一个APP 请求有很多，为了区分 及 维护方便 ，于是我定义了一个枚举；每个业务请求，只需给它表明一个标识；</p>
+<p>请求具有什么特性呢？ 1）有请求的API url地址，2）请求的参数，请求的标识（请求的枚举值）， 3）对请求回来的数据解析好封装（业务数据封装等处理）；   于是我定义了一个名叫APIInterface 的接口协议； 父类请求去实现这个APInterface接口协议； 子类去Override 这几个方法即可；</p>
+<p>发出一个请求，必然有 回答；要么成功，要么失败 （有的失败是业务码失败）； 于是 ，我定义了已一个请求回调的接口；RequestCallBackInterface ； （具有三个方法： 业务成功，业务失败，网络其他原因失败）</p>
+<p>我从VC 发出去的请求，相当于Android 的Activity; 熟称视图控制器；当然是希望请求回调 回到 视图控制器；<br>于是我 在 基类视图控制器 BaseViewController 或者BaseActivity(Android)  实现 请求回调 接口协议；实现其中的方法。<br>具体视图控制器 继承基类，  只需覆盖Override 这三个方法 （具体VC 实现回调后的业务）</p>
+<p>最后；页面逻辑就显示得比较简单了，一个单例 NetManager  执行一个 DataRequest (传具体请求子类) ； 视图控制器在具体RequestCallBackInterface  的回调方法 中处理 成功 ，失败后的数据； </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//登录请求</span></span><br><span class="line"><span class="keyword">self</span>.loginRequest.userLogin = <span class="keyword">self</span>.userName;</span><br><span class="line"><span class="keyword">self</span>.loginRequest.userPass =  <span class="keyword">self</span>.userPwd;</span><br><span class="line">[[GYNetworkingManager shareInstance] executeRequest:<span class="keyword">self</span>.loginRequest];</span><br><span class="line"></span><br><span class="line"><span class="comment">//朋友圈列表请求</span></span><br><span class="line"><span class="keyword">self</span>.dynamicListRequest.pageIndex = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">self</span>.dynamicListRequest.pageSize = <span class="number">20</span>;</span><br><span class="line">[[GYNetworkingManager shareInstance] executeRequest:<span class="keyword">self</span>.dynamicListRequest];</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) onRequestSuccess:(BaseResponse *)response</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">switch</span> (response.requestAPICode ) &#123;  <span class="comment">//请求的枚举</span></span><br><span class="line"><span class="keyword">case</span> Http_Login:</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//返回的登录对象</span></span><br><span class="line"><span class="comment">// LoginData *data  = response.responseObject;</span></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">case</span> Http_DynamicList:</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//如果是列表,则从取数组</span></span><br><span class="line"><span class="built_in">NSArray</span> *dataList  = response.tableList.dataList;</span><br><span class="line">[<span class="keyword">self</span> allLoadingCompleted:dataList];</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/07/20/Runtime 到底是个什么鬼？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/07/20/Runtime 到底是个什么鬼？/" class="post-title-link" itemprop="url">Runtime 到底是个什么鬼</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-20 09:22:56" itemprop="dateCreated datePublished" datetime="2018-07-20T09:22:56+08:00">2018-07-20</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2018/07/20/Runtime 到底是个什么鬼？/" class="leancloud_visitors" data-flag-title="Runtime 到底是个什么鬼">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Runtime-到底是个什么鬼？"><a href="#Runtime-到底是个什么鬼？" class="headerlink" title="Runtime 到底是个什么鬼？"></a>Runtime 到底是个什么鬼？</h3><p>Runtime是Objective-C中底层的一套C语言API，是一个将C语言转化为面向对象语言的拓展。Runtime的一切都围绕两个中心：<strong>类的动态配置</strong> 和 <strong>消息传递</strong></p>
+<h4 id="能干啥？"><a href="#能干啥？" class="headerlink" title="能干啥？"></a>能干啥？</h4><ul>
+<li>动态的在内存中创建一个类</li>
+<li>给类增加一个属性</li>
+<li>给类增加一个协议实现</li>
+<li>给类增加一个方法实现IMP</li>
+<li>遍历一个类的所有成员变量、属性和方法等</li>
+</ul>
+<ul>
+<li>拦截系统自带的方法调用（Method Swizzling黑魔法）</li>
+<li>将某些OC代码转化为Runtime代码，探究底层。如block的实现原理</li>
+<li>实现给分类增加属性</li>
+<li>实现NSCoding的自动归档和接档</li>
+<li>实现字典的模型和自动转换</li>
+</ul>
+<h6 id="基本元素的认识"><a href="#基本元素的认识" class="headerlink" title="基本元素的认识"></a>基本元素的认识</h6><ol>
+<li>class 和 id  都被称为类对象。</li>
+<li>selector 可以理解为方法的ID, 通过 @selector 可以找到方法的地址。</li>
+<li>IMP是implementation  被称为 函数指针。</li>
+<li>Method 代表类中的某个方法类型。</li>
+<li>lvar 代表 实例变量类型。</li>
+<li>objc_property_t 是属性。 定义一个属性：typedef struct objc_property *objc_property_t;</li>
+<li>Category 分类。 可动态为已知类添加新的方法。</li>
+</ol>
+<h5 id="消息的传递过程"><a href="#消息的传递过程" class="headerlink" title="消息的传递过程"></a>消息的传递过程</h5><p>调用实例方法时，它会首先在自身isa指针指向的类（class）methodLists中查找该方法，如果找不到则会通过class的super_class指针找到父类的类对象结构体，然后从methodLists中查找该方法，如果仍找不到则继续通过super_class向上查找知道metaclass</p>
+<h5 id="实现例子"><a href="#实现例子" class="headerlink" title="实现例子"></a>实现例子</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 遍历类中所有的变量</span><br><span class="line">-(void) getALLVariable&#123; </span><br><span class="line"></span><br><span class="line">    unsigned int count = 0;</span><br><span class="line">    Ivar *allVariables = class_copyIvarList([Student class], &amp;count);</span><br><span class="line"></span><br><span class="line">    for (int i = 0 ; i&lt; count; i++) &#123;</span><br><span class="line">            //遍历每一个变量,包括名称和类型</span><br><span class="line">        Ivar ivar = allVariables[i];</span><br><span class="line">        const char *VariableName = ivar_getName(ivar);</span><br><span class="line">        const char *VariableType = ivar_getTypeEncoding(ivar);</span><br><span class="line">        NSLog(@&quot;(Name:%s)-------(Type:%s)&quot;,VariableName,VariableType);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>若是想遍历属性列表可以将<code>class_copyIvarList</code>替换为<code>class_copyPropertyList</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//遍历类的方法</span><br><span class="line">-(void) getAllMethod&#123;</span><br><span class="line">    unsigned int count = 0;</span><br><span class="line">    Method *AllMethods = class_copyMethodList([Student class], &amp;count);</span><br><span class="line"></span><br><span class="line">    for (int i = 0 ; i&lt;count; i++) &#123;</span><br><span class="line"></span><br><span class="line">        Method method = AllMethods[i];</span><br><span class="line">        //获取SEL：SEL类型,即获取方法选择器@selector()</span><br><span class="line">        SEL sel = method_getName(method);</span><br><span class="line">        //得到sel的方法名：以字符串格式获取sel的name，也即@selector()中的方法名称</span><br><span class="line">        const char *methodName = sel_getName(sel);</span><br><span class="line">        NSLog(@&quot;-------the method :%s&quot;,methodName);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="动态改变一个类变量的数值"><a href="#动态改变一个类变量的数值" class="headerlink" title="动态改变一个类变量的数值"></a>动态改变一个类变量的数值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//改变Person变量的数值</span><br><span class="line">-(void) changeVariable&#123;</span><br><span class="line">    NSLog(@&quot;before change person : %@ -------&quot;,_person);</span><br><span class="line"></span><br><span class="line">    unsigned int count = 0;</span><br><span class="line">    Ivar *allList = class_copyIvarList([Person class], &amp;count);</span><br><span class="line">    for (int i = 0; i&lt; count; i++) &#123;</span><br><span class="line">        Ivar var = allList[i];</span><br><span class="line">        const char *varName = ivar_getName(var);</span><br><span class="line">        NSString *name = [NSString stringWithUTF8String:varName];</span><br><span class="line"></span><br><span class="line">        if ([name isEqualToString:@&quot;_name&quot;]) &#123;</span><br><span class="line">            object_setIvar(_person, var, @&quot;lannis&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    NSLog(@&quot;after change person : %@ -------&quot;,_person);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="动态添加方法"><a href="#动态添加方法" class="headerlink" title="动态添加方法"></a>动态添加方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-(void) addMethod&#123;</span><br><span class="line">    class_addMethod([self class], @selector(addfunc3), (IMP)func3, &quot;v@:&quot;);</span><br><span class="line"></span><br><span class="line">    if ([self respondsToSelector:@selector(addfunc3)]) &#123;</span><br><span class="line">        [self performSelector:@selector(addfunc3)];</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        NSLog(@&quot;add method error&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void func3(id self,SEL _cmd)&#123;</span><br><span class="line">    NSLog(@&quot;%s&quot;,__func__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用<code>class_addMethod(__unsafe_unretained Class cls, SEL name, IMP imp, const char *types)</code>方法给指定类添加方法。<br>imp参数：实现被添加方法的函数，在本例中func3是指func3的地址指针；<br>types参数：一个定义该函数返回值类型和参数类型的字符串。本例中”v@:”意思是v代表无返回值void，@代表id sel；：代表SEL _cmd；<br>要注意的是：func3方法前的void不加+、-号，因为这是C的代码；必须有指定两个参数（id self，SEL _cmd）；</p>
+<h4 id="动态交换方法"><a href="#动态交换方法" class="headerlink" title="动态交换方法"></a>动态交换方法</h4><p>将存在的两个方法的实现进行交换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-(void) exchangeImplementations&#123;</span><br><span class="line">    Method m1 = class_getInstanceMethod([Person class], @selector(func1));</span><br><span class="line">    Method m2 = class_getInstanceMethod([Person class], @selector(func2));</span><br><span class="line"></span><br><span class="line">    method_exchangeImplementations(m1, m2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/07/20/HTTP协议详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1069,12 +1460,24 @@
                 
               
 
-              <time title="创建时间：2017-09-04 11:37:44 / 修改时间：11:42:24" itemprop="dateCreated datePublished" datetime="2017-09-04T11:37:44+08:00">2017-09-04</time>
+              <time title="创建时间：2017-09-04 11:37:44" itemprop="dateCreated datePublished" datetime="2017-09-04T11:37:44+08:00">2017-09-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-10 18:30:56" itemprop="dateModified" datetime="2019-12-10T18:30:56+08:00">2019-12-10</time>
               
             
           </span>
@@ -1151,6 +1554,16 @@
 <li>长时间兼职创业。（创业准备，和研究时间不辞职是可以的，但长时间兼职创业是不可取的。兼职往往导致执行力低下，思考不深入，团队无法正真组建，不能吸引好的人加入。无法融资，最重要的是轻易放弃了市场机会。）</li>
 <li>多线开发，同时想做太多的事情。希望产品功能丰富，堆砌功能，没有抓住核心需求和核心价值。不注意政策和限制，选择太狭窄的方向，不去考虑推广的渠道，盈利模式等。</li>
 </ol>
+<h4 id="什么是创业者"><a href="#什么是创业者" class="headerlink" title="什么是创业者"></a>什么是创业者</h4><ul>
+<li>在做每一件事情的时候，把这个事情的每一个阶段的步骤，然后每个阶段里面的重要性，都想得非常清楚。</li>
+<li><p>能够笼络非常好的优秀团队。要有优秀的能人。对产品的细节和操作流程要很敏感。及时发现自己的劣势，找到优势互补的合伙人。</p>
+</li>
+<li><p>敏锐的洞察力，善于把握一些创业机会。</p>
+</li>
+<li><p>创业的激情。创业者最重要的是问自己，解决的问题是什么，第二，为什么只有你能解决，第二就是你的执行力，或者你的判断力。</p>
+</li>
+<li>创业者是否同时具有格局的高度，又能够有执行力，既有独特的观点，又能够有空杯的心态去听取别人的意见，学习别人的长处。既有乐观的精神，又能够有这种危机的意识(可能来自巨头的打压和同行的竞争，所以要有危机潜意识)。</li>
+</ul>
 
           
         
@@ -1948,401 +2361,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/04/你是个合格的产品经理？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/09/04/你是个合格的产品经理？/" class="post-title-link" itemprop="url">你是个合格的产品经理？</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-09-04 10:05:34 / 修改时间：10:13:32" itemprop="dateCreated datePublished" datetime="2017-09-04T10:05:34+08:00">2017-09-04</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2017/09/04/你是个合格的产品经理？/" class="leancloud_visitors" data-flag-title="你是个合格的产品经理？">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="首先，产品经理应该做什么？"><a href="#首先，产品经理应该做什么？" class="headerlink" title="首先，产品经理应该做什么？"></a>首先，产品经理应该做什么？</h4><p><strong> <font color="orange">帮助企业/用户为用户打造有价值的产品。</font> </strong></p>
-<h4 id="产品经理思维包括哪些？"><a href="#产品经理思维包括哪些？" class="headerlink" title="产品经理思维包括哪些？"></a>产品经理思维包括哪些？</h4><ol>
-<li>抓住需求的本质 - 人性 （一个优秀的产品经理需要具备抓住用户欲望的能力，而不是仅仅在产品上增加一个功能这么简单）<br><br></li>
-<li>核心需求的把控能力。(无论功能如何增加和外界给予任何干扰，都需要时刻保证产品的核心不被影响)<br><br></li>
-<li>时刻描画产品的蓝图 - 未来 （走一步，看百步。需要时刻心中明白产品的将来会是如何，最重要的是在走向未来的过程中又需要哪些助力）<br><br></li>
-<li>不断复盘产品的现在 - 总结 （这个决定做的对吗？有什么数据支撑？ 产品人需一日三省，不断总结，不断修正，给自己日后决策更加充足的依据）<br><br></li>
-<li>无懈可击的思维 - 逻辑思维 （慎密的思维能力，对整个业务流程要非常熟悉。）<br><br></li>
-<li>产品的终极价值 - 商业盈利 （不断迭代的过程中，我们需要懂得如何帮助产品走到商业实现）<br><br></li>
-<li>做减法如同做加法 - 极简 （做产品不是做功能，产品不是功能的不断累加，我们需要给产品瘦身的机会，给用户极简的体验，设问：每个版本要上的功能，你能删掉一个吗？）<br><br></li>
-<li>懂得和不同的人打交道 - 沟通（应该好好思考如何与不同岗位的同学打交道，知道大家的性格特点，懂得如何把信息有效地传递。）<br><br></li>
-<li>管理好自己的时间和任务 - todolist (对时间管理要更加细分化，多用TodoList ，会有不少的帮助。)<br><br></li>
-<li>宰相肚里能撑船  - 抗压 （产品经理的特殊位置，导致了人人可喷的境遇。在如此逆境中，需要有一个广阔的胸怀和极强的抗压能力，其实这些都不是什么，因为我们眼里只有产品。）</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2017/09/04/营销六心理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/09/04/营销六心理/" class="post-title-link" itemprop="url">营销六心理</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-09-04 09:43:52 / 修改时间：09:46:20" itemprop="dateCreated datePublished" datetime="2017-09-04T09:43:52+08:00">2017-09-04</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2017/09/04/营销六心理/" class="leancloud_visitors" data-flag-title="营销六心理">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>法则一：<font color="orange"> 从众心理 </font></p>
-<p>1，比如淘宝。用户购物时候往往会参考别人的购物体验，当某件东西很畅销，人们会本能地把它当作一个正确有效的选择。 </p>
-<ol>
-<li>借助销售排行榜将一个品牌与最畅销的品牌联系在一起。</li>
-<li>可在社交平台分享消费者生动感人的购买经历获得其他用户的认同感。</li>
-<li>通过巧妙的方式让消费者心甘情愿地宣传产品的各种优势。</li>
-<li>利用技术手段，通过社会化推荐系统，对相似消费群体的挖掘并推荐他们可能喜好的商品。</li>
-</ol>
-<p>法则二：<font color="orange">影响力</font></p>
-<ol>
-<li>利用明星或者权威人士进行产品推荐。</li>
-<li>向名人推出试用活动，并鼓励他们在 社交媒体发布。</li>
-</ol>
-<p>法则三：<font color="orange">稀缺原则</font></p>
-<ol>
-<li>进行限量体验，限量机会，限量提供，限量版本等基于稀缺性的促销活动。</li>
-<li>推出只针对社交媒体的促销计划。</li>
-</ol>
-<p>法则四：<font color="orange">喜好原则</font></p>
-<ol>
-<li>充分利用购物者的社交圈进行产品推荐，例如微博群组或QQ群。</li>
-<li>利用社会化媒体平台关注，分享并传播一些目标消费者喜欢的信息。新闻或科普知识。</li>
-<li>经常与活跃粉丝互动以获得他们的好感，这样更容易树立产品品牌形象。</li>
-</ol>
-<p>法则五：<font color="orange">一致性原则</font></p>
-<ol>
-<li>定期开展免费试用，线上的免费体验等。</li>
-<li>设计与品牌相关的小游戏在社交平台推广。</li>
-<li>保留消费者各种购物信息，并提供良好的服务，使消费者形成依赖。</li>
-</ol>
-<p>法则六：<font color="orange">互惠原则</font></p>
-<ol>
-<li>经常在节日与消费者互动，赠送消费者免费的试用装，产品宣传，杂志等。</li>
-<li>电商可以透过社会心理层面利用社会化媒体平台塑造品牌。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2386,7 +2409,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
