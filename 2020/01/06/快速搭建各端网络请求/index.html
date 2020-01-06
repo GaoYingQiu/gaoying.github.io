@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.1.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="HTTP超文本传输协议。TCP 三次握手。   1、客户端 发syn询问 给 服务器   2、服务器  回应询问syn,并发送一个指令ack 客户端   3、客户端 回 ack  服务器。 正式连接成功。 开始客户端请求Http报文 ，服务器响应报文。 四次挥手过程 发送一个请求查询用户日志记录请求123456789101112131415:method: POST:scheme: https:a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速搭建前端网络请求">
+<meta property="og:url" content="http://gaoyingqiu.github.io/2020/01/06/快速搭建各端网络请求/index.html">
+<meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
+<meta property="og:description" content="HTTP超文本传输协议。TCP 三次握手。   1、客户端 发syn询问 给 服务器   2、服务器  回应询问syn,并发送一个指令ack 客户端   3、客户端 回 ack  服务器。 正式连接成功。 开始客户端请求Http报文 ，服务器响应报文。 四次挥手过程 发送一个请求查询用户日志记录请求123456789101112131415:method: POST:scheme: https:a">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/tcp_threeBegin.png">
+<meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/tcp_fourEnd.png">
+<meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/https_cer.png">
+<meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/http_rsa_aes.png">
+<meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/javascript_function.png">
+<meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/js_window_xmlHttpRequest.png">
+<meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/http_axios.png">
+<meta property="og:updated_time" content="2020-01-06T10:35:34.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快速搭建前端网络请求">
+<meta name="twitter:description" content="HTTP超文本传输协议。TCP 三次握手。   1、客户端 发syn询问 给 服务器   2、服务器  回应询问syn,并发送一个指令ack 客户端   3、客户端 回 ack  服务器。 正式连接成功。 开始客户端请求Http报文 ，服务器响应报文。 四次挥手过程 发送一个请求查询用户日志记录请求123456789101112131415:method: POST:scheme: https:a">
+<meta name="twitter:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/tcp_threeBegin.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://gaoyingqiu.github.io/2020/01/06/快速搭建各端网络请求/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>快速搭建前端网络请求 | Qyan's Blog  高颖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/images/avatar.jpg" alt="Qyan's Blog  高颖">
+        </a>
+      </div>
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Qyan's Blog  高颖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">勇敢去做，大胆尝试。</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2020/01/06/快速搭建各端网络请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">快速搭建前端网络请求
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-06 14:05:04 / 修改时间：18:35:34" itemprop="dateCreated datePublished" datetime="2020-01-06T14:05:04+08:00">2020-01-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/01/06/快速搭建各端网络请求/" class="leancloud_visitors" data-flag-title="快速搭建前端网络请求">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="HTTP超文本传输协议。"><a href="#HTTP超文本传输协议。" class="headerlink" title="HTTP超文本传输协议。"></a>HTTP超文本传输协议。</h3><h4 id="TCP-三次握手。"><a href="#TCP-三次握手。" class="headerlink" title="TCP 三次握手。"></a>TCP 三次握手。</h4><p>   1、客户端 发syn询问 给 服务器<br>   2、服务器  回应询问syn,并发送一个指令ack 客户端<br>   3、客户端 回 ack  服务器。 正式连接成功。 开始客户端请求Http报文 ，服务器响应报文。<br><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/tcp_threeBegin.png" alt="三次握手"></p>
+<h4 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h4><p><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/tcp_fourEnd.png" alt="四次挥手"></p>
+<h3 id="发送一个请求查询用户日志记录"><a href="#发送一个请求查询用户日志记录" class="headerlink" title="发送一个请求查询用户日志记录"></a>发送一个请求查询用户日志记录</h3><h4 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">:method: POST</span><br><span class="line">:scheme: https</span><br><span class="line">:authority: vendor-api-prod.gaoying.com</span><br><span class="line">:path: /customer/logs/</span><br><span class="line"></span><br><span class="line">Accept: application/json, text/plain, */*</span><br><span class="line">Content-Type: application/x-www-form-urlencoded  //表单提交方式</span><br><span class="line">Origin: http://h5-vendor-dev.gaoying.com</span><br><span class="line">Content-Length: 236</span><br><span class="line">Accept-Language: zh-cn</span><br><span class="line">Host: vendor-api-dev.gaoying.com</span><br><span class="line">User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148</span><br><span class="line">Referer: http://h5-vendor-dev.gaoying.com/page/customerMain.html?customerId=172821&amp;userId=15243265&amp;token=41cadcb70eed35378a92379871a51181</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
+<h4 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">status: 200</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Content-Type: application/json;charset=UTF-8  //json响应格式</span><br><span class="line">Date: Fri, 27 Dec 2019 05:58:18 GMT</span><br><span class="line">Server: Tengine</span><br></pre></td></tr></table></figure>
+<h4 id="请求方式有哪些？"><a href="#请求方式有哪些？" class="headerlink" title="请求方式有哪些？"></a>请求方式有哪些？</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">METHODS: [</span><br><span class="line">   'ACL',         'BIND',       'CHECKOUT',</span><br><span class="line">   'CONNECT',     'COPY',       'DELETE',</span><br><span class="line">   'GET',         'HEAD',       'LINK',</span><br><span class="line">   'LOCK',        'M-SEARCH',   'MERGE',</span><br><span class="line">   'MKACTIVITY',  'MKCALENDAR', 'MKCOL',</span><br><span class="line">   'MOVE',        'NOTIFY',     'OPTIONS',</span><br><span class="line">   'PATCH',       'POST',       'PROPFIND',</span><br><span class="line">   'PROPPATCH',   'PURGE',      'PUT',</span><br><span class="line">   'REBIND',      'REPORT',     'SEARCH',</span><br><span class="line">   'SOURCE',      'SUBSCRIBE',  'TRACE',</span><br><span class="line">   'UNBIND',      'UNLINK',     'UNLOCK',</span><br><span class="line">   'UNSUBSCRIBE'</span><br><span class="line"> ]</span><br></pre></td></tr></table></figure>
+<h4 id="响应码有哪些？"><a href="#响应码有哪些？" class="headerlink" title="响应码有哪些？"></a>响应码有哪些？</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">STATUS_CODES: &#123;</span><br><span class="line">  '100': 'Continue',</span><br><span class="line">  '101': 'Switching Protocols',</span><br><span class="line">  '102': 'Processing',</span><br><span class="line">  '103': 'Early Hints',</span><br><span class="line">  '200': 'OK',</span><br><span class="line">  '201': 'Created',</span><br><span class="line">  '202': 'Accepted',</span><br><span class="line">  '203': 'Non-Authoritative Information',</span><br><span class="line">  '204': 'No Content',</span><br><span class="line">  '205': 'Reset Content',</span><br><span class="line">  '206': 'Partial Content',</span><br><span class="line">  '207': 'Multi-Status',</span><br><span class="line">  '208': 'Already Reported',</span><br><span class="line">  '226': 'IM Used',</span><br><span class="line">  '300': 'Multiple Choices',</span><br><span class="line">  '301': 'Moved Permanently',</span><br><span class="line">  '302': 'Found',</span><br><span class="line">  '303': 'See Other',</span><br><span class="line">  '304': 'Not Modified',</span><br><span class="line">  '305': 'Use Proxy',</span><br><span class="line">  '307': 'Temporary Redirect',</span><br><span class="line">  '308': 'Permanent Redirect',</span><br><span class="line">  '400': 'Bad Request',</span><br><span class="line">  '401': 'Unauthorized',</span><br><span class="line">  '402': 'Payment Required',</span><br><span class="line">  '403': 'Forbidden',</span><br><span class="line">  '404': 'Not Found',</span><br><span class="line">  '405': 'Method Not Allowed',</span><br><span class="line">  '406': 'Not Acceptable',</span><br><span class="line">  '407': 'Proxy Authentication Required',</span><br><span class="line">  '408': 'Request Timeout',</span><br><span class="line">  '409': 'Conflict',</span><br><span class="line">  '410': 'Gone',</span><br><span class="line">  '411': 'Length Required',</span><br><span class="line">  '412': 'Precondition Failed',</span><br><span class="line">  '413': 'Payload Too Large',</span><br><span class="line">  '414': 'URI Too Long',</span><br><span class="line">  '415': 'Unsupported Media Type',</span><br><span class="line">  '416': 'Range Not Satisfiable',</span><br><span class="line">  '417': 'Expectation Failed',</span><br><span class="line">  '418': "I'm a Teapot",</span><br><span class="line">  '421': 'Misdirected Request',</span><br><span class="line">  '422': 'Unprocessable Entity',</span><br><span class="line">  '423': 'Locked',</span><br><span class="line">  '424': 'Failed Dependency',</span><br><span class="line">  '425': 'Unordered Collection',</span><br><span class="line">  '426': 'Upgrade Required',</span><br><span class="line">  '428': 'Precondition Required',</span><br><span class="line">  '429': 'Too Many Requests',</span><br><span class="line">  '431': 'Request Header Fields Too Large',</span><br><span class="line">  '451': 'Unavailable For Legal Reasons',</span><br><span class="line">  '500': 'Internal Server Error',</span><br><span class="line">  '501': 'Not Implemented',</span><br><span class="line">  '502': 'Bad Gateway',</span><br><span class="line">  '503': 'Service Unavailable',</span><br><span class="line">  '504': 'Gateway Timeout',</span><br><span class="line">  '505': 'HTTP Version Not Supported',</span><br><span class="line">  '506': 'Variant Also Negotiates',</span><br><span class="line">  '507': 'Insufficient Storage',</span><br><span class="line">  '508': 'Loop Detected',</span><br><span class="line">  '509': 'Bandwidth Limit Exceeded',</span><br><span class="line">  '510': 'Not Extended',</span><br><span class="line">  '511': 'Network Authentication Required'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="客户端请求后，服务器响应携带的https证书"><a href="#客户端请求后，服务器响应携带的https证书" class="headerlink" title="客户端请求后，服务器响应携带的https证书"></a>客户端请求后，服务器响应携带的https证书</h4><p>HTTPS:<br>在HTTP与TCP之间 加入SSL层，一个加密/身份验证层，用于安全的HTTP数据传输。 它是一个URI scheme（抽象标识符体系）。<br>SSL : 安全套接层 ， 在网络传输层基础上对网络连接进行数据加密； 具有校验机制，配备身份证书。<br>客户端利用公钥对数据加密，服务端收到加密数据后 对数据进行解密；</p>
+<p><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/https_cer.png" alt="https证书"></p>
+<p>Https 服务器端口是443, Https 公共密钥采用 RSA算法加密， 证书信息将在请求响应之前回复给客户端。客户端根据证书信息 本地做一个安全校验，通过后再允许服务端响应返回数据，否则取消本次请求响应。<br>签名算法：SHA-256 ECDSA</p>
+<h4 id="常用加密算法"><a href="#常用加密算法" class="headerlink" title="常用加密算法"></a>常用加密算法</h4><h5 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h5><ul>
+<li>单向散列函数<br>MD5 是一种 不可逆的信息摘要算法，严格来说不是加密。<br>单向散列函数是一种不可逆的信息摘要算法，无法通过密文还原成明文（注意：是算法上不能实现），对于简单的 MD5 加密（这里的简单是指：明文长度短，且字符单一，并且进行 HASH 操作的时候没有进行加盐处理），是可以通过一些在线工具网站解密出来，实则是利用了彩虹表的技术。</li>
+<li>AES 加密<br>  加密原理： 字节代换，行位移，列混合：（矩阵相乘：状态矩阵 和 固定矩阵相乘） ，轮钥加密：轮钥加密是将128位轮密钥Ki同状态矩阵中的数据进行逐位异或操作</li>
+<li>DES 加密</li>
+</ul>
+<h5 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h5><ul>
+<li>RSA 加密<br><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/http_rsa_aes.png" alt="https加密流程"></li>
+</ul>
+<h3 id="快速搭建Vue-普通h5项目页面的网络请求"><a href="#快速搭建Vue-普通h5项目页面的网络请求" class="headerlink" title="快速搭建Vue 普通h5项目页面的网络请求"></a>快速搭建Vue 普通h5项目页面的网络请求</h3><p>在学习请求之前，需要掌握好Javascript语言。最基础的知识首先要了解和掌握变量修饰符，Function 和 Object对象。</p>
+<h4 id="js-变量修饰符"><a href="#js-变量修饰符" class="headerlink" title="js 变量修饰符"></a>js 变量修饰符</h4><p>let 是局部变量，非常适合循环的时候；<br>const 是只读变量， 初始化的时候就要赋值；只能赋值一次；<br>var 是全局变量，全局都可以用。</p>
+<h4 id="函数-Function"><a href="#函数-Function" class="headerlink" title="函数 Function"></a>函数 Function</h4><p> <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/javascript_function.png" alt="javascript_function"><br> 从上图我们看到有个名为open的函数，包含参数，调用者，长度，名字，以及 <strong>Proto</strong> 对象。该对象里面有 apply ,bind, call 函数。还有一个contructor构造器。</p>
+<ul>
+<li>Function属性： length,name,prototype</li>
+<li><p>Function方法:</p>
+<ul>
+<li>Function.prototype.apply(),  //调用一个函数并将其设置为提供的值。 可以将参数作为Array对象传递</li>
+<li>Function.prototype.bind(), //创建一个新函数，该新函数在调用时将其设置为提供的值，并在调用新函数时在提供的任何参数之前添加给定的参数序列。</li>
+<li>Function.prototype.call(), //调用一个函数并将其设置为提供的值。 可以按原样传递参数。</li>
+<li>Function.prototype.toString() //返回表示函数源代码的字符串。</li>
+</ul>
+<p>//题外话，apply 和 bind 增强代码的扩展性，类似iOS 的category;<br>①动态改变this的指向，也就是this从callObject动态切换为thisArg。<br>②callObject.method.apply(thisArg,thisArray)，可以将thisArray转化为arguments，传入到callObject.method内部。<br>我们通过以下代码来测试bind 的用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序员的黄金年龄 18 ~ 35</span></span><br><span class="line"><span class="keyword">var</span> checkProgramerAgeRange = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">typeof</span> value !== <span class="string">'number'</span>)</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">       <span class="keyword">return</span> value &gt;= <span class="keyword">this</span>.minimum &amp;&amp; value &lt;= <span class="keyword">this</span>.maximum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> programmerRange = &#123; <span class="attr">minimum</span>: <span class="number">18</span>, <span class="attr">maximum</span>: <span class="number">35</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把函数内部的this修改为range对象，</span></span><br><span class="line"><span class="keyword">let</span> boundCheckProgramerAgeRange = checkProgramerAgeRange.bind(programmerRange);</span><br><span class="line"><span class="built_in">console</span>.log(boundCheckProgramerAgeRange(<span class="number">12</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Object-对象"><a href="#Object-对象" class="headerlink" title="Object 对象"></a>Object 对象</h4><p>Object 继承Function, 扩展了自己的许多方法。</p>
+<pre><code>Object 的属性构造器 Object.prototype
+Object.assign()   将所有可枚举的自身属性的值从一个或多个源对象复制到目标对象。
+Object.create()  用指定的原型对象和属性创建一个新对象。
+Object.defineProperty()  定义一个property给指定对象
+Object.defineProperties() 定义一个属性 给指定对象
+Object.entries() 返回一个装有map的数组。
+Object.getOwnPropertyNames() 得到这个对象自己的属性名
+Object.getPrototypeOf() 得到指定类型的属性
+Object.is() 比较对象
+Object.keys() 字符窜属性
+Object.values()
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> stuObj = &#123;<span class="attr">room</span>:<span class="string">"english"</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperties(stuObj,&#123;</span><br><span class="line">    stuName:&#123;</span><br><span class="line">        value:<span class="string">"qiugaoying"</span>,</span><br><span class="line">        writable:<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         configurable, enumerable, </span></span><br><span class="line"><span class="comment">         value, writable, get, set</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;,</span><br><span class="line">    age: &#123;</span><br><span class="line">        value:<span class="number">18</span>,</span><br><span class="line">        writable:<span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//可直接覆盖某对象的属性；</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(stuObj,<span class="string">"stuName"</span>,&#123;</span><br><span class="line">    value:<span class="string">"gaogao"</span>,</span><br><span class="line">    writable: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">stuObj.age = <span class="number">20</span>;</span><br><span class="line"><span class="built_in">console</span>.log(stuObj.stuName); <span class="comment">//gaogao</span></span><br><span class="line"><span class="built_in">console</span>.log(stuObj.age); <span class="comment">//20</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(stuObj)); <span class="comment">//room 取得公共属性</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(stuObj)); <span class="comment">//room 取得公共属性值</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(stuObj)); <span class="comment">//room,age,stuName 取得对象所有属性</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptors(stuObj)); <span class="comment">//获取属性描述器</span></span><br><span class="line"><span class="built_in">console</span>.log(stuObj[<span class="string">"stuName"</span>]); <span class="comment">//gaogao</span></span><br></pre></td></tr></table></figure>
+<h4 id="对象的定义"><a href="#对象的定义" class="headerlink" title="对象的定义"></a>对象的定义</h4><h5 id="传统方式定义一个对象"><a href="#传统方式定义一个对象" class="headerlink" title="传统方式定义一个对象"></a>传统方式定义一个对象</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.name = name;</span><br><span class="line">   <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过函数的prototype公共空间存储方法</span></span><br><span class="line">Person.prototype.introduce = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"hello,my name is "</span>+<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> Person().introduce();</span><br></pre></td></tr></table></figure>
+<h5 id="Class方式定义一个对象"><a href="#Class方式定义一个对象" class="headerlink" title="Class方式定义一个对象"></a>Class方式定义一个对象</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(name,age)&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    introduce()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"我的名字是："</span>+<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类的本质是对象，对象继承Function; 所以introduce方法还是存储在prototype 公共空间中。操作类函数也可通过Person.prototype 去动态新增新的方法。另外要注意一点类的所有实列共享原型的prototype。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> student = <span class="keyword">new</span> Person(<span class="string">"qiugaoying"</span>,<span class="number">18</span>);</span><br><span class="line"><span class="keyword">let</span> student2 = <span class="keyword">new</span> Person(<span class="string">"lihua"</span>,<span class="number">22</span>);</span><br><span class="line"> <span class="built_in">console</span>.log(student.__proto__ == student2.__proto__); <span class="comment">//结果为true。 类的所有实列共享原型的prototype</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Ajax-请求"><a href="#Ajax-请求" class="headerlink" title="Ajax 请求"></a>Ajax 请求</h4><p>通常，发起一个请求，需要传入基础参数，业务url,  业务参数，设置请求头，和响应方式。 接着对响应成功和失败的处理；<br>前端通常的请求方式有 表单提交，Ajax异步请求，Jquery也提供了ajax封装的快捷api。另外也有较新的框架Axios。</p>
+<p>ajax 的出现是解决局部数据刷新的问题。可通过后台异步调用接口 实现页面局部刷新。浏览器原生有个XMLHttpRequest对象。<br><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/js_window_xmlHttpRequest.png" alt="xmlHttpRequest"><br>jQuery 出来之后，ajax的调用简化了好多 </p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ajax(&#123;</span><br><span class="line">    type: <span class="string">'POST'</span>,</span><br><span class="line">    dataType: <span class="string">'json'</span>, <span class="comment">//服务端返回的数据类型</span></span><br><span class="line">    contentType: <span class="string">'application/json'</span> ,<span class="comment">//参数类型</span></span><br><span class="line">    url : <span class="string">"http://127.0.0.1/log/list/"</span>,</span><br><span class="line">    headers:&#123;<span class="string">'Content-Type'</span>:<span class="string">'application/json'</span>&#125;,<span class="comment">//请求头, 内容编码类型 默认 "application/x-www-form-urlencoded"</span></span><br><span class="line">    data: <span class="built_in">JSON</span>.stringify(&#123;<span class="string">"name"</span>:<span class="string">"qiugaoying"</span>&#125;), <span class="comment">//传参</span></span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">result,status,xhr</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(result); <span class="comment">//获取结果</span></span><br><span class="line">    &#125;,</span><br><span class="line">    error: <span class="function"><span class="keyword">function</span> (<span class="params">xhr,status,error</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Axios-框架"><a href="#Axios-框架" class="headerlink" title="Axios 框架"></a>Axios 框架</h4><p>Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中. 我们来观察一下 在axios 的api 方法。<br><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/http_axios.png" alt="axios"></p>
+<ul>
+<li>从图可以看出，有个默认属性中有个xmlHttpRequet网络适配器。</li>
+<li>可设置基础baseURL , 以及请求头，请求超时等一些基础设置。</li>
+<li>转换请求数据和响应数据，支持防御 XSRF。</li>
+<li>提供了常用的get,post 等请求。自动转换 JSON 数据。还提供请求和响应的拦截器。</li>
+</ul>
+<h5 id="script标签引入axios-的js"><a href="#script标签引入axios-的js" class="headerlink" title="script标签引入axios 的js"></a>script标签引入axios 的js</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="comment">//构建一个axios实列只读变量，设置基础url</span></span><br><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span><br><span class="line">    baseURL: <span class="string">'https://vendor-api-prod.qiugaoying.com'</span>,</span><br><span class="line">    timeout: <span class="number">1000</span>,</span><br><span class="line">    transformRequest: [<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Do whatever you want to transform the data</span></span><br><span class="line">        <span class="keyword">let</span> ret = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> it <span class="keyword">in</span> data) &#123;</span><br><span class="line">            ret += <span class="built_in">encodeURIComponent</span>(it) + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(data[it]) + <span class="string">'&amp;'</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="封装基础参数，排序-加密等"><a href="#封装基础参数，排序-加密等" class="headerlink" title="封装基础参数，排序 加密等"></a>封装基础参数，排序 加密等</h5><p>对请求的基础参数做一个封装。 大部分请求都需要带上一些基础参数和userId,token 等字段。最后对所有字段key排序,最后转成Json 字符串再加密。以下为示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> netManager = &#123;</span><br><span class="line">    getRequestParams: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> userId = localStorage.getItem(<span class="string">"userId"</span>);</span><br><span class="line">        <span class="keyword">let</span> token = localStorage.getItem(<span class="string">"token"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// var userInfo = JSON.parse(userInfoStr);</span></span><br><span class="line">        <span class="keyword">var</span> obj = <span class="built_in">Object</span>.assign(params, &#123;</span><br><span class="line">            api_version: <span class="number">1</span>, <span class="comment">//接口版本</span></span><br><span class="line">            platform: <span class="number">2</span>, <span class="comment">//平台类型</span></span><br><span class="line">            terminal: <span class="number">1</span>, <span class="comment">//终端类型</span></span><br><span class="line">            nonce: (<span class="built_in">Math</span>.random().toFixed(<span class="number">8</span>) + <span class="string">''</span>).replace(<span class="string">'0.'</span>, <span class="string">''</span>), <span class="comment">//随机数;</span></span><br><span class="line">            timestamp: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(), <span class="comment">//当前时间戳 毫秒</span></span><br><span class="line">            user_id:<span class="number">123</span>, <span class="comment">//userId</span></span><br><span class="line">            token: <span class="string">"ec29c3af0dd998yjhgd22f9y867ws6512"</span>, <span class="comment">//token</span></span><br><span class="line">            version_code: <span class="number">100</span> <span class="comment">//当前版本号</span></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">let</span> sign = MD5(<span class="keyword">this</span>.strKeySort(obj)).toUpperCase(); <span class="comment">//md5加密</span></span><br><span class="line">        obj[<span class="string">"Sign"</span>] = sign;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">//key排序</span></span><br><span class="line">    strKeySort: <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> newkey = <span class="built_in">Object</span>.keys(obj).sort();</span><br><span class="line">        <span class="keyword">const</span> newArr = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; newkey.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (obj[newkey[i]] === <span class="string">'undefined'</span> || obj[newkey[i]] === <span class="string">'null'</span>) &#123;</span><br><span class="line">                obj[newkey[i]] = <span class="string">''</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            newArr.push(<span class="string">`<span class="subst">$&#123;newkey[i]&#125;</span>=<span class="subst">$&#123;obj[newkey[i]]&#125;</span>`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> newStr = newArr.join(<span class="string">'&amp;'</span>) + <span class="string">'&amp;secret_key=gaoyingAESKey'</span>;</span><br><span class="line">        <span class="keyword">return</span> newStr;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//获取url 后面带的参数;</span></span><br><span class="line">    getUrlKey: <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">decodeURIComponent</span>((<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'[?|&amp;]'</span> + name + <span class="string">'='</span> + <span class="string">'([^&amp;;]+?)(&amp;|#|;|$)'</span>).exec(location.href) || [, <span class="string">""</span>])[<span class="number">1</span>].replace(<span class="regexp">/\+/g</span>, <span class="string">'%20'</span>)) || <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="axios实列发起一个请求示例"><a href="#axios实列发起一个请求示例" class="headerlink" title="axios实列发起一个请求示例"></a>axios实列发起一个请求示例</h5><p>这里拿请求用户个人主页基础信息为样例，把下面方法放入 Vue 的 methods 中。 加载loading用到的是weiui.js.<br>以下可以实现一个分页加载的请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#PageContainer1'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        <span class="comment">//分页数据</span></span><br><span class="line">        pageNumber: <span class="number">1</span>,</span><br><span class="line">        pageSize: <span class="number">10</span>,</span><br><span class="line">        gyPageListStart: <span class="number">0</span>,</span><br><span class="line">        hasMoreDataFlag: <span class="literal">false</span>,</span><br><span class="line">        dataSource: [],</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        execBaseCustomerRequest: <span class="function"><span class="keyword">function</span>(<span class="params">url, listKey</span>) </span>&#123;</span><br><span class="line">             <span class="keyword">var</span> loading = <span class="literal">null</span>;</span><br><span class="line">              <span class="keyword">if</span> (<span class="keyword">this</span>.pageNumber == <span class="number">1</span>) &#123;</span><br><span class="line">                  loading = weui.loading(<span class="string">'加载中'</span>);</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">let</span> pageVue = <span class="keyword">this</span>; <span class="comment">//this在不同的作用域中指向的对象不同；临时存储vue对象</span></span><br><span class="line">              <span class="keyword">if</span> (<span class="keyword">this</span>.pageNumber == <span class="number">1</span>) &#123;</span><br><span class="line">                  <span class="keyword">this</span>.gyPageListStart = <span class="number">0</span>;</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              http.post(url, netManager.getRequestParams(&#123;</span><br><span class="line">                  customer_id: <span class="keyword">this</span>.customerId,</span><br><span class="line">                  start: <span class="keyword">this</span>.gyPageListStart,</span><br><span class="line">                  size: <span class="number">10</span>,</span><br><span class="line">              &#125;)).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">                  <span class="keyword">if</span> (loading) &#123;</span><br><span class="line">                      loading.hide();</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">let</span> dataDic = response.data;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">if</span> (dataDic.status == <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">                      <span class="keyword">var</span> arr = pageVue.dataSource;</span><br><span class="line">                      <span class="keyword">if</span> (pageVue.pageNumber == <span class="number">1</span>) &#123;</span><br><span class="line">                          arr = [];</span><br><span class="line">                      &#125;</span><br><span class="line"></span><br><span class="line">                      <span class="keyword">var</span> dataArr = dataDic.data[listKey];</span><br><span class="line">                      arr = arr.concat(dataArr);</span><br><span class="line"></span><br><span class="line">                      pageVue.gyPageListStart = dataDic.data.start;</span><br><span class="line">                      vm.$data.hasMoreDataFlag = (dataDic.data.more == <span class="number">1</span>);</span><br><span class="line">                      vm.$data.dataSource = arr;</span><br><span class="line">                  &#125;</span><br><span class="line">                  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                      pageVue.requestLoadingFinished = <span class="literal">true</span>;</span><br><span class="line">                  &#125;, <span class="number">800</span>);</span><br><span class="line">                  <span class="comment">//重置加载完成的状态；</span></span><br><span class="line"></span><br><span class="line">              &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">                  <span class="built_in">console</span>.log(error);</span><br><span class="line">              &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>其他： url 通常会放到一个全局文件中配置<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gaoyingAPI = &#123;</span><br><span class="line">    customerList: <span class="string">"/customer/list/"</span>,</span><br><span class="line">    customerLogs: <span class="string">"/customer/logs/"</span>,</span><br><span class="line">    customerCoupons: <span class="string">"/customer/coupons/"</span>,</span><br><span class="line">    customerOrders: <span class="string">"/customer/orders/"</span>,</span><br><span class="line">    customerDetail: <span class="string">"/customer/detail/"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Promise-用法简要讲解"><a href="#Promise-用法简要讲解" class="headerlink" title="Promise 用法简要讲解"></a>Promise 用法简要讲解</h5><p>从上文中，我们看到http发送post 方法请求之后，通过promise语法 then的回调监听响应结果，通过catch方法 来捕捉异常错误处理。ES6 就支持了Promise的用法。<br>Promise中文为承诺。有三种状态：pending(进行中)、fulfilled(已成功)、rejected(已失败)。 即状态一旦更改就不能再次改变赋值。这也是承诺的意义。<br>Promise实列通过.then方法或者.catch方法 返回一个新的Promise实例来实现链式调用。.then方法可以返回普通值或者一个新的promise。不设置返回值时，默认返回null。<br>Promise有很多用法，但什么情况下需要用到Promise呢？ 在需要处理异步耗时任务的时候，可用Promise包装后进行返回。Promise用的时候会遇到很多种情况，Promise也提供了对应的解决方法。</p>
+<ul>
+<li><p>当Promise.then方法返回一个新的Promise时候，下一级的then 将在 新的Promise then 执行 之后执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Promise then 嵌套 方式一</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1:异步请求处理耗时任务"</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">"qiu"</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//第一个接口请求成功拿到qiu</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1-result:"</span> + value);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"step2-1:异步请求处理耗时任务2"</span>);</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            resolve(<span class="string">"qiugao"</span>);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">        <span class="comment">//触发第二个接口请求</span></span><br><span class="line">    &#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">//第二个接口请求成功，拿到id2 做第一件事情。</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"step2-1-result-event1:"</span> + value);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"qiugaoying"</span>;</span><br><span class="line"></span><br><span class="line">    &#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">//第二个接口请求成功，拿到id2 做第二件事情。</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"step2-1-result-event2:"</span> + value);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello, my name is qiugaoying"</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//最后全部请求完成，触发汇总刷新。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1-result:"</span> + value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">console输出结果:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">step1:异步请求处理耗时任务</span></span><br><span class="line"><span class="comment">step1-result:qiu</span></span><br><span class="line"><span class="comment">step2-1:异步请求处理耗时任务2</span></span><br><span class="line"><span class="comment">step2-1-result-event1:qiugao</span></span><br><span class="line"><span class="comment">step2-1-result-event2:qiugaoying</span></span><br><span class="line"><span class="comment">step1-result:hello, my name is qiugaoying</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Promise then 嵌套，方式二： 把then移到同一级展开。执行打印结果是一样的。</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1:异步请求处理耗时任务"</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">"qiu"</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//第一个接口请求成功拿到qiu</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1-result:"</span> + value);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"step2-1:异步请求处理耗时任务"</span>);</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            resolve(<span class="string">"qiugao"</span>);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">        <span class="comment">//触发第二个接口请求</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//第二个接口请求成功，拿到id2 做第一件事情。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step2-1-result-event1:"</span> + value);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"qiugaoying"</span>;</span><br><span class="line"></span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//第二个接口请求成功，拿到id2 做第二件事情。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step2-1-result-event2:"</span> + value);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"hello, my name is qiugaoying"</span>;</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//最后全部请求完成，触发汇总刷新。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1-result:"</span> + value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>then 方法提供两个参数，第二个参数可选。一个是名为resolve的成功回调 和 另一个名为reject 的失败回调。通常处理一个失败回调我们会用catch方法去捕捉异常和失败。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1:异步请求处理耗时任务"</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">"qiu"</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//第一个接口请求成功拿到qiu</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1-result:"</span> + value);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"step2-1:异步请求处理耗时任务"</span>);</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            resolve(<span class="string">"qiugao"</span>);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">        <span class="comment">//触发第二个接口请求</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//第二个接口请求成功，拿到id2 做第一件事情。</span></span><br><span class="line">    <span class="keyword">let</span> hasError = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">if</span> (hasError) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"step2-1-result-event1-error报异常"</span>);</span><br><span class="line">        <span class="comment">//抛出异常 将不再继续执行then, 直接到catch异常；中途如果没有遇到catch 将直接到最后的catch.</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"step2-1-result-event1:"</span> + value);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"qiugaoying"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/*.catch(err =&gt; &#123;</span></span><br><span class="line"><span class="comment">    console.log("中途catchError会继续往下走:" + err);</span></span><br><span class="line"><span class="comment">    return "qiugaoying"</span></span><br><span class="line"><span class="comment">    //也会返回一个promise实例，并且是resolved状态，不会被最后一个catch 捕捉</span></span><br><span class="line"><span class="comment">&#125;)*/</span></span><br><span class="line">.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//第二个接口请求成功，拿到id2 做第二件事情。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step2-1-result-event2:"</span> + value);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"hello, my name is "</span>+value;</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//最后全部请求完成，触发汇总刷新。</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"step1-result:"</span> + value);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"end error:"</span> + error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>finally 方法是最终执行的方法（无参） ，无论状态是什么，成功 or 失败 都会执行收尾。</p>
+</li>
+<li><p>Promise 还提供all 方法(接收一个数组，里面值可以是普通函数，或者Promise对象)，可用来做一个类似批量处理之后汇总的业务。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"> testPromiseAll() &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">washFood</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'做饭第一步：洗菜'</span>);</span><br><span class="line">        <span class="keyword">let</span> hasError = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(hasError)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"发现了一只虫子！洗掉它。"</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'菜洗干净了。'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">cutFood</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'做饭第二步：切菜'</span>);</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123; <span class="comment">//做一些异步操作</span></span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">let</span> cutFoodHasError = <span class="literal">true</span>;  <span class="comment">//控制默契切菜时 是否发生异常</span></span><br><span class="line">                <span class="keyword">if</span>(cutFoodHasError)&#123;</span><br><span class="line">                    reject(<span class="string">"呜呜~ 割到手了，流血！"</span>)</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    resolve(<span class="string">'切好了菜。'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="number">1000</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">/* 试试打开这里的注释</span></span><br><span class="line"><span class="comment">        .catch(error=&gt;&#123;</span></span><br><span class="line"><span class="comment">            console.log("切菜异常:"+error); //异常本身就是返回resolve状态，值是null</span></span><br><span class="line"><span class="comment">            console.log("用创口贴止血，继续做菜。");</span></span><br><span class="line"><span class="comment">        &#125;);</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">cooking</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'做饭第三步：炒菜'</span>);</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123; <span class="comment">//做一些异步操作</span></span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                resolve(<span class="string">'菜已做好!'</span>);</span><br><span class="line">            &#125;, <span class="number">2000</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//数组里，如果放Promise 一定要返回状态。 </span></span><br><span class="line">    <span class="built_in">Promise</span>.all([washFood(), cutFood(),cooking()])</span><br><span class="line">        .then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'上桌，吃饭了：'</span>+result);</span><br><span class="line">            <span class="built_in">console</span>.log(result);</span><br><span class="line">        &#125;).catch(<span class="function"><span class="params">error</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"菜没做成，出现了小事故:"</span>+error);</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">   <span class="comment">/*</span></span><br><span class="line"><span class="comment">     结果：</span></span><br><span class="line"><span class="comment">     1. 当cutFoodHasError = true；打印如下结果：</span></span><br><span class="line"><span class="comment">        菜没做成，出现了小事故:呜呜~ 割到手了，流血！</span></span><br><span class="line"><span class="comment">     2. 当cutFoodHasError = true 且 cutFood方法里的Promise有异常捕捉时： </span></span><br><span class="line"><span class="comment">        切菜异常:呜呜~ 割到手了，流血！</span></span><br><span class="line"><span class="comment">        上桌，吃饭了：菜洗干净了！,,菜已做好</span></span><br><span class="line"><span class="comment">     3. 当cutFoodHasError = false </span></span><br><span class="line"><span class="comment">        上桌，吃饭了：菜洗好了。切好了菜。菜已做好！</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    Promise.all使用总结：</span></span><br><span class="line"><span class="comment">    数组里可以是Promise对象，也可以是别的值，只有Promise会等待状态改变</span></span><br><span class="line"><span class="comment">    当所有的子Promise都完成，该Promise完成，返回值是全部值得数组</span></span><br><span class="line"><span class="comment">    有任何一个失败，该Promise失败，返回值是第一个先失败的子Promise结果 </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Promise 另外一个race 方法与all 不同的是，race 类似竞赛，参数中的Promise实例只要有一个率先改变状态就会触发结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//打印结果： 兔子赢了</span></span><br><span class="line">testPromiseRace() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">rabbit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'兔子选手'</span>);</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                resolve(<span class="string">'兔子赢了'</span>);</span><br><span class="line">            &#125;, <span class="number">1000</span>);</span><br><span class="line">        &#125;) .catch(<span class="function"><span class="params">error</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"兔子跑步中出现异常:"</span>+error);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">tortoise</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'乌龟选手'</span>);</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">            setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                resolve(<span class="string">'乌龟赢了'</span>);</span><br><span class="line">            &#125;, <span class="number">3000</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Promise</span>.race([rabbit(),tortoise()])</span><br><span class="line">        .then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"比赛结果:"</span>+result);</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Vue-Cli-脚手架项目请求模块的搭建"><a href="#Vue-Cli-脚手架项目请求模块的搭建" class="headerlink" title="Vue Cli 脚手架项目请求模块的搭建"></a>Vue Cli 脚手架项目请求模块的搭建</h3><p>在vue的基础上，我们可以通过vue cli来管理我们的项目。vue cli 方式的优势在于模块之间可以很好地相互引用，通过package 包来管理配置相关的框架依赖。生态非常丰富，可轻松运用vue-router 来解决路由跳转等问题。<br>首先第一步是要创建一个 vue cli项目。</p>
+<h4 id="基础安装环境"><a href="#基础安装环境" class="headerlink" title="基础安装环境"></a>基础安装环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br><span class="line">vue create helloworld 方式创建项目</span><br><span class="line">也可以 使用GUI vue ui 来通过网页 手动点击按钮操作 来创建项目</span><br></pre></td></tr></table></figure>
+<h4 id="package-json-配置"><a href="#package-json-配置" class="headerlink" title="package.json 配置"></a>package.json 配置</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"gaoying-cli"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"serve"</span>: <span class="string">"vue-cli-service serve"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"vue-cli-service build"</span>,</span><br><span class="line">    <span class="attr">"lint"</span>: <span class="string">"vue-cli-service lint"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"animate.css"</span>: <span class="string">"^3.7.2"</span>,</span><br><span class="line">    <span class="attr">"core-js"</span>: <span class="string">"^3.4.3"</span>,</span><br><span class="line">    <span class="attr">"vue"</span>: <span class="string">"^2.6.10"</span>,</span><br><span class="line">    <span class="attr">"vue-axios"</span>: <span class="string">"^2.1.5"</span>,</span><br><span class="line">    <span class="attr">"vue-router"</span>: <span class="string">"^3.1.3"</span>,</span><br><span class="line">    <span class="attr">"vuex"</span>: <span class="string">"^3.1.2"</span>,</span><br><span class="line">    <span class="attr">"weui.js"</span>: <span class="string">"^1.2.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"@vue/cli-plugin-babel"</span>: <span class="string">"^4.1.0"</span>,</span><br><span class="line">    <span class="attr">"@vue/cli-plugin-router"</span>: <span class="string">"^4.1.1"</span>,</span><br><span class="line">    <span class="attr">"@vue/cli-plugin-vuex"</span>: <span class="string">"^4.1.1"</span>,</span><br><span class="line">    <span class="attr">"@vue/cli-service"</span>: <span class="string">"^4.1.0"</span>,</span><br><span class="line">    <span class="attr">"axios"</span>: <span class="string">"^0.19.0"</span>,</span><br><span class="line">    <span class="attr">"vue-template-compiler"</span>: <span class="string">"^2.6.10"</span>,</span><br><span class="line">    <span class="attr">"weui"</span>: <span class="string">"^2.1.3"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"eslintConfig"</span>: &#123;</span><br><span class="line">    <span class="attr">"root"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"env"</span>: &#123;</span><br><span class="line">      <span class="attr">"node"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"extends"</span>: [</span><br><span class="line">      <span class="string">"plugin:vue/essential"</span>,</span><br><span class="line">      <span class="string">"eslint:recommended"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"parserOptions"</span>: &#123;</span><br><span class="line">      <span class="attr">"parser"</span>: <span class="string">"babel-eslint"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"browserslist"</span>: [</span><br><span class="line">    <span class="string">"&gt; 1%"</span>,</span><br><span class="line">    <span class="string">"last 2 versions"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="配置main-js"><a href="#配置main-js" class="headerlink" title="配置main.js"></a>配置main.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span> <span class="comment">//请求网络</span></span><br><span class="line"><span class="keyword">import</span> VueAxios <span class="keyword">from</span> <span class="string">'vue-axios'</span> </span><br><span class="line"><span class="keyword">import</span> weui <span class="keyword">from</span> <span class="string">'weui.js'</span> <span class="comment">//weuiJs</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'weui'</span> <span class="comment">//weui样式</span></span><br><span class="line"><span class="keyword">import</span> ymAPI <span class="keyword">from</span> <span class="string">'@/assets/js/urlConfig.js'</span> <span class="comment">//Api</span></span><br><span class="line"><span class="keyword">import</span> netManager <span class="keyword">from</span> <span class="string">'@/assets/js/netManager.js'</span> <span class="comment">//请求基础参数拼接</span></span><br><span class="line"><span class="keyword">import</span> ymNativeBridge <span class="keyword">from</span> <span class="string">'@/assets/js/ymNativeBridge.js'</span> <span class="comment">//原生事件交互</span></span><br><span class="line"><span class="keyword">import</span> animate <span class="keyword">from</span> <span class="string">'animate.css'</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> ymHttp = axios.create(&#123;</span><br><span class="line">    </span><br><span class="line">    baseURL: <span class="string">'https://vendor-api-prod.gaoying.com'</span>, </span><br><span class="line">    timeout: <span class="number">1000</span>,</span><br><span class="line">    transformRequest: [<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Do whatever you want to transform the data</span></span><br><span class="line">        <span class="keyword">let</span> ret = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> it <span class="keyword">in</span> data) &#123;</span><br><span class="line">            ret += <span class="built_in">encodeURIComponent</span>(it) + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(data[it]) + <span class="string">'&amp;'</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">Vue.prototype.$weui = weui</span><br><span class="line">Vue.prototype.$ymAPI = ymAPI</span><br><span class="line">Vue.prototype.$netManager = netManager</span><br><span class="line">Vue.prototype.$ymNativeBridge = ymNativeBridge</span><br><span class="line">Vue.use(VueAxios, ymHttp,animate)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="请求Demo示例"><a href="#请求Demo示例" class="headerlink" title="请求Demo示例"></a>请求Demo示例</h4><p>//和普通h5 请求网络类似，唯一不同的就是通过挂载到Vue上的axios ，可以通过this.$http 取得。this.$netManager 也类似。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">execBaseCustomerRequest: <span class="function"><span class="keyword">function</span>(<span class="params">url, listKey</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> loading = <span class="literal">null</span>;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>.pageNumber == <span class="number">1</span>) &#123;</span><br><span class="line">       loading = <span class="keyword">this</span>.$weui.loading(<span class="string">'加载中'</span>);</span><br><span class="line">       <span class="keyword">this</span>.gyPageListStart = <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">let</span> pageVue = <span class="keyword">this</span>; <span class="comment">//this在不同的作用域中指向的对象不同；临时存储vue对象</span></span><br><span class="line">    </span><br><span class="line">   <span class="keyword">this</span>.$http.post(url, <span class="keyword">this</span>.$netManager.getRequestParams(&#123;</span><br><span class="line">       customer_id: <span class="keyword">this</span>.customerId,</span><br><span class="line">       start: <span class="keyword">this</span>.gyPageListStart,</span><br><span class="line">       size: <span class="number">10</span>,</span><br><span class="line">   &#125;)).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (loading) &#123;</span><br><span class="line">           loading.hide();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">let</span> dataDic = response.data;         </span><br><span class="line">       <span class="keyword">if</span> (dataDic.status == <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">var</span> arr = pageVue.dataSource;</span><br><span class="line">           <span class="keyword">if</span> (pageVue.pageNumber == <span class="number">1</span>) &#123;</span><br><span class="line">               arr = [];</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">var</span> dataArr = dataDic.data[listKey];</span><br><span class="line">           arr = arr.concat(dataArr);</span><br><span class="line"></span><br><span class="line">           pageVue.gyPageListStart = dataDic.data.start;</span><br><span class="line">           pageVue.hasMoreDataFlag = (dataDic.data.more == <span class="number">1</span>);</span><br><span class="line">           pageVue.dataSource = arr;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           pageVue.$weui.topTips(dataDic.errorMsg);</span><br><span class="line">       &#125;</span><br><span class="line">       setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">           pageVue.requestLoadingFinished = <span class="literal">true</span>;</span><br><span class="line">       &#125;, <span class="number">800</span>);</span><br><span class="line">       <span class="comment">//重置加载完成的状态；</span></span><br><span class="line"></span><br><span class="line">   &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(error);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="模块之间的引用和导出"><a href="#模块之间的引用和导出" class="headerlink" title="模块之间的引用和导出"></a>模块之间的引用和导出</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> MD5 <span class="keyword">from</span> <span class="string">'./md5.js'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    getRequestParams: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> userId = localStorage.getItem(<span class="string">"userId"</span>);</span><br><span class="line">        <span class="keyword">let</span> token = localStorage.getItem(<span class="string">"token"</span>);</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//md5.js 文件中 </span></span><br><span class="line"><span class="keyword">var</span> MD5 = <span class="function"><span class="keyword">function</span> (<span class="params">string</span>) </span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = MD5</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口配置urlConfig.js 文件中</span></span><br><span class="line"><span class="keyword">const</span> ymAPI = &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//客户信息 </span></span><br><span class="line">    customerList: <span class="string">"/customer/list/"</span>,</span><br><span class="line">    customerLogs: <span class="string">"/customer/logs/"</span>,</span><br><span class="line">    customerCoupons: <span class="string">"/customer/coupons/"</span>,</span><br><span class="line">    customerOrders: <span class="string">"/customer/orders/"</span>,</span><br><span class="line">    customerDetail: <span class="string">"/customer/detail/"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = ymAPI</span><br></pre></td></tr></table></figure>
+<p>export 在js文件中可以有多个.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//testExport.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> person = &#123; <span class="attr">name</span>: <span class="string">"qiugaoying"</span>,<span class="attr">sex</span>:<span class="number">1</span>, <span class="attr">job</span>:<span class="string">"software Programmer"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> addressInfo = &#123;<span class="attr">province</span>:<span class="string">"广东省"</span>, <span class="attr">city</span>:<span class="string">"guangzhou"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> introduct = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"my name is qiugaoying"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>export 有多个的时候 ，导入必须用花括号括起来.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;person,addressInfo&#125; <span class="keyword">from</span> <span class="string">"../../utils/testExport.js"</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span>  allExp <span class="keyword">from</span> <span class="string">"../../utils/testExport.js"</span>  <span class="comment">//加载全部export,取个别名</span></span><br></pre></td></tr></table></figure></p>
+<p><strong> 总结 </strong></p>
+<ol>
+<li>export default 只能导出一个对象。import 和 export 同一js文件中可以导入或导出多次。</li>
+<li>module.exports 和 exports 都是 node 端在用，两者指向同一内存块，可以导出变量 或 函数，对象。</li>
+<li>exports 变量是在模块的文件级作用域内可用的，且在模块执行之前赋值给 module.exports。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechatRCode.PNG" alt="QiuGaoYing wechat" style="width: 200px; max-width: 100%;">
+  <div></div>
+</div>
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/02/提升编程思维逻辑能力的几道基础题/" rel="next" title="提升编程思维逻辑能力的几道基础题">
+                <i class="fa fa-chevron-left"></i> 提升编程思维逻辑能力的几道基础题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODIwNS8xNDczMw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="QiuGaoYing">
+            
+              <p class="site-author-name" itemprop="name">QiuGaoYing</p>
+              <div class="site-description motion-element" itemprop="description">坚定信念，相信美好。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP超文本传输协议。"><span class="nav-number">1.</span> <span class="nav-text">HTTP超文本传输协议。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-三次握手。"><span class="nav-number">1.1.</span> <span class="nav-text">TCP 三次握手。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四次挥手过程"><span class="nav-number">1.2.</span> <span class="nav-text">四次挥手过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送一个请求查询用户日志记录"><span class="nav-number">2.</span> <span class="nav-text">发送一个请求查询用户日志记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#请求"><span class="nav-number">2.1.</span> <span class="nav-text">请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应"><span class="nav-number">2.2.</span> <span class="nav-text">响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求方式有哪些？"><span class="nav-number">2.3.</span> <span class="nav-text">请求方式有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应码有哪些？"><span class="nav-number">2.4.</span> <span class="nav-text">响应码有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端请求后，服务器响应携带的https证书"><span class="nav-number">2.5.</span> <span class="nav-text">客户端请求后，服务器响应携带的https证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用加密算法"><span class="nav-number">2.6.</span> <span class="nav-text">常用加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#对称加密"><span class="nav-number">2.6.1.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#非对称加密"><span class="nav-number">2.6.2.</span> <span class="nav-text">非对称加密</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速搭建Vue-普通h5项目页面的网络请求"><span class="nav-number">3.</span> <span class="nav-text">快速搭建Vue 普通h5项目页面的网络请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#js-变量修饰符"><span class="nav-number">3.1.</span> <span class="nav-text">js 变量修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数-Function"><span class="nav-number">3.2.</span> <span class="nav-text">函数 Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-对象"><span class="nav-number">3.3.</span> <span class="nav-text">Object 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的定义"><span class="nav-number">3.4.</span> <span class="nav-text">对象的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#传统方式定义一个对象"><span class="nav-number">3.4.1.</span> <span class="nav-text">传统方式定义一个对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Class方式定义一个对象"><span class="nav-number">3.4.2.</span> <span class="nav-text">Class方式定义一个对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax-请求"><span class="nav-number">3.5.</span> <span class="nav-text">Ajax 请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Axios-框架"><span class="nav-number">3.6.</span> <span class="nav-text">Axios 框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#script标签引入axios-的js"><span class="nav-number">3.6.1.</span> <span class="nav-text">script标签引入axios 的js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#封装基础参数，排序-加密等"><span class="nav-number">3.6.2.</span> <span class="nav-text">封装基础参数，排序 加密等</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#axios实列发起一个请求示例"><span class="nav-number">3.6.3.</span> <span class="nav-text">axios实列发起一个请求示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Promise-用法简要讲解"><span class="nav-number">3.6.4.</span> <span class="nav-text">Promise 用法简要讲解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-Cli-脚手架项目请求模块的搭建"><span class="nav-number">4.</span> <span class="nav-text">Vue Cli 脚手架项目请求模块的搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础安装环境"><span class="nav-number">4.1.</span> <span class="nav-text">基础安装环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json-配置"><span class="nav-number">4.2.</span> <span class="nav-text">package.json 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置main-js"><span class="nav-number">4.3.</span> <span class="nav-text">配置main.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求Demo示例"><span class="nav-number">4.4.</span> <span class="nav-text">请求Demo示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模块之间的引用和导出"><span class="nav-number">4.5.</span> <span class="nav-text">模块之间的引用和导出</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuGaoYing</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script>
+  window.livereOptions = {
+    refer: '2020/01/06/快速搭建各端网络请求/'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz',
+                'X-LC-Key': 'r0pJLLJPQqSWS9HO9MO5DkKq',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "box";
+      
+        flOptions.boxForm = "horizontal";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Weibo,Wechat,Douban";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
