@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.1.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Stud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android-TableView">
+<meta property="og:url" content="http://gaoyingqiu.github.io/2016/11/11/【Android-TableView】/index.html">
+<meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
+<meta property="og:description" content="How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Stud">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get1.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get2.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get3.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get4.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab1.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab2.png!github">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab3.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab4.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab5.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableview.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableViewFragment.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request1.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request2.png">
+<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request3.png">
+<meta property="og:updated_time" content="2019-01-26T08:10:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android-TableView">
+<meta name="twitter:description" content="How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Stud">
+<meta name="twitter:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://gaoyingqiu.github.io/2016/11/11/【Android-TableView】/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Android-TableView | Qyan's Blog  高颖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/images/avatar.jpg" alt="Qyan's Blog  高颖">
+        </a>
+      </div>
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Qyan's Blog  高颖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">勇敢去做，大胆尝试。</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2016/11/11/【Android-TableView】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qyan's Blog  高颖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android-TableView
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-11-11 13:22:42" itemprop="dateCreated datePublished" datetime="2016-11-11T13:22:42+08:00">2016-11-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-26 16:10:32" itemprop="dateModified" datetime="2019-01-26T16:10:32+08:00">2019-01-26</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2016/11/11/【Android-TableView】/" class="leancloud_visitors" data-flag-title="Android-TableView">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="How-to-development-a-Android-App"><a href="#How-to-development-a-Android-App" class="headerlink" title="How to development a Android App"></a>How to development a Android App</h2><h4 id="Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio"><a href="#Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio" class="headerlink" title="Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio."></a>Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.</h4><h3 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Activity1-&gt;Activity2: onCreate()——&gt;onStart()——&gt;onResume()</span><br><span class="line">Note left of Activity2: 第一个 Pause，第二个Create，Start，Resume。第一个 Stop</span><br><span class="line">Activity2--&gt;Activity1: back to the activity1</span><br><span class="line">Note left of Activity2: 暂停，restart第一个，start，resume,第二个stop,destory.</span><br></pre></td></tr></table></figure>
+<p>when you push a new  Activity or back Activity, it’s due to the stack to manage the Activity status, but how to push a new Activity?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(ReorderFour.this, ReorderTwo.class);    </span><br><span class="line"></span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);</span><br><span class="line"></span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="Activity-Extented"><a href="#Activity-Extented" class="headerlink" title="Activity Extented"></a>Activity Extented</h4><h5 id="after-we-know-the-android-activity-i-want-tall-about-fragment"><a href="#after-we-know-the-android-activity-i-want-tall-about-fragment" class="headerlink" title="after we know the android activity, i want tall about fragment."></a>after we know the android activity, i want tall about fragment.</h5><h4 id="Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface"><a href="#Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface" class="headerlink" title="Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface."></a>Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface.</h4><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get1.png" alt="picture1"><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get2.png" alt="picture2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get3.png" alt="picture1"><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get4.png" alt="picture1"></p>
+<h6 id="so-what-about-the-fragment"><a href="#so-what-about-the-fragment" class="headerlink" title="so, what about the fragment ?"></a>so, what about the fragment ?</h6><ol>
+<li>tabbar interface is a activity contains one or more fragments.</li>
+<li>fragments lifecycle is rely one activity.   </li>
+</ol>
+<h6 id="what-did-I-do-to-make-layout-the-UITabarActivity"><a href="#what-did-I-do-to-make-layout-the-UITabarActivity" class="headerlink" title="what did I do to make layout the UITabarActivity?"></a>what did I do to make layout the UITabarActivity?</h6><h3 id="app-gradle-配置"><a href="#app-gradle-配置" class="headerlink" title="app gradle 配置"></a>app gradle 配置</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab1.png" alt="picture1"></p>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab2.png!github" alt="picture2">  </p>
+<h3 id="Tabbar-Activity"><a href="#Tabbar-Activity" class="headerlink" title="Tabbar Activity"></a>Tabbar Activity</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab3.png" alt="picture1"></p>
+<h3 id="Layout-布局"><a href="#Layout-布局" class="headerlink" title="Layout 布局"></a>Layout 布局</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab4.png" alt="picture1"> </p>
+<h3 id="界面Fragment配置"><a href="#界面Fragment配置" class="headerlink" title="界面Fragment配置"></a>界面Fragment配置</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab5.png" alt="picture1"></p>
+<p>ok,after you see my screenshots, you can know  , i use the ViewpagerIndicator to make a tabbar Activity . it can manager fragments. you can easy to change every fragment you need. </p>
+<h6 id="app-gradle-instroduce"><a href="#app-gradle-instroduce" class="headerlink" title="app gradle instroduce"></a>app gradle instroduce</h6><font color="#2D2D39" size="4.5px"><br>1. use the fastjson to make json parse.<br>2. use the butterknife replace the frequent findViewById.<br>3. use the ViewPagerIndicator to achieve a tabbarActivity interface.<br>4. use the android-smart-image-view to make the image cache.<br>5. use the android-async-http to make http request.<br>6. use the recycleView-v7 replace the android system listView.<br>7. use the bga-refreshlayout to make the pull refresh cool header.<br>8. finally, use cn.bingoogolapple:bga-adapter to make the recycleView cell Item can  right move delete, long press event ,ItemChildClickListener ,and so on .  all in all, bga-adapter is perfect !<br></font>
+
+<p><strong>For your convenience, i encapsulated a tableview like iOS UITableView , you can use the group style or plain style decide by youself; you can find it in the package com.lvj.bookoneday-&gt;widget.view</strong>   </p>
+<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableview.png" alt="tableview like iOS UItableView">  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//定义表格的数据源接口</span><br><span class="line">public interface TableViewDataSource&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    RecyclerViewCell&lt;T&gt;[]  getRecyclerCells(); //获取cell</span><br><span class="line">	int getItemViewType(int position);  //获取position: cell类型的tag</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//定义表格的事件委托源</span><br><span class="line"> public interface TableViewDelegate &#123;   </span><br><span class="line"> </span><br><span class="line">	void onTableViewDidSelectRow(int row);//点击单行   </span><br><span class="line">	void onTableViewDidLongClickRow(int row); //长按单行   </span><br><span class="line"> 	void onTableViewDidChangeCheckRow(int row, boolean isChecked); //选中行   </span><br><span class="line">	void onItemChildClick(View childView, int position); //item 点击</span><br><span class="line">	void onTableViewRefresh();//下拉刷新</span><br><span class="line">	void onTableViewLoadMore();  //加载更多</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>I create two java interface : TableViewDelete, TableViewDataSoucre. that you can easy<br>implements there’s methods .</li>
+<li>when you use the activity or fragment need tableView layout , you can easy and fast<br>layout ,and implements TableViewDelegate, TableViewDatasource.</li>
+</ul>
+<h4 id="for-examples"><a href="#for-examples" class="headerlink" title="for examples"></a>for examples</h4><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableViewFragment.png" alt="tableview like iOS UItableView"></p>
+<h3 id="Talk-about-Http-request"><a href="#Talk-about-Http-request" class="headerlink" title="Talk about Http request"></a>Talk about Http request</h3><p>you know, when your app ask a request, may be have two Design Patterns . it named “block”（anonymous inner classes） ,”delegate”(delegate is named by iOS. on java, it’s interface or ask “OOP” thoughts).</p>
+<h4 id="My-HttpRequest-Design"><a href="#My-HttpRequest-Design" class="headerlink" title="My HttpRequest Design"></a>My HttpRequest Design</h4><p>there is a abstract class named BaseDataService.  if you have a   new request . you just extend BaseDataService and @Override three methods. “getAPIRequestMethodName<br>, setRequestParams,parseResponse”. look these screenshots. And on your  Activity  or Fragments  , you just implemets RequestCallBackDelegate , and you can use your son of BaseDataService to make some request. </p>
+<h3 id="父类"><a href="#父类" class="headerlink" title="父类"></a>父类</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request1.png" alt="tableview like iOS UItableView">   </p>
+<h3 id="子类继承父类"><a href="#子类继承父类" class="headerlink" title="子类继承父类"></a>子类继承父类</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request2.png" alt="tableview like iOS UItableView">   </p>
+<h3 id="界面用子类请求实现"><a href="#界面用子类请求实现" class="headerlink" title="界面用子类请求实现"></a>界面用子类请求实现</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request3.png" alt="tableview like iOS UItableView"></p>
+<p><em>For more info about the tableView how to work, you can find my   open source on my <a href="http://github.com/gaoyingqiu" target="_blank" rel="noopener">Github Android-TableView</a>,welcome make you suggestion. if you like this project, on my github, I hope you can click on the star in the upper right corner to give me more encouragement. thank you!</em></p>
+<h3 id="TO-Do-Introduce-Android-Service-components"><a href="#TO-Do-Introduce-Android-Service-components" class="headerlink" title="TO Do:  Introduce Android Service components"></a>TO Do:  Introduce Android Service components</h3>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechatRCode.PNG" alt="QiuGaoYing wechat" style="width: 200px; max-width: 100%;">
+  <div></div>
+</div>
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/29/【客户端网络请求模块的设计】/" rel="next" title="application httpRequest design">
+                <i class="fa fa-chevron-left"></i> application httpRequest design
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/11/【巧用图解构思-百度脑图】/" rel="prev" title="how desigin thinking line">
+                how desigin thinking line <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODIwNS8xNDczMw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="QiuGaoYing">
+            
+              <p class="site-author-name" itemprop="name">QiuGaoYing</p>
+              <div class="site-description motion-element" itemprop="description">坚定信念，相信美好。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-development-a-Android-App"><span class="nav-number">1.</span> <span class="nav-text">How to development a Android App</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio"><span class="nav-number">1.0.1.</span> <span class="nav-text">Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity"><span class="nav-number">1.1.</span> <span class="nav-text">Activity</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity-Extented"><span class="nav-number">1.1.1.</span> <span class="nav-text">Activity Extented</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#after-we-know-the-android-activity-i-want-tall-about-fragment"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">after we know the android activity, i want tall about fragment.</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface"><span class="nav-number">1.1.2.</span> <span class="nav-text">Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果图"><span class="nav-number">1.2.</span> <span class="nav-text">效果图</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#so-what-about-the-fragment"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">so, what about the fragment ?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#what-did-I-do-to-make-layout-the-UITabarActivity"><span class="nav-number">1.2.0.0.2.</span> <span class="nav-text">what did I do to make layout the UITabarActivity?</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#app-gradle-配置"><span class="nav-number">1.3.</span> <span class="nav-text">app gradle 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目结构"><span class="nav-number">1.4.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tabbar-Activity"><span class="nav-number">1.5.</span> <span class="nav-text">Tabbar Activity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layout-布局"><span class="nav-number">1.6.</span> <span class="nav-text">Layout 布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#界面Fragment配置"><span class="nav-number">1.7.</span> <span class="nav-text">界面Fragment配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#app-gradle-instroduce"><span class="nav-number">1.7.0.0.1.</span> <span class="nav-text">app gradle instroduce</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for-examples"><span class="nav-number">1.7.1.</span> <span class="nav-text">for examples</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Talk-about-Http-request"><span class="nav-number">1.8.</span> <span class="nav-text">Talk about Http request</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#My-HttpRequest-Design"><span class="nav-number">1.8.1.</span> <span class="nav-text">My HttpRequest Design</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父类"><span class="nav-number">1.9.</span> <span class="nav-text">父类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子类继承父类"><span class="nav-number">1.10.</span> <span class="nav-text">子类继承父类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#界面用子类请求实现"><span class="nav-number">1.11.</span> <span class="nav-text">界面用子类请求实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TO-Do-Introduce-Android-Service-components"><span class="nav-number">1.12.</span> <span class="nav-text">TO Do:  Introduce Android Service components</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiuGaoYing</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script>
+  window.livereOptions = {
+    refer: '2016/11/11/【Android-TableView】/'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+  
+
+
+  
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz',
+                'X-LC-Key': 'r0pJLLJPQqSWS9HO9MO5DkKq',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "box";
+      
+        flOptions.boxForm = "horizontal";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Weibo,Wechat,Douban";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
