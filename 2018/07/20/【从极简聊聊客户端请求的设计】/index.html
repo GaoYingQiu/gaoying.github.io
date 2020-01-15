@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例； 发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataRequest;  具体的请求，只需传 具体的子类request； 一个APP 请求有很多，为了区分 及 维护方便 ，于">
+  <meta name="description" content="探究原生网络请求业务接口API设计与网络请求Swift 版 Alnofire 框架使用Swift 中的Json解析VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例； 发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataReq">
 <meta name="keywords" content="NewStyle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【从极简聊聊客户端请求的设计】">
+<meta property="og:title" content="【iOS客户端请求模块】">
 <meta property="og:url" content="http://gaoyingqiu.github.io/2018/07/20/【从极简聊聊客户端请求的设计】/index.html">
 <meta property="og:site_name" content="高高编程小屋">
-<meta property="og:description" content="VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例； 发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataRequest;  具体的请求，只需传 具体的子类request； 一个APP 请求有很多，为了区分 及 维护方便 ，于">
+<meta property="og:description" content="探究原生网络请求业务接口API设计与网络请求Swift 版 Alnofire 框架使用Swift 中的Json解析VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例； 发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataReq">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-25T05:05:05.000Z">
+<meta property="og:updated_time" content="2020-01-13T02:40:47.527Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【从极简聊聊客户端请求的设计】">
-<meta name="twitter:description" content="VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例； 发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataRequest;  具体的请求，只需传 具体的子类request； 一个APP 请求有很多，为了区分 及 维护方便 ，于">
+<meta name="twitter:title" content="【iOS客户端请求模块】">
+<meta name="twitter:description" content="探究原生网络请求业务接口API设计与网络请求Swift 版 Alnofire 框架使用Swift 中的Json解析VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例； 发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataReq">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>【从极简聊聊客户端请求的设计】 | 高高编程小屋</title>
+  <title>【iOS客户端请求模块】 | 高高编程小屋</title>
   
 
 
@@ -366,7 +366,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【从极简聊聊客户端请求的设计】
+          <h2 class="post-title" itemprop="name headline">【iOS客户端请求模块】
 
               
             
@@ -409,7 +409,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-25 13:05:05" itemprop="dateModified" datetime="2018-09-25T13:05:05+08:00">2018-09-25</time>
+                <time title="修改时间：2020-01-13 10:40:47" itemprop="dateModified" datetime="2020-01-13T10:40:47+08:00">2020-01-13</time>
               
             
           </span>
@@ -441,7 +441,7 @@
 
           
           
-            <span id="/2018/07/20/【从极简聊聊客户端请求的设计】/" class="leancloud_visitors" data-flag-title="【从极简聊聊客户端请求的设计】">
+            <span id="/2018/07/20/【从极简聊聊客户端请求的设计】/" class="leancloud_visitors" data-flag-title="【iOS客户端请求模块】">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -472,7 +472,7 @@
       
 
       
-        <p>VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例；</p>
+        <h2 id="探究原生网络请求"><a href="#探究原生网络请求" class="headerlink" title="探究原生网络请求"></a>探究原生网络请求</h2><h2 id="业务接口API设计与网络请求"><a href="#业务接口API设计与网络请求" class="headerlink" title="业务接口API设计与网络请求"></a>业务接口API设计与网络请求</h2><h2 id="Swift-版-Alnofire-框架使用"><a href="#Swift-版-Alnofire-框架使用" class="headerlink" title="Swift 版 Alnofire 框架使用"></a>Swift 版 Alnofire 框架使用</h2><h2 id="Swift-中的Json解析"><a href="#Swift-中的Json解析" class="headerlink" title="Swift 中的Json解析"></a>Swift 中的Json解析</h2><p>VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例；</p>
 <p>发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataRequest;  具体的请求，只需传 具体的子类request；</p>
 <p>一个APP 请求有很多，为了区分 及 维护方便 ，于是我定义了一个枚举；每个业务请求，只需给它表明一个标识；</p>
 <p>请求具有什么特性呢？ 1）有请求的API url地址，2）请求的参数，请求的标识（请求的枚举值）， 3）对请求回来的数据解析好封装（业务数据封装等处理）；   于是我定义了一个名叫APIInterface 的接口协议； 父类请求去实现这个APInterface接口协议； 子类去Override 这几个方法即可；</p>
@@ -583,8 +583,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -703,6 +712,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#探究原生网络请求"><span class="nav-number">1.</span> <span class="nav-text">探究原生网络请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务接口API设计与网络请求"><span class="nav-number">2.</span> <span class="nav-text">业务接口API设计与网络请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-版-Alnofire-框架使用"><span class="nav-number">3.</span> <span class="nav-text">Swift 版 Alnofire 框架使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift-中的Json解析"><span class="nav-number">4.</span> <span class="nav-text">Swift 中的Json解析</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
