@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/%E4%BC%9A%E8%AE%AE%E8%A7%92%E8%89%B2%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/%E4%BC%9A%E8%AE%AE%E4%B8%BB%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/%E6%9B%B4%E6%8D%A2%E4%B8%BB%E6%8C%81%E4%BA%BA%E6%B5%81%E7%A8%8B.png">
-<meta property="og:updated_time" content="2020-01-07T03:29:24.300Z">
+<meta property="og:updated_time" content="2020-01-07T03:29:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【巧用图解构思-百度脑图】">
 <meta name="twitter:description" content="很多情况，软件功能实现遇到比较复杂的业务情况下，都会借助于草稿或者流程图 去简单画出业务的流程，然后再编码实现。这样有助于提高程序的编写效率，减少bug 的出现。 以下，是基于实时聊天的会议功能设计流程图。逻辑紧代表本人草稿设计思路。 使用百度脑图画图">
@@ -693,7 +693,7 @@
                   
                     
                   
-                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  <a href="https://github.com/gaoyingqiu" title="GitHub &rarr; https://github.com/gaoyingqiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
                 </span>
               
             </div>
@@ -854,6 +854,8 @@
 
 
 
+
+
   
   
 
@@ -884,19 +886,22 @@
 
 
   
-    <script>
-  window.livereOptions = {
-    refer: '2017/08/11/【巧用图解构思-百度脑图】/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-</script>
+     
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
 
   
 
@@ -982,6 +987,16 @@
   
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
 
   
 
@@ -1014,6 +1029,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 

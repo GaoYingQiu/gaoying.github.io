@@ -97,12 +97,12 @@
   <meta name="description" content="目录 打印图案 等腰三角形之字母扩展 空心菱形 方法一：两个等腰三角形拼接 空心菱形 方法二：对角线相等 杨辉三角 螺旋矩阵 蛇形矩阵 1 蛇形矩阵 2   趣味习题 打印某年某月日历排版 找出最长的单词 颠倒一串英文句子 颠倒一串英文句子 Java版本 生成不重复的随机数 统计班级成绩排名 Java 版本 统计班级成绩排名 C 版本 报数 123，报数 3 的童鞋退出，最后留下的是哪个同学。 J">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【递归，分治，标记】">
-<meta property="og:url" content="http://gaoyingqiu.github.io/2020/01/02/【递归，分治，标记】/index.html">
+<meta property="og:url" content="http://gaoyingqiu.github.io/2020/02/02/【递归，分治，标记】/index.html">
 <meta property="og:site_name" content="高高编程小屋">
 <meta property="og:description" content="目录 打印图案 等腰三角形之字母扩展 空心菱形 方法一：两个等腰三角形拼接 空心菱形 方法二：对角线相等 杨辉三角 螺旋矩阵 蛇形矩阵 1 蛇形矩阵 2   趣味习题 打印某年某月日历排版 找出最长的单词 颠倒一串英文句子 颠倒一串英文句子 Java版本 生成不重复的随机数 统计班级成绩排名 Java 版本 统计班级成绩排名 C 版本 报数 123，报数 3 的童鞋退出，最后留下的是哪个同学。 J">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/luoxun_line.png">
-<meta property="og:updated_time" content="2020-01-15T11:04:22.805Z">
+<meta property="og:updated_time" content="2020-04-25T02:10:12.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【递归，分治，标记】">
 <meta name="twitter:description" content="目录 打印图案 等腰三角形之字母扩展 空心菱形 方法一：两个等腰三角形拼接 空心菱形 方法二：对角线相等 杨辉三角 螺旋矩阵 蛇形矩阵 1 蛇形矩阵 2   趣味习题 打印某年某月日历排版 找出最长的单词 颠倒一串英文句子 颠倒一串英文句子 Java版本 生成不重复的随机数 统计班级成绩排名 Java 版本 统计班级成绩排名 C 版本 报数 123，报数 3 的童鞋退出，最后留下的是哪个同学。 J">
@@ -114,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="http://gaoyingqiu.github.io/2020/01/02/【递归，分治，标记】/">
+  <link rel="canonical" href="http://gaoyingqiu.github.io/2020/02/02/【递归，分治，标记】/">
 
 
 
@@ -350,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2020/01/02/【递归，分治，标记】/">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2020/02/02/【递归，分治，标记】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QiuGaoYing">
@@ -393,7 +393,7 @@
                 
               
 
-              <time title="创建时间：2020-01-02 10:11:19" itemprop="dateCreated datePublished" datetime="2020-01-02T10:11:19+08:00">2020-01-02</time>
+              <time title="创建时间：2020-02-02 10:11:19" itemprop="dateCreated datePublished" datetime="2020-02-02T10:11:19+08:00">2020-02-02</time>
             
 
             
@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-01-15 19:04:22" itemprop="dateModified" datetime="2020-01-15T19:04:22+08:00">2020-01-15</time>
+                <time title="修改时间：2020-04-25 10:10:12" itemprop="dateModified" datetime="2020-04-25T10:10:12+08:00">2020-04-25</time>
               
             
           </span>
@@ -424,7 +424,7 @@
 
           
           
-            <span id="/2020/01/02/【递归，分治，标记】/" class="leancloud_visitors" data-flag-title="【递归，分治，标记】">
+            <span id="/2020/02/02/【递归，分治，标记】/" class="leancloud_visitors" data-flag-title="【递归，分治，标记】">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -489,6 +489,7 @@
 </li>
 <li>Json 格式的校验</li>
 </ol>
+<a id="more"></a>
 <h3 id="打印图案"><a href="#打印图案" class="headerlink" title="打印图案"></a>打印图案</h3><h4 id="等腰三角形之字母扩展"><a href="#等腰三角形之字母扩展" class="headerlink" title="等腰三角形之字母扩展"></a>等腰三角形之字母扩展</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//等腰三角形之字母扩展</span></span><br><span class="line"><span class="keyword">void</span>  printThreeCornerRect1()</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,row;</span><br><span class="line">    printf(<span class="string">"输入行："</span>);</span><br><span class="line">    scanf(<span class="string">"%d"</span>,&amp;row);</span><br><span class="line">    int col=<span class="number">2</span>*row<span class="number">-1</span>;</span><br><span class="line">    char words[<span class="number">27</span>]=<span class="string">" ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>;</span><br><span class="line">    int center = col/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    printf(<span class="string">"center:%d\n"</span>,center);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=row;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=col;j++)&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(j&lt;=row-i||j&gt;col-(row-i))</span><br><span class="line">                printf(<span class="string">" "</span>);</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(j==center &amp;&amp; i &gt;<span class="number">1</span>)&#123;</span><br><span class="line">                    printf(<span class="string">"%c"</span>,words[i+<span class="number">1</span>]);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    printf(<span class="string">"%c"</span>,words[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">打印结果：</span><br><span class="line">输入行：<span class="number">9</span></span><br><span class="line">        A        </span><br><span class="line">       BCB       </span><br><span class="line">      CCDCC      </span><br><span class="line">     DDDEDDD     </span><br><span class="line">    EEEEFEEEE    </span><br><span class="line">   FFFFFGFFFFF   </span><br><span class="line">  GGGGGGHGGGGGG  </span><br><span class="line"> HHHHHHHIHHHHHHH </span><br><span class="line">IIIIIIIIJIIIIIIII</span><br></pre></td></tr></table></figure>
 <p>思路分析： </p>
 <ol>
@@ -643,8 +644,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/10/【找出字符串最长单词】/" rel="next" title="【找出字符串最长单词】">
-                <i class="fa fa-chevron-left"></i> 【找出字符串最长单词】
+              <a href="/2020/01/07/【iOS Runtime 到底是个什么鬼】/" rel="next" title="【Runtime 到底是个什么鬼】">
+                <i class="fa fa-chevron-left"></i> 【Runtime 到底是个什么鬼】
               </a>
             
           </div>
@@ -653,7 +654,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/01/06/【快速搭建前端网络请求】/" rel="prev" title="【快速搭建前端网络请求】">
+              <a href="/2020/02/06/【快速搭建前端网络请求】/" rel="prev" title="【快速搭建前端网络请求】">
                 【快速搭建前端网络请求】 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -814,7 +815,7 @@
                   
                     
                   
-                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  <a href="https://github.com/gaoyingqiu" title="GitHub &rarr; https://github.com/gaoyingqiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
                 </span>
               
             </div>
@@ -975,6 +976,8 @@
 
 
 
+
+
   
   
 
@@ -1005,19 +1008,22 @@
 
 
   
-    <script>
-  window.livereOptions = {
-    refer: '2020/01/02/【递归，分治，标记】/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-</script>
+     
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
 
   
 
@@ -1103,6 +1109,16 @@
   
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
 
   
 
@@ -1135,6 +1151,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 

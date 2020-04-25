@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="高高编程小屋">
 <meta property="og:description" content="基于TCP的长连接。在使用 TCP 长连接的 IM 服务设计中，往往都会涉及到心跳。心跳一般是指某端(绝大多数情况下是客户端)每隔一定时间向对端发送自定义指令，以判断双方是否存活，因其按照一定间隔发送，类似于心跳，故被称为心跳指令。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-07T03:25:56.297Z">
+<meta property="og:updated_time" content="2020-01-07T03:25:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Xmpp协议】">
 <meta name="twitter:description" content="基于TCP的长连接。在使用 TCP 长连接的 IM 服务设计中，往往都会涉及到心跳。心跳一般是指某端(绝大多数情况下是客户端)每隔一定时间向对端发送自定义指令，以判断双方是否存活，因其按照一定间隔发送，类似于心跳，故被称为心跳指令。">
@@ -722,7 +722,7 @@
                   
                     
                   
-                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  <a href="https://github.com/gaoyingqiu" title="GitHub &rarr; https://github.com/gaoyingqiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
                 </span>
               
             </div>
@@ -883,6 +883,8 @@
 
 
 
+
+
   
   
 
@@ -913,19 +915,22 @@
 
 
   
-    <script>
-  window.livereOptions = {
-    refer: '2016/05/15/【Xmpp协议】/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-</script>
+     
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
 
   
 
@@ -1011,6 +1016,16 @@
   
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
 
   
 
@@ -1043,6 +1058,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 

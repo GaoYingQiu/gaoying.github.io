@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="高高编程小屋">
 <meta property="og:description" content="创业建议在合作方面不一定要找和自己相差不多的，因为这样彼此的眼光或者视野都比较短浅，合伙本来就是一种互助和学习的机会！我认为找合适的是必须的，同时先要了解对方的为人，因为合伙很容易出纠纷的！ 　　至于真正的合伙创业，我建议你慎重，至于网络工作室的想法是好的，一来你没有技术、没有太多的资金都不是最主要的问题，关键是，能否找到合适的人选！比如技术不到位下面的工作是无法继续的，同时技术需要专业，不然谈判">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-07T03:23:30.082Z">
+<meta property="og:updated_time" content="2020-01-07T03:23:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【创业前的几点】">
 <meta name="twitter:description" content="创业建议在合作方面不一定要找和自己相差不多的，因为这样彼此的眼光或者视野都比较短浅，合伙本来就是一种互助和学习的机会！我认为找合适的是必须的，同时先要了解对方的为人，因为合伙很容易出纠纷的！ 　　至于真正的合伙创业，我建议你慎重，至于网络工作室的想法是好的，一来你没有技术、没有太多的资金都不是最主要的问题，关键是，能否找到合适的人选！比如技术不到位下面的工作是无法继续的，同时技术需要专业，不然谈判">
@@ -707,7 +707,7 @@
                   
                     
                   
-                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  <a href="https://github.com/gaoyingqiu" title="GitHub &rarr; https://github.com/gaoyingqiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
                 </span>
               
             </div>
@@ -868,6 +868,8 @@
 
 
 
+
+
   
   
 
@@ -898,19 +900,22 @@
 
 
   
-    <script>
-  window.livereOptions = {
-    refer: '2017/09/04/【创业前的几点】/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-</script>
+     
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
 
   
 
@@ -996,6 +1001,16 @@
   
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
 
   
 
@@ -1028,6 +1043,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 

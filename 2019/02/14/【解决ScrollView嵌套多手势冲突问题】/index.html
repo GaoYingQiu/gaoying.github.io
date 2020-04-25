@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/scrollview_pan.PNG">
 <meta property="og:image" content="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/scrollview_pan1.PNG">
-<meta property="og:updated_time" content="2020-01-07T03:27:56.288Z">
+<meta property="og:updated_time" content="2020-01-07T03:27:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【解决ScrollView嵌套多手势冲突问题】">
 <meta name="twitter:description" content="嵌套ScrollView, ScrollView嵌套CollectView, Tab随内容固定滑动到顶部，解决UIScrollView 多手势冲突； ScrollView 嵌套ScrollView ScrollView 嵌套CollectionView Demo 源码Demo源码">
@@ -692,7 +692,7 @@
                   
                     
                   
-                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  <a href="https://github.com/gaoyingqiu" title="GitHub &rarr; https://github.com/gaoyingqiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
                 </span>
               
             </div>
@@ -853,6 +853,8 @@
 
 
 
+
+
   
   
 
@@ -883,19 +885,22 @@
 
 
   
-    <script>
-  window.livereOptions = {
-    refer: '2019/02/14/【解决ScrollView嵌套多手势冲突问题】/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-</script>
+     
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
 
   
 
@@ -981,6 +986,16 @@
   
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
 
   
 
@@ -1013,6 +1028,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 

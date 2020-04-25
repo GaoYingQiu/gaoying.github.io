@@ -348,6 +348,885 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/12/08/【螺旋矩阵】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高高编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/08/【螺旋矩阵】/" class="post-title-link" itemprop="url">【螺旋矩阵】</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-08 09:09:04" itemprop="dateCreated datePublished" datetime="2019-12-08T09:09:04+08:00">2019-12-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-07 11:23:41" itemprop="dateModified" datetime="2020-01-07T11:23:41+08:00">2020-01-07</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/12/08/【螺旋矩阵】/" class="leancloud_visitors" data-flag-title="【螺旋矩阵】">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/luoxunmap.jpeg" alt="图片"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> len 9</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">luoxuan</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[len][len];</span><br><span class="line">    <span class="comment">//开始初始化，给数组赋值0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j++)&#123;</span><br><span class="line">            arr[i][j] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    arr[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//顶角确定了，我们可以算出第一行右边的数字</span></span><br><span class="line">    <span class="keyword">int</span> circleTimes = len/<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> circelIndex = <span class="number">0</span>; <span class="comment">//圈的数量</span></span><br><span class="line">    <span class="comment">//赋值过程</span></span><br><span class="line">    <span class="keyword">while</span>(circleTimes&gt;<span class="number">0</span>)&#123;  <span class="comment">//测试时候，每一圈结束可以打印出看一下：&amp;&amp; circelIndex &lt;1</span></span><br><span class="line">        circelIndex ++;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"第%d圈\n"</span>,circelIndex);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> column = <span class="number">1</span>;column &lt;= len-circelIndex; column++)&#123;  <span class="comment">//往右排列</span></span><br><span class="line">            <span class="keyword">if</span>(column &gt;= circelIndex<span class="number">-1</span>)&#123;</span><br><span class="line">                arr[circelIndex<span class="number">-1</span>][column] = arr[circelIndex <span class="number">-1</span>][column<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> row = circelIndex; row&lt;= len-circelIndex; row++)&#123; <span class="comment">//往下排列，从第二行，第X-i 列开始</span></span><br><span class="line">            arr[row][len-circelIndex] = arr[row<span class="number">-1</span>][len-circelIndex] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> column = len-circelIndex<span class="number">-1</span>; column &gt;= circelIndex<span class="number">-1</span>; column--)&#123; <span class="comment">//往左排，下标递减1，值为后一个 + 1</span></span><br><span class="line">            arr[len-circelIndex][column] = arr[len-circelIndex][column+<span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> row =len-circelIndex<span class="number">-1</span>; row &gt; circelIndex<span class="number">-1</span>; row--)&#123; <span class="comment">//往上排列</span></span><br><span class="line">            arr[row][circelIndex<span class="number">-1</span>] = arr[row+<span class="number">1</span>][circelIndex<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        circleTimes--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//输出二维数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\t"</span>,arr[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/12/06/【沪江-C语言课程精选32讲】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高高编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/06/【沪江-C语言课程精选32讲】/" class="post-title-link" itemprop="url">【沪江-C语言课程精选32讲】</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-06 10:41:30" itemprop="dateCreated datePublished" datetime="2019-12-06T10:41:30+08:00">2019-12-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-07 11:26:49" itemprop="dateModified" datetime="2020-01-07T11:26:49+08:00">2020-01-07</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/12/06/【沪江-C语言课程精选32讲】/" class="leancloud_visitors" data-flag-title="【沪江-C语言课程精选32讲】">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="编程逻辑精选32讲"><a href="#编程逻辑精选32讲" class="headerlink" title="编程逻辑精选32讲"></a>编程逻辑精选32讲</h3><p>沪江课程：<br><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/cctalk_classC.jpeg" alt="图片1"></p>
+<p>打卡鸭：<br><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/dakaya.png" alt="图片1"></p>
+<p>公众号： 高高编程小屋<br><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/gagao_gongzhonghao.jpeg" alt="图片1"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/12/06/【iOS开发商品规格设置模块】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高高编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/06/【iOS开发商品规格设置模块】/" class="post-title-link" itemprop="url">【iOS开发商品规格设置模块】</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-06 09:55:20" itemprop="dateCreated datePublished" datetime="2019-12-06T09:55:20+08:00">2019-12-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-07 11:22:10" itemprop="dateModified" datetime="2020-01-07T11:22:10+08:00">2020-01-07</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/12/06/【iOS开发商品规格设置模块】/" class="leancloud_visitors" data-flag-title="【iOS开发商品规格设置模块】">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SKU百度百科为 库存保有单位 （Stock keeping Unit 或者SKU）是对每一个产品和服务的唯一标示符。  也就是说sku 为商品对应的很多种类规格情况下的 库存，价格  各有不同。需要通过sku 这样一种组合结构存储这些计量值。<br>在移动电商时代，网购已然成为潮流。更是全民参与。每一年都有购物节 ： 京东618 , 淘宝天猫双11, 双12 。 一个淘宝店家月销售额30万背后 ，他的商品sku有上千种。  一个卖橱柜的，小到抽屉，拉篮，五金 ，把手，螺丝钉 都可以细分成很小的SKU。移动电商商品背后的SKU种类的复杂性。可正是因为商品SKU的多样化，才能商家带来巨量的销售额。</p>
+<h3 id="从详情页认识SKU"><a href="#从详情页认识SKU" class="headerlink" title="从详情页认识SKU"></a>从详情页认识SKU</h3><p><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/chat_sku2.PNG" alt="C端sku选择"><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这个商品包含的SKU信息:&#123;</span><br><span class="line">    规格类型:[&#123;</span><br><span class="line">            尺寸:[XS, S， M, L，XL， XXL]</span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            颜色: [白色，珊瑚粉，草木绿]</span><br><span class="line">        &#125;],</span><br><span class="line">    规格明细组合描述: &#123;</span><br><span class="line">        XS-白色:&#123;</span><br><span class="line">            图片: 图片url,</span><br><span class="line">            价格: ￥328,</span><br><span class="line">            库存: 188件,</span><br><span class="line">            扩展..字段: 值</span><br><span class="line">        &#125;,</span><br><span class="line">        其他规格组合:&#123; </span><br><span class="line">            图片: 图片url,</span><br><span class="line">            价格: 价格..,</span><br><span class="line">            库存: 库存数量..,</span><br><span class="line">            扩展..字段: 值</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/12/06/【iOS开发商品规格设置模块】/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/04/25/【SKU商品属性多级动态树】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高高编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/25/【SKU商品属性多级动态树】/" class="post-title-link" itemprop="url">【SKU商品属性多级动态树】</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-25 15:56:01" itemprop="dateCreated datePublished" datetime="2019-04-25T15:56:01+08:00">2019-04-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-07 11:27:26" itemprop="dateModified" datetime="2020-01-07T11:27:26+08:00">2020-01-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/04/25/【SKU商品属性多级动态树】/" class="leancloud_visitors" data-flag-title="【SKU商品属性多级动态树】">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="GYLevelTree"><a href="#GYLevelTree" class="headerlink" title="GYLevelTree"></a>GYLevelTree</h1><p>SKU 商品属性 价格或库存 设置； 动态多层级树，自由排列组合，递归，深拷贝,浅拷贝;  </p>
+<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/sku_2.PNG" alt="图片2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/sku_3.PNG" alt="图片3"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/sku_5.PNG" alt="图片5"></p>
+<p><a href="https://github.com/GaoYingQiu/GYLevelTree" target="_blank" rel="noopener">源码</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/04/20/【自定义双向Slider选范围】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiuGaoYing">
+      <meta itemprop="description" content="坚定信念，相信美好。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高高编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/20/【自定义双向Slider选范围】/" class="post-title-link" itemprop="url">【自定义双向Slider选范围】</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-20 15:50:22" itemprop="dateCreated datePublished" datetime="2019-04-20T15:50:22+08:00">2019-04-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-07 11:26:58" itemprop="dateModified" datetime="2020-01-07T11:26:58+08:00">2020-01-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/04/20/【自定义双向Slider选范围】/" class="leancloud_visitors" data-flag-title="【自定义双向Slider选范围】">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="GYSliderBar"><a href="#GYSliderBar" class="headerlink" title="GYSliderBar"></a>GYSliderBar</h1><p>双向Slider, 选择范围控件；支持阶梯值滑动； 可用于筛选界面，筛选价格，其他业务等；</p>
+<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/gySliderBar.PNG" alt="图片"></p>
+<p><a href="https://github.com/GaoYingQiu/GYSliderBar" target="_blank" rel="noopener">源码</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/04/16/【2019年四月】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1098,393 +1977,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2019/01/26/【TextView富文本插入图片】/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高高编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/26/【TextView富文本插入图片】/" class="post-title-link" itemprop="url">【TextView富文本插入图片】</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-26 16:05:57" itemprop="dateCreated datePublished" datetime="2019-01-26T16:05:57+08:00">2019-01-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-01-07 11:26:39" itemprop="dateModified" datetime="2020-01-07T11:26:39+08:00">2020-01-07</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/01/26/【TextView富文本插入图片】/" class="leancloud_visitors" data-flag-title="【TextView富文本插入图片】">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>welcome look this NoteTextView Small Demo l., you can use NoteTextView insertPicture that you can process the data to your server.  also, it will not be hide TextView ‘s point position  by keyboard . ok , just try . you can find it on my github.com/gaoyingqiu.<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/26/【TextView富文本插入图片】/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/【iOS中高级阶段路线图】/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高高编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/28/【iOS中高级阶段路线图】/" class="post-title-link" itemprop="url">【iOS中高级阶段路线图】</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-28 16:23:32" itemprop="dateCreated datePublished" datetime="2018-09-28T16:23:32+08:00">2018-09-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-01-07 11:25:46" itemprop="dateModified" datetime="2020-01-07T11:25:46+08:00">2020-01-07</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2018/09/28/【iOS中高级阶段路线图】/" class="leancloud_visitors" data-flag-title="【iOS中高级阶段路线图】">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。</p>
-<p>2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断</p>
-<p>3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。</p>
-<p>4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏</p>
-<p>#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，</p>
-<p> 推送模块，推送消息存储</p>
-<p>H5 的webView 跳转 与原生交互。</p>
-<p>图片压缩缓存。 发表话题。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/09/28/【iOS中高级阶段路线图】/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/【地图多手势的应用】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1668,552 +2160,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/【MVC设计模式见解】/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高高编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/28/【MVC设计模式见解】/" class="post-title-link" itemprop="url">【MVC设计模式见解】</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-28 14:34:52" itemprop="dateCreated datePublished" datetime="2018-09-28T14:34:52+08:00">2018-09-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-01-07 11:30:57" itemprop="dateModified" datetime="2020-01-07T11:30:57+08:00">2020-01-07</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2018/09/28/【MVC设计模式见解】/" class="leancloud_visitors" data-flag-title="【MVC设计模式见解】">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>（控制器Controller）- 负责转发请求，网络处理，控制业务逻辑。</p>
-<p>（视图View） - 页面视图UI交互； 模型与视图不能通信，需通过控制器controller来实现；</p>
-<p>（模型Model） -  数据业务模型的呈现； 涉及到的UI 改动， 数据驱动UI，改动数据状态即可实现UI的变更；</p>
-<hr>
-<h2 id="演进（ViewModel模型）-在原有MVC-基础上多了一层，Controller不直接控制Model-直接操作ViewModel-来间接管理；-ViewModel-（NSObject）的职责：数据逻辑处理-控制，算法，解析，网络处理等等；-不直接管理View"><a href="#演进（ViewModel模型）-在原有MVC-基础上多了一层，Controller不直接控制Model-直接操作ViewModel-来间接管理；-ViewModel-（NSObject）的职责：数据逻辑处理-控制，算法，解析，网络处理等等；-不直接管理View" class="headerlink" title="演进（ViewModel模型） - 在原有MVC 基础上多了一层，Controller不直接控制Model,   直接操作ViewModel 来间接管理； ViewModel （NSObject）的职责：数据逻辑处理,控制，算法，解析，网络处理等等；  不直接管理View;"></a>演进（ViewModel模型） - 在原有MVC 基础上多了一层，Controller不直接控制Model,   直接操作ViewModel 来间接管理； ViewModel （NSObject）的职责：数据逻辑处理,控制，算法，解析，网络处理等等；  不直接管理View;</h2><p>三层模式可有效降低项目偶尔度，有效业务规整，分类； 大大提高项目开发效率；</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/【几种典型的设计模式】/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高高编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/28/【几种典型的设计模式】/" class="post-title-link" itemprop="url">【几种典型的设计模式】</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-28 14:07:37 / 修改时间：14:59:57" itemprop="dateCreated datePublished" datetime="2018-09-28T14:07:37+08:00">2018-09-28</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2018/09/28/【几种典型的设计模式】/" class="leancloud_visitors" data-flag-title="【几种典型的设计模式】">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">----------  简单工厂模式：---------- </span><br><span class="line"></span><br><span class="line">定义一个计算接口。 </span><br><span class="line"></span><br><span class="line">定义四个加减乘除 的具有该接口功能 的类。</span><br><span class="line"></span><br><span class="line">定义一个工厂类。 用来创建 不同的 接口功能类。 </span><br><span class="line"></span><br><span class="line">根据不同的需要，通过 接口 接收对象， 调用不同的功能操作类的实现方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  模板模式：---------- </span><br><span class="line"></span><br><span class="line">父类运行的时候，调用子类 重写的方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  工厂模式：---------- </span><br><span class="line"></span><br><span class="line">定义一个接口功能。 两个数变量  ，有计算功能。 </span><br><span class="line"></span><br><span class="line">定义 不同的 功能接口实现类。 使用变量时候 用  @synthesize numberA = _numberA;</span><br><span class="line"></span><br><span class="line">定义一个类，定义创建工厂方法，不实现。改抽象工厂  具有计算接口功能。</span><br><span class="line"></span><br><span class="line">定义不同的工厂子类，实现创建工厂对象。 </span><br><span class="line"></span><br><span class="line">调用的时候，通过 不同的计算方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  责任模式：---------- </span><br><span class="line"></span><br><span class="line">请假：</span><br><span class="line"></span><br><span class="line">定义一个 领导。 Manager  领导 具有批准请假功能。 内包含直属领导。</span><br><span class="line"></span><br><span class="line">领导有三级层次的领导。（内包含直属领导。如果自己审批时候发现 需要直属领导审批 则直接让直属领导操作）</span><br><span class="line"></span><br><span class="line">普通请假 普通领导批准，请假天数超过一定数需要更高级领导 批准。 普通领导 有直属 领导 。 普通领导处理时候 一级一级 处理上去 。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  命令模式，享元模式：---------- </span><br><span class="line"></span><br><span class="line">定义一个菜单。Order . </span><br><span class="line"></span><br><span class="line">菜单有很多种菜单。 子类 order .  菜单中  厨师 cook  执行这个菜单。</span><br><span class="line"></span><br><span class="line">多个客户下单 。 waiter 统一接受 菜单。（不管点的什么菜）。</span><br><span class="line"></span><br><span class="line">watier 去传达给 cook 去 做不同的菜系。调用不同的子类菜单 让厨师去 做菜。</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/25/【HTTPS连接过程】/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="高高编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/25/【HTTPS连接过程】/" class="post-title-link" itemprop="url">【HTTPS连接过程】</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-25 14:03:27" itemprop="dateCreated datePublished" datetime="2018-09-25T14:03:27+08:00">2018-09-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-01-26 16:13:37" itemprop="dateModified" datetime="2019-01-26T16:13:37+08:00">2019-01-26</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2018/09/25/【HTTPS连接过程】/" class="leancloud_visitors" data-flag-title="【HTTPS连接过程】">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>【HTTPS连接过程】<br>https协议就是http+ssl协议，如下图所示为其连接过程：<br>￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509100144426.jpg" alt="图片"></p>
-<p>1.https请求<br>客户端向服务端发送https请求；<br>2.生成公钥和私钥<br>服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；<br>3.返回公钥<br>服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；<br>4.客户端验证公钥<br>客户端收到公钥之后，首先会验证其是否有效，如颁发机构或者过期时间等，如果发现有问题就会抛出异常，提示证书存在问题。如果没有问题，那么就生成一个随机值，作为客户端的密钥，然后用服务端的公钥加密；<br>5.发送客户端密钥<br>客户端用服务端的公钥加密密钥，然后发送给服务端。<br>6.服务端收取密钥，对称加密内容<br>服务端收到经过加密的密钥，然后用私钥将其解密，得到客户端的密钥，然后服务端把要传输的内容和客户端的密钥进行对称加密，这样除非知道密钥，否则无法知道传输的内容。<br>7.加密传输<br>服务端将经过加密的内容传输给客户端。<br>8.获取加密内容，解密<br>客户端获取加密内容后，用之前生成的密钥对其进行解密，获取到内容。<br>中间人劫持攻击<br>https也不是绝对安全的，如下图所示为中间人劫持攻击，中间人可以获取到客户端与服务器之间所有的通信内容。<br>￼￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509104722086.jpg" alt="图片"></p>
-<p>中间人截取客户端发送给服务器的请求，然后伪装成客户端与服务器进行通信；将服务器返回给客户端的内容发送给客户端，伪装成服务器与客户端进行通信。<br>通过这样的手段，便可以获取客户端和服务器之间通信的所有内容。<br>使用中间人攻击手段，必须要让客户端信任中间人的证书，如果客户端不信任，则这种攻击手段也无法发挥作用。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2345,7 +2291,7 @@
                   
                     
                   
-                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  <a href="https://github.com/gaoyingqiu" title="GitHub &rarr; https://github.com/gaoyingqiu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
                 </span>
               
             </div>
@@ -2489,6 +2435,8 @@
 
 
 
+
+
   
   
 
@@ -2599,6 +2547,16 @@
   
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
 
   
 
@@ -2631,6 +2589,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 
