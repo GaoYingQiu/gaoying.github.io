@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>AFNNetWorking-分析 - littleWhale</title>
+  
+  
+    <meta name="description" content="基于ASI之后，AFN应该是比较流行的ios第三方。GIthub AFNetWorking.这里，先贴我之前做项目 基于AFN的封装。之后，解释下AFNetWorking 的相关知识，AFURLConnectionOperation,SSL 安全AFSecurityPolicy。">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            littleWhale
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2016/05/13/AFNNetWorking-%E5%88%86%E6%9E%90/">
+      AFNNetWorking-分析
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2016年5月13日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>基于ASI之后，AFN应该是比较流行的ios第三方。<a href="https://github.com/AFNetworking/AFNetworking" target="_blank" rel="noopener">GIthub AFNetWorking</a>.<br>这里，先贴我之前做项目 基于AFN的封装。之后，解释下AFNetWorking 的相关知识，AFURLConnectionOperation,SSL 安全AFSecurityPolicy。</p>
+<a id="more"></a>
+<h3 id="项目AFNetWorking-请求封装部分代码"><a href="#项目AFNetWorking-请求封装部分代码" class="headerlink" title="项目AFNetWorking 请求封装部分代码"></a>项目AFNetWorking 请求封装部分代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">#关于 基于AFN网络请求的get,post方法</span></span><br><span class="line">//  BaseDataService.m</span><br><span class="line">//  LvJinKu</span><br><span class="line">//</span><br><span class="line">//  Created by lvjinku on 15/9/8.</span><br><span class="line">//  Copyright (c) 2015年 lvjinku. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line"><span class="comment">#import "BaseDataService.h"</span></span><br><span class="line"><span class="comment">#import "DFReachabilityUtil.h"</span></span><br><span class="line"><span class="comment">#import "NSString+RRAPI.h"</span></span><br><span class="line"><span class="comment">#import "JSONKit.h"</span></span><br><span class="line"></span><br><span class="line">static const NSString *LvJinKuAgency = @<span class="string">"root"</span>;</span><br><span class="line">static const NSString *LvJinKuSecurity = @<span class="string">"permission"</span>;</span><br><span class="line"></span><br><span class="line">@interface BaseDataService()</span><br><span class="line"></span><br><span class="line">@property (nonatomic,strong) NSMutableDictionary *requestParams;</span><br><span class="line"></span><br><span class="line">-(NSString *) acquireBaseRequestParamDictionary;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation BaseDataService</span><br><span class="line">@synthesize manager,requestType,requestParams;</span><br><span class="line"></span><br><span class="line"><span class="comment">#pragma mark - Lifecycle</span></span><br><span class="line"></span><br><span class="line">- (instancetype)init</span><br><span class="line">&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    <span class="keyword">if</span> (self) &#123;</span><br><span class="line">        manager = [[AFHTTPRequestOperationManager alloc] init];</span><br><span class="line">        manager.requestSerializer.timeoutInterval = NetworkTimeoutInterval;</span><br><span class="line">        requestType = RequestTypeGet;</span><br><span class="line">        requestParams = [NSMutableDictionary dictionary];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#pragma mark - Method</span></span><br><span class="line"></span><br><span class="line">-(void)executeRequest</span><br><span class="line">&#123;</span><br><span class="line">    //网络不可用</span><br><span class="line">    <span class="keyword">if</span> (![DFReachabilityUtil isNetworkAvailable]) &#123;</span><br><span class="line">        </span><br><span class="line">        NSError *error = [NSError errorWithDomain:CustomErrorDomain code:CustomErrorConnectFailed userInfo:nil];</span><br><span class="line">        [self onError:error];</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    switch (requestType) &#123;</span><br><span class="line">        <span class="keyword">case</span> RequestTypeGet:</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            NSDictionary *requestParamsDic = @&#123;@<span class="string">"xml"</span>:[self acquireBaseRequestParamDictionary]&#125;;</span><br><span class="line">            NSLog(@<span class="string">"get请求参数：%@"</span>, [self acquireBaseRequestParamDictionary]);</span><br><span class="line">         </span><br><span class="line">             //参数,简单的get请求</span><br><span class="line">            [manager GET:[self getRequestDomain] parameters:requestParamsDic success:^(AFHTTPRequestOperation *operation, id responseObject) &#123;</span><br><span class="line">                </span><br><span class="line">                [self onSuccess:responseObject];</span><br><span class="line">                </span><br><span class="line">            &#125; failure:^(AFHTTPRequestOperation *operation, NSError *error) &#123;</span><br><span class="line">                NSLog(@<span class="string">"错误日志：%@"</span>,error.localizedDescription);</span><br><span class="line">                [self onError:error];</span><br><span class="line">            &#125;];</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">case</span> RequestTypePost:</span><br><span class="line">        &#123;</span><br><span class="line">            //参数,简单的post请求</span><br><span class="line">            NSDictionary *requestParamsDic = @&#123;@<span class="string">"xml"</span>:[self acquireBaseRequestParamDictionary]&#125;;</span><br><span class="line">            [manager POST:[self getRequestDomain]  parameters:requestParamsDic  success:^(AFHTTPRequestOperation *operation, id responseObject)&#123;</span><br><span class="line">                </span><br><span class="line">                 [self onSuccess:responseObject];</span><br><span class="line">            &#125; failure:^(AFHTTPRequestOperation *operation, NSError *error) &#123;</span><br><span class="line">                </span><br><span class="line">                 [self onError:error];</span><br><span class="line">            &#125;];</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> RequestTypePostMultipart:</span><br><span class="line">        &#123;</span><br><span class="line">           </span><br><span class="line">            //检查是否为文件类型</span><br><span class="line">            BOOL isFile = NO;</span><br><span class="line">            <span class="keyword">for</span> (NSString * key <span class="keyword">in</span> requestParams.allKeys)</span><br><span class="line">            &#123;</span><br><span class="line">                id value = requestParams[key];</span><br><span class="line">                //判断请求参数是否是文件数据</span><br><span class="line">                <span class="keyword">if</span> ([value isKindOfClass:[NSData class]]) &#123;</span><br><span class="line">                    </span><br><span class="line">                    isFile = YES;</span><br><span class="line">                    <span class="built_in">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(isFile)</span><br><span class="line">            &#123;</span><br><span class="line">                //上传文件</span><br><span class="line">                [manager POST:[self getRequestDomain]  parameters:requestParams constructingBodyWithBlock:^(id formData) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (NSString *key <span class="keyword">in</span> requestParams) &#123;</span><br><span class="line">                        id value = requestParams[key];</span><br><span class="line">                        <span class="keyword">if</span> ([value isKindOfClass:[NSData class]]) &#123;</span><br><span class="line">                            [formData appendPartWithFileData:value  name:key fileName:key  mimeType:@<span class="string">"image/jpeg"</span>];</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                &#125; success:^(AFHTTPRequestOperation *operation, id responseObject) &#123;</span><br><span class="line">                    </span><br><span class="line">                    [self onSuccess:responseObject];</span><br><span class="line">                    </span><br><span class="line">                &#125; failure:^(AFHTTPRequestOperation *operation, NSError *error) &#123;</span><br><span class="line">                    </span><br><span class="line">                    [self onError:error];</span><br><span class="line">                    </span><br><span class="line">                &#125;];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        default:</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(NSString *) getRequestDomain</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">return</span> @<span class="string">"https://www.lvjinku.com/Home/Router/doRoute"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void) onSuccess:(id)result</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (result) &#123;</span><br><span class="line">        BaseResponse *response =  [[BaseResponse alloc] initWithData:result];</span><br><span class="line">        response.requestAPICode = self.requestApiCode;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (response.error == 0) &#123;</span><br><span class="line">            </span><br><span class="line">            NSLog(@<span class="string">"reqest finished:%@"</span>,result);</span><br><span class="line">            //解析，将responseObject设置成model对象</span><br><span class="line">            [self parseResponse:response];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (_delegate &amp;&amp; [_delegate conformsToProtocol:@protocol(DataServiceDelegate)] &amp;&amp; [_delegate respondsToSelector:@selector(onRequestSuccess:)]) &#123;</span><br><span class="line">                [_delegate onRequestSuccess:response];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (_delegate &amp;&amp; [_delegate conformsToProtocol:@protocol(DataServiceDelegate)] &amp;&amp; [_delegate respondsToSelector:@selector(onRequestStatusError:)]) &#123;</span><br><span class="line">                </span><br><span class="line">                [_delegate onRequestStatusError:response];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void) onError:(NSError *)error</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_delegate &amp;&amp; [_delegate conformsToProtocol:@protocol(DataServiceDelegate)] &amp;&amp; [_delegate respondsToSelector:@selector(onRequestError:)]) &#123;</span><br><span class="line">        [_delegate onRequestError:error];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//配置请求参数 xml的值</span><br><span class="line">-(NSString *) acquireBaseRequestParamDictionary</span><br><span class="line">&#123;</span><br><span class="line">    [self setRequestParams:self.requestParams];</span><br><span class="line">    </span><br><span class="line">    //json字符串</span><br><span class="line">    NSMutableDictionary *baseRequestDictionary = [NSMutableDictionary dictionary];</span><br><span class="line">    [baseRequestDictionary setObject:LvJinKuAgency forKey:@<span class="string">"agency"</span>];</span><br><span class="line">    [baseRequestDictionary setObject:LvJinKuSecurity forKey:@<span class="string">"security"</span>];</span><br><span class="line">    [baseRequestDictionary setObject:[self getAPIRequestMethodName] forKey:@<span class="string">"serviceCode"</span>];</span><br><span class="line">    [baseRequestDictionary setObject:self.requestParams forKey:@<span class="string">"params"</span>];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    NSString *requestParamJsonStr = [self.requestParams JSONString];</span><br><span class="line">    NSString *tokenIdStr = [NSString stringWithFormat:@<span class="string">"%@%@%@%@"</span>,LvJinKuAgency,LvJinKuSecurity,[self getAPIRequestMethodName],requestParamJsonStr];</span><br><span class="line">    NSString *tokenId = [tokenIdStr MD5Code];</span><br><span class="line">    [baseRequestDictionary setObject:tokenId forKey:@<span class="string">"tokenid"</span>]; //md5加密</span><br><span class="line">    </span><br><span class="line">    NSString *baseRequestParamJsonStr = [baseRequestDictionary JSONString];</span><br><span class="line">    <span class="built_in">return</span> baseRequestParamJsonStr;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  获取请求api的具体接口方法名</span><br><span class="line"> *</span><br><span class="line"> *  @<span class="built_in">return</span> &lt;<span class="comment">#return value description#&gt;</span></span><br><span class="line"> */</span><br><span class="line">-(NSString *) getAPIRequestMethodName</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">return</span> @<span class="string">""</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  解析response 字段</span><br><span class="line"> *</span><br><span class="line"> *  @param response &lt;<span class="comment">#response description#&gt;</span></span><br><span class="line"> */</span><br><span class="line">-(void) parseResponse:(BaseResponse *)response</span><br><span class="line">&#123;</span><br><span class="line">     //子类覆盖该方法进行解析</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>【后面我将会结合Http请求封装解耦 写一个系列关于HTTP请求自定义封装的解析，结合AFN封装，JSON解析，下拉刷新，分页】</p>
+<h3 id="AFNetWorking-h-文件代码"><a href="#AFNetWorking-h-文件代码" class="headerlink" title="AFNetWorking.h 文件代码"></a>AFNetWorking.h 文件代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import &lt;Foundation/Foundation.h&gt;</span></span><br><span class="line"><span class="comment">#import &lt;Availability.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#ifndef _AFNETWORKING_</span></span><br><span class="line">    <span class="comment">#define _AFNETWORKING_</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#import "AFURLRequestSerialization.h"</span></span><br><span class="line">    <span class="comment">#import "AFURLResponseSerialization.h"</span></span><br><span class="line">    <span class="comment">#import "AFSecurityPolicy.h"</span></span><br><span class="line">    <span class="comment">#import "AFNetworkReachabilityManager.h"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#import "AFURLConnectionOperation.h"</span></span><br><span class="line">    <span class="comment">#import "AFHTTPRequestOperation.h"</span></span><br><span class="line">    <span class="comment">#import "AFHTTPRequestOperationManager.h"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#if ( ( defined(__MAC_OS_X_VERSION_MAX_ALLOWED) &amp;&amp; __MAC_OS_X_VERSION_MAX_ALLOWED &gt;= 1090) || \</span></span><br><span class="line">      ( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) &amp;&amp; __IPHONE_OS_VERSION_MAX_ALLOWED &gt;= 70000 ) )</span><br><span class="line">    <span class="comment">#import "AFURLSessionManager.h"</span></span><br><span class="line">    <span class="comment">#import "AFHTTPSessionManager.h"</span></span><br><span class="line"><span class="comment">#endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif /* _AFNETWORKING_ */</span></span><br></pre></td></tr></table></figure>
+<h3 id="一、综述"><a href="#一、综述" class="headerlink" title="一、综述"></a>一、综述</h3><p>#类库的头文件AFNetworking.h引入了下面的所有类库，并可以根据不同的系统使用不同的实现方式。</p>
+<h5 id="1、AFURLConnectionOperation"><a href="#1、AFURLConnectionOperation" class="headerlink" title="1、AFURLConnectionOperation"></a>1、AFURLConnectionOperation</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AFURLConnectionOperation.h 文件 </span><br><span class="line">@interface AFURLConnectionOperation : NSOperation &lt;NSURLConnectionDelegate, NSURLConnectionDataDelegate, NSSecureCoding, NSCopying&gt;</span><br></pre></td></tr></table></figure>
+<p>AFN最基础的类继承自NSOperation类，将网络请求依附到一个operation上。从而让我们能够有效的控制并观察一个网络请求的创建、进行、取消、完成、暂停恢复<br>、异常等问题及状态。</p>
+<h5 id="2、AFHTTPRequestOperation"><a href="#2、AFHTTPRequestOperation" class="headerlink" title="2、AFHTTPRequestOperation"></a>2、AFHTTPRequestOperation</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AFHTTPRequestOperation.h 文件 </span><br><span class="line">/**</span><br><span class="line">`AFHTTPRequestOperation` is a subclass of `AFURLConnectionOperation` <span class="keyword">for</span> requests using the HTTP or HTTPS protocols. It encapsulates the concept of acceptable status codes and content types, <span class="built_in">which</span> determine the success or failure of a request.</span><br><span class="line">*/</span><br><span class="line">@interface AFHTTPRequestOperation : AFURLConnectionOperation</span><br></pre></td></tr></table></figure>
+<p>HTTP或HTTPS协议请求的AFURLConnectionOperation的子类。它封装的可接受状态码和内容的类型，判定一个请求结果是成功或失败。实际上对系统的HTTP网络请求增加了几个HTTP需要用到的参数。</p>
+<h5 id="3、AFHTTPRequestOperationManager"><a href="#3、AFHTTPRequestOperationManager" class="headerlink" title="3、AFHTTPRequestOperationManager"></a>3、AFHTTPRequestOperationManager</h5><p>这个类是AFN类库的核心类。它封装完成了一种通用的模式，可以帮助我们轻松友好的完成请求的创建、响应的系列化，网络状态的监控以及安全策略以及每一个请求operation的管理（operation的相互依赖或状态改变）。</p>
+<h5 id="4、AFURLSessionManager"><a href="#4、AFURLSessionManager" class="headerlink" title="4、AFURLSessionManager"></a>4、AFURLSessionManager</h5><p>iOS7之后，苹果增加了新的网络请求类–NSURLSession。<br>AFN官方推荐iOS 7 或者 Mac OS X 10.9以上的，最好使用该类发起网络请求，取代AFHTTPRequestOperationManager。基于目前国内app大都最低适配的iOS6，该类的用途还不是太广泛。</p>
+<h5 id="5、AFNetworkReachabilityManager"><a href="#5、AFNetworkReachabilityManager" class="headerlink" title="5、AFNetworkReachabilityManager"></a>5、AFNetworkReachabilityManager</h5><p>网络的连通状态监控以及网络的类型。实际是将苹果官方提供的Reachability的类名和通知名更换了一下，防止和系统提供的类的通知名以及类名的冲突。</p>
+<h5 id="6、AFURLRequestSerialization"><a href="#6、AFURLRequestSerialization" class="headerlink" title="6、AFURLRequestSerialization"></a>6、AFURLRequestSerialization</h5><p>1：符合这个协议的对象用于处理请求，它将请求参数转换为 query string 或是 entity body 的形式，并设置必要的 header。<br>2：构建multipart请求。</p>
+<h5 id="7、AFURLResponseSerialization"><a href="#7、AFURLResponseSerialization" class="headerlink" title="7、AFURLResponseSerialization"></a>7、AFURLResponseSerialization</h5><p>遵循AFURLResponseSerialization协议的对象，用于验证、序列化响应及相关数据，转换为有用的形式，比如 JSON 对象、图像、甚至基于mantle的模型对象。</p>
+<h5 id="8、AFSecurityPolicy"><a href="#8、AFSecurityPolicy" class="headerlink" title="8、AFSecurityPolicy"></a>8、AFSecurityPolicy</h5><p>基于HTTPS 配置一些请求证书相关的安全策略。<br>讲到AFSecurityPolicy ，有必要先了解一下HTTPS.<br>HTTPS 连接建立过程大致是，客户端和服务端建立一个连接，服务端返回一个证书，客户端里存有各个受信任的证书机构根证书，用这些根证书对服务端 返回的证书进行验证，经验证如果证书是可信任的，就生成一个pre-master  secret，用这个证书的公钥加密后发送给服务端，服务端用私钥解密后得到pre-master secret，再根据某种算法生成master  secret，客户端也同样根据这种算法从pre-master secret生成master secret，随后双方的通信都用这个master  secret对传输数据进行加密解密。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager]; </span><br><span class="line"></span><br><span class="line">AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init]; </span><br><span class="line">[securityPolicy setAllowInvalidCertificates:NO]; </span><br><span class="line">[securityPolicy setSSLPinningMode:AFSSLPinningModeCertificate]; </span><br><span class="line">[securityPolicy setValidatesDomainName:YES];</span><br><span class="line">[securityPolicy setValidatesCertificateChain:NO]; </span><br><span class="line"></span><br><span class="line">manager.securityPolicy = securityPolicy;</span><br><span class="line"></span><br><span class="line"><span class="comment">## SSL Pinning Modes</span></span><br><span class="line"></span><br><span class="line"> The following constants are provided by `AFSSLPinningMode` as possible SSL pinning modes.</span><br><span class="line"></span><br><span class="line"> enum &#123;</span><br><span class="line"> AFSSLPinningModeNone,</span><br><span class="line"> AFSSLPinningModePublicKey,</span><br><span class="line"> AFSSLPinningModeCertificate,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><br>AFSSLPinningModeNone: 代表客户端无条件地信任服务器端返回的证书。<br>AFSSLPinningModePublicKey: 代表客户端会将服务器端返回的证书与本地保存的证书中，PublicKey的部分进行校验；如果正确，才继续进行。<br>AFSSLPinningModeCertificate: 代表客户端会将服务器端返回的证书和本地保存的证书中的所有内容，包括PublicKey和证书部分，全部进行校验；如果正确，才继续进行。<br>AFSecurityPolicy相关更多知识可以了解这篇文章 <a href="http://www.jianshu.com/p/4102b817ff2f" target="_blank" rel="noopener">AFSecurityPolicy</a></p>
+<h3 id="AFURLConnectionOperation-实现分析"><a href="#AFURLConnectionOperation-实现分析" class="headerlink" title="AFURLConnectionOperation 实现分析"></a>AFURLConnectionOperation 实现分析</h3><p>1、综述<br>AFURLConnectionOperation将Operation和URLConnection结合到一起，利用operation可以监听到状态以及可以建立相互之间的依赖关系的特性，实现了对于一个NSURLConnection对象的完美控制，并将请求的结果通过block友好的返回。</p>
+<p>2、实现文件.m<br>我们总结下.m中这个类主要有哪些方法。</p>
+<p>1）：首先我们可以看到它创建了一个单例线程。这个线程将会常驻内存，用来处理AFN发起的所有请求任务。当然，线程也跟随着一个runloop，AFN将这个runloop的模式设置为NSDefaultRunLoopMode。NSDefaultRunLoopMode是无法检测到connection的状态的。这说明了，AFN将不会在这该线程处理connection完成后的UI刷新等工作，而是会将数据抛给主线程，让主线程去完成UI的刷新。<br>2）：我们可以看到该类通过接受请求的字符串，创建了URLRequest以及NSURLConnection对象。从而去进行请求。<br>3）：实现文件多次使用到了锁，可以保证数据的安全。当然他也实现了几个数据的NSCoping协议。<br>4）：请求的创建、进行、取消、完成、暂停恢复、异常等问题及状态的控制。这里讲一下暂停和恢复。暂停实际上将网络请求取消掉了。但是由于实现了nscoping协议，已经下载到数据得以保存下来。下次进行相同请求的时候，我们会将已经下载到的数据的节点一起发送给服务器，告诉服务器这些部门的数据我们不需要了，服务器根据我发送的返回节点给我返回相应的数据即可。从而实现了暂停和恢复功能，也就是断点续传。<br>5）：operation方法的重写。<br>6）：状态的各种控制方法的实现以及发送状态改变的通知</p>
+<p>3、接口文件.h<br>接口文档中的属性方法，基本可以概括为以下几个方法</p>
+<p>1）：只读的数据，让管理者可以接收到。<br>2）：设置runloop的modes。不再使用类库默认设置的defaultmodes。<br>3）：状态的控制方法<br>4）：安全策略的设置总而言之，接口文件.h暴露的接口都是为了让manager可以去完全控制这个operation以及其中的网络请求。</p>
+<h3 id="AFHTTPRequestOperationManger"><a href="#AFHTTPRequestOperationManger" class="headerlink" title="AFHTTPRequestOperationManger"></a>AFHTTPRequestOperationManger</h3><p>2.0后，AFN将一些设置提取出来，线程了专门的类【AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization】。现在看来，AFN整体的设计是非常完美的。耦合性变得非常低，一些1.0版本中存在的问题也得到了改善。</p>
+<p>1、实现文件.m<br>实现文件较为简单，可以看到他创建了一个队列。并将各个operation加入到队列中。在队列中，各个请求就可以设置依赖关系，并发的数量等等。</p>
+<p>2、接口文件.h<br>接口文件中，我们可以看到。这个类可以设置AFSecurityPolicy、AFURLRequestSerialization、AFURLResponseSerialization 等参数了。这就是综述所说的降低耦合性的方式。</p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
+        
+          height='225px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-27T08:44:21+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2020年5月27日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://gaoyingqiu.github.io/2016/05/13/AFNNetWorking-%E5%88%86%E6%9E%90/&title=AFNNetWorking-分析 - littleWhale&summary=基于ASI之后，AFN应该是比较流行的ios第三方。GIthub AFNetWorking.这里，先贴我之前做项目 基于AFN的封装。之后，解释下AFNetWorking 的相关知识，AFURLConnectionOperation,SSL 安全AFSecurityPolicy。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://gaoyingqiu.github.io/2016/05/13/AFNNetWorking-%E5%88%86%E6%9E%90/&title=AFNNetWorking-分析 - littleWhale&summary=基于ASI之后，AFN应该是比较流行的ios第三方。GIthub AFNetWorking.这里，先贴我之前做项目 基于AFN的封装。之后，解释下AFNetWorking 的相关知识，AFURLConnectionOperation,SSL 安全AFSecurityPolicy。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://gaoyingqiu.github.io/2016/05/13/AFNNetWorking-%E5%88%86%E6%9E%90/&title=AFNNetWorking-分析 - littleWhale&summary=基于ASI之后，AFN应该是比较流行的ios第三方。GIthub AFNetWorking.这里，先贴我之前做项目 基于AFN的封装。之后，解释下AFNetWorking 的相关知识，AFURLConnectionOperation,SSL 安全AFSecurityPolicy。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2016/05/15/Xmpp%E5%8D%8F%E8%AE%AE/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Xmpp协议</p>
+                <p class='content'>基于TCP的长连接。在使用 TCP 长连接的 IM 服务设计中，往往都会涉及到心跳。心跳一般是指某端(绝大多数情况下是客户端)每隔一定时间向对端发送自定义指令，以判断双方是否存活，因其按照一定间...</p>
+              </a>
+            
+            
+              <a class='next' href='/2016/02/03/2015%E5%B9%B4%E6%80%BB%E7%BB%93/'>
+                <p class='title'>2015年总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>今天是2016年 2月 3号了，写这篇博文的时候，手脚冰冷冰冷的。回想起走过的2015年，虽然不是很顺利，好几次遇到困难都是在零界点快要放弃了，自己的最后坚持又让我重新看到希望。当然，我一直坚信...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'AFNNetWorking-分析',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#项目AFNetWorking-请求封装部分代码"><span class="toc-text">项目AFNetWorking 请求封装部分代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AFNetWorking-h-文件代码"><span class="toc-text">AFNetWorking.h 文件代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、综述"><span class="toc-text">一、综述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、AFURLConnectionOperation"><span class="toc-text">1、AFURLConnectionOperation</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、AFHTTPRequestOperation"><span class="toc-text">2、AFHTTPRequestOperation</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、AFHTTPRequestOperationManager"><span class="toc-text">3、AFHTTPRequestOperationManager</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4、AFURLSessionManager"><span class="toc-text">4、AFURLSessionManager</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5、AFNetworkReachabilityManager"><span class="toc-text">5、AFNetworkReachabilityManager</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6、AFURLRequestSerialization"><span class="toc-text">6、AFURLRequestSerialization</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7、AFURLResponseSerialization"><span class="toc-text">7、AFURLResponseSerialization</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8、AFSecurityPolicy"><span class="toc-text">8、AFSecurityPolicy</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AFURLConnectionOperation-实现分析"><span class="toc-text">AFURLConnectionOperation 实现分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AFHTTPRequestOperationManger"><span class="toc-text">AFHTTPRequestOperationManger</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget related_posts shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2020/01/07/Runtime 到底是个什么鬼/" title="Runtime 到底是个什么鬼" rel="bookmark">Runtime 到底是个什么鬼</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='true'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='4862553993'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:qiugaoying@163.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/gaoyingqiu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="http://littleWhale.xyz" target="_blank" rel="noopener">Copyright © 2016-2020 高颖</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://qyanblog.oss-cn-shenzhen.aliyuncs.com/IMG_0131.JPG", "https://qyanblog.oss-cn-shenzhen.aliyuncs.com/小恐龙.JPG"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

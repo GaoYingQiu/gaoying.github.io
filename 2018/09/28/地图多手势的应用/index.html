@@ -1,483 +1,318 @@
 <!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+  <!-- 页面元数据 -->
+  
+    <title>地图多手势的应用 - littleWhale</title>
+  
+  
+    <meta name="description" content="当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来；
+需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数...">
+  
 
+  <!-- feed -->
+  
 
+  <!-- import meta -->
+  
 
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
-
-
-
-
-
-
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
 
   
 
+  
 
-<html class="theme-next muse use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
 
+  
+
+  <!-- import link -->
+  
 
   
   
-  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+    
+<link rel="stylesheet" href="/css/style.css">
 
+  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
-
-<link rel="stylesheet" href="/css/main.css?v=7.1.0">
-
-
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.1.0">
-
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.1.0',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
     }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来； 需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览； 思考 手势开始：记录 开始点startY， 手势移动：根据起始位置移">
-<meta name="keywords" content="NewStyle">
-<meta property="og:type" content="article">
-<meta property="og:title" content="地图多手势的应用">
-<meta property="og:url" content="http://gaoyingqiu.github.io/2018/09/28/地图多手势的应用/index.html">
-<meta property="og:site_name" content="Qyan&#39;s Blog  高颖">
-<meta property="og:description" content="当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来； 需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览； 思考 手势开始：记录 开始点startY， 手势移动：根据起始位置移">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg">
-<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG252.jpeg">
-<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide2OnView.png">
-<meta property="og:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide1OnView.png">
-<meta property="og:updated_time" content="2019-02-18T09:49:42.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="地图多手势的应用">
-<meta name="twitter:description" content="当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来； 需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览； 思考 手势开始：记录 开始点startY， 手势移动：根据起始位置移">
-<meta name="twitter:image" content="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg">
-
-
-
-
+  </script>
 
   
   
-  <link rel="canonical" href="http://gaoyingqiu.github.io/2018/09/28/地图多手势的应用/">
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>地图多手势的应用 | Qyan's Blog  高颖</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
+<body>
   
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta custom-logo">
-    
-      <div class="site-meta-headline">
-        <a>
-          <img class="custom-logo-image" src="/images/avatar.jpg" alt="Qyan's Blog  高颖">
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            littleWhale
+          
+          
         </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2018/09/28/%E5%9C%B0%E5%9B%BE%E5%A4%9A%E6%89%8B%E5%8A%BF%E7%9A%84%E5%BA%94%E7%94%A8/">
+      地图多手势的应用
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月28日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
       </div>
     
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Qyan's Blog  高颖</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-    
-      
-        <h1 class="site-subtitle" itemprop="description">勇敢去做，大胆尝试。</h1>
-      
-    
-    
-  </div>
-
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
+  </section>
 
 
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
           
-          <li class="menu-item menu-item-home">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
-
-  </li>
-
-      
-      
-    </ul>
-  
-
-  
-    
-
-  
-
-  
-</nav>
-
-
-
-  
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gaoyingqiu.github.io/2018/09/28/地图多手势的应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="QiuGaoYing">
-      <meta itemprop="description" content="坚定信念，相信美好。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Qyan's Blog  高颖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">地图多手势的应用
-
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-28 15:45:56" itemprop="dateCreated datePublished" datetime="2018-09-28T15:45:56+08:00">2018-09-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-02-18 17:49:42" itemprop="dateModified" datetime="2019-02-18T17:49:42+08:00">2019-02-18</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NewStyle/" itemprop="url" rel="index"><span itemprop="name">NewStyle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2018/09/28/地图多手势的应用/" class="leancloud_visitors" data-flag-title="地图多手势的应用">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG252.jpeg" alt="图片2"><br>当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；<br>当想收起时候，可用下拉，或者随着手势滑落下来；</p>
+          <p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG252.jpeg" alt="图片2"><br>当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；<br>当想收起时候，可用下拉，或者随着手势滑落下来；</p>
 <p>需解决的问题：<br>1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；<br>2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；<br>3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；</p>
 <p><strong>思考</strong></p>
 <p>手势开始：记录 开始点startY，</p>
@@ -487,546 +322,654 @@
 <p>正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；</p>
 <p><strong><em>code :以下是重点逻辑代码；</em></strong></p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">if(gestureRecognizer.state == UIGestureRecognizerStateChanged)&#123;</span><br><span class="line">    CGPoint point = [gestureRecognizer locationInView:self.view];</span><br><span class="line"></span><br><span class="line">    CGFloat topDistance = startSpanPoint.y - point.y;</span><br><span class="line">    if(topDistance &gt;0)&#123; //&gt;100 就是向上滑，但是要控制滑动的距离限制；</span><br><span class="line"></span><br><span class="line">        if(pointB1_Y == -1)&#123;</span><br><span class="line">        blChange = YES; //记录从往下变成往上；</span><br><span class="line">        &#125;else if(pointB1_Y == 0)&#123;</span><br><span class="line">        blChange = NO; //方向没有变更；</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pointB1_Y = 1; //记录当前是往上推；</span><br><span class="line"></span><br><span class="line">        //往上推；</span><br><span class="line">        if(self.tableView.top == self.listViewMinTop)&#123;</span><br><span class="line">            self.tableView.scrollEnabled = YES;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            if(self.datas.count &gt; 0)&#123; //无数据时候 不给往上推</span><br><span class="line">                //向上；上剩多少留多少 ;</span><br><span class="line">                if(bBottom_Top_Flag == NO)&#123;</span><br><span class="line">                    if(!blChange &amp;&amp; self.mapViewHeight - topDistance &gt;= self.listViewMinTop)&#123;</span><br><span class="line">                    self.tableView.top = self.mapViewHeight - topDistance;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(self.mapViewHeight - topDistance &gt;= self.listViewMinTop)&#123;</span><br><span class="line">                    self.tableView.top = self.mapViewHeight - topDistance;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;else if(topDistance&lt;0)&#123;</span><br><span class="line"></span><br><span class="line">        if(pointB1_Y == 1)&#123;</span><br><span class="line">        blChange = YES; //记录从往上变成往下；</span><br><span class="line">        &#125;else if(pointB1_Y == 0)&#123;</span><br><span class="line">        blChange = NO; //方向没有变更；</span><br><span class="line">        &#125;</span><br><span class="line">        pointB1_Y = -1; //记录当前是往下拉；</span><br><span class="line"></span><br><span class="line">        if(self.tableView.contentOffset.y&lt;=0 &amp;&amp; self.tableView.top &lt; self.mapViewHeight)&#123; //并且是在顶部小于0时候</span><br><span class="line"></span><br><span class="line">            self.tableView.contentOffset = CGPointMake(0, 0); //可写可不写；</span><br><span class="line">            self.tableView.scrollEnabled = NO;</span><br><span class="line"></span><br><span class="line">            if(bBottom_Top_Flag == YES)&#123;</span><br><span class="line">                if(!blChange &amp;&amp; self.listViewMinTop - topDistance &lt;= self.mapViewHeight)&#123;</span><br><span class="line">                self.tableView.top = self.listViewMinTop - topDistance;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(self.listViewMinTop - topDistance &lt;= self.mapViewHeight)&#123;</span><br><span class="line">                self.tableView.top = self.listViewMinTop - topDistance;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">if(gestureRecognizer.state &#x3D;&#x3D; UIGestureRecognizerStateChanged)&#123;</span><br><span class="line">    CGPoint point &#x3D; [gestureRecognizer locationInView:self.view];</span><br><span class="line"></span><br><span class="line">    CGFloat topDistance &#x3D; startSpanPoint.y - point.y;</span><br><span class="line">    if(topDistance &gt;0)&#123; &#x2F;&#x2F;&gt;100 就是向上滑，但是要控制滑动的距离限制；</span><br><span class="line"></span><br><span class="line">        if(pointB1_Y &#x3D;&#x3D; -1)&#123;</span><br><span class="line">        blChange &#x3D; YES; &#x2F;&#x2F;记录从往下变成往上；</span><br><span class="line">        &#125;else if(pointB1_Y &#x3D;&#x3D; 0)&#123;</span><br><span class="line">        blChange &#x3D; NO; &#x2F;&#x2F;方向没有变更；</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pointB1_Y &#x3D; 1; &#x2F;&#x2F;记录当前是往上推；</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;往上推；</span><br><span class="line">        if(self.tableView.top &#x3D;&#x3D; self.listViewMinTop)&#123;</span><br><span class="line">            self.tableView.scrollEnabled &#x3D; YES;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            if(self.datas.count &gt; 0)&#123; &#x2F;&#x2F;无数据时候 不给往上推</span><br><span class="line">                &#x2F;&#x2F;向上；上剩多少留多少 ;</span><br><span class="line">                if(bBottom_Top_Flag &#x3D;&#x3D; NO)&#123;</span><br><span class="line">                    if(!blChange &amp;&amp; self.mapViewHeight - topDistance &gt;&#x3D; self.listViewMinTop)&#123;</span><br><span class="line">                    self.tableView.top &#x3D; self.mapViewHeight - topDistance;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(self.mapViewHeight - topDistance &gt;&#x3D; self.listViewMinTop)&#123;</span><br><span class="line">                    self.tableView.top &#x3D; self.mapViewHeight - topDistance;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;else if(topDistance&lt;0)&#123;</span><br><span class="line"></span><br><span class="line">        if(pointB1_Y &#x3D;&#x3D; 1)&#123;</span><br><span class="line">        blChange &#x3D; YES; &#x2F;&#x2F;记录从往上变成往下；</span><br><span class="line">        &#125;else if(pointB1_Y &#x3D;&#x3D; 0)&#123;</span><br><span class="line">        blChange &#x3D; NO; &#x2F;&#x2F;方向没有变更；</span><br><span class="line">        &#125;</span><br><span class="line">        pointB1_Y &#x3D; -1; &#x2F;&#x2F;记录当前是往下拉；</span><br><span class="line"></span><br><span class="line">        if(self.tableView.contentOffset.y&lt;&#x3D;0 &amp;&amp; self.tableView.top &lt; self.mapViewHeight)&#123; &#x2F;&#x2F;并且是在顶部小于0时候</span><br><span class="line"></span><br><span class="line">            self.tableView.contentOffset &#x3D; CGPointMake(0, 0); &#x2F;&#x2F;可写可不写；</span><br><span class="line">            self.tableView.scrollEnabled &#x3D; NO;</span><br><span class="line"></span><br><span class="line">            if(bBottom_Top_Flag &#x3D;&#x3D; YES)&#123;</span><br><span class="line">                if(!blChange &amp;&amp; self.listViewMinTop - topDistance &lt;&#x3D; self.mapViewHeight)&#123;</span><br><span class="line">                self.tableView.top &#x3D; self.listViewMinTop - topDistance;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(self.listViewMinTop - topDistance &lt;&#x3D; self.mapViewHeight)&#123;</span><br><span class="line">                self.tableView.top &#x3D; self.listViewMinTop - topDistance;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="单独写了个demo-，仿boss-直聘-查看更多职位，仿哈喽出现-app-扫码底部按钮-查看更多活动"><a href="#单独写了个demo-，仿boss-直聘-查看更多职位，仿哈喽出现-app-扫码底部按钮-查看更多活动" class="headerlink" title="单独写了个demo ，仿boss 直聘 查看更多职位，仿哈喽出现 app 扫码底部按钮 查看更多活动"></a>单独写了个demo ，仿boss 直聘 查看更多职位，仿哈喽出现 app 扫码底部按钮 查看更多活动</h3><p><a href="https://github.com/GaoYingQiu/GYSlideOnView" target="_blank" rel="noopener">Demo 源码</a><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide2OnView.png" alt="图片2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/slide1OnView.png" alt="图片"></p>
 
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
-  <img id="wechat_subscriber_qcode" src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechatRCode.PNG" alt="QiuGaoYing wechat" style="width: 200px; max-width: 100%;">
-  <div></div>
-</div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
           
-            <a href="/tags/NewStyle/" rel="tag"># NewStyle</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/09/28/MVC设计模式见解/" rel="next" title="MVC设计模式见解">
-                <i class="fa fa-chevron-left"></i> MVC设计模式见解
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/28/中高级阶段/" rel="prev" title="中高级IOS">
-                中高级IOS <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
+            <div class='article_footer'>
+              
+                
   
-  
-  
-  </article>
+    
+    
 
 
-  </div>
-
-
-          </div>
-          
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODIwNS8xNDczMw=="></div>
-    </div>
 
   
 
+  
+    
+    
 
 
-        </div>
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+          height='225px'
+        ></div>
+      
+    
   </div>
+</section>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
+  
 
-      
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="QiuGaoYing">
-            
-              <p class="site-author-name" itemprop="name">QiuGaoYing</p>
-              <div class="site-description motion-element" itemprop="description">坚定信念，相信美好。</div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">45</span>
-                    <span class="site-state-item-name">日志</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">6</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">7</span>
-                    <span class="site-state-item-name">标签</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="/github" title="GitHub &rarr; github"><i class="fa fa-fw fa-globe"></i>GitHub</a>
-                </span>
               
             </div>
           
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
         </div>
-      </div>
+        
+          
 
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
       
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单独写了个demo-，仿boss-直聘-查看更多职位，仿哈喽出现-app-扫码底部按钮-查看更多活动"><span class="nav-number">1.</span> <span class="nav-text">单独写了个demo ，仿boss 直聘 查看更多职位，仿哈喽出现 app 扫码底部按钮 查看更多活动</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-  
-
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-27T08:57:45+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2020年5月27日</p>
+  </a>
+</div>
 
         
-      </div>
-    </main>
+      
+        
+          
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">QiuGaoYing</span>
+        
+      
+        
+          
 
-  
-
-  
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://gaoyingqiu.github.io/2018/09/28/%E5%9C%B0%E5%9B%BE%E5%A4%9A%E6%89%8B%E5%8A%BF%E7%9A%84%E5%BA%94%E7%94%A8/&title=地图多手势的应用 - littleWhale&summary=当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来；
+需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；
+思考
+手势开始：记录 开始点startY，
+手势移动：根据起始位置移动差  确定上滑动 ， 下滑动；  
+起点B 点 记录方向 0；B-A 正向， 记录方向符号 1；B-C 反向 ，记录方向 -1；
+偏移值 大于0 ， 上滑动；当B-A-C 后，立马记录 1 变成 -1；    记录标记状态前，
+正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；
+code :以下是重点逻辑代码；"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://gaoyingqiu.github.io/2018/09/28/%E5%9C%B0%E5%9B%BE%E5%A4%9A%E6%89%8B%E5%8A%BF%E7%9A%84%E5%BA%94%E7%94%A8/&title=地图多手势的应用 - littleWhale&summary=当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来；
+需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；
+思考
+手势开始：记录 开始点startY，
+手势移动：根据起始位置移动差  确定上滑动 ， 下滑动；  
+起点B 点 记录方向 0；B-A 正向， 记录方向符号 1；B-C 反向 ，记录方向 -1；
+偏移值 大于0 ， 上滑动；当B-A-C 后，立马记录 1 变成 -1；    记录标记状态前，
+正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；
+code :以下是重点逻辑代码；"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://gaoyingqiu.github.io/2018/09/28/%E5%9C%B0%E5%9B%BE%E5%A4%9A%E6%89%8B%E5%8A%BF%E7%9A%84%E5%BA%94%E7%94%A8/&title=地图多手势的应用 - littleWhale&summary=当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；当想收起时候，可用下拉，或者随着手势滑落下来；
+需解决的问题：1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；
+思考
+手势开始：记录 开始点startY，
+手势移动：根据起始位置移动差  确定上滑动 ， 下滑动；  
+起点B 点 记录方向 0；B-A 正向， 记录方向符号 1；B-C 反向 ，记录方向 -1；
+偏移值 大于0 ， 上滑动；当B-A-C 后，立马记录 1 变成 -1；    记录标记状态前，
+正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；
+code :以下是重点逻辑代码；"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
 
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
-
-
+        
+      
+    </div>
+  </section>
 
 
         
-
-
-
-
-
-
-
-
         
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
+          <div class="prev-next">
+            
+              <a class='prev' href='/2019/02/09/%E8%BD%AC%E7%9B%98%E6%8A%BD%E5%A5%96%E5%B0%8F%E5%8A%9F%E8%83%BD/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>转盘抽奖小功能</p>
+                <p class='content'>
+抽奖功能模块源码产品出发点1、通过动态抽奖数据和排行激发用户抽奖消费；2、通过技能和宝石等以及转盘的燃爆值，中奖率翻倍等等吸引用户；3、根本上是为了激发用户活跃性以及刺激消费
+技术难点1、抽奖...</p>
+              </a>
+            
+            
+              <a class='next' href='/2018/09/28/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%81%E8%A7%A3/'>
+                <p class='title'>MVC设计模式见解<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>（控制器Controller）- 负责转发请求，网络处理，控制业务逻辑。
+（视图View） - 页面视图UI交互； 模型与视图不能通信，需通过控制器controller来实现；
+（模型Model...</p>
+              </a>
+            
+          </div>
         
-      </div>
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '地图多手势的应用',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
     
 
-    
-      <div id="needsharebutton-float">
-        <span class="btn">
-          <i class="fa fa-share-alt" aria-hidden="true"></i>
-        </span>
-      </div>
-    
 
+  <section class="widget toc-wrapper shadow desktop mobile">
     
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
 
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#单独写了个demo-，仿boss-直聘-查看更多职位，仿哈喽出现-app-扫码底部按钮-查看更多活动"><span class="toc-text">单独写了个demo ，仿boss 直聘 查看更多职位，仿哈喽出现 app 扫码底部按钮 查看更多活动</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
     
+    
+  
+
+  <section class="widget related_posts shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2016/05/13/AFNNetWorking-分析/" title="AFNNetWorking-分析" rel="bookmark">AFNNetWorking-分析</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='true'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='4862553993'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:qiugaoying@163.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/gaoyingqiu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="http://littleWhale.xyz" target="_blank" rel="noopener">Copyright © 2016-2020 高颖</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
   </div>
-
   
-
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/utils.js?v=7.1.0"></script>
-
-  <script src="/js/motion.js?v=7.1.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/schemes/muse.js?v=7.1.0"></script>
-
-
-
-  
-  <script src="/js/scrollspy.js?v=7.1.0"></script>
-<script src="/js/post-details.js?v=7.1.0"></script>
-
-
-
-  
-
-
-  <script src="/js/next-boot.js?v=7.1.0"></script>
-
-
-  
-
-  
-
-  
-
-  
-
-
-  
-    <script>
-  window.livereOptions = {
-    refer: '2018/09/28/地图多手势的应用/'
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-</script>
-
-  
-
-
-  
-
-
-
-
-  
-  
   <script>
     
-    function addCount(Counter) {
-      var $visitors = $('.leancloud_visitors');
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
 
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
-        .done(function({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
-            
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
-            
-              .fail(function ({ responseJSON }) {
-                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
-              })
-          } else {
-            
-              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
-                .done(function() {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(1);
-                })
-                .fail(function() {
-                  console.log('Failed to create');
-                });
-            
-          }
-        })
-        .fail(function ({ responseJSON }) {
-          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
-        });
-    }
-    
 
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz')
-        .done(function({ api_server }) {
-          var Counter = function(method, url, data) {
-            return $.ajax({
-              method: method,
-              url: 'https://' + api_server + '/1.1' + url,
-              headers: {
-                'X-LC-Id': 'OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz',
-                'X-LC-Key': 'r0pJLLJPQqSWS9HO9MO5DkKq',
-                'Content-Type': 'application/json',
-              },
-              data: data
-            });
-          };
-          
-            addCount(Counter);
-          
-        });
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
     });
   </script>
 
 
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-  
-  <script src="/lib/needsharebutton/needsharebutton.js"></script>
-  <script>
-    
-    
-      flOptions = {};
-      
-        flOptions.iconStyle = "box";
-      
-        flOptions.boxForm = "horizontal";
-      
-        flOptions.position = "middleRight";
-      
-        flOptions.networks = "Weibo,Wechat,Douban";
-      
-      new needShareButton('#needsharebutton-float', flOptions);
-    
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
   </script>
 
 
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
   
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://qyanblog.oss-cn-shenzhen.aliyuncs.com/IMG_0131.JPG", "https://qyanblog.oss-cn-shenzhen.aliyuncs.com/小恐龙.JPG"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
 
   
 
-  
+
+
+
+
+
+
+
 
   
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
 
   
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
 
   
+<script src="/js/app.js"></script>
 
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
 </body>
 </html>
