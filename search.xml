@@ -11,12 +11,12 @@
         <content type="html"><![CDATA[<p>框架方面目前主要掌握 Vue 。可独立开发 H5 项目，PC Web 后台系统, 小程序开发。</p><p>UI 框架：用过 element-UI, iView, WeUI, WeUIJs. MiniUI</p><p>第三方插件：使用过 Moment 日期处理,Echart 图表统计, VueDraggable 拖动。</p><p>网络请求：Axios</p><p>图片上传: Weui-Uploader, Blob 或 base64 上传.</p><p>IM: 使用过网易云信。</p><p>移动 App: 用 Swift 开发过 iOS 项目,Sass 应用。(云喵)</p><p>熟悉 Webpack, Sass, NodeJs, vue-Cli, Router, VueX.</p><p><a href="http://littlewhale.xyz/mpTemplate/" target="_blank" rel="noopener">个人 Github Page 演示</a></p>]]></content>
       
       
+      <categories>
+          
+          <category> Web </category>
+          
+      </categories>
       
-        <tags>
-            
-            <tag> 前端 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -278,7 +278,7 @@
       
       <categories>
           
-          <category> iOS </category>
+          <category> 技术，iOS </category>
           
       </categories>
       
@@ -543,8 +543,6 @@
       <categories>
           
           <category> iOS </category>
-          
-          <category> 技术 </category>
           
       </categories>
       
@@ -858,12 +856,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 技术 </tag>
-            
-        </tags>
       
     </entry>
     
