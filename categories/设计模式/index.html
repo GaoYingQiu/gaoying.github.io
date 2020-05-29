@@ -318,6 +318,8 @@
         
           
         
+          
+        
       
     
     
@@ -336,7 +338,7 @@
         
           
   <h2 class="title">
-    <a href="/2018/09/28/MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%81%E8%A7%A3/">
+    <a href="/2018/09/28/mvc/">
       MVC设计模式见解
     </a>
   </h2>
@@ -447,7 +449,114 @@
         
           
   <h2 class="title">
-    <a href="/2018/09/28/%E5%87%A0%E7%A7%8D%E5%85%B8%E5%9E%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+    <a href="/2018/09/28/DesignPatterns/">
+      几种典型的设计模式
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>设计模式</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月28日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：421字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">----------  简单工厂模式：---------- </span><br><span class="line"></span><br><span class="line">定义一个计算接口。 </span><br><span class="line"></span><br><span class="line">定义四个加减乘除 的具有该接口功能 的类。</span><br><span class="line"></span><br><span class="line">定义一个工厂类。 用来创建 不同的 接口功能类。 </span><br><span class="line"></span><br><span class="line">根据不同的需要，通过 接口 接收对象， 调用不同的功能操作类的实现方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  模板模式：---------- </span><br><span class="line"></span><br><span class="line">父类运行的时候，调用子类 重写的方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  工厂模式：---------- </span><br><span class="line"></span><br><span class="line">定义一个接口功能。 两个数变量  ，有计算功能。 </span><br><span class="line"></span><br><span class="line">定义 不同的 功能接口实现类。 使用变量时候 用  @synthesize numberA &#x3D; _numberA;</span><br><span class="line"></span><br><span class="line">定义一个类，定义创建工厂方法，不实现。改抽象工厂  具有计算接口功能。</span><br><span class="line"></span><br><span class="line">定义不同的工厂子类，实现创建工厂对象。 </span><br><span class="line"></span><br><span class="line">调用的时候，通过 不同的计算方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  责任模式：---------- </span><br><span class="line"></span><br><span class="line">请假：</span><br><span class="line"></span><br><span class="line">定义一个 领导。 Manager  领导 具有批准请假功能。 内包含直属领导。</span><br><span class="line"></span><br><span class="line">领导有三级层次的领导。（内包含直属领导。如果自己审批时候发现 需要直属领导审批 则直接让直属领导操作）</span><br><span class="line"></span><br><span class="line">普通请假 普通领导批准，请假天数超过一定数需要更高级领导 批准。 普通领导 有直属 领导 。 普通领导处理时候 一级一级 处理上去 。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------  命令模式，享元模式：---------- </span><br><span class="line"></span><br><span class="line">定义一个菜单。Order . </span><br><span class="line"></span><br><span class="line">菜单有很多种菜单。 子类 order .  菜单中  厨师 cook  执行这个菜单。</span><br><span class="line"></span><br><span class="line">多个客户下单 。 waiter 统一接受 菜单。（不管点的什么菜）。</span><br><span class="line"></span><br><span class="line">watier 去传达给 cook 去 做不同的菜系。调用不同的子类菜单 让厨师去 做菜。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2018/09/28/designPatterns/">
       几种典型的设计模式
     </a>
   </h2>
@@ -651,7 +760,7 @@
           <li><a class="flat-box"
             title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
             id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(2)</div></a></li>
+            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
         
       </ul>
     </div>
