@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>2020年下半年iOS工作技术点 - littleWhale</title>
+  
+  
+    <meta name="description" content="2020 年下半年iOS工作技术点 tips背景：疫情原因导致之前云喵工作不能够继续，2020年6月还是面试找了一份相对稳定的工作，去了南航的一家外包供应商。
+E App 是一个企业内部OA即时通讯App. 驻场南航后主要是针对此项目进行功能迭代敏捷开发。主要说一下几个技术任务点：
+
+首要任务就是将旧有MRC内存...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+	  setTimeout(function() { 
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?6b3fb1292e27273cec08f6f75406a761";
+		hm.defer=true;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+	  }, 5000);
+    })();
+    </script>
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            littleWhale
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2021/06/29/2020iOS/">
+      2020年下半年iOS工作技术点
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年6月29日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <h3 id="2020-年下半年iOS工作技术点-tips"><a href="#2020-年下半年iOS工作技术点-tips" class="headerlink" title="2020 年下半年iOS工作技术点 tips"></a>2020 年下半年iOS工作技术点 tips</h3><p>背景：疫情原因导致之前云喵工作不能够继续，2020年6月还是面试找了一份相对稳定的工作，去了南航的一家外包供应商。</p>
+<p>E App 是一个企业内部OA即时通讯App. 驻场南航后主要是针对此项目进行功能迭代敏捷开发。主要说一下几个技术任务点：</p>
+<ol>
+<li>首要任务就是将旧有MRC内存运行环境改成ARC运行环境。<br> 任务到不是复杂，主要修改点是多，体力劳动。将ARC相关的修饰关键词，控制器的dealloc 方法以及设置的代理delegate, 配置文件-fno-objc 相关配置干掉。<br>遇到的问题？<br> 期间由于之前是MRC手动内存回收机制，由于开发人员代码某些变量没有回收或者泄露贮存在内存中，当改成ARC之后会自动释放导致再次使用该变量的时候出现nil值崩溃或者业务的中断开！<br>C++代码块Client类某方法的变量被释放造成崩溃？<br> 当时问题点抛向如何停止某线程的解决方案上去了，而不是终止某条件然后让线程自然停止。当程序进入后台applicationWillTerminate的时候，手动退出IM.然后进入销毁连接阶段。为了使alive_thread , recv_thread 两线程退出,在CLIENT_Disconnect 销毁阶段，通过改变alivethread的条件让while条件中止，线程必然退出。</li>
+<li>h5网页打卡有时候定位不到或者崩溃。因App程序使用了百度地图sdk,所以直接升级百度地图sdk即可。sdk编译分xcode11.3 或 xcode 12 。具体看E项目如果采取xcode11.3 编译打包上线，那么需要找到适应的.a包或者framework 进行编译。</li>
+<li><p>将ASI网络文件下载改成AFNetwroking网络文件下载，将长进度条改成扇形进度条。<br>ASI那套网络请求比较老旧，当时还是用NSURLConnnection来进行网络请求，而且需要单独维护一个网络线程长期贮存到内存中。AFN 采取NSURLSession来进行网络请求，线程即用即回收。<br>AFN请求时设置支持SSL安全策略。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AFSecurityPolicy *securityPolicy &#x3D; [[AFSecurityPolicy alloc] init];</span><br><span class="line">securityPolicy &#x3D; [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];</span><br><span class="line">securityPolicy.allowInvalidCertificates &#x3D; YES;</span><br><span class="line">securityPolicy.validatesDomainName &#x3D; NO;</span><br><span class="line">[_manager setSecurityPolicy:securityPolicy];</span><br></pre></td></tr></table></figure>
+<p>然后通过NSURLSessionDownloadTask 进行下载request,返回对应的进度，通过KVO进行进度条的UI显示,也可通过Block传递到控制器进行显示。</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> NSURLSessionDownloadTask *downloadTask &#x3D; [_manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) &#123;</span><br><span class="line">     dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">         if(progressBlock)&#123;</span><br><span class="line">             progressBlock(downloadProgress);</span><br><span class="line">         &#125;</span><br><span class="line">         downloadModel.progress &#x3D; downloadProgress.fractionCompleted;</span><br><span class="line">     &#125;);</span><br><span class="line">&#125; destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) &#123;</span><br><span class="line">        return [NSURL fileURLWithPath:downloadModel.pathName]; &#x2F;&#x2F;这里直接返回需要存储的本地沙盒路径</span><br><span class="line">&#125; completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) &#123;</span><br><span class="line">   if (error) &#123;</span><br><span class="line">       if (failedBlock) &#123;</span><br><span class="line">           downloadModel.progress &#x3D; 1;</span><br><span class="line">           failedBlock(error);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;else&#123;</span><br><span class="line">       if(successBlock)&#123;</span><br><span class="line">           NSHTTPURLResponse * successRes &#x3D; (NSHTTPURLResponse *)response;</span><br><span class="line">           successBlock(successRes,downloadModel);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;];</span><br><span class="line">[downloadTask resume];</span><br><span class="line">downloadModel.task &#x3D; downloadTask;</span><br></pre></td></tr></table></figure>
+<p>扇形视图的定义编写参考TZImagePicker图片选择器开源UI框架中的TZProgressView，后期的聊天图片预览也很大参考了TZ的图片、gif，视频混合预览控件。后期还会讲到基于TZImagePicker的图片入口进行图片编辑等功能扩展。<br>回到扇形进度视图，我们定义了一个PieProgressView， 代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">#define Hollow_Circle_Radius 0 &#x2F;&#x2F;中间空心圆半径，默认为0实心</span><br><span class="line">#define KOffsetRadius 10 &#x2F;&#x2F;偏移距离</span><br><span class="line">#define KMargin 0 &#x2F;&#x2F;边缘间距</span><br><span class="line"></span><br><span class="line">@interface PieProgressView ()&#123;</span><br><span class="line">    CGFloat _radius;</span><br><span class="line">    CGPoint _center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong) CAShapeLayer *pieLayer;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation PieProgressView</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithFrame:(CGRect)frame&#123;</span><br><span class="line"></span><br><span class="line">    self &#x3D; [super initWithFrame:frame];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">        self.backgroundColor &#x3D; UIColor.clearColor;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;线的半径为扇形半径的一半，线宽是扇形半径-&gt;半径+线宽的一半&#x3D;真实半径，这样就能画出圆形了</span><br><span class="line">        _radius &#x3D; (frame.size.width - KMargin*2)&#x2F;4.f;</span><br><span class="line">        _center &#x3D; CGPointMake(_radius*2 + KMargin, _radius*2 + KMargin);</span><br><span class="line"></span><br><span class="line">         _pieLayer &#x3D; [CAShapeLayer layer];</span><br><span class="line">         _pieLayer.strokeStart &#x3D; 0;</span><br><span class="line">        _pieLayer.lineWidth &#x3D; _radius*2 - Hollow_Circle_Radius;</span><br><span class="line">        _pieLayer.strokeColor &#x3D;  [[UIColor colorWithWhite:0 alpha:0.5] CGColor];</span><br><span class="line">        _pieLayer.fillColor &#x3D; [UIColor clearColor].CGColor;</span><br><span class="line">        _pieLayer.strokeEnd &#x3D; 0.98;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark -- Publish Methods</span><br><span class="line"></span><br><span class="line">- (void)drawRect:(CGRect)rect &#123;</span><br><span class="line"></span><br><span class="line">    _radius &#x3D; (rect.size.width - KMargin*2)&#x2F;4.f;</span><br><span class="line">    _center &#x3D; CGPointMake(_radius*2 + KMargin, _radius*2 + KMargin);</span><br><span class="line">    _pieLayer.frame &#x3D; self.bounds;</span><br><span class="line">    UIBezierPath *piePath &#x3D; [UIBezierPath bezierPathWithArcCenter:_center radius:_radius + Hollow_Circle_Radius startAngle:M_PI_2*3 endAngle:-M_PI_2 clockwise:false];</span><br><span class="line"></span><br><span class="line">    _pieLayer.strokeEnd &#x3D; 1.0-_progress;</span><br><span class="line">    _pieLayer.path &#x3D; piePath.CGPath;</span><br><span class="line">   [_pieLayer removeFromSuperlayer];</span><br><span class="line">    [self.layer addSublayer:_pieLayer];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setProgress:(float)progress &#123;</span><br><span class="line"></span><br><span class="line">    _progress &#x3D; progress;</span><br><span class="line">    [self setNeedsDisplay];</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>设置视图进度属性的时候，通过调用setNeedsDisplay告诉系统需要进行视图渲染，系统调用drawRect方法,往self.layer添加一个pieLayer, pieLayer的path通过贝塞尔曲线进行设置，piePath相当于从画了一个圆弧度，通过strokeEnd控制结束点，需要和closewise配合控制逆时针。pieLayer需要每次移除再往里添加。<br>在控制器列表cellFor的时候, 设置progress的起初值为0.0001很小，几乎接近0，这样在点击的时候如果去下载，则灰色透明蒙版值达到0.999接近1.0 ，给人很逼真的感觉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if(_convRecord.msg_type &#x3D;&#x3D; type_file)&#123;</span><br><span class="line">    PieProgressView *pieProgressView &#x3D; (PieProgressView *) [cell.contentView viewWithTag:pic_progress_circle_tag];</span><br><span class="line">    pieProgressView.superview.hidden &#x3D; NO;</span><br><span class="line">    if(pieProgressView) &#123;</span><br><span class="line">         if(_convRecord.download_flag &#x3D;&#x3D; state_download_success) &#123;</span><br><span class="line">             pieProgressView.hidden &#x3D; YES;</span><br><span class="line">         &#125;else &#123;</span><br><span class="line">              pieProgressView.hidden &#x3D; YES;</span><br><span class="line">              pieProgressView.alpha &#x3D; 1.0;</span><br><span class="line">              pieProgressView.progress &#x3D; 0.0001; &#x2F;&#x2F;初始化配置进度。</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于ui需求需显示圆扇形进度，需要将pieProgressView添加到一个背景view中，再设置其circleBackView的背景颜色为透明，layer的masksToBounds为YES,这样就可以显示我们需要的圆扇形了。</p>
+</li>
+<li><p>Xcode12 Runtime的方法调用。由于主工程是多个project工程相互依赖串行而成的工程，底工程需要依赖主工程类时候，可通过runtime obj_msgSend消息发送方式进行调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id cls &#x3D; ((id (*) (id, SEL)) objc_msgSend)(objc_getClass(&quot;HttpTool&quot;),sel_registerName(&quot;tool&quot;));</span><br><span class="line">SEL sel &#x3D; sel_registerName(&quot;POST:paramDic:Success:Failure:&quot;);</span><br><span class="line">((void (*)(id,SEL,NSString *,NSDictionary *, id, id))objc_msgSend)(cls, sel, urlStr, dic, finishSuccessBlock,FailureBlock);</span><br></pre></td></tr></table></figure></li>
+<li><p>崩溃问题：</p>
+<ul>
+<li>数组越界。尤其在使用tableview的beginUpdate 的时候，局部刷新操作的数据源和读取的数据源个数不一致导致。还有一种情况是在子线程中操作了该数据，导致刷新的时候和该数据源不一致导致崩溃。或者是数据源遭到污染，变相被改变。</li>
+<li>字符串截取崩溃。 在使用字符串的方法截取range 的时候没有判断长度越界情况。</li>
+<li>在集合copy的时候，要注意是否变化为不可变集合，否则调用类似addObject等方法时候容易崩溃。</li>
+<li>对象释放。在使用SDWebImage下载图片的时候，如果用一个临时的imageView去下载一个图片，而这个imageView又没有被界面引用就出现对象被释放了。从而导致imageView sd_download的时候complateBlock一直没有回调。</li>
+<li>对象关键字的使用。比如block没有使用copy, delegate没有使用weak等。</li>
+<li>在子线程中发送了通知，然后在主线程更改了UI导致崩溃。</li>
+</ul>
+</li>
+<li><p>业务异常：</p>
+<ul>
+<li>切换登录用户，导致发送消息失败或者丢失。原因：切换用户时，数据库开关不正确导致sql事务没有提交。 解决方案：首先sqllite模式为串行模式，全局App只有一个共享的句柄handle。我们把这个变量定义在LCLSqlite中设置为只读。 建立一个单例dbManager类,只负责创建数据库和关闭数据库以及数据库版本的管理。 定义BaseSqlite类.提供公共的操纵数据库sql的读写方法，子类业务DAO都继承于BaseSqlite类，子类Dao可以使用handle(只读),但不可更改handle. 在数据库sqlite关闭的时候，为防止遗留与语句池statement还在使用, 需循环拿出未处理的语句池进行关闭。这样再打开数据库就能成功。</li>
+<li>正在某会话聊天的时候，输入文字发送后。突然杀掉进程，再次打开会话发现消息消失。解决方案：App线程干掉会走applicationWillTerminate方法，在此需要将数据库关闭。</li>
+<li>用户登录后收到很多离线消息，如果处理消息入库的线程池开辟数量大于2，则会出现多个业务先后顺序的问题（问题场景：消息在会话页面撤销了，但未在消息列表页面撤销掉）。必须控制线程数为1，保证Operation任务依赖有序插入，如果要处理入库的效率。可将消息数据记录进行批量事务入库。</li>
+</ul>
+</li>
+<li><p>线程问题：</p>
+<ul>
+<li>消息数据记录入库后，都会写一段代码来发送通知到控制器进行页面的刷新操作。当大量消息入库后发送通知时候，会造成主界面代码块如果开辟了GCD线程，会造成大量浪费和内存开辟的浪费。需要严格控制好线程的数量，可通过线程池等方面去控制。</li>
+<li>不要一味地想当然用异步去处理耗时长的任务然后直接下一步业务操作。比如发送一段语音，需要存储到沙盒，需要上传，需要把数据记录存到数据库。存到数据库时候，我们需要存储后端服务器返回给我们的fileToken，线程的执行有先后，文件的fileToken取到的是否正确的？值得考量。或者采取Block方式当真正拿到fileToken时候才进行下一步的业务操作。</li>
+<li>如何保证在多线程情况下的数据源安全？原子性？加同步锁？信号量？栅栏函数？ 值得你去探索? 归根结底是引用类型造成的问题，Swift Struct 值类型值得你拥有。</li>
+</ul>
+</li>
+<li><p>业务懒加载：</p>
+<ul>
+<li>场景1：某消息类型为群待办或者群公告。他们重用的消息Cell可能一直，只是局部UI的不同。 cell的显示需要实时显示正确的消息类型对应的UI,这个时候可能通过查数据库拿到值后再更新UI. 但在计算cell高度的时候，无论是群待办还是群公告，它们的高度是固定的。所以无需多余的查询，只需load数据源的时候提前一次查询即可。</li>
+<li>当涉及到对象的copy的时候，尤其是当对象里某属性重写了get又去查询数据库的时候，性能损耗较大，在copyWithZone的方法里赋值的时候可根据情况将self.propA 改成_propA 这样就不会触发耗时的查询。</li>
+<li>在消息首页不断地查询计算总得未读数的时候，我们可以控制当消息数99+的时候，终止没必要的查询机制。当在收到通知需要查询未读数业务时候可控制专门的线程去查询该未读数。</li>
+<li>为了减少通知之后的刷新率，我们可以在消息入库之后发出通知之前，用一个中转器相当于一个定时时间内去检查有记录则即通知刷新一次（带参将消息数据发出去）。</li>
+</ul>
+</li>
+<li><p>性能问题：</p>
+<ul>
+<li>大部分性能损耗其实还是发生在主线程进行IO读取上，应该尽量去控制IO的读取频次，以及根据业务情况按实际需要它放在子线程中处理，再通过Block形式去返回。而block形式会给编写的代码造成block嵌套，尤其是层次多的时候，给阅读上造成一定的干扰。所以应该控制嵌套层次数，两者结合。业界也有coobjc协程解决方案。或者参考PromiseKit 类似前端web的promise方案。</li>
+<li>Sqlite串行模式下数据库读写在大量离线消息收到时候比较容易出现卡顿的问题，因为所触发的读和写都是穿插排队。并不能很好地实现读写并发。在此基础上，我们应该控制大量数据写的时候尽量剥离出冗合的业务，将数据批量事务入库，这样在性能上也不至于那么卡。当然此方案也需要后台配合，看后台服务器是一条条下发给客户端还是批量多条下发给客户端。</li>
+<li>当在群会话发送一条消息的时候，本地有一张数据已读回执表记录着消息id, 用户id,阅读状态，创建时间，阅读时间等。首先需要将群里所有人批量入库初始为未阅读状态。当有收到回执消息时，即更新对应的阅读状态。这样给此表造成数据量的庞大和臃肿。解决方案：可根据时间戳删除一个月之前的废记录。在创建表的时候，可根据一个群一个回执记录表。这样有利于消息的多表连接与快速查询。</li>
+<li>当有大量数据在内存中排序的时候，如果能从数据库中排序尽量通过sql排序，效率远远大于内存排序。</li>
+<li>如果服务器是一条条离线消息下发，可根据消息的类型属于聊天消息专门通过一个队列来维护，后台线程getMessage循环去取的时候，一次就可以拿多个进行批量入库。</li>
+</ul>
+</li>
+<li>关于IM App 消息存储问题：<br>目前是所有消息都存储在本地客户端。虽然节省了服务器资源，如果不批量下发，客户端性能上处理可能有点问题。可能会有轻微卡顿，如果量大，那就很明显了。虽然进入会话都是从本地拉数据，查询数据也都是本地进行搜索，比较全。但是如果后期要做多端数据同步[漫游]。那其实服务器还是要存储一定时间段的用户聊天消息的。网上查了很多资料，还有一种做法是这样：用户每次登录后，IM服务端会下发每个会话的近50条消息，10个会话也才500条，其实数据量很小了。当用户点击某会话时候，先显示最近的消息，当往上翻页的时候，本地数据库如果有则本地加载出来，如果没有则请求网络进行拉数据。这样推拉结合能减轻客户端很多问题。客户端根据需要进行消息存储。</li>
+</ol>
+<p>接下来将会写一些功能点上的技术心得：<br>[图片编辑：涂鸦，裁剪，文字帖，马赛克]<br>[聊天图片浏览：图片，gif，视频]<br>[消息收藏]<br>[YYTextView富文本部分文字光标选择]<br>[正则匹配解决群内邀请新成员点击问题]<br>[奇怪的侧边栏问题]<br>[@某人在文字前中后的处理规则]<br>[群插件如何开发？]<br>[数据源的线程安全]<br>[图片的转发]</p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
+        
+          height='225px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-29T17:57:07+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年6月29日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/06/29/2020iOS/&title=2020年下半年iOS工作技术点 - littleWhale&summary=2020 年下半年iOS工作技术点 tips背景：疫情原因导致之前云喵工作不能够继续，2020年6月还是面试找了一份相对稳定的工作，去了南航的一家外包供应商。
+E App 是一个企业内部OA即时通讯App. 驻场南航后主要是针对此项目进行功能迭代敏捷开发。主要说一下几个技术任务点：
+
+首要任务就是将旧有MRC内存运行环境改成ARC运行环境。 任务到不是复杂，主要修改点是多，体力劳动。将ARC相关的修饰关键词，控制器的dealloc 方法以及设置的代理delegate, 配置文件-fno-objc 相关配置干掉。遇到的问题？ 期间由于之前是MRC手动内存回收机制，由于开发人员代码某些变量没有回收或者泄露贮存在内存中，当改成ARC之后会自动释放导致再次使用该变量的时候出现nil值崩溃或者业务的中断开！C++代码块Client类某方法的变量被释放造成崩溃？ 当时问题点抛向如何停止某线程的解决方案上去了，而不是终止某条件然后让线程自然停止。当程序进入后台applicationWillTerminate的时候，手动退出IM.然后进入销毁连接阶段。为了使alive_thread , recv_thread 两线程退出,在CLIENT_Disconnect 销毁阶段，通过改变alivethread的条件让while条件中止，线程必然退出。
+h5网页打卡有时候定位不到或者崩溃。因App程序使用了百度地图sdk,所以直接升级百度地图sdk即可。sdk编译分xcode11.3 或 xcode 12 。具体看E项目如果采取xcode11.3 编译打包上线，那么需要找到适应的.a包或者framework 进行编译。
+将ASI网络文件下载改成AFNetwroking网络文件下载，将长进度条改成扇形进度条。ASI那套网络请求比较老旧，当时还是用NSURLConnnection来进行网络请求，而且需要单独维护一个网络线程长期贮存到内存中。AFN 采取NSURLSession来进行网络请求，线程即用即回收。AFN请求时设置支持SSL安全策略。
+12345AFSecurityPolicy *securityPolicy &#x3D; [[AFSecurityPolicy alloc] init];securityPolicy &#x3D; [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];securityPolicy.allowInvalidCertificates &#x3D; YES;securityPolicy.validatesDomainName &#x3D; NO;[_manager setSecurityPolicy:securityPolicy];
+然后通过NSURLSessionDownloadTask 进行下载request,返回对应的进度，通过KVO进行进度条的UI显示,也可通过Block传递到控制器进行显示。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/06/29/2020iOS/&title=2020年下半年iOS工作技术点 - littleWhale&summary=2020 年下半年iOS工作技术点 tips背景：疫情原因导致之前云喵工作不能够继续，2020年6月还是面试找了一份相对稳定的工作，去了南航的一家外包供应商。
+E App 是一个企业内部OA即时通讯App. 驻场南航后主要是针对此项目进行功能迭代敏捷开发。主要说一下几个技术任务点：
+
+首要任务就是将旧有MRC内存运行环境改成ARC运行环境。 任务到不是复杂，主要修改点是多，体力劳动。将ARC相关的修饰关键词，控制器的dealloc 方法以及设置的代理delegate, 配置文件-fno-objc 相关配置干掉。遇到的问题？ 期间由于之前是MRC手动内存回收机制，由于开发人员代码某些变量没有回收或者泄露贮存在内存中，当改成ARC之后会自动释放导致再次使用该变量的时候出现nil值崩溃或者业务的中断开！C++代码块Client类某方法的变量被释放造成崩溃？ 当时问题点抛向如何停止某线程的解决方案上去了，而不是终止某条件然后让线程自然停止。当程序进入后台applicationWillTerminate的时候，手动退出IM.然后进入销毁连接阶段。为了使alive_thread , recv_thread 两线程退出,在CLIENT_Disconnect 销毁阶段，通过改变alivethread的条件让while条件中止，线程必然退出。
+h5网页打卡有时候定位不到或者崩溃。因App程序使用了百度地图sdk,所以直接升级百度地图sdk即可。sdk编译分xcode11.3 或 xcode 12 。具体看E项目如果采取xcode11.3 编译打包上线，那么需要找到适应的.a包或者framework 进行编译。
+将ASI网络文件下载改成AFNetwroking网络文件下载，将长进度条改成扇形进度条。ASI那套网络请求比较老旧，当时还是用NSURLConnnection来进行网络请求，而且需要单独维护一个网络线程长期贮存到内存中。AFN 采取NSURLSession来进行网络请求，线程即用即回收。AFN请求时设置支持SSL安全策略。
+12345AFSecurityPolicy *securityPolicy &#x3D; [[AFSecurityPolicy alloc] init];securityPolicy &#x3D; [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];securityPolicy.allowInvalidCertificates &#x3D; YES;securityPolicy.validatesDomainName &#x3D; NO;[_manager setSecurityPolicy:securityPolicy];
+然后通过NSURLSessionDownloadTask 进行下载request,返回对应的进度，通过KVO进行进度条的UI显示,也可通过Block传递到控制器进行显示。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/06/29/2020iOS/&title=2020年下半年iOS工作技术点 - littleWhale&summary=2020 年下半年iOS工作技术点 tips背景：疫情原因导致之前云喵工作不能够继续，2020年6月还是面试找了一份相对稳定的工作，去了南航的一家外包供应商。
+E App 是一个企业内部OA即时通讯App. 驻场南航后主要是针对此项目进行功能迭代敏捷开发。主要说一下几个技术任务点：
+
+首要任务就是将旧有MRC内存运行环境改成ARC运行环境。 任务到不是复杂，主要修改点是多，体力劳动。将ARC相关的修饰关键词，控制器的dealloc 方法以及设置的代理delegate, 配置文件-fno-objc 相关配置干掉。遇到的问题？ 期间由于之前是MRC手动内存回收机制，由于开发人员代码某些变量没有回收或者泄露贮存在内存中，当改成ARC之后会自动释放导致再次使用该变量的时候出现nil值崩溃或者业务的中断开！C++代码块Client类某方法的变量被释放造成崩溃？ 当时问题点抛向如何停止某线程的解决方案上去了，而不是终止某条件然后让线程自然停止。当程序进入后台applicationWillTerminate的时候，手动退出IM.然后进入销毁连接阶段。为了使alive_thread , recv_thread 两线程退出,在CLIENT_Disconnect 销毁阶段，通过改变alivethread的条件让while条件中止，线程必然退出。
+h5网页打卡有时候定位不到或者崩溃。因App程序使用了百度地图sdk,所以直接升级百度地图sdk即可。sdk编译分xcode11.3 或 xcode 12 。具体看E项目如果采取xcode11.3 编译打包上线，那么需要找到适应的.a包或者framework 进行编译。
+将ASI网络文件下载改成AFNetwroking网络文件下载，将长进度条改成扇形进度条。ASI那套网络请求比较老旧，当时还是用NSURLConnnection来进行网络请求，而且需要单独维护一个网络线程长期贮存到内存中。AFN 采取NSURLSession来进行网络请求，线程即用即回收。AFN请求时设置支持SSL安全策略。
+12345AFSecurityPolicy *securityPolicy &#x3D; [[AFSecurityPolicy alloc] init];securityPolicy &#x3D; [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];securityPolicy.allowInvalidCertificates &#x3D; YES;securityPolicy.validatesDomainName &#x3D; NO;[_manager setSecurityPolicy:securityPolicy];
+然后通过NSURLSessionDownloadTask 进行下载request,返回对应的进度，通过KVO进行进度条的UI显示,也可通过Block传递到控制器进行显示。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/04/25/webSummary/'>
+                <p class='title'>这两个月学的前端知识<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>框架方面目前主要掌握 Vue 。可独立开发 H5 项目，PC Web 后台系统, 小程序开发。
+UI 框架：用过 element-UI, iView, WeUI, WeUIJs. MiniUI
+...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '2020年下半年iOS工作技术点',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2020-年下半年iOS工作技术点-tips"><span class="toc-text">2020 年下半年iOS工作技术点 tips</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget related_posts shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2016/05/13/AFNNetWorking/" title="AFNNetWorking-分析" rel="bookmark">AFNNetWorking-分析</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='true'
+      volume='0.6'
+      loop='all'
+      order='random'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='4862553993'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:qiugaoying@163.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/gaoyingqiu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="http://littleWhale.xyz" target="_blank" rel="noopener">Copyright © 2016-2020 高颖</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://qyanblog.oss-cn-shenzhen.aliyuncs.com/IMG_0131.JPG", "https://qyanblog.oss-cn-shenzhen.aliyuncs.com/小恐龙.JPG"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
