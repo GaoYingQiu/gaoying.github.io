@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,10 @@
 
   <!-- 页面元数据 -->
   
-    <title>归档：2019/4 - littleWhale</title>
+    <title>群插件如何开发？ - littleWhale</title>
   
+  
+    <meta name="description" content="群插件的基础属性群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地...">
   
 
   <!-- feed -->
@@ -84,91 +84,7 @@
 
 <body>
   
-  <div class="cover-wrapper">
-    
-      <cover class='cover  half'>
-        <div class='cover-body'>
-  <div class='a'>
-    
-    
-    
-  </div>
-  <div class='b'>
-    
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="ever searching for the world" />
-          <i class="icon fas fa-search fa-fw"></i>
-        </form>
-      </div>
-    
-    <div class='menu navigation'>
-      <ul class='cover-list-h'>
-        
-          
-            <li>
-              <a class="nav home"
-                href="/"
-                
-                
-                id="home">
-                <i class='fas fa-book fa-fw'></i>首页
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/archives/"
-                
-                
-                id="archives">
-                <i class='fas fa-archive fa-fw'></i>归档
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/paint/"
-                
-                
-                id="paint">
-                <i class='fas fa-tags fa-fw'></i>胖橙的画廊
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://mi.aliyun.com/shop/43068"
-                
-                  rel="external nofollow noopener noreferrer"
-                
-                
-                  target="_blank"
-                
-                id="https:mialiyuncomshop43068">
-                <i class='fas fa-file-code fa-fw'></i>域名出售
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/about/"
-                
-                
-                id="about">
-                <i class='fas fa-info-circle fa-fw'></i>关于
-              </a>
-            </li>
-          
-        
-      </ul>
-    </div>
-  </div>
-</div>
-
-      </cover>
-    
-    <div id="loading-bar-wrapper">
+  <div id="loading-bar-wrapper">
   <div id="loading-bar"></div>
 </div>
 <header class="l_header shadow blur">
@@ -397,34 +313,18 @@
 
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -434,11 +334,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2019/04/25/skuTree/">
-      SKU商品属性多级动态树
+  <h1 class="title">
+    <a href="/2021/07/01/groupPlugin/">
+      群插件如何开发？
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -474,27 +374,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2019年4月25日</p>
+    <p>发布于：2021年7月1日</p>
   </a>
 </div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：34字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
 
             
           
@@ -512,352 +394,224 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="GYLevelTree"><a href="#GYLevelTree" class="headerlink" title="GYLevelTree"></a>GYLevelTree</h1><p>SKU 商品属性 价格或库存 设置； 动态多层级树，自由排列组合，递归，深拷贝,浅拷贝;  </p>
-<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/sku_2.PNG" alt="图片2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/sku_3.PNG" alt="图片3"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/sku_5.PNG" alt="图片5"></p>
-<p><a href="https://github.com/GaoYingQiu/GYLevelTree" target="_blank" rel="noopener">源码</a></p>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
           
-  <h2 class="title">
-    <a href="/2019/04/20/doubleSliderRange/">
-      自定义双向Slider选范围
-    </a>
-  </h2>
+          <h4 id="群插件的基础属性"><a href="#群插件的基础属性" class="headerlink" title="群插件的基础属性"></a>群插件的基础属性</h4><p>群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。<br>插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地模块 等等。<br>插件关系表： 群id，插件id，角标数量，排序值，是否显示，等等。<br><a id="more"></a></p>
+<h4 id="群插件的本地存储以及业务逻辑"><a href="#群插件的本地存储以及业务逻辑" class="headerlink" title="群插件的本地存储以及业务逻辑"></a>群插件的本地存储以及业务逻辑</h4><p>由于每个IM用户本地都有一个相关的userId唯一数据库，插件基础信息存储在一张表，信息更新频率较低。插件关系一张表，和群id关联性较高，即一个群可以有多个插件。<br>当用户登录后，在适当的时机请求Java接口进行同步插件信息。（客户端可以根据时间戳定义一个时间段，这样就不用每次登录同步插件信息了）由业务决定多久时间段同步最新的插件信息到本地。如果后端后台配置了最新插件，客户单需要及时显示的话就需要服务端进行实时下发IM通知，表示有插件更新或新增。群插件当且仅当和群挂钩时候才会实时下发。当客户端收到群插件变更指令的时候，首先判断群插件变更类型如果是插件信息变更，则根据id请求最新的某插件信息 replace into（更新或新增） 插件信息的记录。如果是其他变更类型： 首先检查插件表是否有该插件记录，如果有，则存储到插件关系表，完成后则通知界面去读取群最新的插件信息。如果没有，则先请求网络插件信息，再replace into 到插件表。然后再处理插件关系表，最后通知到界面刷新。 群插件的变更类型一般可分为以下几种：绑定，解绑，角标数量，群插件排序，显示/隐藏等等。具体根据业务情况，这里只是简单列举。</p>
+<h4 id="界面刷新"><a href="#界面刷新" class="headerlink" title="界面刷新"></a>界面刷新</h4><p>当IM收到群插件自定义通知时，进行条件处理对应的业务。当完成群插件关系表的变更时，发送通知到控制器，控制器收到通知后，判断仅当当前会id与要接收通知的群id相等的时候，才进行调用dao查询群插件列表方法返回相关的插件关系集合。插件关系Model包含插件信息Model，然后界面就能完整显示了。</p>
+<h4 id="同步时机？"><a href="#同步时机？" class="headerlink" title="同步时机？"></a>同步时机？</h4><ol>
+<li>当用户登录后，首次点开某群时候，会自动调用同步群信息基础接口，里面包含插件集合。集合里分别为已关联的某插件id在当前群的最终状态。根据existGroupFlag为true表示与该群关联着，如果为false 则需要调用解绑删除群插件关系。</li>
+<li>当用户首次安装或卸载重装时候，进入消息首页会进行多群同步，在群信息同步时返回的基础信息也会包含此群插件集合基信息。</li>
+</ol>
+<h4 id="代码建议"><a href="#代码建议" class="headerlink" title="代码建议"></a>代码建议</h4><p>插件Dao提供查询，修改，删除等基本方法。插件Manager专门处理业务，调用Dao相关方法结合完成业务需求。避免block回调地狱,防止多层嵌套。内存排序和sql排序相结合，结构体和对象Model相映射，解包时候留意结构体字段类型，解码时候对应相关网络字节序，留意新增与replace into 的区别，界面刷新严格条件过滤防止造成不必要的刷新。插件基本信息同步频率看业务，关系绑定要实时，测试要充分留意卸载重装后的插件信息同步问题。</p>
 
-
-        
-        <div class='new-meta-box'>
           
-            
-          
-            
+            <div class='article_footer'>
               
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2019年4月20日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：34字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="GYSliderBar"><a href="#GYSliderBar" class="headerlink" title="GYSliderBar"></a>GYSliderBar</h1><p>双向Slider, 选择范围控件；支持阶梯值滑动； 可用于筛选界面，筛选价格，其他业务等；</p>
-<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/gySliderBar.PNG" alt="图片"></p>
-<p><a href="https://github.com/GaoYingQiu/GYSliderBar" target="_blank" rel="noopener">源码</a></p>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2019/04/16/2019_April/">
-      2019年四月
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E6%9D%82%E8%B0%88/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>杂谈</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2019年4月16日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：184字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>时间在快马加鞭地前行，身边的人，在做的事，也都发生了变化；回顾过去一年，做过的项目不少，也经历了生命周期销毁的企业；那些盲目迭代没有思考力地堆砌功能对于用户来说是多余无用的，对于整个产品战略来说似乎渐渐步入深渊；过去一年的开发中，自己也变得被动，整个思考力和行为都被牵着走； “安分守己”一词 形容自己成了一个”标准“的职业码农，时间之河上，有一刻 似乎意识到脑洞齿轮已经生锈 转动缓慢，对，需要着手动起来了，起身，去做！</p>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-	
-</div>
-<aside class='l_side'>
-  
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>Be brave，close to life</p>
 
-        
-        
-      </div>
+
+  
+
+  
     
     
-      <div class="social-wrapper">
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
         
-          
-            <a href="mailto:qiugaoying@163.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/gaoyingqiu"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+          height='225px'
+        ></div>
+      
     
   </div>
 </section>
 
   
 
-  
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-01T18:02:44+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月1日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/01/groupPlugin/&title=群插件如何开发？ - littleWhale&summary=群插件的基础属性群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地模块 等等。插件关系表： 群id，插件id，角标数量，排序值，是否显示，等等。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
     
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/01/groupPlugin/&title=群插件如何开发？ - littleWhale&summary=群插件的基础属性群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地模块 等等。插件关系表： 群id，插件id，角标数量，排序值，是否显示，等等。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/01/groupPlugin/&title=群插件如何开发？ - littleWhale&summary=群插件的基础属性群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地模块 等等。插件关系表： 群id，插件id，角标数量，排序值，是否显示，等等。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2021/07/01/input@/'>
+                <p class='title'>聊天输入框@某人<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>聊天输入框@某人逻辑分类点说明IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
   
 
-  <section class="widget category shadow desktop">
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '群插件如何开发？',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Web/" href="/categories/Web/"
-            id="categoriesWeb"
-            ><div class='name'>Web</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/iOS/" href="/categories/iOS/"
-            id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(18)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
-            id="categoriesE585B6E4BB96"
-            ><div class='name'>其他</div><div class='badge'>(14)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%8A%80%E6%9C%AF/" href="/categories/%E6%8A%80%E6%9C%AF/"
-            id="categoriesE68A80E69CAF"
-            ><div class='name'>技术</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E8%B0%88/" href="/categories/%E6%9D%82%E8%B0%88/"
-            id="categoriesE69D82E8B088"
-            ><div class='name'>杂谈</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#群插件的基础属性"><span class="toc-text">群插件的基础属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#群插件的本地存储以及业务逻辑"><span class="toc-text">群插件的本地存储以及业务逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#界面刷新"><span class="toc-text">界面刷新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步时机？"><span class="toc-text">同步时机？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码建议"><span class="toc-text">代码建议</span></a></li></ol>
     </div>
   </section>
 
@@ -869,22 +623,20 @@
     
   
 
-  <section class="widget tagcloud shadow desktop mobile">
+  <section class="widget related_posts shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
     
   </header>
 
 
-    <div class='content'>
-      <a href="/tags/AndroidTableView/" style="font-size: 14px; color: #999">AndroidTableView</a> <a href="/tags/DatePicker/" style="font-size: 14px; color: #999">DatePicker</a> <a href="/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/SKU/" style="font-size: 19px; color: #777">SKU</a> <a href="/tags/Slider/" style="font-size: 14px; color: #999">Slider</a> <a href="/tags/%E5%85%B3%E7%B3%BB%E5%9B%BE/" style="font-size: 14px; color: #999">关系图</a> <a href="/tags/%E5%AF%8C%E6%96%87%E6%9C%AC/" style="font-size: 14px; color: #999">富文本</a> <a href="/tags/%E6%8A%BD%E5%A5%96/" style="font-size: 14px; color: #999">抽奖</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a> <a href="/tags/%E8%BD%AF%E5%AE%9E%E5%8A%9B/" style="font-size: 14px; color: #999">软实力</a>
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2021/06/29/2020iOS/" title="2020年下半年iOS工作技术点" rel="bookmark">2020年下半年iOS工作技术点</a></h3></div></li></ul>
     </div>
   </section>
 
-
-  
 
   
 
@@ -967,14 +719,6 @@
   </footer>
 
 <script>setLoadingBarProgress(80);</script>
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
@@ -1089,6 +833,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
