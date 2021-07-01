@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>聊天输入框@某人 - littleWhale</title>
+  
+  
+    <meta name="description" content="聊天输入框@某人逻辑分类点说明IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：
+
+首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+	  setTimeout(function() { 
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?6b3fb1292e27273cec08f6f75406a761";
+		hm.defer=true;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+	  }, 5000);
+    })();
+    </script>
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            littleWhale
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2021/07/01/input@/">
+      聊天输入框@某人
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月1日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <h3 id="聊天输入框-某人逻辑分类点说明"><a href="#聊天输入框-某人逻辑分类点说明" class="headerlink" title="聊天输入框@某人逻辑分类点说明"></a>聊天输入框@某人逻辑分类点说明</h3><p>IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：</p>
+<ol>
+<li>首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”</li>
+<li>input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”</li>
+<li>input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”</li>
+<li>input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”</li>
+</ol>
+<p>在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。</p>
+<p>核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。<br><a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">NSString *newNameStr &#x3D; nil;</span><br><span class="line">    if(originStr.length &gt; 1)&#123;</span><br><span class="line">        NSMutableString *mStr &#x3D; [[NSMutableString alloc] init];</span><br><span class="line">        if(_range.location &gt; 0)&#123;</span><br><span class="line">            &#x2F;&#x2F;在中间或者在末尾插入@,取出之前的，再取出之后的。</span><br><span class="line">            NSString *beforeStr &#x3D; [originStr substringWithRange:NSMakeRange(0, _range.location)];</span><br><span class="line">            [mStr appendString:beforeStr];</span><br><span class="line">            BOOL bCenterInsertFlag &#x3D; NO;</span><br><span class="line">            BOOL bNeedInsertAtFlag &#x3D; YES;</span><br><span class="line">            if(_range.location + 1 &lt; originStr.length)&#123;</span><br><span class="line">                bCenterInsertFlag &#x3D; YES;</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;中间插入.判断前一个是否@</span><br><span class="line">                NSString *lastChar &#x3D; [beforeStr substringFromIndex:beforeStr.length-1];</span><br><span class="line">                if([lastChar isEqualToString:@&quot;@&quot;])&#123;</span><br><span class="line">                    bNeedInsertAtFlag &#x3D; NO;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if(beforeStr.length &gt; 2 &amp;&amp; beforeStr.length-2 &gt; 0)&#123;</span><br><span class="line">                    NSString *lastTwoChar &#x3D; [beforeStr substringFromIndex:beforeStr.length-2];</span><br><span class="line">                    if([lastTwoChar isEqualToString:@&quot;@@&quot;])&#123;</span><br><span class="line">                        [mStr replaceOccurrencesOfString:@&quot;@@&quot; withString:@&quot;@&quot; options:nil range:NSMakeRange(0, mStr.length)];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                &#x2F;&#x2F;末尾插入.判断前一个是否@</span><br><span class="line">                NSString *lastChar &#x3D; [beforeStr substringFromIndex:beforeStr.length-1];</span><br><span class="line">                if([lastChar isEqualToString:@&quot;@&quot;])&#123;</span><br><span class="line">                    bNeedInsertAtFlag &#x3D; NO;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if(bNeedInsertAtFlag)&#123;</span><br><span class="line">                [mStr appendString:@&quot;@&quot;];</span><br><span class="line">            &#125;</span><br><span class="line">            [mStr appendString:nameStr];</span><br><span class="line">            if(bCenterInsertFlag)&#123; &#x2F;&#x2F;如果在文字中间插入,拿到@之后的字符串</span><br><span class="line">                NSString *afterStr &#x3D; [originStr substringFromIndex:_range.location+1];</span><br><span class="line">                [mStr appendString:afterStr];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            &#x2F;&#x2F;首字母为@符号，截取之后的.</span><br><span class="line">            [mStr appendString:@&quot;@&quot;];</span><br><span class="line">            [mStr appendString:nameStr];</span><br><span class="line">            NSString *afterStr &#x3D; [originStr substringFromIndex:1];</span><br><span class="line">            [mStr appendString:afterStr];</span><br><span class="line">        &#125;</span><br><span class="line">        newNameStr &#x3D; mStr;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        newNameStr &#x3D; [NSString stringWithFormat:@&quot;%@%@&quot;,mutableStr,nameStr];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
+        
+          height='225px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-01T16:42:41+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月1日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/01/input@/&title=聊天输入框@某人 - littleWhale&summary=聊天输入框@某人逻辑分类点说明IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：
+
+首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”
+input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”
+input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”
+input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”
+
+在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。
+核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/01/input@/&title=聊天输入框@某人 - littleWhale&summary=聊天输入框@某人逻辑分类点说明IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：
+
+首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”
+input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”
+input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”
+input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”
+
+在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。
+核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/01/input@/&title=聊天输入框@某人 - littleWhale&summary=聊天输入框@某人逻辑分类点说明IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：
+
+首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”
+input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”
+input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”
+input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”
+
+在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。
+核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2021/07/01/LeftSlide/'>
+                <p class='title'>奇怪的侧边栏问题<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>开发中由于系统版本以及sdk，第三方库等原因，都会影响成出现一些奇怪的问题。当时是引用YYTextview控件解决消息cell长文本的光标选择范围内容复制的小功能。由于YYTextview光标弹...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '聊天输入框@某人',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#聊天输入框-某人逻辑分类点说明"><span class="toc-text">聊天输入框@某人逻辑分类点说明</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget related_posts shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2021/06/29/2020iOS/" title="2020年下半年iOS工作技术点" rel="bookmark">2020年下半年iOS工作技术点</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='true'
+      volume='0.6'
+      loop='all'
+      order='random'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='4862553993'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:qiugaoying@163.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/gaoyingqiu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="http://littleWhale.xyz" target="_blank" rel="noopener">Copyright © 2016-2020 高颖</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://qyanblog.oss-cn-shenzhen.aliyuncs.com/IMG_0131.JPG", "https://qyanblog.oss-cn-shenzhen.aliyuncs.com/小恐龙.JPG"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
