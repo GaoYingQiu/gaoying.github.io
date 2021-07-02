@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,7 +16,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>归档：2021 - littleWhale</title>
+    <title>群通知里的人员名字点击剖析 - littleWhale</title>
   
   
 
@@ -84,91 +82,7 @@
 
 <body>
   
-  <div class="cover-wrapper">
-    
-      <cover class='cover  half'>
-        <div class='cover-body'>
-  <div class='a'>
-    
-    
-    
-  </div>
-  <div class='b'>
-    
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="ever searching for the world" />
-          <i class="icon fas fa-search fa-fw"></i>
-        </form>
-      </div>
-    
-    <div class='menu navigation'>
-      <ul class='cover-list-h'>
-        
-          
-            <li>
-              <a class="nav home"
-                href="/"
-                
-                
-                id="home">
-                <i class='fas fa-book fa-fw'></i>首页
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/archives/"
-                
-                
-                id="archives">
-                <i class='fas fa-archive fa-fw'></i>归档
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/paint/"
-                
-                
-                id="paint">
-                <i class='fas fa-tags fa-fw'></i>胖橙的画廊
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://mi.aliyun.com/shop/43068"
-                
-                  rel="external nofollow noopener noreferrer"
-                
-                
-                  target="_blank"
-                
-                id="https:mialiyuncomshop43068">
-                <i class='fas fa-file-code fa-fw'></i>域名出售
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/about/"
-                
-                
-                id="about">
-                <i class='fas fa-info-circle fa-fw'></i>关于
-              </a>
-            </li>
-          
-        
-      </ul>
-    </div>
-  </div>
-</div>
-
-      </cover>
-    
-    <div id="loading-bar-wrapper">
+  <div id="loading-bar-wrapper">
   <div id="loading-bar"></div>
 </div>
 <header class="l_header shadow blur">
@@ -397,38 +311,18 @@
 
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -438,11 +332,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2021/07/02/nameClick/">
       群通知里的人员名字点击剖析
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -486,24 +380,6 @@
           
             
               
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：2.1k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：9分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
 
             
           
@@ -516,10 +392,10 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们每个人的手机都安装有微信App,肯定大家都使用过以下场景在聊天群中，当有新的成员进入的时候，可以看到 某某邀请了某某1进入群聊，或者当你是群主的时候，某管理人员邀请了几个人进入时候看到 某某管理员邀请了张三、李四，王五，张三（同名）进入了群聊。对于邀请人员或者被邀请人员，我们发现人员的名称是可以点击的，即使同名的人，点击其名字也可以跳转到各自的主页详情中。</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>我们每个人的手机都安装有微信App,肯定大家都使用过以下场景在聊天群中，当有新的成员进入的时候，可以看到 某某邀请了某某1进入群聊，或者当你是群主的时候，某管理人员邀请了几个人进入时候看到 某某管理员邀请了张三、李四，王五，张三（同名）进入了群聊。对于邀请人员或者被邀请人员，我们发现人员的名称是可以点击的，即使同名的人，点击其名字也可以跳转到各自的主页详情中。</p>
 <h3 id="如何存储人员的id？"><a href="#如何存储人员的id？" class="headerlink" title="如何存储人员的id？"></a>如何存储人员的id？</h3><p>一条群成员变更通知就是一串文本，我们点击的时候肯定要存储好他的人员id,然后点击的时候就能拿到对应人员的id。从最简单的存储方案来看，这条内容可以写成以下格式： 管理员<font color=blue>刘某某</font>邀请了<font color=blue>张三</font>、<font color=blue>李四</font>、<font color=blue>王五</font>、<font color=blue>张三</font>进入了群聊。换成代码的格式即为：“管理员\”刘某某::1000\”邀请了\”张三::1001、李四::1002、王五::1003、张三::1004\”进入了群聊”。其中的代码格式为userName::userId这样一种形式进行拼接，中间的符号可以采用其他特殊符号代替。这里为了区别用户特殊性输入用了双冒号。多个成员之间用顿号隔开，人员与普通内容之间用符号双引号\”进行分割（斜杆为转义符）。 我们需要对这一串文字表达式进行解析进行UI显示，把人员名字后的拼接符号用户id进行过滤掉,组合成不带用户id的易懂文字内容给到用户。</p>
 <h3 id="解析带用户id的字符串规则，拼装成正常文本"><a href="#解析带用户id的字符串规则，拼装成正常文本" class="headerlink" title="解析带用户id的字符串规则，拼装成正常文本"></a>解析带用户id的字符串规则，拼装成正常文本</h3><p>判断待解析的目标内容是否包含我们定义的特殊连接符号与双引号，符合条件的情况下第一步以双引号将文本进行分割。分为以下步骤。</p>
 <ol>
@@ -534,594 +410,212 @@
 <p>以下是匹配一个字符串里包含字段某字符串的所有range<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (NSArray*)rangeOfSubString:(NSString*)subStr inString:(NSString*)string &#123;</span><br><span class="line">    NSMutableArray *rangeArray &#x3D; [NSMutableArray array];</span><br><span class="line">    NSString*string1 &#x3D; [string stringByAppendingString:subStr];</span><br><span class="line">    NSString *temp;</span><br><span class="line">    for(int i &#x3D;0; i &lt; string.length; i ++) &#123;</span><br><span class="line">        temp &#x3D; [string1 substringWithRange:NSMakeRange(i, subStr.length)];</span><br><span class="line">        if ([temp isEqualToString:subStr]) &#123;</span><br><span class="line">            NSRange range &#x3D; &#123;i,subStr.length&#125;;</span><br><span class="line">            [rangeArray addObject: [NSValue valueWithRange:range]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return rangeArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="正则过滤处理"><a href="#正则过滤处理" class="headerlink" title="正则过滤处理"></a>正则过滤处理</h3><p>将符合改正则表达式的字符串找出来，NSRegularExpression可以拿到NSTextCheckingResult,然后result可以拿到range.把对应的字符串截取出来。最后再循环遍替换成空字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> if([msgBody containsString:@&quot;::&quot;])&#123;</span><br><span class="line">   &#x2F;&#x2F;匹配替换掉::工号显示。</span><br><span class="line">    NSMutableArray *replaceFormatStrArr &#x3D; [[NSMutableArray alloc] init];</span><br><span class="line">    NSError *error &#x3D; nil;</span><br><span class="line">    NSRegularExpression *regexp &#x3D; [NSRegularExpression regularExpressionWithPattern:@&quot;::\\d&#123;1,&#125;&quot; options:NSRegularExpressionCaseInsensitive error:&amp;error];</span><br><span class="line">    [regexp enumerateMatchesInString:msgBody options:0 range:NSMakeRange(0, msgBody.length) usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL *stop) &#123;</span><br><span class="line">        if (flags !&#x3D; NSMatchingInternalError) &#123;</span><br><span class="line">            NSRange firstHalfRange &#x3D; [result rangeAtIndex:0];</span><br><span class="line">            if (firstHalfRange.length &gt; 0) &#123;</span><br><span class="line">                NSString *resultString1 &#x3D; [msgBody substringWithRange:result.range];</span><br><span class="line">                [replaceFormatStrArr addObject:resultString1];</span><br><span class="line">                NSLog(@&quot;result1 &#x3D; %@&quot;,resultString1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;];</span><br><span class="line"></span><br><span class="line">    for(NSString *formatStr in replaceFormatStrArr)&#123;</span><br><span class="line">         msgBody &#x3D; [msgBody stringByReplacingOccurrencesOfString:formatStr  withString:@&quot;&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
           
-  <h2 class="title">
-    <a href="/2021/07/01/groupPlugin/">
-      群插件如何开发？
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
+            <div class='article_footer'>
               
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="群插件的基础属性"><a href="#群插件的基础属性" class="headerlink" title="群插件的基础属性"></a>群插件的基础属性</h4><p>群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。<br>插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地模块 等等。<br>插件关系表： 群id，插件id，角标数量，排序值，是否显示，等等。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/groupPlugin/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/input@/">
-      聊天输入框@某人
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：960字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="聊天输入框-某人逻辑分类点说明"><a href="#聊天输入框-某人逻辑分类点说明" class="headerlink" title="聊天输入框@某人逻辑分类点说明"></a>聊天输入框@某人逻辑分类点说明</h3><p>IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：</p>
-<ol>
-<li>首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”</li>
-<li>input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”</li>
-<li>input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”</li>
-<li>input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”</li>
-</ol>
-<p>在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。</p>
-<p>核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/input@/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/LeftSlide/">
-      奇怪的侧边栏问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1.4k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：6分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>开发中由于系统版本以及sdk，第三方库等原因，都会影响成出现一些奇怪的问题。当时是引用YYTextview控件解决消息cell长文本的光标选择范围内容复制的小功能。由于YYTextview光标弹出层自定义在另外一个新的Windown上，然后左侧侧滑出的view是新增在另一个新的Windown中。当侧边栏dismiss的时候，可能由于windown层级的影响，当在聊天输入框再次输入文字长按时候，系统出现的UIMenu层的Button不见了。当时想从根本问题去排查为啥系统的UIMenu当长按的时候操作功能的button为啥不见去解决，花费了将近2个多小时通过Xcode调试查看层级，阅读YYTextview的光标自定义层的实现以及添加到windown的层级，查看左侧侧边栏添加动画实现方式等都未解决。然后想到如果不通过新创建window来添加view 实现动画，而是通过present一个控制器实现侧边栏动画。最终问题得到了解决。</p>
-<h4 id="旧Slide侧滑方案"><a href="#旧Slide侧滑方案" class="headerlink" title="旧Slide侧滑方案"></a>旧Slide侧滑方案</h4><p>旧有的侧滑方案是创建一个新window,然后设置其windowLevel 为正常的+1，这样就在最顶层了，然后设置其rootViewController为侧滑的控制器。很有可能是新创建的window与YYtextView的光标选择层创建的window有冲突，然后造成UIMenu按钮消失了。</p>
-<h4 id="改进方案，Present一个控制器-SlideVC"><a href="#改进方案，Present一个控制器-SlideVC" class="headerlink" title="改进方案，Present一个控制器 SlideVC"></a>改进方案，Present一个控制器 SlideVC</h4><p>实则我们可以通过拿到最顶层控制器topVC，用导航控制器把SlideVC包裹好，设置它的 modalPresentationStyle 模式为UIModalPresentationOverCurrentContext，然后present出来 .这里要注意的是，系统的present方法是否有被runtime method swizled进行方法替换来公共统一处理modelPresentStyle问题，因为有些App交互不想使用系统的抽屉式present效果, 如果有需要做相关的过滤业务控制器逻辑判断。 侧边动画的实现：在SlideVC中定义一个半透明层背景bgView，添加tap手势，点击即关闭。往bgView添加一个左侧内容视图leftView 75%宽,右侧rightView。self.view添加一个Pan手势，用来计算leftView拖拽时候X的值位移变化。将内容控制器交由SlideVC管理：<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/LeftSlide/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/06/29/2020iOS/">
-      2020年下半年iOS工作技术点
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年6月29日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：3.8k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：14分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="2020-年下半年iOS工作技术点-tips"><a href="#2020-年下半年iOS工作技术点-tips" class="headerlink" title="2020 年下半年iOS工作技术点 tips"></a>2020 年下半年iOS工作技术点 tips</h3><p>背景：疫情原因导致之前云喵工作不能够继续，2020年6月还是面试找了一份相对稳定的工作，去了南航的一家外包供应商。</p>
-<p>E App 是一个企业内部OA即时通讯App. 驻场南航后主要是针对此项目进行功能迭代敏捷开发。主要说一下几个技术任务点：</p>
-<ol>
-<li>首要任务就是将旧有MRC内存运行环境改成ARC运行环境。<br> 任务到不是复杂，主要修改点是多，体力劳动。将ARC相关的修饰关键词，控制器的dealloc 方法以及设置的代理delegate, 配置文件-fno-objc 相关配置干掉。<br>遇到的问题？<br> 期间由于之前是MRC手动内存回收机制，由于开发人员代码某些变量没有回收或者泄露贮存在内存中，当改成ARC之后会自动释放导致再次使用该变量的时候出现nil值崩溃或者业务的中断开！<br>C++代码块Client类某方法的变量被释放造成崩溃？<br> 当时问题点抛向如何停止某线程的解决方案上去了，而不是终止某条件然后让线程自然停止。当程序进入后台applicationWillTerminate的时候，手动退出IM.然后进入销毁连接阶段。为了使alive_thread , recv_thread 两线程退出,在CLIENT_Disconnect 销毁阶段，通过改变alivethread的条件让while条件中止，线程必然退出。</li>
-<li>h5网页打卡有时候定位不到或者崩溃。因App程序使用了百度地图sdk,所以直接升级百度地图sdk即可。sdk编译分xcode11.3 或 xcode 12 。具体看E项目如果采取xcode11.3 编译打包上线，那么需要找到适应的.a包或者framework 进行编译。</li>
-<li><p>将ASI网络文件下载改成AFNetwroking网络文件下载，将长进度条改成扇形进度条。<br>ASI那套网络请求比较老旧，当时还是用NSURLConnnection来进行网络请求，而且需要单独维护一个网络线程长期贮存到内存中。AFN 采取NSURLSession来进行网络请求，线程即用即回收。<br>AFN请求时设置支持SSL安全策略。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AFSecurityPolicy *securityPolicy &#x3D; [[AFSecurityPolicy alloc] init];</span><br><span class="line">securityPolicy &#x3D; [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];</span><br><span class="line">securityPolicy.allowInvalidCertificates &#x3D; YES;</span><br><span class="line">securityPolicy.validatesDomainName &#x3D; NO;</span><br><span class="line">[_manager setSecurityPolicy:securityPolicy];</span><br></pre></td></tr></table></figure>
-<p>然后通过NSURLSessionDownloadTask 进行下载request,返回对应的进度，通过KVO进行进度条的UI显示,也可通过Block传递到控制器进行显示。</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/06/29/2020iOS/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-	
-</div>
-<aside class='l_side'>
-  
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>Be brave，close to life</p>
 
-        
-        
-      </div>
+
+  
+
+  
     
     
-      <div class="social-wrapper">
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
         
-          
-            <a href="mailto:qiugaoying@163.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/gaoyingqiu"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+          height='225px'
+        ></div>
+      
     
   </div>
 </section>
 
   
 
-  
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-02T17:01:49+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月2日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/02/nameClick/&title=群通知里的人员名字点击剖析 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
     
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/02/nameClick/&title=群通知里的人员名字点击剖析 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/02/nameClick/&title=群通知里的人员名字点击剖析 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2021/07/01/groupPlugin/'>
+                <p class='title'>群插件如何开发？<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>群插件的基础属性群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
   
 
-  <section class="widget category shadow desktop">
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '群通知里的人员名字点击剖析',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Web/" href="/categories/Web/"
-            id="categoriesWeb"
-            ><div class='name'>Web</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/iOS/" href="/categories/iOS/"
-            id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(19)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
-            id="categoriesE585B6E4BB96"
-            ><div class='name'>其他</div><div class='badge'>(14)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%8A%80%E6%9C%AF/" href="/categories/%E6%8A%80%E6%9C%AF/"
-            id="categoriesE68A80E69CAF"
-            ><div class='name'>技术</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E8%B0%88/" href="/categories/%E6%9D%82%E8%B0%88/"
-            id="categoriesE69D82E8B088"
-            ><div class='name'>杂谈</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何存储人员的id？"><span class="toc-text">如何存储人员的id？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解析带用户id的字符串规则，拼装成正常文本"><span class="toc-text">解析带用户id的字符串规则，拼装成正常文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#渲染人员名字、增加样式蓝色，表示可以点击"><span class="toc-text">渲染人员名字、增加样式蓝色，表示可以点击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正则过滤处理"><span class="toc-text">正则过滤处理</span></a></li></ol>
     </div>
   </section>
 
@@ -1133,22 +627,20 @@
     
   
 
-  <section class="widget tagcloud shadow desktop mobile">
+  <section class="widget related_posts shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
     
   </header>
 
 
-    <div class='content'>
-      <a href="/tags/AndroidTableView/" style="font-size: 14px; color: #999">AndroidTableView</a> <a href="/tags/DatePicker/" style="font-size: 14px; color: #999">DatePicker</a> <a href="/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/SKU/" style="font-size: 19px; color: #777">SKU</a> <a href="/tags/Slider/" style="font-size: 14px; color: #999">Slider</a> <a href="/tags/%E5%85%B3%E7%B3%BB%E5%9B%BE/" style="font-size: 14px; color: #999">关系图</a> <a href="/tags/%E5%AF%8C%E6%96%87%E6%9C%AC/" style="font-size: 14px; color: #999">富文本</a> <a href="/tags/%E6%8A%BD%E5%A5%96/" style="font-size: 14px; color: #999">抽奖</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a> <a href="/tags/%E8%BD%AF%E5%AE%9E%E5%8A%9B/" style="font-size: 14px; color: #999">软实力</a>
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2016/05/13/AFNNetWorking/" title="AFNNetWorking-分析" rel="bookmark">AFNNetWorking-分析</a></h3></div></li></ul>
     </div>
   </section>
 
-
-  
 
   
 
@@ -1231,14 +723,6 @@
   </footer>
 
 <script>setLoadingBarProgress(80);</script>
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
@@ -1353,6 +837,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
