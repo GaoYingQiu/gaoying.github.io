@@ -376,6 +376,125 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/04/pictureEdit/">
+      图片编辑总结
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月4日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：5.4k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：25分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>图片编辑是基于 CLImageEditor 第三方进行改装得到仿微信的图片编辑交互。原CLImageEditor库是一个日本人写的图片编辑，支持涂鸦，裁剪，旋转，文字帖功能。但有几项我们进行改进。</p>
+<ul>
+<li>所有的这些图片操作我们汇总到一起进行编辑，最终保存的时候才处理所有操作汇总成一张处理图片。</li>
+<li>涂鸦撤销功能实现真正的上一步撤销，而不是仅仅透明色进行橡皮擦擦除。</li>
+<li>新增马赛克操作功能。</li>
+<li>把图片裁剪和旋转进行结合到一个页面操作，另外新增裁剪、旋转之后的图片恢复。</li>
+<li>改变颜色选择，文字编辑的交互，新增图片裁剪区域的边角重点标注。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CLImageEditorViewController：</span><br><span class="line"></span><br><span class="line">usedToolDic：使用过的工具【toolName:CLImageToolBase】</span><br><span class="line"></span><br><span class="line">-(CLImageToolBase *)currentEditTool; 当前正在使用的工具。</span><br><span class="line"></span><br><span class="line">-(UIImage *)getMergeDrawImageForCropTool; 最后合成的图片。用于业务转发、保存、回调给用户。</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;图片编辑器所支持的工具类都继承于CLImageToolBase, 通过CLClassList辅助类runtime方式自动将相关工具类注入到菜单项中。</span><br><span class="line">+ (NSArray*)subtools</span><br><span class="line">&#123;</span><br><span class="line">    return [CLImageToolInfo toolsWithToolClass:[CLImageToolBase class]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时具有setup, cleanUp 这几个“生命周期”方法，做相关工具的视图创建与清除。
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/04/pictureEdit/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/02/nameClick/">
       群通知里的人员名字点击剖析
     </a>
@@ -1984,114 +2103,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2018/09/25/typeCells/">
-      聊聊动态多类型cell的设计
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2018年9月25日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：292字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>红包实体，文章实体  都属于动态 ，定义时候实现该协议DynamicPro,相当于java中的接口。<br>dataList 数组中 存放的是通过网络请求拿到的 DynamicPro 类型的动态列表。</p>
-<pre><code><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">@protocol</span> <span class="title">DynamicPro</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"> <span class="keyword">@end</span></span><br><span class="line"> </span><br><span class="line"> 红包实体，文章实体  都属于动态 ，定义时候实现该协议DynamicPro。</span><br><span class="line"> dataList 数组中 存放的是通过网络请求拿到的 DynamicPro 类型的动态列表。</span><br><span class="line"> </span><br><span class="line"> DynamicCell: <span class="built_in">UITableViewCell</span></span><br><span class="line"> &#123;</span><br><span class="line"> 属性  Id&lt;DynamicPro&gt; dynamic;  <span class="comment">//文章动态，普通动态，直播动态，红包类型动态</span></span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="class"><span class="keyword">@implementation</span> <span class="title">DynamicCell</span></span></span><br><span class="line"> -(<span class="keyword">void</span>)setDynamic:(<span class="keyword">id</span>&lt;DynamicPro&gt;)dynamic&#123;</span><br><span class="line"> _dynamic = dynamic;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//DynamicCell 有很多子类cell:  红包cell ,文章cell,直播cell 等</span></span><br><span class="line"> <span class="comment">//在子类cell  渲染具体UI数据绑定</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">@end</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> 表格 cellFor 渲染的时候：&#123; </span><br><span class="line"> DynamicPro *dynamic  = <span class="keyword">self</span>.dataList[indexPath.row]; </span><br><span class="line"> DynamicCell * cell =  [红包cell  new]; <span class="comment">//根据dynamic类型 创建 不同的 动态cell</span></span><br><span class="line"> <span class="comment">//最终统一设置动态数据</span></span><br><span class="line"> [cell setDynamic: dynamic];</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 表格高度 heightFor 渲染的时候：&#123;</span><br><span class="line"> </span><br><span class="line"> DynamicPro *dynamic  = <span class="keyword">self</span>.dataList[indexPath.row]; </span><br><span class="line"> <span class="keyword">if</span>(dynamic 高度不变的)&#123;</span><br><span class="line"> <span class="keyword">return</span>  <span class="number">44</span>;</span><br><span class="line"> &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"> <span class="comment">//高度变动的用自动布局</span></span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">UITableViewAutomaticDimension</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 表格 estimatedHeightForRowAtIndexPath 进行自动布局的估算</span><br><span class="line"> &#123; <span class="keyword">return</span> <span class="number">100</span>; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2198,7 +2209,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(19)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(20)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
