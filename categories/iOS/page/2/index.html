@@ -342,6 +342,126 @@
         
           
   <h2 class="title">
+    <a href="/2018/09/28/mapGesture/">
+      地图多手势的应用
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月28日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：680字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG252.jpeg" alt="图片2"><br>当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；<br>当想收起时候，可用下拉，或者随着手势滑落下来；</p>
+<p>需解决的问题：<br>1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；<br>2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；<br>3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；</p>
+<p><strong>思考</strong></p>
+<p>手势开始：记录 开始点startY，</p>
+<p>手势移动：<br>根据起始位置移动差  确定上滑动 ， 下滑动；  </p>
+<p>起点B 点 记录方向 0；<br>B-A 正向， 记录方向符号 1；<br>B-C 反向 ，记录方向 -1；</p>
+<p>偏移值 大于0 ， 上滑动；<br>当B-A-C 后，立马记录 1 变成 -1；    记录标记状态前，</p>
+<p>正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；</p>
+<p><strong><em>code :以下是重点逻辑代码；</em></strong></p>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2018/09/28/mapGesture/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2018/09/25/typeCells/">
       聊聊动态多类型cell的设计
     </a>
@@ -994,7 +1114,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(20)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

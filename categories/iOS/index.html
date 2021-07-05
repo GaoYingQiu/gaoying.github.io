@@ -376,6 +376,125 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/05/sqlite/">
+      Sqlite 并行模式的试验探究
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月5日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：755字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大多数产品在本地Sqlite存储的时候，基本都是用了串行模式。即整个应用全局只有一个sql操作句柄，用单例管理着这个SqlHandler。另外还有一个模式叫线程模式。这种模式下很容易出现Sqlite_Busy错误。</p>
+<ol>
+<li>当有写操作时，其他读操作会被驳回。</li>
+<li>当有写操作时，其他写操作会被驳回。</li>
+<li>当开启事务时，在事务提交之前，其他写操作会被驳回。</li>
+<li>当开启事务时，在事务提交之前，其他事务请求会被驳回。</li>
+<li>当有读操作时，其他写操作会被驳回。</li>
+<li>读操作之间能够并发执行。</li>
+</ol>
+<p>第三方库<a href="https://github.com/Tencent/wcdb/wiki/Swift-%e6%a8%a1%e5%9e%8b%e7%bb%91%e5%ae%9a" target="_blank" rel="noopener">WCDB</a>支持多线程度于读与读，读与写并发执行，写与写串行执行。WCDB 在多线程方面明显优于 FMDB 和 ModelSqliteKit，通过 WCDB 的改造，使得SQLite的性能发挥到极致。</p>
+<p>我们可以设计所有写的任务都放在一个队列中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_gyWriteQueue &#x3D; dispatch_queue_create([[NSString stringWithFormat:@&quot;gy_write_queue.%@&quot;, self]</span><br></pre></td></tr></table></figure><br>当所有关于新增，删除，修改等sql 业务时候统一用_gyWriteQueue。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_sync(_gyWriteQueue,^&#123;</span><br><span class="line">  &#x2F;&#x2F;进行写操作</span><br><span class="line">);</span><br></pre></td></tr></table></figure><br>我们可以根据队列的名字，确定是属于写队列，还是读队列。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const char * queueLabel &#x3D; dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL); &#x2F;&#x2F;获取当前队列的名字。</span><br><span class="line">NSString *queueName &#x3D; [NSString stringWithUTF8String:queueLabel];</span><br></pre></td></tr></table></figure><br>如果是读队列，则从读的队列池中取中取出与之对应的队列，拿出队列中所持有的handle句柄。这样就能保证每个队列中唯一正在执行的子线程使用该handle句柄。<br>首先准备队列池，队列最大并发数1，并且持有一个handle. 读取操作时候，从队列池取当前操作数最小的队列进行添加任务。</p>
+<p>以下是创建读队列的队列池:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)createSqlHandleToPool:(NSString *)queueName</span><br><span class="line">&#123;</span><br><span class="line">    GYSqlHandle *handleModel &#x3D; [[GYSqlHandle alloc] init]; &#x2F;&#x2F;初始化即创建了一个sql句柄</span><br><span class="line">    if(handleModel.sqlHandle)&#123;</span><br><span class="line">        GYSqlOperationQueue *sqlQueue &#x3D; [[GYSqlOperationQueue alloc] init];</span><br><span class="line">        sqlQueue.name &#x3D; queueName;</span><br><span class="line">        sqlQueue.sqlQueueName &#x3D; queueName;</span><br><span class="line">        sqlQueue.maxConcurrentOperationCount &#x3D; 1;</span><br><span class="line">        sqlQueue.handle &#x3D; handleModel;</span><br><span class="line"></span><br><span class="line">        [self.dbQueueList addObject:sqlQueue];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>由于sqlite的句柄返回的是结构体指针，所以用GYSqlHandle对象进行包裹一下方便处理。</p>
+<p>GYSqlOperationQueue代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">@interface GYSqlOperationQueue: NSOperationQueue</span><br><span class="line">@property(nonatomic,strong) GYSqlHandle *handle; &#x2F;&#x2F;每一个queue持有一个handle模型</span><br><span class="line">@property(nonatomic,strong) NSString *sqlQueueName; &#x2F;&#x2F;记录队列名</span><br><span class="line">- (NSComparisonResult)compareByOperationsCount:(GYSqlOperationQueue *) another;</span><br><span class="line">-(void)addSqlOperationWithBlock:(void (^)(void))block;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation GYSqlOperationQueue</span><br><span class="line"></span><br><span class="line">- (NSComparisonResult)compareByOperationsCount:(GYSqlOperationQueue *) another</span><br><span class="line">&#123;</span><br><span class="line">    if (self.operations.count &gt; another.operations.count) &#123;</span><br><span class="line">        return NSOrderedAscending;</span><br><span class="line">    &#125;</span><br><span class="line">    else if(self.operations.count &lt; another.operations.count)</span><br><span class="line">    &#123;</span><br><span class="line">        return NSOrderedDescending;</span><br><span class="line">    &#125;</span><br><span class="line">    return NSOrderedSame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)addSqlOperationWithBlock:(void (^)(void))block &#123;</span><br><span class="line">    if(self)&#123;</span><br><span class="line">        NSOperation *operation &#x3D; [NSBlockOperation blockOperationWithBlock:block];</span><br><span class="line">        id lastOperation &#x3D; self.operations.lastObject;</span><br><span class="line">        if(lastOperation)&#123;</span><br><span class="line">            [operation addDependency:lastOperation];</span><br><span class="line">        &#125;</span><br><span class="line">        [self addOperation:operation];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure><br>这里仅为个人的一些试验性的探索，因为全局业务代码无法固定使用某统一队列，线程之间可能出现嵌套等，无法保证一个Handle同一时间只有一个线程在使用。这也是我的疑惑点，希望大家多多交流。</p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/04/pictureEdit/">
       图片编辑总结
     </a>
@@ -1983,126 +2102,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2018/09/28/mapGesture/">
-      地图多手势的应用
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2018年9月28日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：680字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG252.jpeg" alt="图片2"><br>当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；<br>当想收起时候，可用下拉，或者随着手势滑落下来；</p>
-<p>需解决的问题：<br>1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；<br>2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；<br>3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；</p>
-<p><strong>思考</strong></p>
-<p>手势开始：记录 开始点startY，</p>
-<p>手势移动：<br>根据起始位置移动差  确定上滑动 ， 下滑动；  </p>
-<p>起点B 点 记录方向 0；<br>B-A 正向， 记录方向符号 1；<br>B-C 反向 ，记录方向 -1；</p>
-<p>偏移值 大于0 ， 上滑动；<br>当B-A-C 后，立马记录 1 变成 -1；    记录标记状态前，</p>
-<p>正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；</p>
-<p><strong><em>code :以下是重点逻辑代码；</em></strong></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2018/09/28/mapGesture/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2209,7 +2208,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(20)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

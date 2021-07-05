@@ -341,6 +341,107 @@
         
           
   <h2 class="title">
+    <a href="/2018/09/25/https/">
+      HTTPS连接过程
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月25日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：604字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>【HTTPS连接过程】<br>https协议就是http+ssl协议，如下图所示为其连接过程：<br>￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509100144426.jpg" alt="图片"></p>
+<p>1.https请求<br>客户端向服务端发送https请求；<br>2.生成公钥和私钥<br>服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；<br>3.返回公钥<br>服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；<br>4.客户端验证公钥<br>客户端收到公钥之后，首先会验证其是否有效，如颁发机构或者过期时间等，如果发现有问题就会抛出异常，提示证书存在问题。如果没有问题，那么就生成一个随机值，作为客户端的密钥，然后用服务端的公钥加密；<br>5.发送客户端密钥<br>客户端用服务端的公钥加密密钥，然后发送给服务端。<br>6.服务端收取密钥，对称加密内容<br>服务端收到经过加密的密钥，然后用私钥将其解密，得到客户端的密钥，然后服务端把要传输的内容和客户端的密钥进行对称加密，这样除非知道密钥，否则无法知道传输的内容。<br>7.加密传输<br>服务端将经过加密的内容传输给客户端。<br>8.获取加密内容，解密<br>客户端获取加密内容后，用之前生成的密钥对其进行解密，获取到内容。<br>中间人劫持攻击<br>https也不是绝对安全的，如下图所示为中间人劫持攻击，中间人可以获取到客户端与服务器之间所有的通信内容。<br>￼￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509104722086.jpg" alt="图片"></p>
+<p>中间人截取客户端发送给服务器的请求，然后伪装成客户端与服务器进行通信；将服务器返回给客户端的内容发送给客户端，伪装成服务器与客户端进行通信。<br>通过这样的手段，便可以获取客户端和服务器之间通信的所有内容。<br>使用中间人攻击手段，必须要让客户端信任中间人的证书，如果客户端不信任，则这种攻击手段也无法发挥作用。</p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2018/09/25/sinaPullPush/">
       新浪微博 推和拉
     </a>
@@ -1390,134 +1491,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2017/09/04/operation/">
-      何为运营？
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E5%85%B6%E4%BB%96/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>其他</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2017年9月4日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：588字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>产品运营往往是紧紧围绕三个目标： <font color=orange > <strong>    产品，用户，渠道。</strong> </font></p>
-<h3 id="成功的运营能够挖掘用户的特点和需求。"><a href="#成功的运营能够挖掘用户的特点和需求。" class="headerlink" title="成功的运营能够挖掘用户的特点和需求。"></a>成功的运营能够挖掘用户的特点和需求。</h3><ol>
-<li>产品运营具体工作有哪些？</li>
-<li>运营策划： 主要是以数据为依据的产品运营方案策划，这块是重点。</li>
-<li>BD : 运营会接触到不同的渠道的转化效率，因此相对的需要和渠道商打交道或者公司内部的销售人员接触，这块实际也会涉及到一定的沟通协调公关的工作。</li>
-<li>媒介： 这里又包括文案的撰写，话题策划，软文发布等。</li>
-<li>活动营销： 结合产品推广和品牌宣传，策划活动营销方案并有力执行，促使达到提高产品和品牌知名度的目的，以及用户的调研奖励等。</li>
-<li>数据分析： 数据决定运营的执行。</li>
-<li>市场监控： 主要是战略层面，包括行业市场的监控以及竞争对手的监控。</li>
-</ol>
-<h3 id="产品运营有极为明确的目标。"><a href="#产品运营有极为明确的目标。" class="headerlink" title="产品运营有极为明确的目标。"></a>产品运营有极为明确的目标。</h3><ol>
-<li>营收：运营要找到商业模式，或者为现有的产品扩大营收。</li>
-<li>扩大用户群：让更多人知道，产品将更成功。</li>
-<li>用户活跃度：沉默的用户是没有多少商业价值的，只有活跃方能带来价值。</li>
-<li>好的产品是运营出来的。第一，它能在一个点上打动用户。第二， 它一定是靠持续改进，持续运营的东西。互联网本质就是服务，用户的需求不断在变，你就得随时调整。</li>
-</ol>
-<h3 id="目标决定数据取样，找到关键值并努力执行。"><a href="#目标决定数据取样，找到关键值并努力执行。" class="headerlink" title="目标决定数据取样，找到关键值并努力执行。"></a>目标决定数据取样，找到关键值并努力执行。</h3><ol>
-<li>看数据，分析数据，找到需要及时调整的数据。进行后续执行工作。</li>
-<li>首先是要有数据，其次是准确性，然后数据要有连贯性。再者，一切数据要有对比才能产生价值。最后得到结论。</li>
-<li>同时，关键数值是重要一环，可以省力高效；但真正每天围绕这个数值不断地努力执行下去才会有真正的提高。</li>
-<li>产品运营不要寄予希望最后一击命中用户需求，而重点应该稳定有效地一步步接触，引导，尝试，认知，渗透，熟悉 的过程。</li>
-</ol>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1627,7 +1600,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(20)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

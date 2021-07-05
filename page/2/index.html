@@ -341,6 +341,132 @@
         
           
   <h2 class="title">
+    <a href="/2020/01/07/iOSRuntime/">
+      Runtime 到底是个什么鬼
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2020年1月7日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：909字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Runtime-到底是个什么鬼？"><a href="#Runtime-到底是个什么鬼？" class="headerlink" title="Runtime 到底是个什么鬼？"></a>Runtime 到底是个什么鬼？</h3><p>Runtime是Objective-C中底层的一套C语言API，是一个将C语言转化为面向对象语言的拓展。Runtime的一切都围绕两个中心：<strong>类的动态配置</strong> 和 <strong>消息传递</strong></p>
+<h4 id="能干啥？"><a href="#能干啥？" class="headerlink" title="能干啥？"></a>能干啥？</h4><ul>
+<li>动态的在内存中创建一个类</li>
+<li>给类增加一个属性</li>
+<li>给类增加一个协议实现</li>
+<li>给类增加一个方法实现IMP</li>
+<li>遍历一个类的所有成员变量、属性和方法等</li>
+</ul>
+<ul>
+<li>拦截系统自带的方法调用（Method Swizzling黑魔法）</li>
+<li>将某些OC代码转化为Runtime代码，探究底层。如block的实现原理</li>
+<li>实现给分类增加属性</li>
+<li>实现NSCoding的自动归档和接档</li>
+<li>实现字典的模型和自动转换</li>
+</ul>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2020/01/07/iOSRuntime/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2020/01/07/textViewPicture/">
       TextView富文本插入图片
     </a>
@@ -1332,119 +1458,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2019/12/06/iOSSku/">
-      iOS开发商品规格设置模块
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E6%8A%80%E6%9C%AF/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>技术</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2019年12月6日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：3.4k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：14分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SKU百度百科为 库存保有单位 （Stock keeping Unit 或者SKU）是对每一个产品和服务的唯一标示符。  也就是说sku 为商品对应的很多种类规格情况下的 库存，价格  各有不同。需要通过sku 这样一种组合结构存储这些计量值。<br>在移动电商时代，网购已然成为潮流。更是全民参与。每一年都有购物节 ： 京东618 , 淘宝天猫双11, 双12 。 一个淘宝店家月销售额30万背后 ，他的商品sku有上千种。  一个卖橱柜的，小到抽屉，拉篮，五金 ，把手，螺丝钉 都可以细分成很小的SKU。移动电商商品背后的SKU种类的复杂性。可正是因为商品SKU的多样化，才能商家带来巨量的销售额。</p>
-<h3 id="从详情页认识SKU"><a href="#从详情页认识SKU" class="headerlink" title="从详情页认识SKU"></a>从详情页认识SKU</h3><p><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/chat_sku2.PNG" alt="C端sku选择"><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这个商品包含的SKU信息:&#123;</span><br><span class="line">    规格类型:[&#123;</span><br><span class="line">            尺寸:[XS, S， M, L，XL， XXL]</span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            颜色: [白色，珊瑚粉，草木绿]</span><br><span class="line">        &#125;],</span><br><span class="line">    规格明细组合描述: &#123;</span><br><span class="line">        XS-白色:&#123;</span><br><span class="line">            图片: 图片url,</span><br><span class="line">            价格: ￥328,</span><br><span class="line">            库存: 188件,</span><br><span class="line">            扩展..字段: 值</span><br><span class="line">        &#125;,</span><br><span class="line">        其他规格组合:&#123; </span><br><span class="line">            图片: 图片url,</span><br><span class="line">            价格: 价格..,</span><br><span class="line">            库存: 库存数量..,</span><br><span class="line">            扩展..字段: 值</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2019/12/06/iOSSku/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1554,7 +1567,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(20)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

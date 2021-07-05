@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,7 +16,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>归档：2016/11 - littleWhale</title>
+    <title>Sqlite 并行模式的试验探究 - littleWhale</title>
   
   
 
@@ -84,91 +82,7 @@
 
 <body>
   
-  <div class="cover-wrapper">
-    
-      <cover class='cover  half'>
-        <div class='cover-body'>
-  <div class='a'>
-    
-    
-    
-  </div>
-  <div class='b'>
-    
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="ever searching for the world" />
-          <i class="icon fas fa-search fa-fw"></i>
-        </form>
-      </div>
-    
-    <div class='menu navigation'>
-      <ul class='cover-list-h'>
-        
-          
-            <li>
-              <a class="nav home"
-                href="/"
-                
-                
-                id="home">
-                <i class='fas fa-book fa-fw'></i>首页
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/archives/"
-                
-                
-                id="archives">
-                <i class='fas fa-archive fa-fw'></i>归档
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/paint/"
-                
-                
-                id="paint">
-                <i class='fas fa-tags fa-fw'></i>胖橙的画廊
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://mi.aliyun.com/shop/43068"
-                
-                  rel="external nofollow noopener noreferrer"
-                
-                
-                  target="_blank"
-                
-                id="https:mialiyuncomshop43068">
-                <i class='fas fa-file-code fa-fw'></i>域名出售
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/about/"
-                
-                
-                id="about">
-                <i class='fas fa-info-circle fa-fw'></i>关于
-              </a>
-            </li>
-          
-        
-      </ul>
-    </div>
-  </div>
-</div>
-
-      </cover>
-    
-    <div id="loading-bar-wrapper">
+  <div id="loading-bar-wrapper">
   <div id="loading-bar"></div>
 </div>
 <header class="l_header shadow blur">
@@ -397,30 +311,18 @@
 
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -430,11 +332,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2016/11/11/Android-TableView/">
-      Android-TableView
+  <h1 class="title">
+    <a href="/2021/07/05/sqlite/">
+      Sqlite 并行模式的试验探究
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -455,6 +357,14 @@
           
             
               
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
 
             
           
@@ -462,27 +372,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2016年11月11日</p>
+    <p>发布于：2021年7月5日</p>
   </a>
 </div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：690字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：4分钟</p>
-    </a>
-  </div>
-
 
             
           
@@ -500,146 +392,219 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="How-to-development-a-Android-App"><a href="#How-to-development-a-Android-App" class="headerlink" title="How to development a Android App"></a>How to development a Android App</h2><h4 id="Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio"><a href="#Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio" class="headerlink" title="Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio."></a>Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.</h4><h3 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h3><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Activity1-&gt;Activity2: onCreate()——&gt;onStart()——&gt;onResume()</span><br><span class="line">Note left of Activity2: 第一个 Pause，第二个Create，Start，Resume。第一个 Stop</span><br><span class="line">Activity2--&gt;Activity1: back to the activity1</span><br><span class="line">Note left of Activity2: 暂停，restart第一个，start，resume,第二个stop,destory.</span><br></pre></td></tr></table></figure>
-<p>when you push a new  Activity or back Activity, it’s due to the stack to manage the Activity status, but how to push a new Activity?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(ReorderFour.this, ReorderTwo.class);    </span><br><span class="line"></span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);</span><br><span class="line"></span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2016/11/11/Android-TableView/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>大多数产品在本地Sqlite存储的时候，基本都是用了串行模式。即整个应用全局只有一个sql操作句柄，用单例管理着这个SqlHandler。另外还有一个模式叫线程模式。这种模式下很容易出现Sqlite_Busy错误。</p>
+<ol>
+<li>当有写操作时，其他读操作会被驳回。</li>
+<li>当有写操作时，其他写操作会被驳回。</li>
+<li>当开启事务时，在事务提交之前，其他写操作会被驳回。</li>
+<li>当开启事务时，在事务提交之前，其他事务请求会被驳回。</li>
+<li>当有读操作时，其他写操作会被驳回。</li>
+<li>读操作之间能够并发执行。</li>
+</ol>
+<p>第三方库<a href="https://github.com/Tencent/wcdb/wiki/Swift-%e6%a8%a1%e5%9e%8b%e7%bb%91%e5%ae%9a" target="_blank" rel="noopener">WCDB</a>支持多线程度于读与读，读与写并发执行，写与写串行执行。WCDB 在多线程方面明显优于 FMDB 和 ModelSqliteKit，通过 WCDB 的改造，使得SQLite的性能发挥到极致。</p>
+<p>我们可以设计所有写的任务都放在一个队列中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_gyWriteQueue &#x3D; dispatch_queue_create([[NSString stringWithFormat:@&quot;gy_write_queue.%@&quot;, self]</span><br></pre></td></tr></table></figure><br>当所有关于新增，删除，修改等sql 业务时候统一用_gyWriteQueue。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_sync(_gyWriteQueue,^&#123;</span><br><span class="line">  &#x2F;&#x2F;进行写操作</span><br><span class="line">);</span><br></pre></td></tr></table></figure><br>我们可以根据队列的名字，确定是属于写队列，还是读队列。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const char * queueLabel &#x3D; dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL); &#x2F;&#x2F;获取当前队列的名字。</span><br><span class="line">NSString *queueName &#x3D; [NSString stringWithUTF8String:queueLabel];</span><br></pre></td></tr></table></figure><br>如果是读队列，则从读的队列池中取中取出与之对应的队列，拿出队列中所持有的handle句柄。这样就能保证每个队列中唯一正在执行的子线程使用该handle句柄。<br>首先准备队列池，队列最大并发数1，并且持有一个handle. 读取操作时候，从队列池取当前操作数最小的队列进行添加任务。</p>
+<p>以下是创建读队列的队列池:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)createSqlHandleToPool:(NSString *)queueName</span><br><span class="line">&#123;</span><br><span class="line">    GYSqlHandle *handleModel &#x3D; [[GYSqlHandle alloc] init]; &#x2F;&#x2F;初始化即创建了一个sql句柄</span><br><span class="line">    if(handleModel.sqlHandle)&#123;</span><br><span class="line">        GYSqlOperationQueue *sqlQueue &#x3D; [[GYSqlOperationQueue alloc] init];</span><br><span class="line">        sqlQueue.name &#x3D; queueName;</span><br><span class="line">        sqlQueue.sqlQueueName &#x3D; queueName;</span><br><span class="line">        sqlQueue.maxConcurrentOperationCount &#x3D; 1;</span><br><span class="line">        sqlQueue.handle &#x3D; handleModel;</span><br><span class="line"></span><br><span class="line">        [self.dbQueueList addObject:sqlQueue];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>由于sqlite的句柄返回的是结构体指针，所以用GYSqlHandle对象进行包裹一下方便处理。</p>
+<p>GYSqlOperationQueue代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">@interface GYSqlOperationQueue: NSOperationQueue</span><br><span class="line">@property(nonatomic,strong) GYSqlHandle *handle; &#x2F;&#x2F;每一个queue持有一个handle模型</span><br><span class="line">@property(nonatomic,strong) NSString *sqlQueueName; &#x2F;&#x2F;记录队列名</span><br><span class="line">- (NSComparisonResult)compareByOperationsCount:(GYSqlOperationQueue *) another;</span><br><span class="line">-(void)addSqlOperationWithBlock:(void (^)(void))block;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation GYSqlOperationQueue</span><br><span class="line"></span><br><span class="line">- (NSComparisonResult)compareByOperationsCount:(GYSqlOperationQueue *) another</span><br><span class="line">&#123;</span><br><span class="line">    if (self.operations.count &gt; another.operations.count) &#123;</span><br><span class="line">        return NSOrderedAscending;</span><br><span class="line">    &#125;</span><br><span class="line">    else if(self.operations.count &lt; another.operations.count)</span><br><span class="line">    &#123;</span><br><span class="line">        return NSOrderedDescending;</span><br><span class="line">    &#125;</span><br><span class="line">    return NSOrderedSame;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)addSqlOperationWithBlock:(void (^)(void))block &#123;</span><br><span class="line">    if(self)&#123;</span><br><span class="line">        NSOperation *operation &#x3D; [NSBlockOperation blockOperationWithBlock:block];</span><br><span class="line">        id lastOperation &#x3D; self.operations.lastObject;</span><br><span class="line">        if(lastOperation)&#123;</span><br><span class="line">            [operation addDependency:lastOperation];</span><br><span class="line">        &#125;</span><br><span class="line">        [self addOperation:operation];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure><br>这里仅为个人的一些试验性的探索，因为全局业务代码无法固定使用某统一队列，线程之间可能出现嵌套等，无法保证一个Handle同一时间只有一个线程在使用。这也是我的疑惑点，希望大家多多交流。</p>
 
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-	
-</div>
-<aside class='l_side'>
-  
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>Be brave，close to life</p>
 
-        
-        
-      </div>
+
+  
+
+  
     
     
-      <div class="social-wrapper">
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
         
-          
-            <a href="mailto:qiugaoying@163.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/gaoyingqiu"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+          height='225px'
+        ></div>
+      
     
   </div>
 </section>
 
   
 
-  
-    
-    
-  
 
-  <section class="widget category shadow desktop">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
+              
+            </div>
+          
+        </div>
+        
+          
 
 
-    <div class='content'>
-      <ul class="entry navigation">
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
         
-          <li><a class="flat-box"
-            title="/categories/Web/" href="/categories/Web/"
-            id="categoriesWeb"
-            ><div class='name'>Web</div><div class='badge'>(2)</div></a></li>
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-05T17:49:16+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月5日</p>
+  </a>
+</div>
+
         
-          <li><a class="flat-box"
-            title="/categories/iOS/" href="/categories/iOS/"
-            id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(21)</div></a></li>
+      
         
-          <li><a class="flat-box"
-            title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
-            id="categoriesE585B6E4BB96"
-            ><div class='name'>其他</div><div class='badge'>(14)</div></a></li>
+          
+
         
-          <li><a class="flat-box"
-            title="/categories/%E6%8A%80%E6%9C%AF/" href="/categories/%E6%8A%80%E6%9C%AF/"
-            id="categoriesE68A80E69CAF"
-            ><div class='name'>技术</div><div class='badge'>(6)</div></a></li>
+      
         
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E8%B0%88/" href="/categories/%E6%9D%82%E8%B0%88/"
-            id="categoriesE69D82E8B088"
-            ><div class='name'>杂谈</div><div class='badge'>(2)</div></a></li>
+          
+
         
-          <li><a class="flat-box"
-            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(2)</div></a></li>
+      
         
-      </ul>
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/05/sqlite/&title=Sqlite 并行模式的试验探究 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/05/sqlite/&title=Sqlite 并行模式的试验探究 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/05/sqlite/&title=Sqlite 并行模式的试验探究 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
     </div>
   </section>
 
 
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2021/07/04/pictureEdit/'>
+                <p class='title'>图片编辑总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>简介图片编辑是基于 CLImageEditor 第三方进行改装得到仿微信的图片编辑交互。原CLImageEditor库是一个日本人写的图片编辑，支持涂鸦，裁剪，旋转，文字帖功能。但有几项我们进行...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Sqlite 并行模式的试验探究',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+
   
 
   
@@ -647,22 +612,20 @@
     
   
 
-  <section class="widget tagcloud shadow desktop mobile">
+  <section class="widget related_posts shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
     
   </header>
 
 
-    <div class='content'>
-      <a href="/tags/AndroidTableView/" style="font-size: 14px; color: #999">AndroidTableView</a> <a href="/tags/DatePicker/" style="font-size: 14px; color: #999">DatePicker</a> <a href="/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/SKU/" style="font-size: 19px; color: #777">SKU</a> <a href="/tags/Slider/" style="font-size: 14px; color: #999">Slider</a> <a href="/tags/%E5%85%B3%E7%B3%BB%E5%9B%BE/" style="font-size: 14px; color: #999">关系图</a> <a href="/tags/%E5%AF%8C%E6%96%87%E6%9C%AC/" style="font-size: 14px; color: #999">富文本</a> <a href="/tags/%E6%8A%BD%E5%A5%96/" style="font-size: 14px; color: #999">抽奖</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a> <a href="/tags/%E8%BD%AF%E5%AE%9E%E5%8A%9B/" style="font-size: 14px; color: #999">软实力</a>
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2021/06/29/2020iOS/" title="2020年下半年iOS工作技术点" rel="bookmark">2020年下半年iOS工作技术点</a></h3></div></li></ul>
     </div>
   </section>
 
-
-  
 
   
 
@@ -745,14 +708,6 @@
   </footer>
 
 <script>setLoadingBarProgress(80);</script>
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
@@ -867,6 +822,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 

@@ -341,6 +341,119 @@
         
           
   <h2 class="title">
+    <a href="/2019/12/06/iOSSku/">
+      iOS开发商品规格设置模块
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E6%8A%80%E6%9C%AF/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>技术</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2019年12月6日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：3.4k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：14分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SKU百度百科为 库存保有单位 （Stock keeping Unit 或者SKU）是对每一个产品和服务的唯一标示符。  也就是说sku 为商品对应的很多种类规格情况下的 库存，价格  各有不同。需要通过sku 这样一种组合结构存储这些计量值。<br>在移动电商时代，网购已然成为潮流。更是全民参与。每一年都有购物节 ： 京东618 , 淘宝天猫双11, 双12 。 一个淘宝店家月销售额30万背后 ，他的商品sku有上千种。  一个卖橱柜的，小到抽屉，拉篮，五金 ，把手，螺丝钉 都可以细分成很小的SKU。移动电商商品背后的SKU种类的复杂性。可正是因为商品SKU的多样化，才能商家带来巨量的销售额。</p>
+<h3 id="从详情页认识SKU"><a href="#从详情页认识SKU" class="headerlink" title="从详情页认识SKU"></a>从详情页认识SKU</h3><p><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/chat_sku2.PNG" alt="C端sku选择"><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">这个商品包含的SKU信息:&#123;</span><br><span class="line">    规格类型:[&#123;</span><br><span class="line">            尺寸:[XS, S， M, L，XL， XXL]</span><br><span class="line">        &#125;,&#123;</span><br><span class="line">            颜色: [白色，珊瑚粉，草木绿]</span><br><span class="line">        &#125;],</span><br><span class="line">    规格明细组合描述: &#123;</span><br><span class="line">        XS-白色:&#123;</span><br><span class="line">            图片: 图片url,</span><br><span class="line">            价格: ￥328,</span><br><span class="line">            库存: 188件,</span><br><span class="line">            扩展..字段: 值</span><br><span class="line">        &#125;,</span><br><span class="line">        其他规格组合:&#123; </span><br><span class="line">            图片: 图片url,</span><br><span class="line">            价格: 价格..,</span><br><span class="line">            库存: 库存数量..,</span><br><span class="line">            扩展..字段: 值</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2019/12/06/iOSSku/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2019/04/25/skuTree/">
       SKU商品属性多级动态树
     </a>
@@ -1324,107 +1437,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2018/09/25/https/">
-      HTTPS连接过程
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2018年9月25日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：604字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：2分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>【HTTPS连接过程】<br>https协议就是http+ssl协议，如下图所示为其连接过程：<br>￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509100144426.jpg" alt="图片"></p>
-<p>1.https请求<br>客户端向服务端发送https请求；<br>2.生成公钥和私钥<br>服务端收到请求之后，生成公钥和私钥。公钥相当于是锁，私钥相当于是钥匙，只有私钥才能够打开公钥锁住的内容；<br>3.返回公钥<br>服务端将公钥（证书）返回给客户端，公钥里面包含有很多信息，比如证书的颁发机构、过期时间等等；<br>4.客户端验证公钥<br>客户端收到公钥之后，首先会验证其是否有效，如颁发机构或者过期时间等，如果发现有问题就会抛出异常，提示证书存在问题。如果没有问题，那么就生成一个随机值，作为客户端的密钥，然后用服务端的公钥加密；<br>5.发送客户端密钥<br>客户端用服务端的公钥加密密钥，然后发送给服务端。<br>6.服务端收取密钥，对称加密内容<br>服务端收到经过加密的密钥，然后用私钥将其解密，得到客户端的密钥，然后服务端把要传输的内容和客户端的密钥进行对称加密，这样除非知道密钥，否则无法知道传输的内容。<br>7.加密传输<br>服务端将经过加密的内容传输给客户端。<br>8.获取加密内容，解密<br>客户端获取加密内容后，用之前生成的密钥对其进行解密，获取到内容。<br>中间人劫持攻击<br>https也不是绝对安全的，如下图所示为中间人劫持攻击，中间人可以获取到客户端与服务器之间所有的通信内容。<br>￼￼<img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/20170509104722086.jpg" alt="图片"></p>
-<p>中间人截取客户端发送给服务器的请求，然后伪装成客户端与服务器进行通信；将服务器返回给客户端的内容发送给客户端，伪装成服务器与客户端进行通信。<br>通过这样的手段，便可以获取客户端和服务器之间通信的所有内容。<br>使用中间人攻击手段，必须要让客户端信任中间人的证书，如果客户端不信任，则这种攻击手段也无法发挥作用。</p>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1534,7 +1546,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(20)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
