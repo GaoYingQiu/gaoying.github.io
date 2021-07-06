@@ -341,6 +341,117 @@
         
           
   <h2 class="title">
+    <a href="/2018/09/28/mvc/">
+      MVC设计模式见解
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>设计模式</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月28日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：180字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（控制器Controller）- 负责转发请求，网络处理，控制业务逻辑。</p>
+<p>（视图View） - 页面视图UI交互； 模型与视图不能通信，需通过控制器controller来实现；</p>
+<p>（模型Model） -  数据业务模型的呈现； 涉及到的UI 改动， 数据驱动UI，改动数据状态即可实现UI的变更；</p>
+<hr>
+<h2 id="演进（ViewModel模型）-在原有MVC-基础上多了一层，Controller不直接控制Model-直接操作ViewModel-来间接管理；-ViewModel-（NSObject）的职责：数据逻辑处理-控制，算法，解析，网络处理等等；-不直接管理View"><a href="#演进（ViewModel模型）-在原有MVC-基础上多了一层，Controller不直接控制Model-直接操作ViewModel-来间接管理；-ViewModel-（NSObject）的职责：数据逻辑处理-控制，算法，解析，网络处理等等；-不直接管理View" class="headerlink" title="演进（ViewModel模型） - 在原有MVC 基础上多了一层，Controller不直接控制Model,   直接操作ViewModel 来间接管理； ViewModel （NSObject）的职责：数据逻辑处理,控制，算法，解析，网络处理等等；  不直接管理View;"></a>演进（ViewModel模型） - 在原有MVC 基础上多了一层，Controller不直接控制Model,   直接操作ViewModel 来间接管理； ViewModel （NSObject）的职责：数据逻辑处理,控制，算法，解析，网络处理等等；  不直接管理View;</h2><p>三层模式可有效降低项目偶尔度，有效业务规整，分类； 大大提高项目开发效率；</p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2018/09/28/designPatterns/">
       几种典型的设计模式
     </a>
@@ -1370,117 +1481,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2017/09/04/InternetThinking/">
-      互联网思维到底说啥？
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E5%85%B6%E4%BB%96/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>其他</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2017年9月4日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：580字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="互联网思维指的是什么思维？"><a href="#互联网思维指的是什么思维？" class="headerlink" title="互联网思维指的是什么思维？"></a>互联网思维指的是什么思维？</h3><font color=orange>快速迭代，用户参与。</font>通过不断地迭代使产品日臻完善，而不是追求一次性做出完美的产品。并且，用户的反馈会作为设计决策的部分依据。<br><br>基于海量数据分析进行决策。互联网产品的一大便利是可以实时获取大量用户的行为数据，<font color=orange>基于这些数据可进行产品决策。</font>也可以采用AB测试等方法主动比较不同的设计方案。<br><br>病毒式营销，星火燎原。 利用互联网的传播特点，促成产品在社交网络，社会化媒体的渗透，并通过制造轰动性事件，争议性话题，实现大范围病毒传播，这是一种无本万利的营销手段。<br><br>小而美，少即多。互联网产品通常不追求大而全，而是抓住用户的某个痛点或价值点，针对性地做出定位明确的产品。在功能上尽量简单明确，即便要做大做复杂也是慢慢加上去的。<font color=orange>体验上尽量做到简单易上手。</font>
-
-<p>免费策略，平台战争。 互联网产品大多不向用户直接收费，而是用免费策略极力争取用户，锁定用户。并且，同时致力于使Im，搜索引擎，浏览器，杀毒软件等从专用产品变成平台产品，凭借庞大的用户基数，推广和销售其他服务。</p>
-<p>粉丝经济，草根品牌。培育和勾引死忠用户，壮大粉丝规模，营造粉丝文化乃至构建话语体系。同时必须在品牌中注入草根基因，放低身段，讨好甚至都弄粉丝，保持高频，全方位的互动，比较成功的互联网产品：小米，逻辑思维，梁欢。</p>
-<p><font color=orange>激发用户创造，自组织构筑网络生态。</font> 使用户也成为产品的一部分，激励用户进行创造，生成高价值内容，用户在创造的同时还能自组织，自发形成多层次，多样性的网络单元，使互联网产品扩展为一个复杂的生态系统，最典型如豆瓣，自行繁荣壮大。</p>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1590,7 +1590,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(22)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(23)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

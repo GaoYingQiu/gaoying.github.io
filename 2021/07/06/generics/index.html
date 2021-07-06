@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>用泛型和协议构建可伸缩性组件 - littleWhale</title>
+  
+  
+    <meta name="description" content="在App开发中，数据层往往会做本地缓存，以便在网络不好的情况下能够先显示本地缓存数据。接下来将讲解到如何设计本地数据源中间件来实现业务数据的读取。在讲解之前我们会先了解一下简单泛型在Swift中的应用，结合associated types, 你也可以在协议中使用泛型。
+在介绍之前，我刚提到我想要对泛型数据存储在本...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+	  setTimeout(function() { 
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?6b3fb1292e27273cec08f6f75406a761";
+		hm.defer=true;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+	  }, 5000);
+    })();
+    </script>
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            littleWhale
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2021/07/06/generics/">
+      用泛型和协议构建可伸缩性组件
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月6日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>在App开发中，数据层往往会做本地缓存，以便在网络不好的情况下能够先显示本地缓存数据。接下来将讲解到如何设计本地数据源中间件来实现业务数据的读取。在讲解之前我们会先了解一下简单泛型在Swift中的应用，结合associated types, 你也可以在协议中使用泛型。</p>
+<p>在介绍之前，我刚提到我想要对泛型数据存储在本地，然后还需要一个远程数据接口API提供数据以便在本地数据没有的情况下调用。假设我需要用户信息数据：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> localDataStore = <span class="type">UserDataStore</span>()</span><br><span class="line"><span class="keyword">let</span> remoteDataStore = <span class="type">UserApi</span>()</span><br><span class="line"><span class="keyword">let</span> dataStore = <span class="type">CacheBackedDataStore</span>(localDataStore, remoteDataStore)</span><br><span class="line"></span><br><span class="line">dataStore.fetch(userID) &#123; result <span class="keyword">in</span></span><br><span class="line">  <span class="comment">// handle result</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><a id="more"></a><br>以上为大致逻辑简写，继续拆解CacheBackedDataStore:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CacheBackedDataStore</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> localStore: <span class="type">LocalStore</span></span><br><span class="line">  <span class="keyword">let</span> remoteStore: <span class="type">RemoteStore</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">fetch</span><span class="params">(<span class="number">_</span> identifier: IdentifierType, completion: @escaping Result&lt;T, Error&gt;)</span></span> &#123;</span><br><span class="line">    localStore.fetchObject(identifier) &#123; result <span class="keyword">in</span></span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">let</span> result = <span class="keyword">try</span>? result.<span class="keyword">get</span>() &#123;</span><br><span class="line">         completion(.success(result))</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        remoteStore.fetchObject(identifier) &#123; result <span class="keyword">in</span></span><br><span class="line">          <span class="keyword">if</span> <span class="keyword">let</span> result = <span class="keyword">try</span>? result.<span class="keyword">get</span>() &#123;</span><br><span class="line">            completion(.success(result))</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// extract error and forward to the completion handler</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>注意到Result<T, Error>， T 为泛型的一个占位符。可代表任何对象。讲解泛型之前，回顾一下在Swift中，我们定义一个字符串数组。一般有两种方式:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let words1 &#x3D; [String]()</span><br><span class="line">let words2 &#x3D; Array&lt;String&gt;()</span><br></pre></td></tr></table></figure><br>第二种方式，我们留意到<String>方式注明是字符串类型。我们查看Array的代码可以看到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct Array&lt;T&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; implementation code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>T即代表我们将要注入的类型。我们再来看一串代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct SpecializedPrinter&lt;T&gt; &#123;</span><br><span class="line">  func print(_ object: T) &#123;</span><br><span class="line">    print(object)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>我们定义了一个SpecializedPrinter泛型结构体，print方法使用了泛型参数。在使用的时候，如果我们传入了字符串类型，那么输出打印的就是字符串。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> printer = <span class="type">SpecializedPrinter</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line">printer.<span class="built_in">print</span>(<span class="string">"Hello!"</span>) <span class="comment">// this is fine</span></span><br><span class="line">printer.<span class="built_in">print</span>(<span class="number">10</span>) <span class="comment">// this is not okay since T for this printer is String, not Int</span></span><br></pre></td></tr></table></figure><br>现在你已经了解了泛型，我们接下来对CacheBackedDataStore进行改进：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CacheBackedDataSource</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> localStore: <span class="type">LocalStore</span></span><br><span class="line">  <span class="keyword">let</span> remoteStore: <span class="type">RemoteStore</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;T?, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>之前的代码，我们localStore,和remoteStore不能够写死，需要制定一套标准。即localStore可以做什么，remoteStore可以做什么。进而继续改进：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">LocalStore</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;T, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>)</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">persist</span><span class="params">(<span class="number">_</span> object: T)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">RemoteStore</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;T, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>当改成上述代码的时候，这个时候编译器会报错，在协议中，泛型参数T没有声明！接下来我们需要在协议中使用泛型机制。这个时候就用到AssociateType进行类型关联。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">LocalStore</span> </span>&#123;</span><br><span class="line">  <span class="keyword">associatedtype</span> <span class="type">StoredObject</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;StoredObject, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>)</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">persist</span><span class="params">(<span class="number">_</span> object: StoredObject)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">RemoteStore</span> </span>&#123;</span><br><span class="line">  <span class="keyword">associatedtype</span> <span class="type">TargetObject</span>:<span class="type">Decodable</span> <span class="comment">//为了约束TargetObject要符合Decodable协议规则</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;TargetObject, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>接下来我们定义ArrayBackedUserStore的业务类实现LocalStore协议,RemoteUserStore业务类实现 RemoteStore 协议：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ArrayBackedUserStore</span>: <span class="title">LocalStore</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;User, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">    <span class="comment">//本地数据读取</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">persist</span><span class="params">(<span class="number">_</span> object: User)</span></span> &#123;</span><br><span class="line">    <span class="comment">//本地持久化操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RemoteUserStore</span>: <span class="title">RemoteStore</span> </span>&#123;</span><br><span class="line">  <span class="keyword">typealias</span> <span class="type">TargetObject</span> = <span class="type">User</span> <span class="comment">//如果所使用的对象User不是Decodable协议，则会报错</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;TargetObject, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>回到上述CacheBackedDataSource<T>泛型结构体，其中两个变量localStore和remoteStore将会编译出错，提示“Protocol ‘LocalStore’ can only be used as a generic constraint because it has Self or associated type requirements” 意思是LocalStore协议里有associatedtype关联类型，只能够通过泛型约束来使用。<br>继续改进代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CacheBackedDataSource</span>&lt;<span class="title">Local</span>:<span class="title">LocalStore</span>,<span class="title">Remote</span>:<span class="title">RemoteStore</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> localStore: <span class="type">Local</span></span><br><span class="line">  <span class="keyword">let</span> remoteStore: <span class="type">Remote</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;Local.StoredObject, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这样就编译正常了。此时CacheBackedDataSource含有两个泛型参数，而Result<T, Error> 改成了Result<Local.StoredObject, Error>。其实用Result<Remote.TargetObject, Error>也是可以，为了保证local和remote关联的类型为同一对象类型，我们继续对CacheBackedDataSource增加约束：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CacheBackedDataSource</span>&lt;<span class="title">Local</span>:<span class="title">LocalStore</span>,<span class="title">Remote</span>:<span class="title">RemoteStore</span>&gt; <span class="title">where</span> <span class="title">Local</span>.<span class="title">StoredObject</span> == <span class="title">Remote</span>.<span class="title">TargetObject</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> localStore: <span class="type">Local</span></span><br><span class="line">  <span class="keyword">let</span> remoteStore: <span class="type">Remote</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">find</span><span class="params">(<span class="number">_</span> objectID: String, completion: @escaping <span class="params">(Result&lt;Local.StoredObject, Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">    localStore.<span class="built_in">find</span>(objectID) &#123; result <span class="keyword">in</span></span><br><span class="line">      <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> object = <span class="keyword">try</span> result.<span class="keyword">get</span>()</span><br><span class="line">        completion(.success(object))</span><br><span class="line">      &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.remoteStore.<span class="built_in">find</span>(objectID) &#123; result <span class="keyword">in</span></span><br><span class="line">          <span class="keyword">do</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> object = <span class="keyword">try</span> result.<span class="keyword">get</span>()</span><br><span class="line">            <span class="keyword">self</span>.localStore.persist(object)</span><br><span class="line">            completion(.success(object))</span><br><span class="line">          &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">            completion(.failure(error))</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>最后调用的时候：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> localUserStore = <span class="type">ArrayBackedUserStore</span>()</span><br><span class="line"><span class="keyword">let</span> remoteUserStore = <span class="type">RemoteUserStore</span>()</span><br><span class="line"><span class="keyword">let</span> cache = <span class="type">CacheBackedDataSource</span>(localStore: localUserStore, remoteStore: remoteUserStore)</span><br><span class="line">cache.<span class="built_in">find</span>(<span class="string">"someObjectId"</span>) &#123; (result: <span class="type">Result</span>&lt;<span class="type">User</span>, <span class="type">Error</span>&gt;) <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>通过这篇文章，你已经知道使用<T>给对象定义泛型，使用泛型参数，以及在在协议中使用关联类型来约束参数类型。以及在对象中包含定义了关联的协议变量，需使用泛型参数来对协议变量进行约束。泛型的功能强大，可使组件抽象，复用。可帮助我们构建弹性组件。</p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
+        
+          height='225px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-06T18:18:50+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月6日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/06/generics/&title=用泛型和协议构建可伸缩性组件 - littleWhale&summary=在App开发中，数据层往往会做本地缓存，以便在网络不好的情况下能够先显示本地缓存数据。接下来将讲解到如何设计本地数据源中间件来实现业务数据的读取。在讲解之前我们会先了解一下简单泛型在Swift中的应用，结合associated types, 你也可以在协议中使用泛型。
+在介绍之前，我刚提到我想要对泛型数据存储在本地，然后还需要一个远程数据接口API提供数据以便在本地数据没有的情况下调用。假设我需要用户信息数据：1234567let localDataStore = UserDataStore()let remoteDataStore = UserApi()let dataStore = CacheBackedDataStore(localDataStore, remoteDataStore)dataStore.fetch(userID) &#123; result in  // handle result&#125;"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/06/generics/&title=用泛型和协议构建可伸缩性组件 - littleWhale&summary=在App开发中，数据层往往会做本地缓存，以便在网络不好的情况下能够先显示本地缓存数据。接下来将讲解到如何设计本地数据源中间件来实现业务数据的读取。在讲解之前我们会先了解一下简单泛型在Swift中的应用，结合associated types, 你也可以在协议中使用泛型。
+在介绍之前，我刚提到我想要对泛型数据存储在本地，然后还需要一个远程数据接口API提供数据以便在本地数据没有的情况下调用。假设我需要用户信息数据：1234567let localDataStore = UserDataStore()let remoteDataStore = UserApi()let dataStore = CacheBackedDataStore(localDataStore, remoteDataStore)dataStore.fetch(userID) &#123; result in  // handle result&#125;"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/06/generics/&title=用泛型和协议构建可伸缩性组件 - littleWhale&summary=在App开发中，数据层往往会做本地缓存，以便在网络不好的情况下能够先显示本地缓存数据。接下来将讲解到如何设计本地数据源中间件来实现业务数据的读取。在讲解之前我们会先了解一下简单泛型在Swift中的应用，结合associated types, 你也可以在协议中使用泛型。
+在介绍之前，我刚提到我想要对泛型数据存储在本地，然后还需要一个远程数据接口API提供数据以便在本地数据没有的情况下调用。假设我需要用户信息数据：1234567let localDataStore = UserDataStore()let remoteDataStore = UserApi()let dataStore = CacheBackedDataStore(localDataStore, remoteDataStore)dataStore.fetch(userID) &#123; result in  // handle result&#125;"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2021/07/05/@State/'>
+                <p class='title'>SwiftUI 属性包裹器<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>简介文章将简要讲述何时使用@State, @Binding, @StateObject, @ObservedObject, @EnvironmentObject。
+@State@State属性包...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '用泛型和协议构建可伸缩性组件',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget related_posts shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2021/06/29/2020iOS/" title="2020年下半年iOS工作技术点" rel="bookmark">2020年下半年iOS工作技术点</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='true'
+      volume='0.6'
+      loop='all'
+      order='random'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='4862553993'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:qiugaoying@163.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/gaoyingqiu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="http://littleWhale.xyz" target="_blank" rel="noopener">Copyright © 2016-2020 高颖</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://qyanblog.oss-cn-shenzhen.aliyuncs.com/IMG_0131.JPG", "https://qyanblog.oss-cn-shenzhen.aliyuncs.com/小恐龙.JPG"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
