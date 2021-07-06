@@ -425,9 +425,127 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/05/@State/">
+      SwiftUI 属性包裹器
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月5日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1.4k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：5分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>文章将简要讲述何时使用@State, @Binding, @StateObject, @ObservedObject, @EnvironmentObject。</p>
+<h3 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h3><p>@State属性包裹器可用于当你的视图对象响应任何状态改变时候。换句话说，视图初始化@State修饰的属性变量。该属性变量的变更只发生在内部View，而不被外界所改变。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">struct StateExample: View &#123;</span><br><span class="line">  @State private var intValue &#x3D; 0</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    VStack &#123;</span><br><span class="line">      Text(&quot;intValue equals \(intValue)&quot;)</span><br><span class="line"></span><br><span class="line">      Button(&quot;Increment&quot;) &#123;</span><br><span class="line">        intValue +&#x3D; 1</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在内部，SwiftUI将会存储 @State修饰的属性值，然后贯穿整个渲染或重复渲染的生命周期中将持久化存储这个值，当在视图刷新或者重新创建的时候，该属性值可以很好地被视图自身管理。当然，你也可以用private修饰词修饰@State属性，保证只在内部修改@State属性。<br>@State使用场景：</p>
+<ul>
+<li>在被修饰的属性需要响应你视图变化的状态时候</li>
+<li>你修饰的是一个值类型（结构体、枚举）
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/05/@State/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1336,7 +1454,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(21)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(22)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

@@ -16,12 +16,11 @@
 
   <!-- 页面元数据 -->
   
-    <title>Android-TableView - littleWhale</title>
-  
-    <meta name="keywords" content="AndroidTableView">
+    <title>SwiftUI 属性包裹器 - littleWhale</title>
   
   
-    <meta name="description" content="How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar ...">
+    <meta name="description" content="简介文章将简要讲述何时使用@State, @Binding, @StateObject, @ObservedObject, @EnvironmentObject。
+@State@State属性包裹器可用于当你的视图对象响应任何状态改变时候。换句话说，视图初始化@State修饰的属性变量。该属性变量的变更只发生在内...">
   
 
   <!-- feed -->
@@ -337,8 +336,8 @@
         
           
   <h1 class="title">
-    <a href="/2016/11/11/Android-TableView/">
-      Android-TableView
+    <a href="/2021/07/05/@State/">
+      SwiftUI 属性包裹器
     </a>
   </h1>
 
@@ -361,6 +360,14 @@
           
             
               
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
 
             
           
@@ -368,7 +375,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2016年11月11日</p>
+    <p>发布于：2021年7月5日</p>
   </a>
 </div>
 
@@ -391,40 +398,38 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <h2 id="How-to-development-a-Android-App"><a href="#How-to-development-a-Android-App" class="headerlink" title="How to development a Android App"></a>How to development a Android App</h2><h4 id="Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio"><a href="#Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio" class="headerlink" title="Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio."></a>Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.</h4><h3 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h3><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Activity1-&gt;Activity2: onCreate()——&gt;onStart()——&gt;onResume()</span><br><span class="line">Note left of Activity2: 第一个 Pause，第二个Create，Start，Resume。第一个 Stop</span><br><span class="line">Activity2--&gt;Activity1: back to the activity1</span><br><span class="line">Note left of Activity2: 暂停，restart第一个，start，resume,第二个stop,destory.</span><br></pre></td></tr></table></figure>
-<p>when you push a new  Activity or back Activity, it’s due to the stack to manage the Activity status, but how to push a new Activity?</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(ReorderFour.this, ReorderTwo.class);    </span><br><span class="line"></span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);</span><br><span class="line"></span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h4 id="Activity-Extented"><a href="#Activity-Extented" class="headerlink" title="Activity Extented"></a>Activity Extented</h4><h5 id="after-we-know-the-android-activity-i-want-tall-about-fragment"><a href="#after-we-know-the-android-activity-i-want-tall-about-fragment" class="headerlink" title="after we know the android activity, i want tall about fragment."></a>after we know the android activity, i want tall about fragment.</h5><h4 id="Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface"><a href="#Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface" class="headerlink" title="Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface."></a>Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface.</h4><h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get1.png" alt="picture1"><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get2.png" alt="picture2"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get3.png" alt="picture1"><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get4.png" alt="picture1"></p>
-<h6 id="so-what-about-the-fragment"><a href="#so-what-about-the-fragment" class="headerlink" title="so, what about the fragment ?"></a>so, what about the fragment ?</h6><ol>
-<li>tabbar interface is a activity contains one or more fragments.</li>
-<li>fragments lifecycle is rely one activity.   </li>
-</ol>
-<h6 id="what-did-I-do-to-make-layout-the-UITabarActivity"><a href="#what-did-I-do-to-make-layout-the-UITabarActivity" class="headerlink" title="what did I do to make layout the UITabarActivity?"></a>what did I do to make layout the UITabarActivity?</h6><h3 id="app-gradle-配置"><a href="#app-gradle-配置" class="headerlink" title="app gradle 配置"></a>app gradle 配置</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab1.png" alt="picture1"></p>
-<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab2.png!github" alt="picture2">  </p>
-<h3 id="Tabbar-Activity"><a href="#Tabbar-Activity" class="headerlink" title="Tabbar Activity"></a>Tabbar Activity</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab3.png" alt="picture1"></p>
-<h3 id="Layout-布局"><a href="#Layout-布局" class="headerlink" title="Layout 布局"></a>Layout 布局</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab4.png" alt="picture1"> </p>
-<h3 id="界面Fragment配置"><a href="#界面Fragment配置" class="headerlink" title="界面Fragment配置"></a>界面Fragment配置</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_tab5.png" alt="picture1"></p>
-<p>ok,after you see my screenshots, you can know  , i use the ViewpagerIndicator to make a tabbar Activity . it can manager fragments. you can easy to change every fragment you need. </p>
-<h6 id="app-gradle-instroduce"><a href="#app-gradle-instroduce" class="headerlink" title="app gradle instroduce"></a>app gradle instroduce</h6><font color="#2D2D39" size="4.5px"><br>1. use the fastjson to make json parse.<br>2. use the butterknife replace the frequent findViewById.<br>3. use the ViewPagerIndicator to achieve a tabbarActivity interface.<br>4. use the android-smart-image-view to make the image cache.<br>5. use the android-async-http to make http request.<br>6. use the recycleView-v7 replace the android system listView.<br>7. use the bga-refreshlayout to make the pull refresh cool header.<br>8. finally, use cn.bingoogolapple:bga-adapter to make the recycleView cell Item can  right move delete, long press event ,ItemChildClickListener ,and so on .  all in all, bga-adapter is perfect !<br></font>
-
-<p><strong>For your convenience, i encapsulated a tableview like iOS UITableView , you can use the group style or plain style decide by youself; you can find it in the package com.lvj.bookoneday-&gt;widget.view</strong>   </p>
-<p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableview.png" alt="tableview like iOS UItableView">  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义表格的数据源接口</span><br><span class="line">public interface TableViewDataSource&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    RecyclerViewCell&lt;T&gt;[]  getRecyclerCells(); &#x2F;&#x2F;获取cell</span><br><span class="line">	int getItemViewType(int position);  &#x2F;&#x2F;获取position: cell类型的tag</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;定义表格的事件委托源</span><br><span class="line"> public interface TableViewDelegate &#123;   </span><br><span class="line"> </span><br><span class="line">	void onTableViewDidSelectRow(int row);&#x2F;&#x2F;点击单行   </span><br><span class="line">	void onTableViewDidLongClickRow(int row); &#x2F;&#x2F;长按单行   </span><br><span class="line"> 	void onTableViewDidChangeCheckRow(int row, boolean isChecked); &#x2F;&#x2F;选中行   </span><br><span class="line">	void onItemChildClick(View childView, int position); &#x2F;&#x2F;item 点击</span><br><span class="line">	void onTableViewRefresh();&#x2F;&#x2F;下拉刷新</span><br><span class="line">	void onTableViewLoadMore();  &#x2F;&#x2F;加载更多</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>文章将简要讲述何时使用@State, @Binding, @StateObject, @ObservedObject, @EnvironmentObject。</p>
+<h3 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h3><p>@State属性包裹器可用于当你的视图对象响应任何状态改变时候。换句话说，视图初始化@State修饰的属性变量。该属性变量的变更只发生在内部View，而不被外界所改变。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">struct StateExample: View &#123;</span><br><span class="line">  @State private var intValue &#x3D; 0</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    VStack &#123;</span><br><span class="line">      Text(&quot;intValue equals \(intValue)&quot;)</span><br><span class="line"></span><br><span class="line">      Button(&quot;Increment&quot;) &#123;</span><br><span class="line">        intValue +&#x3D; 1</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在内部，SwiftUI将会存储 @State修饰的属性值，然后贯穿整个渲染或重复渲染的生命周期中将持久化存储这个值，当在视图刷新或者重新创建的时候，该属性值可以很好地被视图自身管理。当然，你也可以用private修饰词修饰@State属性，保证只在内部修改@State属性。<br>@State使用场景：</p>
 <ul>
-<li>I create two java interface : TableViewDelete, TableViewDataSoucre. that you can easy<br>implements there’s methods .</li>
-<li>when you use the activity or fragment need tableView layout , you can easy and fast<br>layout ,and implements TableViewDelegate, TableViewDatasource.</li>
+<li>在被修饰的属性需要响应你视图变化的状态时候</li>
+<li>你修饰的是一个值类型（结构体、枚举）<a id="more"></a>
+</li>
 </ul>
-<h4 id="for-examples"><a href="#for-examples" class="headerlink" title="for examples"></a>for examples</h4><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_tableViewFragment.png" alt="tableview like iOS UItableView"></p>
-<h3 id="Talk-about-Http-request"><a href="#Talk-about-Http-request" class="headerlink" title="Talk about Http request"></a>Talk about Http request</h3><p>you know, when your app ask a request, may be have two Design Patterns . it named “block”（anonymous inner classes） ,”delegate”(delegate is named by iOS. on java, it’s interface or ask “OOP” thoughts).</p>
-<h4 id="My-HttpRequest-Design"><a href="#My-HttpRequest-Design" class="headerlink" title="My HttpRequest Design"></a>My HttpRequest Design</h4><p>there is a abstract class named BaseDataService.  if you have a   new request . you just extend BaseDataService and @Override three methods. “getAPIRequestMethodName<br>, setRequestParams,parseResponse”. look these screenshots. And on your  Activity  or Fragments  , you just implemets RequestCallBackDelegate , and you can use your son of BaseDataService to make some request. </p>
-<h3 id="父类"><a href="#父类" class="headerlink" title="父类"></a>父类</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request1.png" alt="tableview like iOS UItableView">   </p>
-<h3 id="子类继承父类"><a href="#子类继承父类" class="headerlink" title="子类继承父类"></a>子类继承父类</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request2.png" alt="tableview like iOS UItableView">   </p>
-<h3 id="界面用子类请求实现"><a href="#界面用子类请求实现" class="headerlink" title="界面用子类请求实现"></a>界面用子类请求实现</h3><p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/android_get_request3.png" alt="tableview like iOS UItableView"></p>
-<p><em>For more info about the tableView how to work, you can find my   open source on my <a href="http://github.com/gaoyingqiu" target="_blank" rel="noopener">Github Android-TableView</a>,welcome make you suggestion. if you like this project, on my github, I hope you can click on the star in the upper right corner to give me more encouragement. thank you!</em></p>
-<h3 id="TO-Do-Introduce-Android-Service-components"><a href="#TO-Do-Introduce-Android-Service-components" class="headerlink" title="TO Do:  Introduce Android Service components"></a>TO Do:  Introduce Android Service components</h3>
+<h3 id="Binding"><a href="#Binding" class="headerlink" title="@Binding"></a>@Binding</h3><p>@Binding属性包裹器修饰的属性值被其他View所传递。视图内定义的@Binding修饰的属性值可接受外部传入的值，也包含写的权限，即可对Binding修饰的属性做更改，可将值响应回到父容器。（一般在子view Binding修饰属性接收父容器初始值，然后子view做更改，父视图可实时响应其结果。）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">struct StateView: View &#123;</span><br><span class="line">  @State private var intValue &#x3D; 0</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    VStack &#123;</span><br><span class="line">      Text(&quot;intValue equals \(intValue)&quot;)</span><br><span class="line"></span><br><span class="line">      BindingView(intValue: $intValue)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct BindingView: View &#123;</span><br><span class="line">  @Binding var intValue: Int</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    Button(&quot;Increment&quot;) &#123;</span><br><span class="line">      intValue +&#x3D; 1</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>说明：以上代码StateView中把 @State包裹修饰的intValue通过$符号传递到BindingView中。子View通过Binding形式间接修改了@State包裹的intValue。由于@Binding包裹修饰时，值总是从外部传递进来。所以当试图被丢弃时，SwiftUI不管理Binding。 @Bindingg可以比作是绑定传递、响应父视图，而@State是需要持久化状态变更。</p>
+<p>@Binding使用场景：</p>
+<ul>
+<li>你需要对父视图的属性进行读或写权限时候</li>
+<li>被包裹的属性是值类型的时候(结构体或枚举)</li>
+</ul>
+<h3 id="StateObject"><a href="#StateObject" class="headerlink" title="@StateObject"></a>@StateObject</h3><p>@StateObject修饰属性有点类似@State的用法，但可用来引用类型比如class. 一般用于修饰ObservableObject对象。以及订阅ObservableObject里@Published修饰的属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class DataProvider: ObservableObject &#123;</span><br><span class="line">  @Published var currentValue &#x3D; &quot;a value&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct DataOwnerView: View &#123;</span><br><span class="line">  @StateObject private var provider &#x3D; DataProvider()</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    Text(&quot;provider value: \(provider.currentValue)&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>说明：DataOwnerView持有DataProvider的实例。当DataProvider里的currentValue发生改变的时候，值将在DataOwnerView里实时显示。内部，当DataOwnerView发生刷新需要重新创建的时候，SwiftUI将会管理持有@StateObject包裹的变量。意味着视图中@StateObject修饰的变量只创建1次。SwiftUI将实例和@StateObject关联，当视图再次初始化时将会再次重用@StateObject修饰的对象。换句话说，@StateObject 标记的属性，SwiftUI维护管理着该实例，供视图需要时使用（甚至SwiftUI重新创建渲染视图）。和@State不同的是，@StateObject可用来接收ObservableObject的对象而不是接收一个值类型。</p>
+<p>@StateObject使用场景：</p>
+<ul>
+<li>你想在ObservableObject里响应或者更新视图。</li>
+<li>在视图中，创建了ObservableObject实例，需要用@StateObject修饰。</li>
+</ul>
+<h3 id="ObservedObject"><a href="#ObservedObject" class="headerlink" title="@ObservedObject"></a>@ObservedObject</h3><p>@ObservedObject是用来包裹ObservableObject实例，和@StateObject相似，除了视图不创建拥有@ObservedObject 实例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">struct DataOwnerView: View &#123;</span><br><span class="line">  @StateObject private var provider &#x3D; DataProvider()</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    VStack &#123;</span><br><span class="line">      Text(&quot;provider value: \(provider.currentValue)&quot;)</span><br><span class="line"></span><br><span class="line">      DataUserView(provider: provider)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">struct DataUserView: View &#123;</span><br><span class="line">  @ObservedObject var provider: DataProvider</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    &#x2F;&#x2F; create body and use &#x2F; modify &#96;provider&#96;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>DataOwnerView往DataUserView传递了一个@StateObject，而DataProvider实例在DatauserView中被使用。在DatauserView中，当该视图需要刷新渲染的时候，SwiftUI内部不维护不管理 @ObservedObject。SwiftUI知道父视图将会传递ObservedObject过来,用于DatauserView中作为一个属性值来使用即可。</p>
+<p>@ObservedObject使用场景：</p>
+<ul>
+<li>你需要在ObservedObject响应变更或者更新</li>
+<li>在视图中不需创建ObservedObject的实例（如果需要，则用@StateObject）</li>
+</ul>
+<h3 id="EnvironmentObject"><a href="#EnvironmentObject" class="headerlink" title="@EnvironmentObject"></a>@EnvironmentObject</h3><p>有时候你需要在你的App各种各样的地方使用同一个对象，而你又不想一层层传递。你可能想做一个全局依赖可用于让视图的所有节点或者你的App都共享使用到该对象。那么你可以使用@EnvironmentObject。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct EnvironmentUsingView: View &#123;</span><br><span class="line">  @EnvironmentObject var dependency: DataProvider</span><br><span class="line"></span><br><span class="line">  var body: some View &#123;</span><br><span class="line">    Text(dependency.currentValue)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>@EnvironmentObject 修饰的对象必须遵循ObservableObject协议，一般可配置在父节点。例如，我们可以在App入口注入一个全局的环境变量，这样我们整个App都可以使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">struct MyApp: App &#123;</span><br><span class="line">  @StateObject var dataProvider &#x3D; DataProvider()</span><br><span class="line"></span><br><span class="line">  var body: some Scene &#123;</span><br><span class="line">    WindowGroup &#123;</span><br><span class="line">      EnvironmentUsingView()</span><br><span class="line">        .environmentObject(dataProvider)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>当@EnvironmentObject 修饰的属性发生改变时候，你的视图将会重新渲染。<br>@EnvironmentObject使用场景：</p>
+<ul>
+<li>正常情况下，你会使用@ObservedObject，但你可能需要把ObservableObject对象传递到多个视图中初始化之前，因为视图渲染的时候可能用到它，那么此刻就用@EnvironmentObject。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上讲解，我们可以把渲染的类型分为值类型和对象。<br>值类型： 数据怎样使用？常规属性？只读？读或写？ 谁持有该数据？来自外界？（@Binding） 还是自身View的状态（@State）?<br>对象类型： View怎样接收该对象？ 作为参数？（@ObservedObject） 自身创建该对象实例？（@StateObject） 通过环境变量？（@EnvironmentObject）</p>
+
           
             <div class='article_footer'>
               
@@ -481,10 +486,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-27T08:43:47+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-06T14:32:33+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年5月27日</p>
+    <p>更新于：2021年7月6日</p>
   </a>
 </div>
 
@@ -492,9 +497,6 @@
       
         
           
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/AndroidTableView/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>AndroidTableView</p></a></div>
-
 
         
       
@@ -511,10 +513,11 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2016/11/11/Android-TableView/&title=Android-TableView - littleWhale&summary=How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.Activity
-1234Activity1-&gt;Activity2: onCreate()——&gt;onStart()——&gt;onResume()Note left of Activity2: 第一个 Pause，第二个Create，Start，Resume。第一个 StopActivity2--&gt;Activity1: back to the activity1Note left of Activity2: 暂停，restart第一个，start，resume,第二个stop,destory.
-when you push a new  Activity or back Activity, it’s due to the stack to manage the Activity status, but how to push a new Activity?
-12345Intent intent &#x3D; new Intent(ReorderFour.this, ReorderTwo.class);    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);startActivity(intent);"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/05/@State/&title=SwiftUI 属性包裹器 - littleWhale&summary=简介文章将简要讲述何时使用@State, @Binding, @StateObject, @ObservedObject, @EnvironmentObject。
+@State@State属性包裹器可用于当你的视图对象响应任何状态改变时候。换句话说，视图初始化@State修饰的属性变量。该属性变量的变更只发生在内部View，而不被外界所改变。12345678910111213struct StateExample: View &#123;  @State private var intValue &#x3D; 0  var body: some View &#123;    VStack &#123;      Text(&quot;intValue equals \(intValue)&quot;)      Button(&quot;Increment&quot;) &#123;        intValue +&#x3D; 1      &#125;    &#125;  &#125;&#125;在内部，SwiftUI将会存储 @State修饰的属性值，然后贯穿整个渲染或重复渲染的生命周期中将持久化存储这个值，当在视图刷新或者重新创建的时候，该属性值可以很好地被视图自身管理。当然，你也可以用private修饰词修饰@State属性，保证只在内部修改@State属性。@State使用场景：
+
+在被修饰的属性需要响应你视图变化的状态时候
+你修饰的是一个值类型（结构体、枚举）"
           
           >
           
@@ -526,10 +529,11 @@ when you push a new  Activity or back Activity, it’s due to the stack to manag
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2016/11/11/Android-TableView/&title=Android-TableView - littleWhale&summary=How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.Activity
-1234Activity1-&gt;Activity2: onCreate()——&gt;onStart()——&gt;onResume()Note left of Activity2: 第一个 Pause，第二个Create，Start，Resume。第一个 StopActivity2--&gt;Activity1: back to the activity1Note left of Activity2: 暂停，restart第一个，start，resume,第二个stop,destory.
-when you push a new  Activity or back Activity, it’s due to the stack to manage the Activity status, but how to push a new Activity?
-12345Intent intent &#x3D; new Intent(ReorderFour.this, ReorderTwo.class);    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);startActivity(intent);"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/05/@State/&title=SwiftUI 属性包裹器 - littleWhale&summary=简介文章将简要讲述何时使用@State, @Binding, @StateObject, @ObservedObject, @EnvironmentObject。
+@State@State属性包裹器可用于当你的视图对象响应任何状态改变时候。换句话说，视图初始化@State修饰的属性变量。该属性变量的变更只发生在内部View，而不被外界所改变。12345678910111213struct StateExample: View &#123;  @State private var intValue &#x3D; 0  var body: some View &#123;    VStack &#123;      Text(&quot;intValue equals \(intValue)&quot;)      Button(&quot;Increment&quot;) &#123;        intValue +&#x3D; 1      &#125;    &#125;  &#125;&#125;在内部，SwiftUI将会存储 @State修饰的属性值，然后贯穿整个渲染或重复渲染的生命周期中将持久化存储这个值，当在视图刷新或者重新创建的时候，该属性值可以很好地被视图自身管理。当然，你也可以用private修饰词修饰@State属性，保证只在内部修改@State属性。@State使用场景：
+
+在被修饰的属性需要响应你视图变化的状态时候
+你修饰的是一个值类型（结构体、枚举）"
           
           >
           
@@ -541,10 +545,11 @@ when you push a new  Activity or back Activity, it’s due to the stack to manag
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2016/11/11/Android-TableView/&title=Android-TableView - littleWhale&summary=How to development a Android AppBefore you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.Activity
-1234Activity1-&gt;Activity2: onCreate()——&gt;onStart()——&gt;onResume()Note left of Activity2: 第一个 Pause，第二个Create，Start，Resume。第一个 StopActivity2--&gt;Activity1: back to the activity1Note left of Activity2: 暂停，restart第一个，start，resume,第二个stop,destory.
-when you push a new  Activity or back Activity, it’s due to the stack to manage the Activity status, but how to push a new Activity?
-12345Intent intent &#x3D; new Intent(ReorderFour.this, ReorderTwo.class);    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);startActivity(intent);"
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/05/@State/&title=SwiftUI 属性包裹器 - littleWhale&summary=简介文章将简要讲述何时使用@State, @Binding, @StateObject, @ObservedObject, @EnvironmentObject。
+@State@State属性包裹器可用于当你的视图对象响应任何状态改变时候。换句话说，视图初始化@State修饰的属性变量。该属性变量的变更只发生在内部View，而不被外界所改变。12345678910111213struct StateExample: View &#123;  @State private var intValue &#x3D; 0  var body: some View &#123;    VStack &#123;      Text(&quot;intValue equals \(intValue)&quot;)      Button(&quot;Increment&quot;) &#123;        intValue +&#x3D; 1      &#125;    &#125;  &#125;&#125;在内部，SwiftUI将会存储 @State修饰的属性值，然后贯穿整个渲染或重复渲染的生命周期中将持久化存储这个值，当在视图刷新或者重新创建的时候，该属性值可以很好地被视图自身管理。当然，你也可以用private修饰词修饰@State属性，保证只在内部修改@State属性。@State使用场景：
+
+在被修饰的属性需要响应你视图变化的状态时候
+你修饰的是一个值类型（结构体、枚举）"
           
           >
           
@@ -568,15 +573,10 @@ when you push a new  Activity or back Activity, it’s due to the stack to manag
         
           <div class="prev-next">
             
-              <a class='prev' href='/2017/08/11/brainMap/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>巧用图解构思-百度脑图</p>
-                <p class='content'>很多情况，软件功能实现遇到比较复杂的业务情况下，都会借助于草稿或者流程图 去简单画出业务的流程，然后再编码实现。这样有助于提高程序的编写效率，减少bug 的出现。 以下，是基于实时聊天的会议功能...</p>
-              </a>
             
-            
-              <a class='next' href='/2016/05/29/iOSDataTransmission/'>
-                <p class='title'>客户端网络请求模块的设计<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>AFNetworking也被广泛使用。其它的ASIHttpRequest，MKNetworkKit啥的其实也都还不错，苹果对网络请求部分已经做了很好的封装。但不管如何，APP端还是要对网络进行一...</p>
+              <a class='next' href='/2021/07/05/sqlite/'>
+                <p class='title'>Sqlite 并行模式的试验探究<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>大多数产品在本地Sqlite存储的时候，基本都是用了串行模式。即整个应用全局只有一个sql操作句柄，用单例管理着这个SqlHandler。另外还有一个模式叫线程模式。这种模式下很容易出现Sqli...</p>
               </a>
             
           </div>
@@ -621,7 +621,7 @@ when you push a new  Activity or back Activity, it’s due to the stack to manag
 
   <script>
     window.subData = {
-      title: 'Android-TableView',
+      title: 'SwiftUI 属性包裹器',
       tools: true
     }
   </script>
@@ -647,7 +647,7 @@ when you push a new  Activity or back Activity, it’s due to the stack to manag
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-development-a-Android-App"><span class="toc-text">How to development a Android App</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Before-you-begin-Let’s-talk-about-Android-lifecycle-first-Learn-about-Android’s-four-major-components-And-to-be-familiar-with-Android-development-tool-Android-Studio"><span class="toc-text">Before you begin, Let’s talk about Android lifecycle first .  Learn about Android’s four major components,And to be familiar with Android development tool -Android Studio.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity"><span class="toc-text">Activity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Activity-Extented"><span class="toc-text">Activity Extented</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#after-we-know-the-android-activity-i-want-tall-about-fragment"><span class="toc-text">after we know the android activity, i want tall about fragment.</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Perhaps-you-have-seen-the-most-app-interfaces-is-like-this-YEs-it’s-Tabbar-UI-Interface"><span class="toc-text">Perhaps you have seen the most app interfaces is like this. YEs ,it’s Tabbar UI Interface.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果图"><span class="toc-text">效果图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-gradle-配置"><span class="toc-text">app gradle 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目结构"><span class="toc-text">项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tabbar-Activity"><span class="toc-text">Tabbar Activity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Layout-布局"><span class="toc-text">Layout 布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#界面Fragment配置"><span class="toc-text">界面Fragment配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#for-examples"><span class="toc-text">for examples</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Talk-about-Http-request"><span class="toc-text">Talk about Http request</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#My-HttpRequest-Design"><span class="toc-text">My HttpRequest Design</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父类"><span class="toc-text">父类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子类继承父类"><span class="toc-text">子类继承父类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#界面用子类请求实现"><span class="toc-text">界面用子类请求实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TO-Do-Introduce-Android-Service-components"><span class="toc-text">TO Do:  Introduce Android Service components</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#State"><span class="toc-text">@State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Binding"><span class="toc-text">@Binding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StateObject"><span class="toc-text">@StateObject</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ObservedObject"><span class="toc-text">@ObservedObject</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EnvironmentObject"><span class="toc-text">@EnvironmentObject</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
