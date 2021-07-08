@@ -531,9 +531,121 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/08/hash/">
+      给数组元素去重
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月8日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：374字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个数组，要对元素进行去重操作有两种方式，要么重写equals方法做比较，要么利用Hash值做比较。<br>假设对象为点Point<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> x: <span class="type">Int</span></span><br><span class="line">  <span class="keyword">let</span> y: <span class="type">Int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="让对象实现equals方法"><a href="#让对象实现equals方法" class="headerlink" title="让对象实现equals方法"></a>让对象实现equals方法</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Point</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> == <span class="params">(lhs: Point, rhs: Point)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> lhs.x == rhs.x &amp;&amp; lhs.y == rhs.y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着，我们对Array做扩展，新增去重方法并返回新数组：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">uniqueElements</span><span class="params">()</span></span> -&gt; [<span class="type">Element</span>] &#123;</span><br><span class="line">    <span class="keyword">var</span> out = [<span class="type">Element</span>]()</span><br><span class="line">    <span class="keyword">for</span> element <span class="keyword">in</span> <span class="keyword">self</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> !out.<span class="built_in">contains</span>(element) &#123;</span><br><span class="line">        out.append(element)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> out</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="用Hash值方式比较对象"><a href="#用Hash值方式比较对象" class="headerlink" title="用Hash值方式比较对象"></a>用Hash值方式比较对象</h3><p>把元素对象放至Set无序集合中，由于Set根据Hash值来存储，可存储唯一Hash值对象保证不重复。准备一个空数组接收。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Hashable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">uniqueElements</span><span class="params">()</span></span> -&gt; [<span class="type">Element</span>] &#123;</span><br><span class="line">    <span class="keyword">var</span> seen = <span class="type">Set</span>&lt;<span class="type">Element</span>&gt;()</span><br><span class="line">    <span class="keyword">var</span> out = [<span class="type">Element</span>]()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> element <span class="keyword">in</span> <span class="keyword">self</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> !seen.<span class="built_in">contains</span>(element) &#123;</span><br><span class="line">        out.append(element)</span><br><span class="line">        seen.insert(element)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> out</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>将代码用compactMap改进一下：遍历每一个元素并返回不为nil的元素。我们根据元素是否存在Set集合中为条件，当存在集合中时返回nil。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Hashable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">uniqueElements</span><span class="params">()</span></span> -&gt; [<span class="type">Element</span>] &#123;</span><br><span class="line">    <span class="keyword">var</span> seen = <span class="type">Set</span>&lt;<span class="type">Element</span>&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.compactMap &#123; element <span class="keyword">in</span></span><br><span class="line">      <span class="keyword">guard</span> !seen.<span class="built_in">contains</span>(element)</span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">nil</span> &#125;</span><br><span class="line"></span><br><span class="line">      seen.insert(element)</span><br><span class="line">      <span class="keyword">return</span> element</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>当我们不考虑原元素对象顺序的情况下，可以快速对元素去重<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Hashable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">unsortedUniqueElements</span><span class="params">()</span></span> -&gt; [<span class="type">Element</span>] &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">set</span> = <span class="type">Set</span>(<span class="keyword">self</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="type">Array</span>(<span class="keyword">set</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1569,126 +1681,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/input@/">
-      聊天输入框@某人
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：960字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="聊天输入框-某人逻辑分类点说明"><a href="#聊天输入框-某人逻辑分类点说明" class="headerlink" title="聊天输入框@某人逻辑分类点说明"></a>聊天输入框@某人逻辑分类点说明</h3><p>IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：</p>
-<ol>
-<li>首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”</li>
-<li>input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”</li>
-<li>input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”</li>
-<li>input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”</li>
-</ol>
-<p>在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。</p>
-<p>核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/input@/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1792,7 +1784,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(26)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(27)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
