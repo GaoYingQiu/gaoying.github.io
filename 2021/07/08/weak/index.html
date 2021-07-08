@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>何时使用weak self 防止内存泄露 - littleWhale</title>
+  
+  
+    <meta name="description" content="我们都想写得一手好代码。这包含防止内存泄露，当在写闭包时业务如果需要用到self，我们会使用[weak self] 修饰。但为什么需要弱捕获呢？是否任何情况下在闭包里都要用weak? 接下来我们将用捕获列表来回答这几个问题。我们将讲解到不同的捕获，以及什么时候用合适的捕获去处理问题。
+什么是捕获列表我们先看以下代...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+    <!-- ba -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+	  setTimeout(function() { 
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?6b3fb1292e27273cec08f6f75406a761";
+		hm.defer=true;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+	  }, 5000);
+    })();
+    </script>
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            littleWhale
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="搜索..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-book fa-fw'></i>首页
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/paint/
+                  
+                  
+                  
+                    id="paint"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>胖橙的画廊
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=https://mi.aliyun.com/shop/43068
+                  
+                    rel="external nofollow noopener noreferrer"
+                  
+                  
+                    target="_blank"
+                  
+                  
+                    id="https:mialiyuncomshop43068"
+                  >
+                  <i class='fas fa-link fa-fw'></i>域名出售
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2021/07/08/weak/">
+      何时使用weak self 防止内存泄露
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月8日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>我们都想写得一手好代码。这包含防止内存泄露，当在写闭包时业务如果需要用到self，我们会使用[weak self] 修饰。但为什么需要弱捕获呢？是否任何情况下在闭包里都要用weak? 接下来我们将用捕获列表来回答这几个问题。我们将讲解到不同的捕获，以及什么时候用合适的捕获去处理问题。</p>
+<h3 id="什么是捕获列表"><a href="#什么是捕获列表" class="headerlink" title="什么是捕获列表"></a>什么是捕获列表</h3><p>我们先看以下代码片段，调用闭包后显示的结果:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"qiu"</span></span><br><span class="line"><span class="keyword">var</span> appendToName = &#123; (string: <span class="type">String</span>) -&gt; <span class="type">String</span> <span class="keyword">in</span></span><br><span class="line">  <span class="keyword">return</span> name.appending(string)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> one = appendToName(<span class="string">"gaoying"</span>) <span class="comment">//qiugaoying</span></span><br><span class="line">name = <span class="string">"liu"</span></span><br><span class="line"><span class="keyword">let</span> two = appendToName(<span class="string">"gaoying"</span>)  <span class="comment">//liugaoying</span></span><br></pre></td></tr></table></figure><br>闭包可对同一作用域范围内的属性做引用，也就是闭包内持有的属性在同一上下文作用域内变更受影响。我们再观察以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"qiu"</span></span><br><span class="line"><span class="keyword">var</span> appendToName = &#123; [name] (string: <span class="type">String</span>) -&gt; <span class="type">String</span> <span class="keyword">in</span></span><br><span class="line">  <span class="keyword">return</span> name.appending(string)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> one = appendToName(<span class="string">"gaoying"</span>) <span class="comment">//qiugaoying</span></span><br><span class="line">name = <span class="string">"liu"</span></span><br><span class="line"><span class="keyword">let</span> two = appendToName(<span class="string">"gaoying"</span>)  <span class="comment">//qiugaoying</span></span><br></pre></td></tr></table></figure>
+<p>这时输出的结果都为qiugaoying。[name] 将属性name放在闭包的捕获列表，明确地告诉闭包强持有闭包首次调用时的name值。如果要在闭包捕获列表内捕获多个值，则用逗号隔开，如[property, anotherProperty] in 方式。<br><a id="more"></a></p>
+<h3 id="关于内存泄露"><a href="#关于内存泄露" class="headerlink" title="关于内存泄露"></a>关于内存泄露</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> instance: <span class="type">MyClass?</span> = <span class="type">MyClass</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> aClosure = &#123; [instance] <span class="keyword">in</span></span><br><span class="line">  <span class="built_in">print</span>(instance)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">aClosure() <span class="comment">// MyClass</span></span><br><span class="line">instance = <span class="literal">nil</span></span><br><span class="line">aClosure() <span class="comment">// MyClass</span></span><br></pre></td></tr></table></figure>
+<p>如上代码片段，当instance = nil之后，闭包再次调用，此时instance仍然在闭包内被强捕获。即虽然instance置为nil，但闭包里强捕获的属性没有被释放。此刻instance捕获的是引用类型，那么闭包强指针引用该对象。我们知道在内存管理时候，引用类型对象只要引用计数大于1，那么再内存中是不会被回收的，此刻，即造成了内存泄露。 如果强捕获的属性是值类型(结构体或者枚举)，那么强捕获的时候将发生copy。</p>
+<p>通常情况下，我们是不希望这种情况发生的。举一个场景：当我们在ViewController执行网络请求的时候，在请求结果回来之前，我们dismissed了控制器，如果网络请求回调的必要内强捕获了控制器，那么内存中是仍然存在该ViewController。当来回切换的时候，是不是造成了很多内存泄露呢？那么我们怎么去解决这个问题呢？把强捕获改成弱捕获就行了，使用weak关键字。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> instance: <span class="type">MyClass?</span> = <span class="type">MyClass</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> aClosure = &#123; [<span class="keyword">weak</span> instance] <span class="keyword">in</span></span><br><span class="line">  <span class="built_in">print</span>(instance)</span><br><span class="line">  <span class="keyword">guard</span> strongSelf = instance <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">  <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">aClosure() <span class="comment">// MyClass</span></span><br><span class="line">instance = <span class="literal">nil</span></span><br><span class="line">aClosure() <span class="comment">// nil</span></span><br></pre></td></tr></table></figure><br>在闭包调用之前，如果对象销毁了继续调用闭包可能会出一些潜在的业务bug。如果你想立即抛出异常或直接让程序crash掉，这样有助于及早地发现问题。你也可以用关键字unowned关键字进行捕获。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> instance: <span class="type">MyClass?</span> = <span class="type">MyClass</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> aClosure = &#123; [<span class="keyword">unowned</span> instance] <span class="keyword">in</span></span><br><span class="line">  <span class="built_in">print</span>(instance)</span><br><span class="line">  <span class="keyword">guard</span> strongSelf = instance <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">  <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">aClosure() <span class="comment">// MyClass</span></span><br><span class="line">instance = <span class="literal">nil</span></span><br><span class="line">aClosure() <span class="comment">// Crash</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="闭包内何时直接用-self"><a href="#闭包内何时直接用-self" class="headerlink" title="闭包内何时直接用 self"></a>闭包内何时直接用 self</h3><ul>
+<li>当self 指的是值类型(结构体、枚举)时候，可以直接用self. 因为结构体没有指针引用他们，在闭包内也不会出现内存泄露一说。</li>
+<li>当闭包和self对象无直接持有关系时候，比如DispatchQueue.<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dispatchSomething</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="type">DispatchQueue</span>.global().async &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在调用dispatchSomething方法后，异步闭包体会立即执行，在闭包体可以放心的使用self。如果闭包是对象的某一事件回调你需要留意self是否弱引用避免引起循环引用。<br>有个最简单的方法判断调用的函数闭包是否被持有：判断是否有关键字@escaping。</li>
+</ul>
+<h3 id="闭包里何时用强捕获变量"><a href="#闭包里何时用强捕获变量" class="headerlink" title="闭包里何时用强捕获变量"></a>闭包里何时用强捕获变量</h3><p>强捕获用的场景比较少。以下有一个例子，如在网络请求后，通过本地存储CoreData或者Sqlite把数据持久化。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SomeDataSource</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> storage: <span class="type">MyDataStore</span> <span class="comment">//class</span></span><br><span class="line">  <span class="keyword">let</span> networking: <span class="type">NetworkingLayer</span></span><br><span class="line">  <span class="comment">// more properties</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">refreshData</span><span class="params">()</span></span> &#123;</span><br><span class="line">    networking.refresh &#123; [storage] data <span class="keyword">in</span></span><br><span class="line">      storage.persist(data)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这个时候，无论页面销毁SomeDataSource，只要网络请求结果回来，都能够保证数据被持久化以便下次使用。而且storage只捕获首次调用refreshData时候的storage变量。（假设）后期无论对storage更改，storage仍然是之前旧的对象。</p>
+<h3 id="何时使用Weak-或者-unowned-关键字"><a href="#何时使用Weak-或者-unowned-关键字" class="headerlink" title="何时使用Weak 或者 unowned 关键字"></a>何时使用Weak 或者 unowned 关键字</h3><p>弱捕获是我们比较常用且最好默认的一种捕获选择。当你不想让一个已释放对象还在闭包内执行时候，或者当你调用的函数闭包被应用时，这个时候需考虑用弱捕获。弱捕获的属性记得给可选值，因为可能是nil。这样给nil发送消息的时候就不至于崩溃。使用weak或者unowned能100%确保引用类型在销毁后也能从内存中回收，不会出现内存泄露的情况。如果你实在不知道用哪种捕获方式的时候，那就用它吧😝。</p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
+        
+          height='225px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-08T12:28:57+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月8日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/08/weak/&title=何时使用weak self 防止内存泄露 - littleWhale&summary=我们都想写得一手好代码。这包含防止内存泄露，当在写闭包时业务如果需要用到self，我们会使用[weak self] 修饰。但为什么需要弱捕获呢？是否任何情况下在闭包里都要用weak? 接下来我们将用捕获列表来回答这几个问题。我们将讲解到不同的捕获，以及什么时候用合适的捕获去处理问题。
+什么是捕获列表我们先看以下代码片段，调用闭包后显示的结果:12345678var name = "qiu"var appendToName = &#123; (string: String) -&gt; String in  return name.appending(string)&#125;let one = appendToName("gaoying") //qiugaoyingname = "liu"let two = appendToName("gaoying")  //liugaoying闭包可对同一作用域范围内的属性做引用，也就是闭包内持有的属性在同一上下文作用域内变更受影响。我们再观察以下代码：
+12345678var name = "qiu"var appendToName = &#123; [name] (string: String) -&gt; String in  return name.appending(string)&#125;let one = appendToName("gaoying") //qiugaoyingname = "liu"let two = appendToName("gaoying")  //qiugaoying
+这时输出的结果都为qiugaoying。[name] 将属性name放在闭包的捕获列表，明确地告诉闭包强持有闭包首次调用时的name值。如果要在闭包捕获列表内捕获多个值，则用逗号隔开，如[property, anotherProperty] in 方式。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/08/weak/&title=何时使用weak self 防止内存泄露 - littleWhale&summary=我们都想写得一手好代码。这包含防止内存泄露，当在写闭包时业务如果需要用到self，我们会使用[weak self] 修饰。但为什么需要弱捕获呢？是否任何情况下在闭包里都要用weak? 接下来我们将用捕获列表来回答这几个问题。我们将讲解到不同的捕获，以及什么时候用合适的捕获去处理问题。
+什么是捕获列表我们先看以下代码片段，调用闭包后显示的结果:12345678var name = "qiu"var appendToName = &#123; (string: String) -&gt; String in  return name.appending(string)&#125;let one = appendToName("gaoying") //qiugaoyingname = "liu"let two = appendToName("gaoying")  //liugaoying闭包可对同一作用域范围内的属性做引用，也就是闭包内持有的属性在同一上下文作用域内变更受影响。我们再观察以下代码：
+12345678var name = "qiu"var appendToName = &#123; [name] (string: String) -&gt; String in  return name.appending(string)&#125;let one = appendToName("gaoying") //qiugaoyingname = "liu"let two = appendToName("gaoying")  //qiugaoying
+这时输出的结果都为qiugaoying。[name] 将属性name放在闭包的捕获列表，明确地告诉闭包强持有闭包首次调用时的name值。如果要在闭包捕获列表内捕获多个值，则用逗号隔开，如[property, anotherProperty] in 方式。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/08/weak/&title=何时使用weak self 防止内存泄露 - littleWhale&summary=我们都想写得一手好代码。这包含防止内存泄露，当在写闭包时业务如果需要用到self，我们会使用[weak self] 修饰。但为什么需要弱捕获呢？是否任何情况下在闭包里都要用weak? 接下来我们将用捕获列表来回答这几个问题。我们将讲解到不同的捕获，以及什么时候用合适的捕获去处理问题。
+什么是捕获列表我们先看以下代码片段，调用闭包后显示的结果:12345678var name = "qiu"var appendToName = &#123; (string: String) -&gt; String in  return name.appending(string)&#125;let one = appendToName("gaoying") //qiugaoyingname = "liu"let two = appendToName("gaoying")  //liugaoying闭包可对同一作用域范围内的属性做引用，也就是闭包内持有的属性在同一上下文作用域内变更受影响。我们再观察以下代码：
+12345678var name = "qiu"var appendToName = &#123; [name] (string: String) -&gt; String in  return name.appending(string)&#125;let one = appendToName("gaoying") //qiugaoyingname = "liu"let two = appendToName("gaoying")  //qiugaoying
+这时输出的结果都为qiugaoying。[name] 将属性name放在闭包的捕获列表，明确地告诉闭包强持有闭包首次调用时的name值。如果要在闭包捕获列表内捕获多个值，则用逗号隔开，如[property, anotherProperty] in 方式。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2021/07/07/result/'>
+                <p class='title'>使用Result（Swift5）<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>在我们设计网络层响应结果的时候，Result是大家用的比较多的。和Optional有点类似，它是用来表述返回类型是成功或者失败。在Swift5.0中，Swift团队已经把Result加入到了标准...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '何时使用weak self 防止内存泄露',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是捕获列表"><span class="toc-text">什么是捕获列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于内存泄露"><span class="toc-text">关于内存泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包内何时直接用-self"><span class="toc-text">闭包内何时直接用 self</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包里何时用强捕获变量"><span class="toc-text">闭包里何时用强捕获变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#何时使用Weak-或者-unowned-关键字"><span class="toc-text">何时使用Weak 或者 unowned 关键字</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget related_posts shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+    
+  </header>
+
+
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2021/06/29/2020iOS/" title="2020年下半年iOS工作技术点" rel="bookmark">2020年下半年iOS工作技术点</a></h3></div></li></ul>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='true'
+      volume='0.6'
+      loop='all'
+      order='random'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='4862553993'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="mailto:qiugaoying@163.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/gaoyingqiu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="http://littleWhale.xyz" target="_blank" rel="noopener">Copyright © 2016-2020 高颖</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://qyanblog.oss-cn-shenzhen.aliyuncs.com/IMG_0131.JPG", "https://qyanblog.oss-cn-shenzhen.aliyuncs.com/小恐龙.JPG"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "10000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
