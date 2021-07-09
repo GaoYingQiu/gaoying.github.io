@@ -341,6 +341,122 @@
         
           
   <h2 class="title">
+    <a href="/2020/01/07/http/">
+      HTTP协议详解
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2020年1月7日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：487字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p><strong>请求头</strong> </p>
+<blockquote>
+<p>请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息，如<strong>Host</strong>: 主机名， <strong>Use-Agent</strong>: 浏览器基本资料， <strong>Accept</strong>: 浏览器能够识别的响应类型， <strong>Accept-Language</strong>: 浏览器默认语言， <strong>Accept-Encoding</strong>: 浏览器能够识别的压缩方式， <strong>Referer</strong>: 来路页面，<strong> Connecton</strong>：是否保持连接。</p>
+</blockquote>
+</li>
+<li><p>GET</p>
+<blockquote>
+<p>GET提交，请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），如果数据是英文字母/数字，原样发送；如果是空格，转换为+；如果是中文/其他字符，则直接把字符串用BASE64加密，得出如： %E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h3><p>GET:特定浏览器和服务器对URL长度有限制.</p>
+<p>POST:由于不是通过URL传值，理论上数据不受 限。但实际各个WEB服务器会规定对post提交数据大小进行限制，Apache、IIS6都有各自的配置</p>
+<h3 id="http请求content-Type"><a href="#http请求content-Type" class="headerlink" title="http请求content-Type"></a>http请求content-Type</h3><p>application/x-www-form-urlencoded：数据被编码为名称/值对。这是标准的编码格式。这种方式用的比较多。</p>
+<p>multipart/form-data： 数据被编码为一条消息，页上的每个控件对应消息中的一个部分。一般上传文件才会使用这种方式。</p>
+<p>text/plain： 数据以纯文本形式(text/json/xml/html)进行编码，其中不含任何控件或格式字符。一般向服务端发送json数据会使用这种方式。</p>
+<h3 id="HTTPS数据加密"><a href="#HTTPS数据加密" class="headerlink" title="HTTPS数据加密"></a>HTTPS数据加密</h3><p> HTTP协议传输的数据都是未加密的，也就是明文的，因此使用HTTP协议传输隐私信息非常不安全，为了保证这些隐私数据能加密传输，于是网景公司设计了SSL（Secure Sockets Layer）协议用于对HTTP协议传输的数据进行加密，从而就诞生了HTTPS</p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2020/01/07/iOSPrimaryRoute/">
       iOS初级阶段
     </a>
@@ -1316,113 +1432,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2019/04/16/2019_April/">
-      2019年四月
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E6%9D%82%E8%B0%88/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>杂谈</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2019年4月16日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：184字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>时间在快马加鞭地前行，身边的人，在做的事，也都发生了变化；回顾过去一年，做过的项目不少，也经历了生命周期销毁的企业；那些盲目迭代没有思考力地堆砌功能对于用户来说是多余无用的，对于整个产品战略来说似乎渐渐步入深渊；过去一年的开发中，自己也变得被动，整个思考力和行为都被牵着走； “安分守己”一词 形容自己成了一个”标准“的职业码农，时间之河上，有一刻 似乎意识到脑洞齿轮已经生锈 转动缓慢，对，需要着手动起来了，起身，去做！</p>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1532,7 +1541,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(27)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(28)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

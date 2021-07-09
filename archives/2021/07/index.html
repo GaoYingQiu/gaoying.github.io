@@ -435,9 +435,124 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/08/safeDic/">
+      创建一个线程安全的字典
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月8日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：891字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。</p>
+<p>我们先看一下如下代码会造成线程安全问题？：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">self</span>.xxx) &#123;</span><br><span class="line">    [<span class="keyword">self</span>.dict setObject:@<span class="string">"ah"</span> forKey:<span class="keyword">self</span>.xxx];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在单线程模式下肯定是没啥问题，但在多线程情况下比如线程A,线程B两者都同时进入了if条件，当A正要执行set操作,B已经对self.dict = nil。那么线程A肯定是不能设置成功的。<br>还有另外一种情况，当我们的数据资源比如集合，多线程对资源进行争夺。如添加和移除操作。为了保证最终结果的准确性，我们通常会给操作代码加锁。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OSSpinLock</span>(&amp;_lock);</span><br><span class="line">[<span class="keyword">self</span>.array addObject:@<span class="string">"data1"</span>];</span><br><span class="line"><span class="type">OSSpinUnlock</span>(&amp;_lock);</span><br></pre></td></tr></table></figure><br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/08/safeDic/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1906,7 +2021,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(27)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(28)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

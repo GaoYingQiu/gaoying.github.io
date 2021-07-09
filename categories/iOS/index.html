@@ -376,6 +376,119 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/08/safeDic/">
+      创建一个线程安全的字典
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月8日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：891字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。</p>
+<p>我们先看一下如下代码会造成线程安全问题？：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">self</span>.xxx) &#123;</span><br><span class="line">    [<span class="keyword">self</span>.dict setObject:@<span class="string">"ah"</span> forKey:<span class="keyword">self</span>.xxx];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>在单线程模式下肯定是没啥问题，但在多线程情况下比如线程A,线程B两者都同时进入了if条件，当A正要执行set操作,B已经对self.dict = nil。那么线程A肯定是不能设置成功的。<br>还有另外一种情况，当我们的数据资源比如集合，多线程对资源进行争夺。如添加和移除操作。为了保证最终结果的准确性，我们通常会给操作代码加锁。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">OSSpinLock</span>(&amp;_lock);</span><br><span class="line">[<span class="keyword">self</span>.array addObject:@<span class="string">"data1"</span>];</span><br><span class="line"><span class="type">OSSpinUnlock</span>(&amp;_lock);</span><br></pre></td></tr></table></figure><br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/08/safeDic/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/08/hash/">
       给数组元素去重
     </a>
@@ -1985,125 +2098,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/01/07/iOSAdvancedRoute/">
-      iOS中高级阶段路线图
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年1月7日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：543字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：2分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。</p>
-<p>2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断</p>
-<p>3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。</p>
-<p>4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏</p>
-<p>#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，</p>
-<p> 推送模块，推送消息存储</p>
-<p>H5 的webView 跳转 与原生交互。</p>
-<p>图片压缩缓存。 发表话题。</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/01/07/iOSAdvancedRoute/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2210,7 +2204,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(27)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(28)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
