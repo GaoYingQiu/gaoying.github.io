@@ -341,6 +341,119 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/02/nameClick/">
+      群通知里的人员名字点击剖析
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月2日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：2.1k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：9分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们每个人的手机都安装有微信App,肯定大家都使用过以下场景在聊天群中，当有新的成员进入的时候，可以看到 某某邀请了某某1进入群聊，或者当你是群主的时候，某管理人员邀请了几个人进入时候看到 某某管理员邀请了张三、李四，王五，张三（同名）进入了群聊。对于邀请人员或者被邀请人员，我们发现人员的名称是可以点击的，即使同名的人，点击其名字也可以跳转到各自的主页详情中。</p>
+<h3 id="如何存储人员的id？"><a href="#如何存储人员的id？" class="headerlink" title="如何存储人员的id？"></a>如何存储人员的id？</h3><p>一条群成员变更通知就是一串文本，我们点击的时候肯定要存储好他的人员id,然后点击的时候就能拿到对应人员的id。从最简单的存储方案来看，这条内容可以写成以下格式： 管理员<font color=blue>刘某某</font>邀请了<font color=blue>张三</font>、<font color=blue>李四</font>、<font color=blue>王五</font>、<font color=blue>张三</font>进入了群聊。换成代码的格式即为：“管理员\”刘某某::1000\”邀请了\”张三::1001、李四::1002、王五::1003、张三::1004\”进入了群聊”。其中的代码格式为userName::userId这样一种形式进行拼接，中间的符号可以采用其他特殊符号代替。这里为了区别用户特殊性输入用了双冒号。多个成员之间用顿号隔开，人员与普通内容之间用符号双引号\”进行分割（斜杆为转义符）。 我们需要对这一串文字表达式进行解析进行UI显示，把人员名字后的拼接符号用户id进行过滤掉,组合成不带用户id的易懂文字内容给到用户。<br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/02/nameClick/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/01/groupPlugin/">
       群插件如何开发？
     </a>
@@ -1394,125 +1507,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/01/07/iOSAdvancedRoute/">
-      iOS中高级阶段路线图
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年1月7日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：543字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：2分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。</p>
-<p>2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断</p>
-<p>3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。</p>
-<p>4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏</p>
-<p>#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，</p>
-<p> 推送模块，推送消息存储</p>
-<p>H5 的webView 跳转 与原生交互。</p>
-<p>图片压缩缓存。 发表话题。</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/01/07/iOSAdvancedRoute/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1527,7 +1521,7 @@
           </a>
         
         <p class="current">
-          2 / 6
+          2 / 7
         </p>
         
           <a class="next" rel="next" href="/page/3/">
@@ -1622,7 +1616,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(28)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(29)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

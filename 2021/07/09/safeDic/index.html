@@ -335,7 +335,7 @@
         
           
   <h1 class="title">
-    <a href="/2021/07/08/safeDic/">
+    <a href="/2021/07/09/safeDic/">
       创建一个线程安全的字典
     </a>
   </h1>
@@ -374,7 +374,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月8日</p>
+    <p>发布于：2021年7月9日</p>
   </a>
 </div>
 
@@ -458,10 +458,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-09T11:45:56+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-12T11:01:33+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年7月9日</p>
+    <p>更新于：2021年7月12日</p>
   </a>
 </div>
 
@@ -485,7 +485,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/08/safeDic/&title=创建一个线程安全的字典 - littleWhale&summary=Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/09/safeDic/&title=创建一个线程安全的字典 - littleWhale&summary=Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。
 我们先看一下如下代码会造成线程安全问题？：123if (self.xxx) &#123;    [self.dict setObject:@"ah" forKey:self.xxx];&#125;在单线程模式下肯定是没啥问题，但在多线程情况下比如线程A,线程B两者都同时进入了if条件，当A正要执行set操作,B已经对self.dict = nil。那么线程A肯定是不能设置成功的。还有另外一种情况，当我们的数据资源比如集合，多线程对资源进行争夺。如添加和移除操作。为了保证最终结果的准确性，我们通常会给操作代码加锁。123OSSpinLock(&amp;_lock);[self.array addObject:@"data1"];OSSpinUnlock(&amp;_lock);"
           
           >
@@ -498,7 +498,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/08/safeDic/&title=创建一个线程安全的字典 - littleWhale&summary=Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/09/safeDic/&title=创建一个线程安全的字典 - littleWhale&summary=Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。
 我们先看一下如下代码会造成线程安全问题？：123if (self.xxx) &#123;    [self.dict setObject:@"ah" forKey:self.xxx];&#125;在单线程模式下肯定是没啥问题，但在多线程情况下比如线程A,线程B两者都同时进入了if条件，当A正要执行set操作,B已经对self.dict = nil。那么线程A肯定是不能设置成功的。还有另外一种情况，当我们的数据资源比如集合，多线程对资源进行争夺。如添加和移除操作。为了保证最终结果的准确性，我们通常会给操作代码加锁。123OSSpinLock(&amp;_lock);[self.array addObject:@"data1"];OSSpinUnlock(&amp;_lock);"
           
           >
@@ -511,7 +511,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/08/safeDic/&title=创建一个线程安全的字典 - littleWhale&summary=Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/09/safeDic/&title=创建一个线程安全的字典 - littleWhale&summary=Swift与OC最大的区别就是新增了值类型Struct, let变量修饰后无法再次被赋值实现真正的immutable，也就是说一旦赋值不能再次修改。虽然OC中定义NSArray *arr 也是一个immutable，但是arr对象指针指向还可以被再次重新赋值。OC是一门运行时语言，arr所指向的变量都是运行时获取对象。OC中使用immutable不直接等同于线程安全。Objective-C中存在深拷贝、浅拷贝，即使你调用一个[NSMutableArray Copy]得到的NSArray也不代表这个数组中的对象都是经过深拷贝。
 我们先看一下如下代码会造成线程安全问题？：123if (self.xxx) &#123;    [self.dict setObject:@"ah" forKey:self.xxx];&#125;在单线程模式下肯定是没啥问题，但在多线程情况下比如线程A,线程B两者都同时进入了if条件，当A正要执行set操作,B已经对self.dict = nil。那么线程A肯定是不能设置成功的。还有另外一种情况，当我们的数据资源比如集合，多线程对资源进行争夺。如添加和移除操作。为了保证最终结果的准确性，我们通常会给操作代码加锁。123OSSpinLock(&amp;_lock);[self.array addObject:@"data1"];OSSpinUnlock(&amp;_lock);"
           
           >
@@ -535,6 +535,11 @@
         
         
           <div class="prev-next">
+            
+              <a class='prev' href='/2021/07/12/inheritance/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>在Swift中实现“多继承”</p>
+                <p class='content'>Swift能实现多继承吗？虽然多继承在C++中可以实现，但在Swift中，是不能够实现多继承的。但一个class可以遵循多个协议，只能继承一个父类。但值类型比如 struct , enum 就不...</p>
+              </a>
             
             
               <a class='next' href='/2021/07/08/hash/'>

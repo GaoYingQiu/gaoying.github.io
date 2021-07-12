@@ -535,6 +535,8 @@
         
           
         
+          
+        
       
     
     
@@ -553,7 +555,120 @@
         
           
   <h2 class="title">
-    <a href="/2021/07/08/safeDic/">
+    <a href="/2021/07/12/inheritance/">
+      在Swift中实现“多继承”
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月12日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：575字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Swift能实现多继承吗？"><a href="#Swift能实现多继承吗？" class="headerlink" title="Swift能实现多继承吗？"></a>Swift能实现多继承吗？</h3><p>虽然多继承在C++中可以实现，但在Swift中，是不能够实现多继承的。但一个class可以遵循多个协议，只能继承一个父类。但值类型比如 struct , enum 就不存在继承这么一说，但还是可以遵循多个协议的。<br><strong>Swift只支持协议多继承</strong><br>如：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ChildAB</span>:<span class="title">ChildA</span>,<span class="title">ChildB</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>: <span class="title">ChildAB</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">method</span><span class="params">()</span></span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>struct或class可遵循多个协议实现假“多继承”</strong><br>比如以下片段给UIView扩展实现多个协议的方法：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Blinkable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">blink</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Blinkable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">blink</span><span class="params">()</span></span> &#123;</span><br><span class="line">        alpha = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="type">UIView</span>.animate(</span><br><span class="line">            withDuration: <span class="number">0.5</span>,</span><br><span class="line">            delay: <span class="number">0.25</span>,</span><br><span class="line">            options: [.<span class="keyword">repeat</span>, .autoreverse],</span><br><span class="line">            animations: &#123;</span><br><span class="line">                <span class="keyword">self</span>.alpha = <span class="number">0</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: - Scalable</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Scalable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">scale</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Scalable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">scale</span><span class="params">()</span></span> &#123;</span><br><span class="line">        transform = .identity</span><br><span class="line"></span><br><span class="line">        <span class="type">UIView</span>.animate(</span><br><span class="line">            withDuration: <span class="number">0.5</span>,</span><br><span class="line">            delay: <span class="number">0.25</span>,</span><br><span class="line">            options: [.<span class="keyword">repeat</span>, .autoreverse],</span><br><span class="line">            animations: &#123;</span><br><span class="line">                <span class="keyword">self</span>.transform = <span class="type">CGAffineTransform</span>(scaleX: <span class="number">1.5</span>, y: <span class="number">1.5</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这样，我们申明一个View的实例，那么可以调用blink,scale 等方法。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIView</span>: <span class="title">Scalable</span>, <span class="title">Blinkable</span> </span>&#123;&#125;</span><br><span class="line">aView.blink()</span><br><span class="line">aView.scale()</span><br></pre></td></tr></table></figure><br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/12/inheritance/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/09/safeDic/">
       创建一个线程安全的字典
     </a>
   </h2>
@@ -592,7 +707,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月8日</p>
+    <p>发布于：2021年7月9日</p>
   </a>
 </div>
 
@@ -640,7 +755,7 @@
     
       
         <div class="button readmore">
-          <a href="/2021/07/08/safeDic/">
+          <a href="/2021/07/09/safeDic/">
             阅读全文 <i class="fas fa-chevron-right"></i>
           </a>
         </div>
@@ -1571,119 +1686,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/02/nameClick/">
-      群通知里的人员名字点击剖析
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月2日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：2.1k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：9分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们每个人的手机都安装有微信App,肯定大家都使用过以下场景在聊天群中，当有新的成员进入的时候，可以看到 某某邀请了某某1进入群聊，或者当你是群主的时候，某管理人员邀请了几个人进入时候看到 某某管理员邀请了张三、李四，王五，张三（同名）进入了群聊。对于邀请人员或者被邀请人员，我们发现人员的名称是可以点击的，即使同名的人，点击其名字也可以跳转到各自的主页详情中。</p>
-<h3 id="如何存储人员的id？"><a href="#如何存储人员的id？" class="headerlink" title="如何存储人员的id？"></a>如何存储人员的id？</h3><p>一条群成员变更通知就是一串文本，我们点击的时候肯定要存储好他的人员id,然后点击的时候就能拿到对应人员的id。从最简单的存储方案来看，这条内容可以写成以下格式： 管理员<font color=blue>刘某某</font>邀请了<font color=blue>张三</font>、<font color=blue>李四</font>、<font color=blue>王五</font>、<font color=blue>张三</font>进入了群聊。换成代码的格式即为：“管理员\”刘某某::1000\”邀请了\”张三::1001、李四::1002、王五::1003、张三::1004\”进入了群聊”。其中的代码格式为userName::userId这样一种形式进行拼接，中间的符号可以采用其他特殊符号代替。这里为了区别用户特殊性输入用了双冒号。多个成员之间用顿号隔开，人员与普通内容之间用符号双引号\”进行分割（斜杆为转义符）。 我们需要对这一串文字表达式进行解析进行UI显示，把人员名字后的拼接符号用户id进行过滤掉,组合成不带用户id的易懂文字内容给到用户。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/02/nameClick/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1692,7 +1694,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
       <div class="prev-next">
         
         <p class="current">
-          1 / 6
+          1 / 7
         </p>
         
           <a class="next" rel="next" href="/page/2/">
@@ -1787,7 +1789,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(28)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(29)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
