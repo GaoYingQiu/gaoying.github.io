@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,7 +16,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>标签：富文本 - littleWhale</title>
+    <title>中介者(mediator)模式 - littleWhale</title>
   
   
 
@@ -319,25 +317,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -347,11 +332,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/01/07/textViewPicture/">
-      TextView富文本插入图片
+  <h1 class="title">
+    <a href="/2021/07/12/mediator/">
+      中介者(mediator)模式
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -374,9 +359,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E6%8A%80%E6%9C%AF/' rel="nofollow">
+    <a href='/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>技术</p>
+      <p>设计模式</p>
     </a>
   </div>
 
@@ -387,27 +372,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年1月7日</p>
+    <p>发布于：2021年7月12日</p>
   </a>
 </div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：74字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
 
             
           
@@ -425,144 +392,208 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>welcome look this NoteTextView Small Demo l., you can use NoteTextView insertPicture that you can process the data to your server.  also, it will not be hide TextView ‘s point position  by keyboard . ok , just try . you can find it on my github.com/gaoyingqiu.<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/01/07/textViewPicture/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-    
-  
-</div>
-<aside class='l_side'>
-  
-  
-    
-    
-
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>Be brave，close to life</p>
-
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
           
-            <a href="mailto:qiugaoying@163.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+          <p>中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。中介者模式属于行为型模式。<br>在MVC 框架中，其中C（控制器）就是 M（模型）和 V（视图）的中介者。我们接下来用一个搜索视图来展示中介者模式:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">HistoryView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> isHidden: <span class="type">Bool</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setHistory</span><span class="params">(<span class="number">_</span> history: [String])</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">HistoryRepository</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> history: [<span class="type">String</span>] &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">addSearchTerm</span><span class="params">(<span class="number">_</span> term: String)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SearchHistoryMediator</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> searchBar: <span class="type">UISearchBar</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> historyView: <span class="type">HistoryView</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> observasion: <span class="type">NSKeyValueObservation?</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> historyRepository: <span class="type">HistoryRepository</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(searchBar: <span class="type">UISearchBar</span>, historyView: <span class="type">HistoryView</span>, historyRepository: <span class="type">HistoryRepository</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.searchBar = searchBar</span><br><span class="line">        <span class="keyword">self</span>.historyView = historyView</span><br><span class="line">        <span class="keyword">self</span>.historyRepository = historyRepository</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">self</span>.historyView.isHidden = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">self</span>.historyView.setHistory(historyRepository.history)</span><br><span class="line"></span><br><span class="line">        searchBar.delegate = <span class="keyword">self</span></span><br><span class="line">        observasion = searchBar.observe(\.text) &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (searchBar, <span class="number">_</span>) <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">self</span>?.historyView.isHidden = searchBar.text?.isEmpty ?? <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">SearchHistoryMediator</span>: <span class="title">UISearchBarDelegate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarTextDidBeginEditing</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarTextDidEndEditing</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarSearchButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> text = searchBar.text, !text.isEmpty &#123;</span><br><span class="line">            historyRepository.addSearchTerm(text)</span><br><span class="line">            historyView.setHistory(historyRepository.history)</span><br><span class="line">            searchBar.text = <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        searchBar.resignFirstResponder()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarCancelButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">true</span></span><br><span class="line">        searchBar.resignFirstResponder()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在控制器中使用中介者</span></span><br><span class="line"><span class="keyword">private</span>(<span class="keyword">set</span>) <span class="built_in">lazy</span> <span class="keyword">var</span> mediator: <span class="type">SearchHistoryMediator</span> = &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">SearchHistoryMediator</span>(searchBar: searchBar, historyView: historyView, historyRepository: historyRepository)</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    <span class="number">_</span> = mediator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>优点：降低了类的复杂度，将一对多转化成了一对一。各个类之间的解耦，减少对象之间的关联性，让每一个对象都能够独立</strong></p>
+
           
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
         
-          
-            <a href="https://github.com/gaoyingqiu"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+          height='225px'
+        ></div>
+      
     
   </div>
 </section>
 
   
 
-  
-    
-    
-  
 
-  <section class="widget category shadow desktop">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
+              
+            </div>
+          
+        </div>
+        
+          
 
 
-    <div class='content'>
-      <ul class="entry navigation">
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
         
-          <li><a class="flat-box"
-            title="/categories/Web/" href="/categories/Web/"
-            id="categoriesWeb"
-            ><div class='name'>Web</div><div class='badge'>(2)</div></a></li>
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-12T16:10:19+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年7月12日</p>
+  </a>
+</div>
+
         
-          <li><a class="flat-box"
-            title="/categories/iOS/" href="/categories/iOS/"
-            id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(30)</div></a></li>
+      
         
-          <li><a class="flat-box"
-            title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
-            id="categoriesE585B6E4BB96"
-            ><div class='name'>其他</div><div class='badge'>(14)</div></a></li>
+          
+
         
-          <li><a class="flat-box"
-            title="/categories/%E6%8A%80%E6%9C%AF/" href="/categories/%E6%8A%80%E6%9C%AF/"
-            id="categoriesE68A80E69CAF"
-            ><div class='name'>技术</div><div class='badge'>(6)</div></a></li>
+      
         
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E8%B0%88/" href="/categories/%E6%9D%82%E8%B0%88/"
-            id="categoriesE69D82E8B088"
-            ><div class='name'>杂谈</div><div class='badge'>(2)</div></a></li>
+          
+
         
-          <li><a class="flat-box"
-            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
+      
         
-      </ul>
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/12/mediator/&title=中介者(mediator)模式 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/12/mediator/&title=中介者(mediator)模式 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/12/mediator/&title=中介者(mediator)模式 - littleWhale&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
     </div>
   </section>
 
 
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2021/07/12/controllersStates/'>
+                <p class='title'>有限状态机驱动设计<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>有限状态自动机（FSM “finite state machine” 或者FSA “finite state automaton” ）是为研究有限内存的计算过程和某些语言类而抽象出的一种计算模型...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '中介者(mediator)模式',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+
   
 
   
@@ -570,22 +601,20 @@
     
   
 
-  <section class="widget tagcloud shadow desktop mobile">
+  <section class="widget related_posts shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
     
   </header>
 
 
-    <div class='content'>
-      <a href="/tags/AndroidTableView/" style="font-size: 14px; color: #999">AndroidTableView</a> <a href="/tags/DatePicker/" style="font-size: 14px; color: #999">DatePicker</a> <a href="/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/SKU/" style="font-size: 19px; color: #777">SKU</a> <a href="/tags/Slider/" style="font-size: 14px; color: #999">Slider</a> <a href="/tags/%E5%85%B3%E7%B3%BB%E5%9B%BE/" style="font-size: 14px; color: #999">关系图</a> <a href="/tags/%E5%AF%8C%E6%96%87%E6%9C%AC/" style="font-size: 14px; color: #999">富文本</a> <a href="/tags/%E6%8A%BD%E5%A5%96/" style="font-size: 14px; color: #999">抽奖</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a> <a href="/tags/%E8%BD%AF%E5%AE%9E%E5%8A%9B/" style="font-size: 14px; color: #999">软实力</a>
+    <div class="content">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/09/28/designPatterns/" title="几种典型的设计模式" rel="bookmark">几种典型的设计模式</a></h3></div></li></ul>
     </div>
   </section>
 
-
-  
 
   
 
@@ -782,6 +811,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
+    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 

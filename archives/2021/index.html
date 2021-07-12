@@ -459,6 +459,114 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/12/mediator/">
+      中介者(mediator)模式
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>设计模式</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月12日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：376字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。中介者模式属于行为型模式。<br>在MVC 框架中，其中C（控制器）就是 M（模型）和 V（视图）的中介者。我们接下来用一个搜索视图来展示中介者模式:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">HistoryView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> isHidden: <span class="type">Bool</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setHistory</span><span class="params">(<span class="number">_</span> history: [String])</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">HistoryRepository</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> history: [<span class="type">String</span>] &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">addSearchTerm</span><span class="params">(<span class="number">_</span> term: String)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SearchHistoryMediator</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> searchBar: <span class="type">UISearchBar</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> historyView: <span class="type">HistoryView</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> observasion: <span class="type">NSKeyValueObservation?</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> historyRepository: <span class="type">HistoryRepository</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(searchBar: <span class="type">UISearchBar</span>, historyView: <span class="type">HistoryView</span>, historyRepository: <span class="type">HistoryRepository</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.searchBar = searchBar</span><br><span class="line">        <span class="keyword">self</span>.historyView = historyView</span><br><span class="line">        <span class="keyword">self</span>.historyRepository = historyRepository</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">self</span>.historyView.isHidden = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">self</span>.historyView.setHistory(historyRepository.history)</span><br><span class="line"></span><br><span class="line">        searchBar.delegate = <span class="keyword">self</span></span><br><span class="line">        observasion = searchBar.observe(\.text) &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] (searchBar, <span class="number">_</span>) <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">self</span>?.historyView.isHidden = searchBar.text?.isEmpty ?? <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">SearchHistoryMediator</span>: <span class="title">UISearchBarDelegate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarTextDidBeginEditing</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarTextDidEndEditing</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarSearchButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> text = searchBar.text, !text.isEmpty &#123;</span><br><span class="line">            historyRepository.addSearchTerm(text)</span><br><span class="line">            historyView.setHistory(historyRepository.history)</span><br><span class="line">            searchBar.text = <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        searchBar.resignFirstResponder()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarCancelButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        historyView.isHidden = <span class="literal">true</span></span><br><span class="line">        searchBar.resignFirstResponder()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在控制器中使用中介者</span></span><br><span class="line"><span class="keyword">private</span>(<span class="keyword">set</span>) <span class="built_in">lazy</span> <span class="keyword">var</span> mediator: <span class="type">SearchHistoryMediator</span> = &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">SearchHistoryMediator</span>(searchBar: searchBar, historyView: historyView, historyRepository: historyRepository)</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    <span class="number">_</span> = mediator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>优点：降低了类的复杂度，将一对多转化成了一对一。各个类之间的解耦，减少对象之间的关联性，让每一个对象都能够独立</strong></p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/12/controllersStates/">
       有限状态机驱动设计
     </a>
@@ -2052,120 +2160,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/LeftSlide/">
-      奇怪的侧边栏问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1.4k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：6分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>开发中由于系统版本以及sdk，第三方库等原因，都会影响成出现一些奇怪的问题。当时是引用YYTextview控件解决消息cell长文本的光标选择范围内容复制的小功能。由于YYTextview光标弹出层自定义在另外一个新的Windown上，然后左侧侧滑出的view是新增在另一个新的Windown中。当侧边栏dismiss的时候，可能由于windown层级的影响，当在聊天输入框再次输入文字长按时候，系统出现的UIMenu层的Button不见了。当时想从根本问题去排查为啥系统的UIMenu当长按的时候操作功能的button为啥不见去解决，花费了将近2个多小时通过Xcode调试查看层级，阅读YYTextview的光标自定义层的实现以及添加到windown的层级，查看左侧侧边栏添加动画实现方式等都未解决。然后想到如果不通过新创建window来添加view 实现动画，而是通过present一个控制器实现侧边栏动画。最终问题得到了解决。</p>
-<h4 id="旧Slide侧滑方案"><a href="#旧Slide侧滑方案" class="headerlink" title="旧Slide侧滑方案"></a>旧Slide侧滑方案</h4><p>旧有的侧滑方案是创建一个新window,然后设置其windowLevel 为正常的+1，这样就在最顶层了，然后设置其rootViewController为侧滑的控制器。很有可能是新创建的window与YYtextView的光标选择层创建的window有冲突，然后造成UIMenu按钮消失了。</p>
-<h4 id="改进方案，Present一个控制器-SlideVC"><a href="#改进方案，Present一个控制器-SlideVC" class="headerlink" title="改进方案，Present一个控制器 SlideVC"></a>改进方案，Present一个控制器 SlideVC</h4><p>实则我们可以通过拿到最顶层控制器topVC，用导航控制器把SlideVC包裹好，设置它的 modalPresentationStyle 模式为UIModalPresentationOverCurrentContext，然后present出来 .这里要注意的是，系统的present方法是否有被runtime method swizled进行方法替换来公共统一处理modelPresentStyle问题，因为有些App交互不想使用系统的抽屉式present效果, 如果有需要做相关的过滤业务控制器逻辑判断。 侧边动画的实现：在SlideVC中定义一个半透明层背景bgView，添加tap手势，点击即关闭。往bgView添加一个左侧内容视图leftView 75%宽,右侧rightView。self.view添加一个Pan手势，用来计算leftView拖拽时候X的值位移变化。将内容控制器交由SlideVC管理：<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/LeftSlide/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2290,7 +2284,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
             id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(2)</div></a></li>
+            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
         
       </ul>
     </div>
