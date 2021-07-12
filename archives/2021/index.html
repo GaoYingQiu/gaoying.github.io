@@ -459,6 +459,117 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/12/multicast/">
+      multicast delegates
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>设计模式</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月12日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：456字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们知道delegate在OC中是比较经常使用的代理模式。主要作用是将某对象的行为属性传递到另一个对象。以及绑定代理都用用weak弱引用。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyClassDelegate</span>: <span class="title">class</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> delegate: <span class="type">MyClassDelegate?</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        delegate?.doFoo()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>问题：假如我不用埋点方法替换foo等,在用户调用触发doFoo()方法，可以怎样做日志行为分析？前提是delegate又不能强制破坏或替换。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MulticastDelegate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> delegates: <span class="type">NSHashTable</span>&lt;<span class="type">AnyObject</span>&gt; = <span class="type">NSHashTable</span>.weakObjects()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(<span class="number">_</span> delegate: T)</span></span> &#123;</span><br><span class="line">        delegates.add(delegate <span class="keyword">as</span> <span class="type">AnyObject</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">remove</span><span class="params">(<span class="number">_</span> delegateToRemove: T)</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> delegate <span class="keyword">in</span> delegates.allObjects.reversed() &#123;</span><br><span class="line">            <span class="keyword">if</span> delegate === delegateToRemove <span class="keyword">as</span> <span class="type">AnyObject</span> &#123;</span><br><span class="line">                delegates.remove(delegate)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">invoke</span><span class="params">(<span class="number">_</span> invocation: <span class="params">(T)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> delegate <span class="keyword">in</span> delegates.allObjects.reversed() &#123;</span><br><span class="line">            invocation(delegate <span class="keyword">as</span>! <span class="type">T</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClassMulticastDelegate</span>: <span class="title">MyClassDelegate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> multicast = <span class="type">MulticastDelegate</span>&lt;<span class="type">MyClassDelegate</span>&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span> delegates: [<span class="type">MyClassDelegate</span>]) &#123;</span><br><span class="line">        delegates.forEach(multicast.add)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        multicast.invoke &#123; $<span class="number">0</span>.doFoo() &#125; <span class="comment">//调用代理对象的doFoo方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnalyticsEngine</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">AnalyticsEngine</span>: <span class="title">MyClassDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">doFoo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Track foo event"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> logger = <span class="type">Logger</span>()</span><br><span class="line"><span class="keyword">let</span> analyticsEngine = <span class="type">AnalyticsEngine</span>()</span><br><span class="line"><span class="keyword">let</span> delegate = <span class="type">MyClassMulticastDelegate</span>([logger, analyticsEngine])</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myClass = <span class="type">MyClass</span>()</span><br><span class="line">myClass.delegate = delegate</span><br><span class="line"></span><br><span class="line">myClass.foo()</span><br></pre></td></tr></table></figure>
+<h3 id="统计搜索文字点击按钮日志分析"><a href="#统计搜索文字点击按钮日志分析" class="headerlink" title="统计搜索文字点击按钮日志分析"></a>统计搜索文字点击按钮日志分析</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchBarMulticastDelegate</span>: <span class="title">NSObject</span>, <span class="title">UISearchBarDelegate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> multicast = <span class="type">MulticastDelegate</span>&lt;<span class="type">UISearchBarDelegate</span>&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(delegates: [<span class="type">UISearchBarDelegate</span>]) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">        delegates.forEach(multicast.add)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarSearchButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        multicast.invoke &#123; $<span class="number">0</span>.searchBarSearchButtonClicked?(searchBar) &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarCancelButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        multicast.invoke &#123; $<span class="number">0</span>.searchBarCancelButtonClicked?(searchBar) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SearchViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> searchBar = <span class="type">UISearchBar</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SearchResultsController</span>: <span class="title">UIViewController</span>, <span class="title">UISearchBarDelegate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">unowned</span> <span class="keyword">var</span> svc: <span class="type">SearchViewController</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span> svc: <span class="type">SearchViewController</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.svc = svc</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(nibName: <span class="literal">nil</span>, bundle: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarSearchButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        <span class="comment">// Show over `SearchViewController`</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">searchBarCancelButtonClicked</span><span class="params">(<span class="number">_</span> searchBar: UISearchBar)</span></span> &#123;</span><br><span class="line">        <span class="comment">// Hide from `SearchViewController`</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构建多个delegate,组合组装成NSHashTable,再SearchBarMulticastDelegate内部实现每个delegate手动invoke调用方法。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">AnalyticsEngine</span>: <span class="title">UISearchBarDelegate</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Logger</span>: <span class="title">UISearchBarDelegate</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> search = <span class="type">SearchViewController</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> logger = <span class="type">Logger</span>()</span><br><span class="line"><span class="keyword">let</span> analyticsEngine = <span class="type">AnalyticsEngine</span>()</span><br><span class="line"><span class="keyword">let</span> searchResults = <span class="type">SearchResultsViewController</span>(search)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> searchBarMulticastDelegate = <span class="type">SearchBarMulticastDelegate</span>(delegates: [logger, analyticsEngine, searchResults])</span><br><span class="line">search.searchBar.delegate = searchBarMulticastDelegate</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/12/mediator/">
       中介者(mediator)模式
     </a>
@@ -2040,126 +2151,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/input@/">
-      聊天输入框@某人
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：960字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="聊天输入框-某人逻辑分类点说明"><a href="#聊天输入框-某人逻辑分类点说明" class="headerlink" title="聊天输入框@某人逻辑分类点说明"></a>聊天输入框@某人逻辑分类点说明</h3><p>IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：</p>
-<ol>
-<li>首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”</li>
-<li>input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”</li>
-<li>input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”</li>
-<li>input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”</li>
-</ol>
-<p>在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。</p>
-<p>核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/input@/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2284,7 +2275,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
             id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
+            ><div class='name'>设计模式</div><div class='badge'>(4)</div></a></li>
         
       </ul>
     </div>
