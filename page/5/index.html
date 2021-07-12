@@ -341,6 +341,121 @@
         
           
   <h2 class="title">
+    <a href="/2018/09/25/sinaPullPush/">
+      新浪微博 推和拉
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E6%8A%80%E6%9C%AF/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>技术</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月25日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：572字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>每个人的feed就是一个list，存储到redis;<br>用户前端产生的所有事件 发送到消息队列 RabbitMQ,<br>Server 根据 业务逻辑将新的item插入到下游用户的feed里面；</p>
+<p>在线推，推给活跃在线用户，离线拉；</p>
+<p>任务调度 ：选用了Celery；</p>
+<p>每个用户都有一个收件箱 和 发件箱；保存自己发过的动态以及Feed动态；</p>
+<p>用户A关注了用户B ， 用户B发布动态则将动态推进用户A的feed，这里使用redis的zset实现，sort为time（记得以毫秒为时间戳，秒级在数据量达到一定程度后，会有读取不到的问题，比如以时间戳为分页页码），value为具体的动态 ID（为什么是动态ID， 其实很简单， 就是因为动态的内容可以进行缓存，在redis里面全部走ID，修改动态内容也需要修改一处，动态内容可以保存在hash结构里）， 每个用户维护一个zset保存我发布的动态，一个zset保存我的feed动态，过期时间3~7天看情况而定。</p>
+<p>全局维护一个在线用户列表，怎么设计这个就自己琢磨了，为了防止用户挂后台导致与服务端为离线状态，所以最好是1~3小时未操作或者离线时间不大于3小时的，都当做在线处理，</p>
+<p>那么，当用户发了一条动态后，后台会有以下这些操作：</p>
+<p>在线推： 异步遍历在线的粉丝，将动态ID，添加到粉丝的Feed中。</p>
+<p>离线拉： 离线用户打开APP后，我们是会请求一个公共的入口接口，主做统计以及其他初始化操作，在这里，我们也开了一个异步线程，对用户进行Feed更新操作，防止用户进入APP后等待拉取时间过长，毕竟关注成千上万的人肯定有（其实万单位以下遍历都很快）。拉取过程其实就是把自己最后一条Feed的时间戳取出，去遍历关注的人的feed，将大于该时间的ID全部拉取回来。用户进入APP后，刷新即可看到最新操作。</p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2018/09/25/typeCells/">
       聊聊动态多类型cell的设计
     </a>
@@ -1403,125 +1518,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2017/09/04/productManager/">
-      你是个合格的产品经理？
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E5%85%B6%E4%BB%96/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>其他</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2017年9月4日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：531字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="首先，产品经理应该做什么？"><a href="#首先，产品经理应该做什么？" class="headerlink" title="首先，产品经理应该做什么？"></a>首先，产品经理应该做什么？</h4><p><strong> <font color=orange>帮助企业/用户为用户打造有价值的产品。</font> </strong></p>
-<h4 id="产品经理思维包括哪些？"><a href="#产品经理思维包括哪些？" class="headerlink" title="产品经理思维包括哪些？"></a>产品经理思维包括哪些？</h4><ol>
-<li>抓住需求的本质 - 人性 （一个优秀的产品经理需要具备抓住用户欲望的能力，而不是仅仅在产品上增加一个功能这么简单）<br/><br/></li>
-<li>核心需求的把控能力。(无论功能如何增加和外界给予任何干扰，都需要时刻保证产品的核心不被影响)<br/><br/></li>
-<li>时刻描画产品的蓝图 - 未来 （走一步，看百步。需要时刻心中明白产品的将来会是如何，最重要的是在走向未来的过程中又需要哪些助力）<br/><br/></li>
-<li>不断复盘产品的现在 - 总结 （这个决定做的对吗？有什么数据支撑？ 产品人需一日三省，不断总结，不断修正，给自己日后决策更加充足的依据）<br/><br/></li>
-<li>无懈可击的思维 - 逻辑思维 （慎密的思维能力，对整个业务流程要非常熟悉。）<br/><br/></li>
-<li>产品的终极价值 - 商业盈利 （不断迭代的过程中，我们需要懂得如何帮助产品走到商业实现）<br/><br/></li>
-<li>做减法如同做加法 - 极简 （做产品不是做功能，产品不是功能的不断累加，我们需要给产品瘦身的机会，给用户极简的体验，设问：每个版本要上的功能，你能删掉一个吗？）<br/><br/></li>
-<li>懂得和不同的人打交道 - 沟通（应该好好思考如何与不同岗位的同学打交道，知道大家的性格特点，懂得如何把信息有效地传递。）<br/><br/></li>
-<li>管理好自己的时间和任务 - todolist (对时间管理要更加细分化，多用TodoList ，会有不少的帮助。)<br/><br/></li>
-<li>宰相肚里能撑船  - 抗压 （产品经理的特殊位置，导致了人人可喷的境遇。在如此逆境中，需要有一个广阔的胸怀和极强的抗压能力，其实这些都不是什么，因为我们眼里只有产品。）</li>
-</ol>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1631,7 +1627,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(29)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(30)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
