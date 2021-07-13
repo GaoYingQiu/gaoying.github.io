@@ -341,6 +341,119 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/06/generics/">
+      用泛型和协议构建可伸缩性组件
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月6日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1.3k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：5分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在App开发中，数据层往往会做本地缓存，以便在网络不好的情况下能够先显示本地缓存数据。接下来将讲解到如何设计本地数据源中间件来实现业务数据的读取。在讲解之前我们会先了解一下简单泛型在Swift中的应用，结合associated types, 你也可以在协议中使用泛型。</p>
+<p>在介绍之前，我刚提到我想要对泛型数据存储在本地，然后还需要一个远程数据接口API提供数据以便在本地数据没有的情况下调用。假设我需要用户信息数据：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> localDataStore = <span class="type">UserDataStore</span>()</span><br><span class="line"><span class="keyword">let</span> remoteDataStore = <span class="type">UserApi</span>()</span><br><span class="line"><span class="keyword">let</span> dataStore = <span class="type">CacheBackedDataStore</span>(localDataStore, remoteDataStore)</span><br><span class="line"></span><br><span class="line">dataStore.fetch(userID) &#123; result <span class="keyword">in</span></span><br><span class="line">  <span class="comment">// handle result</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/06/generics/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/05/@State/">
       SwiftUI 属性包裹器
     </a>
@@ -1368,118 +1481,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
       
     </div>
     
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/02/06/webBegain/">
-      快速搭建前端网络请求
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Web/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>Web</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年2月6日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：5.7k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：25分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="HTTP超文本传输协议。"><a href="#HTTP超文本传输协议。" class="headerlink" title="HTTP超文本传输协议。"></a>HTTP超文本传输协议。</h3><h4 id="TCP-三次握手。"><a href="#TCP-三次握手。" class="headerlink" title="TCP 三次握手。"></a>TCP 三次握手。</h4><p>   1、客户端 发syn询问 给 服务器<br>   2、服务器  回应询问syn,并发送一个指令ack 客户端<br>   3、客户端 回 ack  服务器。 正式连接成功。 开始客户端请求Http报文 ，服务器响应报文。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/02/06/webBegain/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
       
     
   </section>
