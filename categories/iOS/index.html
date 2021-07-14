@@ -376,6 +376,118 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/14/UnitTestAsync/">
+      单元测试-异步篇
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月14日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1.3k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：6分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="SUT"><a href="#SUT" class="headerlink" title="SUT"></a>SUT</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">URLRequest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">search</span><span class="params">(term: String)</span></span> -&gt; <span class="type">URLRequest</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> components = <span class="type">URLComponents</span>(string: <span class="string">"https://itunes.apple.com/search"</span>)</span><br><span class="line">        components?.queryItems = [</span><br><span class="line">            .<span class="keyword">init</span>(name: <span class="string">"media"</span>, value: <span class="string">"music"</span>),</span><br><span class="line">            .<span class="keyword">init</span>(name: <span class="string">"entity"</span>, value: <span class="string">"song"</span>),</span><br><span class="line">            .<span class="keyword">init</span>(name: <span class="string">"term"</span>, value: <span class="string">"\(term)"</span>)</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="type">URLRequest</span>(url: components!.url!)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MusicService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">search</span><span class="params">(<span class="number">_</span> term: String, completion: @escaping <span class="params">(Result&lt;[Track], Error&gt;)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">        <span class="type">URLSession</span>.shared.dataTask(with: .search(term: term)) &#123; data, response, error <span class="keyword">in</span></span><br><span class="line">            <span class="type">DispatchQueue</span>.main.async &#123;</span><br><span class="line">                completion(<span class="keyword">self</span>.parse(data: data, error: error))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.resume()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">parse</span><span class="params">(data: Data?, error: Error?)</span></span> -&gt; <span class="type">Result</span>&lt;[<span class="type">Track</span>], <span class="type">Error</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> data = data &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">Result</span> &#123; <span class="keyword">try</span> <span class="type">JSONDecoder</span>().decode(<span class="type">SearchMediaResponse</span>.<span class="keyword">self</span>, from: data).results &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> .failure(error ?? <span class="type">URLError</span>(.badServerResponse))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/14/UnitTestAsync/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/14/unitest/">
       单元测试-视图篇
     </a>
@@ -1997,118 +2109,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/groupPlugin/">
-      群插件如何开发？
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="群插件的基础属性"><a href="#群插件的基础属性" class="headerlink" title="群插件的基础属性"></a>群插件的基础属性</h4><p>群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。<br>插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地模块 等等。<br>插件关系表： 群id，插件id，角标数量，排序值，是否显示，等等。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/groupPlugin/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2215,7 +2215,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(32)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(33)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

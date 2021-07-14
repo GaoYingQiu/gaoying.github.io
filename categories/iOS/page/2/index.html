@@ -342,6 +342,118 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/01/groupPlugin/">
+      群插件如何开发？
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月1日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="群插件的基础属性"><a href="#群插件的基础属性" class="headerlink" title="群插件的基础属性"></a>群插件的基础属性</h4><p>群插件一般是用H5配置的网页小插件，然后和群构造一个入口。本地通过sqlite维护一个插件表，以及群插件关系表。插件信息升级一下可分为平台系统必须插件以及业务自定义插件。具体可由业务决定。<br>插件有其基本属性：名称，插件id，类型，默认排序值，跳转内容(本地模块名/h5链接地址)，跳转类型：h5/本地模块 等等。<br>插件关系表： 群id，插件id，角标数量，排序值，是否显示，等等。<br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/01/groupPlugin/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/01/input@/">
       聊天输入框@某人
     </a>
@@ -1947,119 +2059,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2016/05/29/iOSDataTransmission/">
-      客户端网络请求模块的设计
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2016年5月29日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：514字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>AFNetworking也被广泛使用。其它的ASIHttpRequest，MKNetworkKit啥的其实也都还不错，苹果对网络请求部分已经做了很好的封装。但不管如何，APP端还是要对网络进行一个封装。在实际的App开发中，Afnetworking已经成为了事实上各大App的标准配置。</p>
-<p>iOS开发领域有很多对象间数据的传递方式，我看到的大多数App在网络层所采用的方案主要集中于这三种：Delegate，Notification，Block。我的意见是Delegate为主，Notification可以用在网络发生变化时候使用。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2016/05/29/iOSDataTransmission/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2172,7 +2171,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(32)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(33)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

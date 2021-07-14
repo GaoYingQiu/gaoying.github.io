@@ -341,6 +341,105 @@
         
           
   <h2 class="title">
+    <a href="/2019/12/10/longWord/">
+      找出字符串最长单词
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2019年12月10日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：189字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">countWords</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">100</span>] = <span class="string">"hello, my name is gaogaoProgramer, welcome to come here!"</span>;</span><br><span class="line">    <span class="keyword">int</span> index;</span><br><span class="line">    <span class="keyword">long</span> len = <span class="built_in">strlen</span>(str);</span><br><span class="line">    <span class="keyword">int</span> spaceIndex = <span class="number">0</span>;  <span class="comment">//从第一个下标开始算</span></span><br><span class="line">    <span class="keyword">int</span> recordMax = <span class="number">0</span>; <span class="comment">//单词空格之间下标最大差即为最长单词</span></span><br><span class="line">    <span class="keyword">int</span> beforeIndex = <span class="number">0</span>,afterIndex = <span class="number">0</span>; <span class="comment">//定义最长单词的前空格，后空格</span></span><br><span class="line">    <span class="keyword">for</span>(index = <span class="number">0</span>; index &lt; len; index++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(str[index] == <span class="number">32</span>)&#123; <span class="comment">//判断空格</span></span><br><span class="line">            <span class="keyword">if</span>(index - spaceIndex &gt; recordMax)&#123;</span><br><span class="line">                recordMax = index - spaceIndex;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">//记录前下标和后下标。</span></span><br><span class="line">                beforeIndex = spaceIndex;</span><br><span class="line">                afterIndex = index;</span><br><span class="line">            &#125;</span><br><span class="line">            spaceIndex = index;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"原始单词为：%s"</span>,str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n单词空格之间下标最大差:%d 前下标:%d,后下标:%d"</span>,recordMax,beforeIndex,afterIndex);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//输出找到的单词；</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n\n找到的最长度单词为："</span>);</span><br><span class="line">    <span class="keyword">int</span> charIndex;</span><br><span class="line">    <span class="keyword">for</span>(charIndex = beforeIndex; charIndex&lt; afterIndex ; charIndex++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>,str[charIndex]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2019/12/10/promotionMethod/">
       促销方式
     </a>
@@ -1307,114 +1406,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2019/02/11/customerDatePicker/">
-      自定义日期选择视图
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2019年2月11日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：15字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：1分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="自定义日期选择视图"><a href="#自定义日期选择视图" class="headerlink" title="自定义日期选择视图"></a>自定义日期选择视图</h3><p><img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/datePicker1.PNG" alt="图片1"></p>
-<h3 id="Demo-源码"><a href="#Demo-源码" class="headerlink" title="Demo 源码"></a>Demo 源码</h3><p><a href="https://github.com/GaoYingQiu/GYDatePicker" target="_blank" rel="noopener">Demo源码</a></p>
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1524,7 +1515,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(32)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(33)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
