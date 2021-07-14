@@ -425,6 +425,238 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/04/pictureEdit/">
+      图片编辑总结
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月4日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：5.4k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：25分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>图片编辑是基于 CLImageEditor 第三方进行改装得到仿微信的图片编辑交互。原CLImageEditor库是一个日本人写的图片编辑，支持涂鸦，裁剪，旋转，文字帖功能。但有几项我们进行改进。</p>
+<ul>
+<li>所有的这些图片操作我们汇总到一起进行编辑，最终保存的时候才处理所有操作汇总成一张处理图片。</li>
+<li>涂鸦撤销功能实现真正的上一步撤销，而不是仅仅透明色进行橡皮擦擦除。</li>
+<li>新增马赛克操作功能。</li>
+<li>把图片裁剪和旋转进行结合到一个页面操作，另外新增裁剪、旋转之后的图片恢复。</li>
+<li>改变颜色选择，文字编辑的交互，新增图片裁剪区域的边角重点标注。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CLImageEditorViewController：</span><br><span class="line"></span><br><span class="line">usedToolDic：使用过的工具【toolName:CLImageToolBase】</span><br><span class="line"></span><br><span class="line">-(CLImageToolBase *)currentEditTool; 当前正在使用的工具。</span><br><span class="line"></span><br><span class="line">-(UIImage *)getMergeDrawImageForCropTool; 最后合成的图片。用于业务转发、保存、回调给用户。</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;图片编辑器所支持的工具类都继承于CLImageToolBase, 通过CLClassList辅助类runtime方式自动将相关工具类注入到菜单项中。</span><br><span class="line">+ (NSArray*)subtools</span><br><span class="line">&#123;</span><br><span class="line">    return [CLImageToolInfo toolsWithToolClass:[CLImageToolBase class]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时具有setup, cleanUp 这几个“生命周期”方法，做相关工具的视图创建与清除。
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/04/pictureEdit/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/02/nameClick/">
+      群通知里的人员名字点击剖析
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月2日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：2.1k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：9分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们每个人的手机都安装有微信App,肯定大家都使用过以下场景在聊天群中，当有新的成员进入的时候，可以看到 某某邀请了某某1进入群聊，或者当你是群主的时候，某管理人员邀请了几个人进入时候看到 某某管理员邀请了张三、李四，王五，张三（同名）进入了群聊。对于邀请人员或者被邀请人员，我们发现人员的名称是可以点击的，即使同名的人，点击其名字也可以跳转到各自的主页详情中。</p>
+<h3 id="如何存储人员的id？"><a href="#如何存储人员的id？" class="headerlink" title="如何存储人员的id？"></a>如何存储人员的id？</h3><p>一条群成员变更通知就是一串文本，我们点击的时候肯定要存储好他的人员id,然后点击的时候就能拿到对应人员的id。从最简单的存储方案来看，这条内容可以写成以下格式： 管理员<font color=blue>刘某某</font>邀请了<font color=blue>张三</font>、<font color=blue>李四</font>、<font color=blue>王五</font>、<font color=blue>张三</font>进入了群聊。换成代码的格式即为：“管理员\”刘某某::1000\”邀请了\”张三::1001、李四::1002、王五::1003、张三::1004\”进入了群聊”。其中的代码格式为userName::userId这样一种形式进行拼接，中间的符号可以采用其他特殊符号代替。这里为了区别用户特殊性输入用了双冒号。多个成员之间用顿号隔开，人员与普通内容之间用符号双引号\”进行分割（斜杆为转义符）。 我们需要对这一串文字表达式进行解析进行UI显示，把人员名字后的拼接符号用户id进行过滤掉,组合成不带用户id的易懂文字内容给到用户。<br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/02/nameClick/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/01/groupPlugin/">
       群插件如何开发？
     </a>
@@ -980,7 +1212,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(30)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(32)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

@@ -376,6 +376,266 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/14/unitest/">
+      单元测试-视图篇
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月14日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：569字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>视图测试关注点：</p>
+<ul>
+<li>tableview的行数是否正确？</li>
+<li>label的文本显示是否正确？</li>
+<li>button 是否启用或禁用？</li>
+<li>view的frame是否正确？</li>
+</ul>
+<p>viewController如果可以从他们依赖项隔离出来，那么就可以测试。依赖注入是一种可以把视图控制器隔离出来的技术。在测试中，我们可以用假数据替换依赖项，模拟真实数据的行为。<br>viewController有两个职责：渲染数据、响应用户交互。在MVVM设计模式中，控制器不主动从model中拉数据，也不负责从model中取出数据来更新控制器。</p>
+<p>我们定义好要显示的状态属性等，然后通过协议来约束控制器实现渲染数据的动作。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ArtistDetailProps</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> title: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> fullName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> numberOfAlbums: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> numberOfFollowers: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ArtistDetailComponent</span>: <span class="title">AnyObject</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">render</span><span class="params">(<span class="number">_</span> props: ArtistDetailProps)</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>viewController遵循该协议，实现渲染数据的动作<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ArtistDetailViewController</span>: <span class="title">ArtistDetailComponent</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">render</span><span class="params">(<span class="number">_</span> props: ArtistDetailProps)</span></span> &#123;</span><br><span class="line">        navigationItem.title = props.title</span><br><span class="line">        fullNameLabel.text = props.fullName</span><br><span class="line">        numberOfAlbumsLabel.text = props.numberOfAlbums</span><br><span class="line">        numberOfFollowersLabel.text = props.numberOfFollowers</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="测试ViewController"><a href="#测试ViewController" class="headerlink" title="测试ViewController"></a>测试ViewController</h3><p>控制器的render是由presenter决定，我我们可以定义一个presenter的mockPresenter子类。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义好交互方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArtistDetailPresenterMock</span>: <span class="title">ArtistDetailPresenter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>(<span class="keyword">set</span>) <span class="keyword">var</span> onViewLoadedCalled = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onViewLoaded</span><span class="params">()</span></span> &#123;</span><br><span class="line">        onViewLoadedCalled = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>(<span class="keyword">set</span>) <span class="keyword">var</span> onEditCalled = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onEdit</span><span class="params">()</span></span> &#123;</span><br><span class="line">        onEditCalled = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>准备好测试数据:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArtistDetailViewControllerTests</span>: <span class="title">XCTestCase</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> presenter = <span class="type">ArtistDetailPresenterMock</span>()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">makeSUT</span><span class="params">()</span></span> -&gt; <span class="type">ArtistDetailViewController</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> storyboard = <span class="type">UIStoryboard</span>(name: <span class="string">"Main"</span>, bundle: <span class="literal">nil</span>)</span><br><span class="line">        <span class="keyword">let</span> sut = storyboard.instantiateViewController(identifier: <span class="string">"ArtistDetailViewController"</span>) <span class="keyword">as</span>! <span class="type">ArtistDetailViewController</span></span><br><span class="line">        sut.presenter = presenter</span><br><span class="line">        sut.loadViewIfNeeded()</span><br><span class="line">        <span class="keyword">return</span> sut</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">//验证交互：</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">testViewDidLoadCallsPresenter</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">let</span> sut = makeSUT()</span><br><span class="line"></span><br><span class="line">      sut.viewDidLoad()</span><br><span class="line"></span><br><span class="line">      <span class="type">XCTAssertTrue</span>(presenter.onViewLoadedCalled)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">testOnEditCallsPresenter</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">let</span> sut = makeSUT()</span><br><span class="line"></span><br><span class="line">      sut.onEdit(.<span class="keyword">init</span>())</span><br><span class="line"></span><br><span class="line">      <span class="type">XCTAssertTrue</span>(presenter.onEditCalled)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//验证测试数据是否正确</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">testRender</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">let</span> props = <span class="type">ArtistDetailProps</span>(title: <span class="string">"TITLE"</span>, fullName: <span class="string">"NAME"</span>, numberOfAlbums: <span class="string">"1"</span>, numberOfFollowers: <span class="string">"2"</span>)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> sut = makeSUT()</span><br><span class="line"></span><br><span class="line">      sut.render(props)</span><br><span class="line"></span><br><span class="line">      <span class="type">XCTAssertEqual</span>(sut.navigationItem.title, <span class="string">"TITLE"</span>)</span><br><span class="line">      <span class="type">XCTAssertEqual</span>(sut.fullNameLabel.text, <span class="string">"NAME"</span>)</span><br><span class="line">      <span class="type">XCTAssertEqual</span>(sut.numberOfAlbumsLabel.text, <span class="string">"1"</span>)</span><br><span class="line">      <span class="type">XCTAssertEqual</span>(sut.numberOfFollowersLabel.text, <span class="string">"2"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>ok，以上测试用例我们验证了用户交互行为是否触发 以及 渲染数据的正确与否。<br>总结：<strong>如果要让viewController可测试，我们需要让viewController数据渲染被动而非主动(MVVM模式或者MVP模式)，可以通过依赖注入来定义mock模型，实现可测试化。控制器和视图的测试不是测试颜色、布局等样式，而是测试交互以及数据渲染的准确性！</strong></p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/14/swiftUnitTest/">
+      Swift单元测试
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月14日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1.3k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：5分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是单元测试"><a href="#什么是单元测试" class="headerlink" title="什么是单元测试"></a>什么是单元测试</h3><p>单元测试是运行一个方法（程序的已部分功能代码）验证其输入和输出结果的正确性。通过调用开放的API和行为属性，一般有:</p>
+<ul>
+<li>方法返回值</li>
+<li>改变Class的属性</li>
+<li>缓存数据的CURD</li>
+<li>发送通知</li>
+</ul>
+<h3 id="为什么需要写单元测试"><a href="#为什么需要写单元测试" class="headerlink" title="为什么需要写单元测试"></a>为什么需要写单元测试</h3><p>单元测试可有效减少程序bug，保证程序结果的准确性，改善代码结构。</p>
+<h3 id="定义一个好的单元测试"><a href="#定义一个好的单元测试" class="headerlink" title="定义一个好的单元测试"></a>定义一个好的单元测试</h3><p>一个好的单元测试具有以下特点：</p>
+<ul>
+<li>可读性高</li>
+<li>可维护性</li>
+<li>可靠的</li>
+</ul>
+<h4 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h4><p>当单元测试失败的时候，你能够快速找到失败的原因代码。单元测试需要符合代码规范，格式、命名、模式等等。</p>
+<ul>
+<li>简洁的命名、变量</li>
+<li>清晰的异常信息</li>
+<li>遵循合适的断言结构</li>
+</ul>
+<h4 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h4><ul>
+<li>只测试public,或者internals变量或者方法。不要仅仅为了验证私有和文件私有属性或方法而削弱封装。</li>
+<li>不要把测试代码放到生成环境</li>
+<li>每项测试只测试一个业务功能</li>
+<li>重用代码。如果测试用例包含很多复制重复的代码，需要进行抽象封装，创建一个共享共用的方法如下片段UserStorageTests代码。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserStorageTests</span>: <span class="title">XCTestCase</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> userDefaults = <span class="type">UserDefaultsMock</span>()</span><br><span class="line">    <span class="keyword">let</span> keychain = <span class="type">KeychainMock</span>()</span><br><span class="line">    <span class="keyword">let</span> user = <span class="type">User</span>(id: <span class="number">1</span>, username: <span class="string">"U1"</span>, password: <span class="string">"P1"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">testUsernameSavedToStorage</span><span class="params">()</span></span> &#123;</span><br><span class="line">        makeSUT().save(user)</span><br><span class="line">        <span class="type">XCTAssertNotNil</span>(userDefaults.inputUsername)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">testPasswordSavedToSecureStorage</span><span class="params">()</span></span> &#123;</span><br><span class="line">        makeSUT().save(user)</span><br><span class="line">        <span class="type">XCTAssertNotNil</span>(keychain.inputPassword)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">makeSUT</span><span class="params">()</span></span> -&gt; <span class="type">UserStorage</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">UserStorage</span>(storage: userDefaults, secureStorage: keychain)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h4><ul>
+<li>100%的通过率</li>
+<li>测试用例可以重现步骤。</li>
+<li>避免在编写单元测试时候写测试逻辑。不要写for,while等循环，不要写if,else,Switch等条件语句，不要写do{}catch{}异常捕获(例如下列片段代码，我们可以用throws将异常抛出)。 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Item</span>:<span class="title">Codable</span>,<span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> id:<span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//`Item` has custom Codable implementations that we want to test</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SwiftTestUITests</span>: <span class="title">XCTestCase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">testItemCodable</span><span class="params">()</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> expected = <span class="type">Item</span>(id: <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">let</span> encoded = <span class="keyword">try</span> <span class="type">JSONEncoder</span>().encode(expected)</span><br><span class="line">      <span class="keyword">let</span> decoded = <span class="keyword">try</span> <span class="type">JSONDecoder</span>().decode(<span class="type">Item</span>.<span class="keyword">self</span>, from: encoded)</span><br><span class="line">      <span class="type">XCTAssertEqual</span>(decoded, expected)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/14/swiftUnitTest/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/12/controllersStates/">
       有限状态机驱动设计
     </a>
@@ -1849,240 +2109,6 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/input@/">
-      聊天输入框@某人
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：960字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="聊天输入框-某人逻辑分类点说明"><a href="#聊天输入框-某人逻辑分类点说明" class="headerlink" title="聊天输入框@某人逻辑分类点说明"></a>聊天输入框@某人逻辑分类点说明</h3><p>IM 应用软件无论是App端或者是PC端都有@某人这样一个功能点，由于用户输入框输入条件的复杂随机性种类多，@的针对不同情况进行拼接或者新增样式显示蓝色字体表示该人名可链接。由输入框开始，用户输入@的方式进行分类：</p>
-<ol>
-<li>首字母为空，用户直接输入@，然后跳转到成员页面进行选择相关人员，选完即带回人名 结果为：“@某人”</li>
-<li>input输入框输入了文字的基础上: 在最前面下班为0的第1个位置进行插入@  结果为：“@某人原input输入框的文字”</li>
-<li>input输入框输入了文字的基础上，在最后面下班为length-1的第后一个位置进行插入@   结果为：“原input输入框的文字@某人”</li>
-<li>input输入框输入了文字的基础上，在文字内容中输入@。即条件 0 &lt; index &lt; length-1 结果为：“原input输入@某人框的文字”</li>
-</ol>
-<p>在以上四种输入情况中，3，4 输入拼接@某人的时候，需要判断前一个字是否为@, 如果是,则后面拼接的时候直接+某人即可。另外当在第4种情况文字中间输入的时候，中英文下输入可能遇到文本框的值为 “ @@文字”，按照之前的逻辑当光标输入在第2个@后时，然后键盘输入@跳转页面选择成员，最后的结果应该是“ @@某人文字”这个组合，为了更友好地显示，还需检查当前两个也是@的时候，即出现1个@. 即结果为“ @某人文字” 以便更友好地显示。</p>
-<p>核心逻辑：根据文本框原输入文字是否有内容，无内容时候直接拼接。有内容时候分两种情况，即光标的输入位置情况：当location等于0的时候，即在首位置输入@某人拼接原文本内容。当location大于0的时候，即光标可能出现在内容文字之间，也可能是在最后面。也是分两种情况：根据location+1判断是否小于原文本框文字长度length.如果小于，则表示在内容之间插入。否则,在内容最后尾部插入。无论是之间还是尾部做插入，都需检查前一个字符是否为@,如果是，则在做拼接人名时候就无需再追加@。当在之间做插入的时候，为了友好显示，可适当判断前两个字符为@@时候进行替换为一个@。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/input@/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/01/LeftSlide/">
-      奇怪的侧边栏问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月1日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1.4k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：6分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>开发中由于系统版本以及sdk，第三方库等原因，都会影响成出现一些奇怪的问题。当时是引用YYTextview控件解决消息cell长文本的光标选择范围内容复制的小功能。由于YYTextview光标弹出层自定义在另外一个新的Windown上，然后左侧侧滑出的view是新增在另一个新的Windown中。当侧边栏dismiss的时候，可能由于windown层级的影响，当在聊天输入框再次输入文字长按时候，系统出现的UIMenu层的Button不见了。当时想从根本问题去排查为啥系统的UIMenu当长按的时候操作功能的button为啥不见去解决，花费了将近2个多小时通过Xcode调试查看层级，阅读YYTextview的光标自定义层的实现以及添加到windown的层级，查看左侧侧边栏添加动画实现方式等都未解决。然后想到如果不通过新创建window来添加view 实现动画，而是通过present一个控制器实现侧边栏动画。最终问题得到了解决。</p>
-<h4 id="旧Slide侧滑方案"><a href="#旧Slide侧滑方案" class="headerlink" title="旧Slide侧滑方案"></a>旧Slide侧滑方案</h4><p>旧有的侧滑方案是创建一个新window,然后设置其windowLevel 为正常的+1，这样就在最顶层了，然后设置其rootViewController为侧滑的控制器。很有可能是新创建的window与YYtextView的光标选择层创建的window有冲突，然后造成UIMenu按钮消失了。</p>
-<h4 id="改进方案，Present一个控制器-SlideVC"><a href="#改进方案，Present一个控制器-SlideVC" class="headerlink" title="改进方案，Present一个控制器 SlideVC"></a>改进方案，Present一个控制器 SlideVC</h4><p>实则我们可以通过拿到最顶层控制器topVC，用导航控制器把SlideVC包裹好，设置它的 modalPresentationStyle 模式为UIModalPresentationOverCurrentContext，然后present出来 .这里要注意的是，系统的present方法是否有被runtime method swizled进行方法替换来公共统一处理modelPresentStyle问题，因为有些App交互不想使用系统的抽屉式present效果, 如果有需要做相关的过滤业务控制器逻辑判断。 侧边动画的实现：在SlideVC中定义一个半透明层背景bgView，添加tap手势，点击即关闭。往bgView添加一个左侧内容视图leftView 75%宽,右侧rightView。self.view添加一个Pan手势，用来计算leftView拖拽时候X的值位移变化。将内容控制器交由SlideVC管理：<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/01/LeftSlide/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2091,7 +2117,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
       <div class="prev-next">
         
         <p class="current">
-          1 / 2
+          1 / 3
         </p>
         
           <a class="next" rel="next" href="/categories/iOS/page/2/">
@@ -2189,7 +2215,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(30)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(32)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
