@@ -1,1 +1,1 @@
-https://www.littlewhale.xyz/2021/07/16/PropertyWrappers/
+https://www.littlewhale.xyz/2021/07/16/ValueTypes/

@@ -425,6 +425,118 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/07/result/">
+      使用Result（Swift5）
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月7日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1.2k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：5分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在我们设计网络层响应结果的时候，Result是大家用的比较多的。和Optional有点类似，它是用来表述返回类型是成功或者失败。在Swift5.0中，Swift团队已经把Result加入到了标准库。这篇文章将讲解到何时去使用Result,以及怎样使用Result。<br>上篇文章，我们讲到Swift异常处理，在处理时候用do{}catch{}捕捉异常,以及在方法名后通过throws关键字将异常往上层抛。和抛错误不同的是，在代码中用Result作为返回类型可以达到我们需要的效果。更大的不同是，Result可以用于在异步处理时候，如鱼得水般地优雅处理成功与失败的回调返回。在讲解之前，我们先看一下以下片段1代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadData</span><span class="params">(from url: URL, completion:@escaping <span class="params">(Data?)</span></span></span> -&gt; <span class="type">Void</span>) <span class="keyword">throws</span> &#123;</span><br><span class="line">    <span class="type">URLSession</span>.shared.dataTask(with: url) &#123; data, response, error <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> error = error &#123;</span><br><span class="line">          <span class="keyword">throw</span> error</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> data = data &#123;</span><br><span class="line">          completion(data)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;.resume()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>按照以往的方式，当error有异常时候，我们进行抛出异常，然后方法上也加上throws。假设以上代码编译通过，那么在调用的时候代码片段如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> loadData(from: aURL) &#123; data <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"fetched data"</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"This will be executed before any data is fetched from the network."</span>) <span class="comment">//这行代码会被先执行。由于loadData方法是异步处理请求数据，就算发生错误，error抛出存在一定的执行时长。这就违背了异常捕捉而中止的性质了，也谈不上异常捕捉。</span></span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">  <span class="built_in">print</span>(error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/07/result/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/07/error/">
       在Swift中有效地抛异常
     </a>
@@ -1675,7 +1787,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(36)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(37)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
