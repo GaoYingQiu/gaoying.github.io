@@ -376,6 +376,357 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/16/PropertyWrappers/">
+      Property Wrappers
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月16日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：714字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Property Wrappers 是 Swift5.1语言的一个功能点，允许我们定义一个自定义的类型，实现get,set方法的一些包装，以便重用。那接下来你可能会提出几个问题？</p>
+<ul>
+<li>它是用来解决什么问题？</li>
+<li>怎样实现一个属性包裹？</li>
+<li>怎样去接收一个属性变量？</li>
+<li>属性包裹器被Swift编译器编译成什么了？</li>
+<li>属性包裹器有什么限制？</li>
+</ul>
+<h3 id="理解属性包裹"><a href="#理解属性包裹" class="headerlink" title="理解属性包裹"></a>理解属性包裹</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Bar</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> _x = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> x: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; _x &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            _x = newValue</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"New value is \(newValue)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="type">Bar</span>()</span><br><span class="line">bar.x = <span class="number">1</span> <span class="comment">// Prints 'New value is 1'</span></span><br></pre></td></tr></table></figure>
+<p>为了复用，我们将变量定义成泛型。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ConsoleLogged</span>&lt;<span class="title">Value</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> value: <span class="type">Value</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(wrappedValue: <span class="type">Value</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.value = wrappedValue</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> wrappedValue: <span class="type">Value</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; value &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            value = newValue</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"New value is \(newValue)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>Ok，我们用ConsoleLogged重写Bar<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Bar</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> _x = <span class="type">ConsoleLogged</span>&lt;<span class="type">Int</span>&gt;(wrappedValue: <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> x: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; _x.wrappedValue &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; _x.wrappedValue = newValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="type">Bar</span>()</span><br><span class="line">bar.x = <span class="number">1</span> <span class="comment">// Prints 'New value is 1'</span></span><br></pre></td></tr></table></figure><br>Swift提供@propertyWrapper关键字对以上封装。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@propertyWrapper</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ConsoleLogged</span>&lt;<span class="title">Value</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">// The rest of the code is unchanged</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/16/PropertyWrappers/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/15/DependencyInjection/">
+      依赖注入
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月15日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：526字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>依赖注入是一种让代码低耦合的设计模式。<br>有四种实现方式：</p>
+<ul>
+<li>初始化注入</li>
+<li>属性赋值注入</li>
+<li>接口注入</li>
+<li>容器注入</li>
+</ul>
+<h3 id="初始化注入"><a href="#初始化注入" class="headerlink" title="初始化注入"></a>初始化注入</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Dependency</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DependencyImplementation</span>: <span class="title">Dependency</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// Does something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dependency: <span class="type">Dependency</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(dependency: <span class="type">Dependency</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.dependency = dependency <span class="comment">//注入后不可再次更改。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</span><br><span class="line">        dependency.foo()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> client = <span class="type">Client</span>(dependency: <span class="type">DependencyImplementation</span>())</span><br><span class="line">client.foo()</span><br></pre></td></tr></table></figure>
+<p>初始化注入后，属性不可再被更改。当超过三个以上的属性需要注入，那么这个时候适合用属性注入的方式。<br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/15/DependencyInjection/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2021/07/15/UserDefaults/">
+      UserDefaults with PropertyWrapper
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月15日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：647字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>UserDefaults可以存储一些基础数据类型，如：Data，String，Date，Bool，Int，Double，Float，Array，Dictionary，URL，等基础对象。也可以存储自定义对象(但需要实现编码成Data进行存储)。<br>尽管如此，我们还是不推荐使用UserDefaults来存储数据量大的数据。因为读写非常昂贵，userDefaults最终用.plist文件进行存储。存储大数据会使此文件变得臃肿。<br>对于自定义的对象，我们可以通过写文件方式将json写到沙盒文件中。或者存储到coreData. Sqlite等。UserDefaults一般用于存储一些简单的数据类型，存储用户的偏好设置等。在写少读多的情况下，性能才会高。底层是通过读写xml文件方式都数据进行读写。</p>
+<p>接下来我们用PropertyWrapper对UserDefaults进行封装。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@propertyWrapper</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UserDefault</span>&lt;<span class="title">T</span>: <span class="title">PropertyListValue</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> key: <span class="type">Key</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> wrappedValue: <span class="type">T?</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="type">UserDefaults</span>.standard.value(forKey: key.rawValue) <span class="keyword">as</span>? <span class="type">T</span> &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; <span class="type">UserDefaults</span>.standard.<span class="keyword">set</span>(newValue, forKey: key.rawValue) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>需要对传入的泛型数据做约束，遵循PropertyListValue协议<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义约束协议</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Data</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Date</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Bool</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Double</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Float</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每个元素必须是 PropertyListValue 类型</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span>: <span class="title">PropertyListValue</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Dictionary</span>: <span class="title">PropertyListValue</span> <span class="title">where</span> <span class="title">Key</span> == <span class="title">String</span>, <span class="title">Value</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure><br>然后我们定义Key的结构体，遵循 RawRepresentable 协议。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Key</span>: <span class="title">RawRepresentable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> rawValue: <span class="type">String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>使用:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">StorageTest</span> </span>&#123;</span><br><span class="line">    @<span class="type">UserDefault</span>(key: <span class="type">Key</span>(rawValue: <span class="string">"isFirstLaunch"</span>))</span><br><span class="line">    <span class="keyword">var</span> isFirstLaunchFlag: <span class="type">Bool?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>为了达到@UserDefault(key: “isFirstLaunch”)这样的简写效果，我们让Key实现ExpressibleByStringLiteral协议。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Key</span>: <span class="title">ExpressibleByStringLiteral</span> </span>&#123;</span><br><span class="line">    <span class="keyword">init</span>(stringLiteral: <span class="type">String</span>) &#123;</span><br><span class="line">        rawValue = stringLiteral</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">StorageTest</span> </span>&#123;</span><br><span class="line">    @<span class="type">UserDefault</span>(key: <span class="string">"isFirstLaunch"</span>)</span><br><span class="line">    <span class="keyword">var</span> isFirstLaunchFlag: <span class="type">Bool?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>为了统一的管理，我们将存储键写在Key结构体中。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Key</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> isFirstLaunch: <span class="type">Key</span> = <span class="string">"isFirstLaunch"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">StorageTest</span> </span>&#123;</span><br><span class="line">    @<span class="type">UserDefault</span>(key: .isFirstLaunch)</span><br><span class="line">    <span class="keyword">var</span> isFirstLaunchFlag: <span class="type">Bool?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DefaultsObservation</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> key: <span class="type">Key</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> onChange: (<span class="type">Any</span>, <span class="type">Any</span>) -&gt; <span class="type">Void</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">init</span>(key: <span class="type">Key</span>, onChange: @escaping (<span class="type">Any</span>, <span class="type">Any</span>) -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.onChange = onChange</span><br><span class="line">        <span class="keyword">self</span>.key = key</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">        <span class="type">UserDefaults</span>.standard.addObserver(<span class="keyword">self</span>, forKeyPath: key.rawValue, options: [.old, .new], context: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">observeValue</span><span class="params">(forKeyPath keyPath: String?, of object: <span class="keyword">Any</span>?, change: [NSKeyValueChangeKey: <span class="keyword">Any</span>]?, context: UnsafeMutableRawPointer?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> change = change, object != <span class="literal">nil</span>, keyPath == key.rawValue <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        onChange(change[.oldKey] <span class="keyword">as</span> <span class="type">Any</span>, change[.newKey] <span class="keyword">as</span> <span class="type">Any</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">deinit</span> &#123;</span><br><span class="line">        <span class="type">UserDefaults</span>.standard.removeObserver(<span class="keyword">self</span>, forKeyPath: key.rawValue, context: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@propertyWrapper</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UserDefault</span>&lt;<span class="title">T</span>: <span class="title">PropertyListValue</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> projectedValue: <span class="type">UserDefault</span>&lt;<span class="type">T</span>&gt; &#123; <span class="keyword">return</span> <span class="keyword">self</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">observe</span><span class="params">(change: @escaping <span class="params">(T?, T?)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">NSObject</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">DefaultsObservation</span>(key: key) &#123; old, new <span class="keyword">in</span></span><br><span class="line">            change(old <span class="keyword">as</span>? <span class="type">T</span>, new <span class="keyword">as</span>? <span class="type">T</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The rest of the code is unchanged</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用法:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> storage = <span class="type">Storage</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> observation = storage.$isFirstLaunch.observe &#123; old, new <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Changed from: \(old) to \(new)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">storage.isFirstLaunch = <span class="literal">true</span></span><br><span class="line">storage.isFirstLaunch?.toggle()</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/14/UnitTestAsync/">
       单元测试-异步篇
     </a>
@@ -1756,359 +2107,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/05/sqlite/">
-      Sqlite 并行模式的试验探究
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月5日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：755字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>大多数产品在本地Sqlite存储的时候，基本都是用了串行模式。即整个应用全局只有一个sql操作句柄，用单例管理着这个SqlHandler。另外还有一个模式叫线程模式。这种模式下很容易出现Sqlite_Busy错误。</p>
-<ol>
-<li>当有写操作时，其他读操作会被驳回。</li>
-<li>当有写操作时，其他写操作会被驳回。</li>
-<li>当开启事务时，在事务提交之前，其他写操作会被驳回。</li>
-<li>当开启事务时，在事务提交之前，其他事务请求会被驳回。</li>
-<li>当有读操作时，其他写操作会被驳回。</li>
-<li>读操作之间能够并发执行。</li>
-</ol>
-<p>第三方库<a href="https://github.com/Tencent/wcdb/wiki/Swift-%e6%a8%a1%e5%9e%8b%e7%bb%91%e5%ae%9a" target="_blank" rel="noopener">WCDB</a>支持多线程度于读与读，读与写并发执行，写与写串行执行。WCDB 在多线程方面明显优于 FMDB 和 ModelSqliteKit，通过 WCDB 的改造，使得SQLite的性能发挥到极致。</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/05/sqlite/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/04/pictureEdit/">
-      图片编辑总结
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月4日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：5.4k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：25分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>图片编辑是基于 CLImageEditor 第三方进行改装得到仿微信的图片编辑交互。原CLImageEditor库是一个日本人写的图片编辑，支持涂鸦，裁剪，旋转，文字帖功能。但有几项我们进行改进。</p>
-<ul>
-<li>所有的这些图片操作我们汇总到一起进行编辑，最终保存的时候才处理所有操作汇总成一张处理图片。</li>
-<li>涂鸦撤销功能实现真正的上一步撤销，而不是仅仅透明色进行橡皮擦擦除。</li>
-<li>新增马赛克操作功能。</li>
-<li>把图片裁剪和旋转进行结合到一个页面操作，另外新增裁剪、旋转之后的图片恢复。</li>
-<li>改变颜色选择，文字编辑的交互，新增图片裁剪区域的边角重点标注。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CLImageEditorViewController：</span><br><span class="line"></span><br><span class="line">usedToolDic：使用过的工具【toolName:CLImageToolBase】</span><br><span class="line"></span><br><span class="line">-(CLImageToolBase *)currentEditTool; 当前正在使用的工具。</span><br><span class="line"></span><br><span class="line">-(UIImage *)getMergeDrawImageForCropTool; 最后合成的图片。用于业务转发、保存、回调给用户。</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;图片编辑器所支持的工具类都继承于CLImageToolBase, 通过CLClassList辅助类runtime方式自动将相关工具类注入到菜单项中。</span><br><span class="line">+ (NSArray*)subtools</span><br><span class="line">&#123;</span><br><span class="line">    return [CLImageToolInfo toolsWithToolClass:[CLImageToolBase class]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时具有setup, cleanUp 这几个“生命周期”方法，做相关工具的视图创建与清除。
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/04/pictureEdit/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/02/nameClick/">
-      群通知里的人员名字点击剖析
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月2日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：2.1k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：9分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们每个人的手机都安装有微信App,肯定大家都使用过以下场景在聊天群中，当有新的成员进入的时候，可以看到 某某邀请了某某1进入群聊，或者当你是群主的时候，某管理人员邀请了几个人进入时候看到 某某管理员邀请了张三、李四，王五，张三（同名）进入了群聊。对于邀请人员或者被邀请人员，我们发现人员的名称是可以点击的，即使同名的人，点击其名字也可以跳转到各自的主页详情中。</p>
-<h3 id="如何存储人员的id？"><a href="#如何存储人员的id？" class="headerlink" title="如何存储人员的id？"></a>如何存储人员的id？</h3><p>一条群成员变更通知就是一串文本，我们点击的时候肯定要存储好他的人员id,然后点击的时候就能拿到对应人员的id。从最简单的存储方案来看，这条内容可以写成以下格式： 管理员<font color=blue>刘某某</font>邀请了<font color=blue>张三</font>、<font color=blue>李四</font>、<font color=blue>王五</font>、<font color=blue>张三</font>进入了群聊。换成代码的格式即为：“管理员\”刘某某::1000\”邀请了\”张三::1001、李四::1002、王五::1003、张三::1004\”进入了群聊”。其中的代码格式为userName::userId这样一种形式进行拼接，中间的符号可以采用其他特殊符号代替。这里为了区别用户特殊性输入用了双冒号。多个成员之间用顿号隔开，人员与普通内容之间用符号双引号\”进行分割（斜杆为转义符）。 我们需要对这一串文字表达式进行解析进行UI显示，把人员名字后的拼接符号用户id进行过滤掉,组合成不带用户id的易懂文字内容给到用户。<br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/02/nameClick/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2215,7 +2213,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(33)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(36)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

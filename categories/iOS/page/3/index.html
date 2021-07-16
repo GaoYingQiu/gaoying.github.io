@@ -342,6 +342,348 @@
         
           
   <h2 class="title">
+    <a href="/2018/09/28/mapGesture/">
+      地图多手势的应用
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月28日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：680字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG253.jpeg" alt="图片"><br><img src="http://qyanblog.oss-cn-shenzhen.aliyuncs.com/WechatIMG252.jpeg" alt="图片2"><br>当需要在地图上层覆盖一个列表时候，我们想看到更多的内容，列表被拉出来后翻看数据；<br>当想收起时候，可用下拉，或者随着手势滑落下来；</p>
+<p>需解决的问题：<br>1、滑动表格，地图不移动；手势来回滑时候，列表要跟着高度变化；<br>2、当滑到最高时候，不再往上滑动；相反，滑到最低高度时候不再继续向下；<br>3、滑上去之后，再往下滑动 不影响列表数据的查看与浏览；</p>
+<p><strong>思考</strong></p>
+<p>手势开始：记录 开始点startY，</p>
+<p>手势移动：<br>根据起始位置移动差  确定上滑动 ， 下滑动；  </p>
+<p>起点B 点 记录方向 0；<br>B-A 正向， 记录方向符号 1；<br>B-C 反向 ，记录方向 -1；</p>
+<p>偏移值 大于0 ， 上滑动；<br>当B-A-C 后，立马记录 1 变成 -1；    记录标记状态前，</p>
+<p>正向如：B-A 的过程 ，需判断是否为 为 -1 到1 还是 0-1 ， 如果是-1 则是来回拖动；否则为正向拖动；</p>
+<p><strong><em>code :以下是重点逻辑代码；</em></strong></p>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2018/09/28/mapGesture/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2018/09/25/typeCells/">
+      聊聊动态多类型cell的设计
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年9月25日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：292字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：1分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>红包实体，文章实体  都属于动态 ，定义时候实现该协议DynamicPro,相当于java中的接口。<br>dataList 数组中 存放的是通过网络请求拿到的 DynamicPro 类型的动态列表。</p>
+<pre><code><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">@protocol</span> <span class="title">DynamicPro</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"> <span class="keyword">@end</span></span><br><span class="line"> </span><br><span class="line"> 红包实体，文章实体  都属于动态 ，定义时候实现该协议DynamicPro。</span><br><span class="line"> dataList 数组中 存放的是通过网络请求拿到的 DynamicPro 类型的动态列表。</span><br><span class="line"> </span><br><span class="line"> DynamicCell: <span class="built_in">UITableViewCell</span></span><br><span class="line"> &#123;</span><br><span class="line"> 属性  Id&lt;DynamicPro&gt; dynamic;  <span class="comment">//文章动态，普通动态，直播动态，红包类型动态</span></span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="class"><span class="keyword">@implementation</span> <span class="title">DynamicCell</span></span></span><br><span class="line"> -(<span class="keyword">void</span>)setDynamic:(<span class="keyword">id</span>&lt;DynamicPro&gt;)dynamic&#123;</span><br><span class="line"> _dynamic = dynamic;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//DynamicCell 有很多子类cell:  红包cell ,文章cell,直播cell 等</span></span><br><span class="line"> <span class="comment">//在子类cell  渲染具体UI数据绑定</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">@end</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> 表格 cellFor 渲染的时候：&#123; </span><br><span class="line"> DynamicPro *dynamic  = <span class="keyword">self</span>.dataList[indexPath.row]; </span><br><span class="line"> DynamicCell * cell =  [红包cell  new]; <span class="comment">//根据dynamic类型 创建 不同的 动态cell</span></span><br><span class="line"> <span class="comment">//最终统一设置动态数据</span></span><br><span class="line"> [cell setDynamic: dynamic];</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 表格高度 heightFor 渲染的时候：&#123;</span><br><span class="line"> </span><br><span class="line"> DynamicPro *dynamic  = <span class="keyword">self</span>.dataList[indexPath.row]; </span><br><span class="line"> <span class="keyword">if</span>(dynamic 高度不变的)&#123;</span><br><span class="line"> <span class="keyword">return</span>  <span class="number">44</span>;</span><br><span class="line"> &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"> <span class="comment">//高度变动的用自动布局</span></span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">UITableViewAutomaticDimension</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 表格 estimatedHeightForRowAtIndexPath 进行自动布局的估算</span><br><span class="line"> &#123; <span class="keyword">return</span> <span class="number">100</span>; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2018/07/20/iOSNetworkDesign/">
+      iOS客户端请求模块
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2018年7月20日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：603字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="探究原生网络请求"><a href="#探究原生网络请求" class="headerlink" title="探究原生网络请求"></a>探究原生网络请求</h2><h2 id="业务接口API设计与网络请求"><a href="#业务接口API设计与网络请求" class="headerlink" title="业务接口API设计与网络请求"></a>业务接口API设计与网络请求</h2><h2 id="Swift-版-Alnofire-框架使用"><a href="#Swift-版-Alnofire-框架使用" class="headerlink" title="Swift 版 Alnofire 框架使用"></a>Swift 版 Alnofire 框架使用</h2><h2 id="Swift-中的Json解析"><a href="#Swift-中的Json解析" class="headerlink" title="Swift 中的Json解析"></a>Swift 中的Json解析</h2><p>VC 发起请求， 一个专门发请求的发射器；我给它取名字 叫 NetManager , 显然 ，为 了不重复创建http 请求基础配置（请求头，Https证书配置等），这是个单例；</p>
+<p>发射器 发的是请求； 考虑到每个业务 都有不同的请求；我准备了 一个 超级父类请求 ；取名 DataRequest;  具体的请求，只需传 具体的子类request；</p>
+<p>一个APP 请求有很多，为了区分 及 维护方便 ，于是我定义了一个枚举；每个业务请求，只需给它表明一个标识；</p>
+<p>请求具有什么特性呢？ 1）有请求的API url地址，2）请求的参数，请求的标识（请求的枚举值）， 3）对请求回来的数据解析好封装（业务数据封装等处理）；   于是我定义了一个名叫APIInterface 的接口协议； 父类请求去实现这个APInterface接口协议； 子类去Override 这几个方法即可；</p>
+<p>发出一个请求，必然有 回答；要么成功，要么失败 （有的失败是业务码失败）； 于是 ，我定义了已一个请求回调的接口；RequestCallBackInterface ； （具有三个方法： 业务成功，业务失败，网络其他原因失败）</p>
+<p>我从VC 发出去的请求，相当于Android 的Activity; 熟称视图控制器；当然是希望请求回调 回到 视图控制器；<br>于是我 在 基类视图控制器 BaseViewController 或者BaseActivity(Android)  实现 请求回调 接口协议；实现其中的方法。<br>具体视图控制器 继承基类，  只需覆盖Override 这三个方法 （具体VC 实现回调后的业务）</p>
+<p>最后；页面逻辑就显示得比较简单了，一个单例 NetManager  执行一个 DataRequest (传具体请求子类) ； 视图控制器在具体RequestCallBackInterface  的回调方法 中处理 成功 ，失败后的数据； </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//登录请求</span></span><br><span class="line"><span class="keyword">self</span>.loginRequest.userLogin = <span class="keyword">self</span>.userName;</span><br><span class="line"><span class="keyword">self</span>.loginRequest.userPass =  <span class="keyword">self</span>.userPwd;</span><br><span class="line">[[GYNetworkingManager shareInstance] executeRequest:<span class="keyword">self</span>.loginRequest];</span><br><span class="line"></span><br><span class="line"><span class="comment">//朋友圈列表请求</span></span><br><span class="line"><span class="keyword">self</span>.dynamicListRequest.pageIndex = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">self</span>.dynamicListRequest.pageSize = <span class="number">20</span>;</span><br><span class="line">[[GYNetworkingManager shareInstance] executeRequest:<span class="keyword">self</span>.dynamicListRequest];</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) onRequestSuccess:(BaseResponse *)response</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">switch</span> (response.requestAPICode ) &#123;  <span class="comment">//请求的枚举</span></span><br><span class="line"><span class="keyword">case</span> Http_Login:</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//返回的登录对象</span></span><br><span class="line"><span class="comment">// LoginData *data  = response.responseObject;</span></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">case</span> Http_DynamicList:</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//如果是列表,则从取数组</span></span><br><span class="line"><span class="built_in">NSArray</span> *dataList  = response.tableList.dataList;</span><br><span class="line">[<span class="keyword">self</span> allLoadingCompleted:dataList];</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2016/05/29/iOSDataTransmission/">
       客户端网络请求模块的设计
     </a>
@@ -772,7 +1114,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(33)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(36)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

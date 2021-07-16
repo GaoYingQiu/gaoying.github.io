@@ -5,6 +5,10 @@
   <!-- SEO相关 -->
   
     
+      
+        <meta name="robots" content="noindex,follow">
+      
+    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -16,11 +20,8 @@
 
   <!-- 页面元数据 -->
   
-    <title>iOS中高级阶段路线图 - littleWhale</title>
+    <title>littleWhale</title>
   
-  
-    <meta name="description" content="1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjusts...">
   
 
   <!-- feed -->
@@ -322,10 +323,14 @@
 
 <div class='l_main'>
   
-
-  
-    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+  <section class="post-list ">
+    
+    
       
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
 
 
   <section class='meta'>
@@ -335,11 +340,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h1 class="title">
-    <a href="/2020/01/07/iOSAdvancedRoute/">
-      iOS中高级阶段路线图
+  <h2 class="title">
+    <a href="/2016/01/22/hexoGithubPageBlog/">
+      Hexo 搭建GithubPage 个人博客
     </a>
-  </h1>
+  </h2>
 
 
         
@@ -362,9 +367,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
+    <a href='/categories/%E5%85%B6%E4%BB%96/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
+      <p>其他</p>
     </a>
   </div>
 
@@ -375,9 +380,27 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年1月7日</p>
+    <p>发布于：2016年1月22日</p>
   </a>
 </div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：919字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
 
             
           
@@ -395,390 +418,180 @@
   </section>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          
-          <p>1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。</p>
-<p>2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断</p>
-<p>3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。</p>
-<p>4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏</p>
-<p>#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，</p>
-<p> 推送模块，推送消息存储</p>
-<p>H5 的webView 跳转 与原生交互。</p>
-<p>图片压缩缓存。 发表话题。</p>
-<a id="more"></a>
-<hr>
-<p>（自定义控件）</p>
-<p>1）图片编辑， 富文本操作</p>
-<p>3）话题处理； (正则表达式)</p>
-<hr>
-<p>（媒体库操作） </p>
-<p>2）音频，直播 ,相机美颜等技术</p>
-<p>3)   蓝牙 操作</p>
-<p>4）设计模式</p>
-<p>阅读<a href="https://github.com/ChenYilong/CYLTabBarController" target="_blank" rel="noopener">CYLTabBarController</a></p>
-<p>YYCache</p>
-<hr>
-<p>中级知识点</p>
-<ul>
-<li><p>设计模式</p>
-</li>
-<li><p>UIScrollView/UITableView/UICollectionView 的嵌套</p>
-</li>
-<li><p>动态行高</p>
-</li>
-<li><p>通知/代理/block</p>
-</li>
-<li><p>程序启动原理</p>
-</li>
-<li><p>触摸事件/手势</p>
-</li>
-<li><p>图文混编</p>
-</li>
-<li><p>Runtime</p>
-</li>
-<li><p>NSRunLoop</p>
-</li>
-<li><p>GCD</p>
-</li>
-<li><p>ReactiveCocoa开发</p>
-</li>
-<li><p>3DTouch</p>
-</li>
-<li><p>界面渲染</p>
-</li>
-<li><p>Charles花瓶抓包</p>
-</li>
-<li><p>区分模拟器/真机项目</p>
-</li>
-<li><p>常用知识</p>
-<ul>
-<li>多线程 ，网络请求；；推送/远程推送</li>
-<li>源代码管理Git</li>
-<li>苹果内购/广告</li>
-<li>音频/视频/二维码</li>
-<li>蓝牙/传感器</li>
-<li>物理仿真器UIDynamic</li>
-</ul>
-</li>
-</ul>
-<p><strong>iOS</strong>高级知识点</p>
-<ul>
-<li><p>iOS高级知识点</p>
-</li>
-<li><ul>
-<li><p>Socket</p>
-</li>
-<li><p>XMPP</p>
-</li>
-<li><p>加密</p>
-</li>
-<li><ul>
-<li>MD5详解</li>
-<li>Base64加密解密</li>
-<li>RSA非对称加密</li>
-<li>AES对称加密</li>
-</ul>
-</li>
-<li><p>音频</p>
-</li>
-<li><ul>
-<li>基础</li>
-<li>Core Audio</li>
-<li>Audio Toolbox</li>
-<li>OpenAL</li>
-<li>AVFoundation</li>
-<li>Speex语音聊天</li>
-<li>AudioQueue/AudioSession</li>
-<li>Speex简介</li>
-</ul>
-</li>
-<li><p>视频</p>
-</li>
-<li><ul>
-<li>AAC视频.H264推流</li>
-<li>P2P传输</li>
-</ul>
-</li>
-<li><p>直播</p>
-</li>
-<li><ul>
-<li>直播的技术分析与实现</li>
-<li>RTMP协议</li>
-<li>RTMP直播应用与延时分析</li>
-<li>如果做一款inke版的App</li>
-<li>推流发布和播放RTMP</li>
-<li>FFmpeg</li>
-<li>基于FFmpeg的推流器</li>
-<li>HLS流媒体传输协议(HTTP Live Streaming)</li>
-<li>FFmpeg</li>
-<li>ijkPlayer</li>
-</ul>
-</li>
-<li><p>算法</p>
-</li>
-<li><ul>
-<li>简介</li>
-<li>冒泡排序</li>
-<li>快速排序</li>
-<li>插入排序</li>
-<li>归并排序</li>
-<li>二分查找</li>
-<li>希尔排序</li>
-<li>动态规划</li>
-<li>堆排序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          
-            <div class='article_footer'>
-              
-                
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-
-
-  
-
-  
-
-  
-    
-    
-
-<section class="widget qrcode  desktop mobile">
-  
-
-  <div class='content article-entry'>
-    
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
       
-        <div class='fancybox'><img src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/wechat_littleWhale.JPG'
-        
-          height='225px'
-        ></div>
-      
-    
-  </div>
-</section>
-
-  
-
-
-              
-            </div>
-          
-        </div>
-        
-          
-
-
-  <section class='meta' id="footer-meta">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-27T08:39:36+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年5月27日</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-
-        
-      
-        
-          
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2020/01/07/iOSAdvancedRoute/&title=iOS中高级阶段路线图 - littleWhale&summary=1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断
-3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。
-4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏
-#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，
- 推送模块，推送消息存储
-H5 的webView 跳转 与原生交互。
-图片压缩缓存。 发表话题。"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
-          
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2020/01/07/iOSAdvancedRoute/&title=iOS中高级阶段路线图 - littleWhale&summary=1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断
-3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。
-4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏
-#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，
- 推送模块，推送消息存储
-H5 的webView 跳转 与原生交互。
-图片压缩缓存。 发表话题。"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2020/01/07/iOSAdvancedRoute/&title=iOS中高级阶段路线图 - littleWhale&summary=1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断
-3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。
-4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏
-#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，
- 推送模块，推送消息存储
-H5 的webView 跳转 与原生交互。
-图片压缩缓存。 发表话题。"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
-          
-        </a>
-      
-    
-  </div>
-</div>
-
-
-
-        
+        <p>程序员都喜欢折腾，我也不列外。当然，用hexo 建博客也是当时碰巧在网上看到别人的博客，用来写技术，生活，读书，以及不一样的心情。<br>当时我也很是好奇这样的博客是用什么搭建的。看到博尾有一行小字“Powered by Hexo.”, 于是，开始了自己的不断折腾。因为这段时间离职了，刚好也有空闲下来去做自己喜欢的事情。<br>接下来，我大概按照我的思路记下来我搭建hexo的步骤。<br>
       
     </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2016/01/22/hexoGithubPageBlog/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
   </section>
+</article>
 
-
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/01/07/textViewPicture/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>TextView富文本插入图片</p>
-                <p class='content'>welcome look this NoteTextView Small Demo l., you can use NoteTextView insertPicture that you can...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/01/07/http/'>
-                <p class='title'>HTTP协议详解<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>
-请求头 
-
-请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息，如Host: 主机名， Use-Agent: 浏览器基本资料， Accept: 浏览器能够识别的响应类...</p>
-              </a>
-            
           </div>
         
-      </section>
-    </article>
+      
+    
+  </section>
   
-
-  
-    <!-- 显示推荐文章和评论 -->
-
-
-
-  <article class="post white-box reveal comments shadow">
-    <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
-      
-      
-      
-      
-      
-      
-        <section id="comments">
-          <div id="valine_container" class="valine_thread">
-            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-          </div>
-        </section>
-      
-      
-    </section>
-  </article>
-
+    
+      <br>
+      <div class="prev-next">
+        
+          <a class="prev" rel="prev" href="/page/7/">
+            <section class="post prev white-box shadow" >
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+            </section>
+          </a>
+        
+        <p class="current">
+          8 / 8
+        </p>
+        
+      </div>
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
 
   
-
-
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-
-
-  <script>
-    window.subData = {
-      title: 'iOS中高级阶段路线图',
-      tools: true
-    }
-  </script>
 
 
 </div>
 <aside class='l_side'>
   
   
+    
+    
+
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box' href='/about/'>
+          <img no-lazy src='https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+          <p>Be brave，close to life</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:qiugaoying@163.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/gaoyingqiu"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
 
   
     
     
-
-
-
   
 
-  
-    
-    
-  
-
-  <section class="widget related_posts shadow desktop mobile">
+  <section class="widget category shadow desktop">
     
   <header>
     
-      <i class="fas fa-bookmark fa-fw" aria-hidden="true"></i><span class='name'>相关文章</span>
+      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
     
   </header>
 
 
-    <div class="content">
-      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2021/06/29/2020iOS/" title="2020年下半年iOS工作技术点" rel="bookmark">2020年下半年iOS工作技术点</a></h3></div></li></ul>
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/Web/" href="/categories/Web/"
+            id="categoriesWeb"
+            ><div class='name'>Web</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/iOS/" href="/categories/iOS/"
+            id="categoriesiOS"
+            ><div class='name'>iOS</div><div class='badge'>(36)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
+            id="categoriesE585B6E4BB96"
+            ><div class='name'>其他</div><div class='badge'>(14)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E6%8A%80%E6%9C%AF/" href="/categories/%E6%8A%80%E6%9C%AF/"
+            id="categoriesE68A80E69CAF"
+            ><div class='name'>技术</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E6%9D%82%E8%B0%88/" href="/categories/%E6%9D%82%E8%B0%88/"
+            id="categoriesE69D82E8B088"
+            ><div class='name'>杂谈</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
+            ><div class='name'>设计模式</div><div class='badge'>(4)</div></a></li>
+        
+      </ul>
     </div>
   </section>
 
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop mobile">
+    
+  <header>
+    
+      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/AndroidTableView/" style="font-size: 14px; color: #999">AndroidTableView</a> <a href="/tags/DatePicker/" style="font-size: 14px; color: #999">DatePicker</a> <a href="/tags/HTTP/" style="font-size: 14px; color: #999">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 14px; color: #999">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/MVC/" style="font-size: 14px; color: #999">MVC</a> <a href="/tags/SKU/" style="font-size: 19px; color: #777">SKU</a> <a href="/tags/Slider/" style="font-size: 14px; color: #999">Slider</a> <a href="/tags/%E5%85%B3%E7%B3%BB%E5%9B%BE/" style="font-size: 14px; color: #999">关系图</a> <a href="/tags/%E5%AF%8C%E6%96%87%E6%9C%AC/" style="font-size: 14px; color: #999">富文本</a> <a href="/tags/%E6%8A%BD%E5%A5%96/" style="font-size: 14px; color: #999">抽奖</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a> <a href="/tags/%E8%BD%AF%E5%AE%9E%E5%8A%9B/" style="font-size: 14px; color: #999">软实力</a>
+    </div>
+  </section>
+
+
+  
 
   
 
@@ -975,60 +788,6 @@ H5 的webView 跳转 与原生交互。
 
 
 
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
-
-  
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var meta = 'nick,mail,link'.split(',').filter(function(item){
-    return GUEST_INFO.indexOf(item) > -1
-  });
-  var REQUIRED_FIELDS = ['nick','mail','link'];
-  var requiredFields = 'nick,mail'.split(',').filter(function(item){
-    return REQUIRED_FIELDS.indexOf(item) > -1
-  });
-  var valine = new Valine();
-  function emoji(path, idx, ext) {
-      return path + "/" + path + "-" + idx + "." + ext;
-  }
-  var emojiMaps = {};
-  for (var i = 1; i <= 54; i++) {
-    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
-  }
-  for (var i = 1; i <= 101; i++) {
-    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
-  }
-  for (var i = 1; i <= 116; i++) {
-    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
-  }
-  for (var i = 1; i <= 125; i++) {
-    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
-  }
-  for (var i = 1; i <= 4; i++) {
-    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
-  }
-  valine.init({
-    el: '#valine_container',
-    meta: meta,
-    
-    appId: "OnQHqq8HNcQhfFFnTapHxBju-gzGzoHsz",
-    appKey: "r0pJLLJPQqSWS9HO9MO5DkKq",
-    placeholder: "快来评论吧~",
-    pageSize:'10',
-    avatar:'robohash',
-    lang:'zh-cn',
-    visitor: 'true',
-    highlight: 'true',
-    mathJax: 'false',
-    enableQQ: 'true',
-    requiredFields: requiredFields,
-    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
-    emojiMaps: emojiMaps
-  })
-  </script>
 
 
 

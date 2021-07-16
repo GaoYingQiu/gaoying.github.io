@@ -16,11 +16,8 @@
 
   <!-- 页面元数据 -->
   
-    <title>iOS中高级阶段路线图 - littleWhale</title>
+    <title>UserDefaults with PropertyWrapper - littleWhale</title>
   
-  
-    <meta name="description" content="1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjusts...">
   
 
   <!-- feed -->
@@ -336,8 +333,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/01/07/iOSAdvancedRoute/">
-      iOS中高级阶段路线图
+    <a href="/2021/07/15/UserDefaults/">
+      UserDefaults with PropertyWrapper
     </a>
   </h1>
 
@@ -375,7 +372,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年1月7日</p>
+    <p>发布于：2021年7月15日</p>
   </a>
 </div>
 
@@ -398,140 +395,10 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。</p>
-<p>2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断</p>
-<p>3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。</p>
-<p>4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏</p>
-<p>#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，</p>
-<p> 推送模块，推送消息存储</p>
-<p>H5 的webView 跳转 与原生交互。</p>
-<p>图片压缩缓存。 发表话题。</p>
-<a id="more"></a>
-<hr>
-<p>（自定义控件）</p>
-<p>1）图片编辑， 富文本操作</p>
-<p>3）话题处理； (正则表达式)</p>
-<hr>
-<p>（媒体库操作） </p>
-<p>2）音频，直播 ,相机美颜等技术</p>
-<p>3)   蓝牙 操作</p>
-<p>4）设计模式</p>
-<p>阅读<a href="https://github.com/ChenYilong/CYLTabBarController" target="_blank" rel="noopener">CYLTabBarController</a></p>
-<p>YYCache</p>
-<hr>
-<p>中级知识点</p>
-<ul>
-<li><p>设计模式</p>
-</li>
-<li><p>UIScrollView/UITableView/UICollectionView 的嵌套</p>
-</li>
-<li><p>动态行高</p>
-</li>
-<li><p>通知/代理/block</p>
-</li>
-<li><p>程序启动原理</p>
-</li>
-<li><p>触摸事件/手势</p>
-</li>
-<li><p>图文混编</p>
-</li>
-<li><p>Runtime</p>
-</li>
-<li><p>NSRunLoop</p>
-</li>
-<li><p>GCD</p>
-</li>
-<li><p>ReactiveCocoa开发</p>
-</li>
-<li><p>3DTouch</p>
-</li>
-<li><p>界面渲染</p>
-</li>
-<li><p>Charles花瓶抓包</p>
-</li>
-<li><p>区分模拟器/真机项目</p>
-</li>
-<li><p>常用知识</p>
-<ul>
-<li>多线程 ，网络请求；；推送/远程推送</li>
-<li>源代码管理Git</li>
-<li>苹果内购/广告</li>
-<li>音频/视频/二维码</li>
-<li>蓝牙/传感器</li>
-<li>物理仿真器UIDynamic</li>
-</ul>
-</li>
-</ul>
-<p><strong>iOS</strong>高级知识点</p>
-<ul>
-<li><p>iOS高级知识点</p>
-</li>
-<li><ul>
-<li><p>Socket</p>
-</li>
-<li><p>XMPP</p>
-</li>
-<li><p>加密</p>
-</li>
-<li><ul>
-<li>MD5详解</li>
-<li>Base64加密解密</li>
-<li>RSA非对称加密</li>
-<li>AES对称加密</li>
-</ul>
-</li>
-<li><p>音频</p>
-</li>
-<li><ul>
-<li>基础</li>
-<li>Core Audio</li>
-<li>Audio Toolbox</li>
-<li>OpenAL</li>
-<li>AVFoundation</li>
-<li>Speex语音聊天</li>
-<li>AudioQueue/AudioSession</li>
-<li>Speex简介</li>
-</ul>
-</li>
-<li><p>视频</p>
-</li>
-<li><ul>
-<li>AAC视频.H264推流</li>
-<li>P2P传输</li>
-</ul>
-</li>
-<li><p>直播</p>
-</li>
-<li><ul>
-<li>直播的技术分析与实现</li>
-<li>RTMP协议</li>
-<li>RTMP直播应用与延时分析</li>
-<li>如果做一款inke版的App</li>
-<li>推流发布和播放RTMP</li>
-<li>FFmpeg</li>
-<li>基于FFmpeg的推流器</li>
-<li>HLS流媒体传输协议(HTTP Live Streaming)</li>
-<li>FFmpeg</li>
-<li>ijkPlayer</li>
-</ul>
-</li>
-<li><p>算法</p>
-</li>
-<li><ul>
-<li>简介</li>
-<li>冒泡排序</li>
-<li>快速排序</li>
-<li>插入排序</li>
-<li>归并排序</li>
-<li>二分查找</li>
-<li>希尔排序</li>
-<li>动态规划</li>
-<li>堆排序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+          <p>UserDefaults可以存储一些基础数据类型，如：Data，String，Date，Bool，Int，Double，Float，Array，Dictionary，URL，等基础对象。也可以存储自定义对象(但需要实现编码成Data进行存储)。<br>尽管如此，我们还是不推荐使用UserDefaults来存储数据量大的数据。因为读写非常昂贵，userDefaults最终用.plist文件进行存储。存储大数据会使此文件变得臃肿。<br>对于自定义的对象，我们可以通过写文件方式将json写到沙盒文件中。或者存储到coreData. Sqlite等。UserDefaults一般用于存储一些简单的数据类型，存储用户的偏好设置等。在写少读多的情况下，性能才会高。底层是通过读写xml文件方式都数据进行读写。</p>
+<p>接下来我们用PropertyWrapper对UserDefaults进行封装。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@propertyWrapper</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UserDefault</span>&lt;<span class="title">T</span>: <span class="title">PropertyListValue</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> key: <span class="type">Key</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> wrappedValue: <span class="type">T?</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="type">UserDefaults</span>.standard.value(forKey: key.rawValue) <span class="keyword">as</span>? <span class="type">T</span> &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123; <span class="type">UserDefaults</span>.standard.<span class="keyword">set</span>(newValue, forKey: key.rawValue) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>需要对传入的泛型数据做约束，遵循PropertyListValue协议<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义约束协议</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Data</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Date</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Bool</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Int</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Double</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Float</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每个元素必须是 PropertyListValue 类型</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span>: <span class="title">PropertyListValue</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Dictionary</span>: <span class="title">PropertyListValue</span> <span class="title">where</span> <span class="title">Key</span> == <span class="title">String</span>, <span class="title">Value</span>: <span class="title">PropertyListValue</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure><br>然后我们定义Key的结构体，遵循 RawRepresentable 协议。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Key</span>: <span class="title">RawRepresentable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> rawValue: <span class="type">String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>使用:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">StorageTest</span> </span>&#123;</span><br><span class="line">    @<span class="type">UserDefault</span>(key: <span class="type">Key</span>(rawValue: <span class="string">"isFirstLaunch"</span>))</span><br><span class="line">    <span class="keyword">var</span> isFirstLaunchFlag: <span class="type">Bool?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>为了达到@UserDefault(key: “isFirstLaunch”)这样的简写效果，我们让Key实现ExpressibleByStringLiteral协议。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Key</span>: <span class="title">ExpressibleByStringLiteral</span> </span>&#123;</span><br><span class="line">    <span class="keyword">init</span>(stringLiteral: <span class="type">String</span>) &#123;</span><br><span class="line">        rawValue = stringLiteral</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">StorageTest</span> </span>&#123;</span><br><span class="line">    @<span class="type">UserDefault</span>(key: <span class="string">"isFirstLaunch"</span>)</span><br><span class="line">    <span class="keyword">var</span> isFirstLaunchFlag: <span class="type">Bool?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>为了统一的管理，我们将存储键写在Key结构体中。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Key</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> isFirstLaunch: <span class="type">Key</span> = <span class="string">"isFirstLaunch"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">StorageTest</span> </span>&#123;</span><br><span class="line">    @<span class="type">UserDefault</span>(key: .isFirstLaunch)</span><br><span class="line">    <span class="keyword">var</span> isFirstLaunchFlag: <span class="type">Bool?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DefaultsObservation</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> key: <span class="type">Key</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> onChange: (<span class="type">Any</span>, <span class="type">Any</span>) -&gt; <span class="type">Void</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">init</span>(key: <span class="type">Key</span>, onChange: @escaping (<span class="type">Any</span>, <span class="type">Any</span>) -&gt; <span class="type">Void</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.onChange = onChange</span><br><span class="line">        <span class="keyword">self</span>.key = key</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">        <span class="type">UserDefaults</span>.standard.addObserver(<span class="keyword">self</span>, forKeyPath: key.rawValue, options: [.old, .new], context: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">observeValue</span><span class="params">(forKeyPath keyPath: String?, of object: <span class="keyword">Any</span>?, change: [NSKeyValueChangeKey: <span class="keyword">Any</span>]?, context: UnsafeMutableRawPointer?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> change = change, object != <span class="literal">nil</span>, keyPath == key.rawValue <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        onChange(change[.oldKey] <span class="keyword">as</span> <span class="type">Any</span>, change[.newKey] <span class="keyword">as</span> <span class="type">Any</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3</span></span><br><span class="line">    <span class="keyword">deinit</span> &#123;</span><br><span class="line">        <span class="type">UserDefaults</span>.standard.removeObserver(<span class="keyword">self</span>, forKeyPath: key.rawValue, context: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@propertyWrapper</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">UserDefault</span>&lt;<span class="title">T</span>: <span class="title">PropertyListValue</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> projectedValue: <span class="type">UserDefault</span>&lt;<span class="type">T</span>&gt; &#123; <span class="keyword">return</span> <span class="keyword">self</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">observe</span><span class="params">(change: @escaping <span class="params">(T?, T?)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">NSObject</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">DefaultsObservation</span>(key: key) &#123; old, new <span class="keyword">in</span></span><br><span class="line">            change(old <span class="keyword">as</span>? <span class="type">T</span>, new <span class="keyword">as</span>? <span class="type">T</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The rest of the code is unchanged</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用法:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> storage = <span class="type">Storage</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> observation = storage.$isFirstLaunch.observe &#123; old, new <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Changed from: \(old) to \(new)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">storage.isFirstLaunch = <span class="literal">true</span></span><br><span class="line">storage.isFirstLaunch?.toggle()</span><br></pre></td></tr></table></figure></p>
 
           
             <div class='article_footer'>
@@ -589,10 +456,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-27T08:39:36+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-15T16:09:43+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年5月27日</p>
+    <p>更新于：2021年7月15日</p>
   </a>
 </div>
 
@@ -616,14 +483,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2020/01/07/iOSAdvancedRoute/&title=iOS中高级阶段路线图 - littleWhale&summary=1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断
-3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。
-4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏
-#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，
- 推送模块，推送消息存储
-H5 的webView 跳转 与原生交互。
-图片压缩缓存。 发表话题。"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.littlewhale.xyz/2021/07/15/UserDefaults/&title=UserDefaults with PropertyWrapper - littleWhale&summary="
           
           >
           
@@ -635,14 +495,7 @@ H5 的webView 跳转 与原生交互。
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2020/01/07/iOSAdvancedRoute/&title=iOS中高级阶段路线图 - littleWhale&summary=1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断
-3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。
-4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏
-#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，
- 推送模块，推送消息存储
-H5 的webView 跳转 与原生交互。
-图片压缩缓存。 发表话题。"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.littlewhale.xyz/2021/07/15/UserDefaults/&title=UserDefaults with PropertyWrapper - littleWhale&summary="
           
           >
           
@@ -654,14 +507,7 @@ H5 的webView 跳转 与原生交互。
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2020/01/07/iOSAdvancedRoute/&title=iOS中高级阶段路线图 - littleWhale&summary=1、iOS 11之前的导航栏的高度是64px（状态条+导航栏），iOS11之后如果设置了prefersLargeTitles = YES（默认NO）则为96pt。所以一般不用管。
-2、在iOS 11上运行tableView向下偏移64px或者20px，因为iOS 11废弃了automaticallyAdjustsScrollViewInsets，而是给UIScrollView增加了contentInsetAdjustmentBehavior属性。避免这个坑的方法是要判断
-3、tableView的sectionHeader、sectionFooter高度与设置不符，因为tableView的estimatedRowHeight、estimatedSectionHeaderHeight、 estimatedSectionFooterHeight三个高度估算属性由默认的0变成了UITableViewAutomaticDimension。最简单的方法就是直接设置为0。
-4、iPhone X状态条由20px变成了44px，UITabBar由49px变成了83px。设置布局时y直接写成64的就要根据机型设置。可以设置宏
-#define Device_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)，
- 推送模块，推送消息存储
-H5 的webView 跳转 与原生交互。
-图片压缩缓存。 发表话题。"
+          href="http://service.weibo.com/share/share.php?url=https://www.littlewhale.xyz/2021/07/15/UserDefaults/&title=UserDefaults with PropertyWrapper - littleWhale&summary="
           
           >
           
@@ -685,18 +531,22 @@ H5 的webView 跳转 与原生交互。
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/01/07/textViewPicture/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>TextView富文本插入图片</p>
-                <p class='content'>welcome look this NoteTextView Small Demo l., you can use NoteTextView insertPicture that you can...</p>
+              <a class='prev' href='/2021/07/15/DependencyInjection/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>依赖注入</p>
+                <p class='content'>依赖注入是一种让代码低耦合的设计模式。有四种实现方式：
+
+初始化注入
+属性赋值注入
+接口注入
+容器注入
+
+初始化注入123456789101112131415161718192021222324...</p>
               </a>
             
             
-              <a class='next' href='/2020/01/07/http/'>
-                <p class='title'>HTTP协议详解<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>
-请求头 
-
-请求头部，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息，如Host: 主机名， Use-Agent: 浏览器基本资料， Accept: 浏览器能够识别的响应类...</p>
+              <a class='next' href='/2021/07/14/UnitTestAsync/'>
+                <p class='title'>单元测试-异步篇<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>SUT12345678910111213141516171819202122232425262728293031extension URLRequest &#123;    static fun...</p>
               </a>
             
           </div>
@@ -741,7 +591,7 @@ H5 的webView 跳转 与原生交互。
 
   <script>
     window.subData = {
-      title: 'iOS中高级阶段路线图',
+      title: 'UserDefaults with PropertyWrapper',
       tools: true
     }
   </script>
@@ -756,6 +606,20 @@ H5 的webView 跳转 与原生交互。
     
     
 
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#KVO"><span class="toc-text">KVO</span></a></li></ol>
+    </div>
+  </section>
 
 
   
