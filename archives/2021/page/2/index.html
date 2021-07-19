@@ -425,6 +425,121 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/08/weak/">
+      何时使用weak self 防止内存泄露
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月8日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1.3k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：4分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们都想写得一手好代码。这包含防止内存泄露，当在写闭包时业务如果需要用到self，我们会使用[weak self] 修饰。但为什么需要弱捕获呢？是否任何情况下在闭包里都要用weak? 接下来我们将用捕获列表来回答这几个问题。我们将讲解到不同的捕获，以及什么时候用合适的捕获去处理问题。</p>
+<h3 id="什么是捕获列表"><a href="#什么是捕获列表" class="headerlink" title="什么是捕获列表"></a>什么是捕获列表</h3><p>我们先看以下代码片段，调用闭包后显示的结果:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"qiu"</span></span><br><span class="line"><span class="keyword">var</span> appendToName = &#123; (string: <span class="type">String</span>) -&gt; <span class="type">String</span> <span class="keyword">in</span></span><br><span class="line">  <span class="keyword">return</span> name.appending(string)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> one = appendToName(<span class="string">"gaoying"</span>) <span class="comment">//qiugaoying</span></span><br><span class="line">name = <span class="string">"liu"</span></span><br><span class="line"><span class="keyword">let</span> two = appendToName(<span class="string">"gaoying"</span>)  <span class="comment">//liugaoying</span></span><br></pre></td></tr></table></figure><br>闭包可对同一作用域范围内的属性做引用，也就是闭包内持有的属性在同一上下文作用域内变更受影响。我们再观察以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"qiu"</span></span><br><span class="line"><span class="keyword">var</span> appendToName = &#123; [name] (string: <span class="type">String</span>) -&gt; <span class="type">String</span> <span class="keyword">in</span></span><br><span class="line">  <span class="keyword">return</span> name.appending(string)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> one = appendToName(<span class="string">"gaoying"</span>) <span class="comment">//qiugaoying</span></span><br><span class="line">name = <span class="string">"liu"</span></span><br><span class="line"><span class="keyword">let</span> two = appendToName(<span class="string">"gaoying"</span>)  <span class="comment">//qiugaoying</span></span><br></pre></td></tr></table></figure>
+<p>这时输出的结果都为qiugaoying。[name] 将属性name放在闭包的捕获列表，明确地告诉闭包强持有闭包首次调用时的name值。如果要在闭包捕获列表内捕获多个值，则用逗号隔开，如[property, anotherProperty] in 方式。<br>
+      
+    </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2021/07/08/weak/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/07/result/">
       使用Result（Swift5）
     </a>
@@ -1787,7 +1902,7 @@ CLImageToolBase 工具基类：持有editor编辑器方便拿到图片，同时�
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(37)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(38)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"

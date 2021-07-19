@@ -376,6 +376,119 @@
         
           
   <h2 class="title">
+    <a href="/2021/07/19/GCD/">
+      Swift GCD
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
+    <p>高颖</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/iOS/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>iOS</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年7月19日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：633字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Grand Central Dispatch (GCD)，CPU多核处理，线程间异步高效地执行任务。在GCD的管理下，只需提供DispatchWorkItem作为单个任务，本质上是个swift 闭包。这些任务项item由GCD根据一定地规则排队自动执行。通过 queue.async(execute: workItem)。通过GCD可设置任务的优先级，以及执行顺序。<br>几个任务项也可以作为一个group， 通过DispatchGroup组织多任务执行，最后将所有处理完毕的结果作为单一整体汇总。<br>队列Queue管理着任务项的执行，可串行也可并发。串行队列一次执行一个任务，并发队列无需等待执行中的任务结束才开启下一个任务（即可同时执行多项任务）。两种队列都按照先进先出（FOFO）执行。<br>内部，有GCD线程池服务所有的队列。当某任务执行完成后线程即销毁。当所有的线程属于busy状态，新的线程需要暂时挂起。GCD预备了五种队列可直接使用。一种串行队列：主队列。四种异步队列分别权限为：hign，default，low，background。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Do work synchronously</span></span><br><span class="line"><span class="type">DispatchQueue</span>.global().sync &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Do work asynchronously</span></span><br><span class="line"><span class="type">DispatchQueue</span>.global().async &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>自定义串行队列：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"Some serial queue"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Do work synchronously</span></span><br><span class="line">queue.sync &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Do work asynchronously</span></span><br><span class="line">queue.async &#123; ... &#125;</span><br></pre></td></tr></table></figure><br>有时，我们需要对某个任务项取消执行，这个时候需要用workItem<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> pendingWorkItem: <span class="type">DispatchWorkItem?</span></span><br><span class="line">    <span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"Some serial queue"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">()</span></span> &#123;</span><br><span class="line">        pendingWorkItem?.cancel()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> newWorkItem = <span class="type">DispatchWorkItem</span> &#123; ... &#125;</span><br><span class="line">        pendingWorkItem = newWorkItem</span><br><span class="line"></span><br><span class="line">        queue.async(execute: newWorkItem)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>批量任务处理:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"Serial queue"</span>)</span><br><span class="line"><span class="keyword">let</span> group = <span class="type">DispatchGroup</span>()</span><br><span class="line"></span><br><span class="line">queue.async(group: group) &#123;</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Task 1 done"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">queue.async(group: group) &#123;</span><br><span class="line">    sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Task 2 done"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group.wait()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"All tasks done"</span>)</span><br></pre></td></tr></table></figure><br>Task 1 done<br>Task 2 done<br>All tasks done</p>
+<p>另外一种group.enter()方式不会阻塞当前任务<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"Serial queue"</span>)</span><br><span class="line"><span class="keyword">let</span> group = <span class="type">DispatchGroup</span>()</span><br><span class="line"></span><br><span class="line">group.enter()</span><br><span class="line">queue.async &#123;</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Task 1 done"</span>)</span><br><span class="line">    group.leave()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group.enter()</span><br><span class="line">queue.async &#123;</span><br><span class="line">    sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Task 2 done"</span>)</span><br><span class="line">    group.leave()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group.notify(queue: queue) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"All tasks done"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"Continue execution immediately"</span>)</span><br></pre></td></tr></table></figure><br>Continue execution immediately<br>Task 1 done<br>Task 2 done<br>All tasks done</p>
+<p>留意线程死锁<br>死锁1:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"my-queue"</span>)</span><br><span class="line">queue.sync &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"print this"</span>)</span><br><span class="line"></span><br><span class="line">  queue.sync &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"deadlocked"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>死锁2:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Create concurrent queue</span></span><br><span class="line"><span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"Concurrent queue"</span>, attributes: .concurrent)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="number">999</span> &#123;</span><br><span class="line">    <span class="comment">// 1</span></span><br><span class="line">    queue.async &#123;</span><br><span class="line">        sleep(<span class="number">1000</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="type">DispatchQueue</span>.main.sync &#123;</span><br><span class="line">    queue.sync &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Done"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过信号量控制线程数<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> concurrentTasks = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> queue = <span class="type">DispatchQueue</span>(label: <span class="string">"Concurrent queue"</span>, attributes: .concurrent)</span><br><span class="line"><span class="keyword">let</span> sema = <span class="type">DispatchSemaphore</span>(value: concurrentTasks)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="number">999</span> &#123;</span><br><span class="line">    queue.async &#123;</span><br><span class="line">        <span class="comment">// Do work</span></span><br><span class="line">        sema.signal()</span><br><span class="line">    &#125;</span><br><span class="line">    sema.wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
     <a href="/2021/07/16/ValueTypes/">
       Swift中的值类型和引用类型
     </a>
@@ -467,33 +580,16 @@
 <li>值类型直接存储到栈中。每个值类型的变量持有自己的数据，之间互不影响。</li>
 <li>引用类型通过指针引用数据（存储在堆中），多个变量可指向同一数据，当操作某一变量时会影响其他变量。</li>
 </ul>
-<p>值类型涉及到值拷贝，引用类型涉及到内存分配，引用计数。接下来我们大致了解一下内存段。</p>
-<h3 id="内存段"><a href="#内存段" class="headerlink" title="内存段"></a>内存段</h3><p>内存是一个很长的字节列表。字节被有序排列，每个字节有它自己的地址。地址空间逻辑上分为4段。Text，Data,Heap, Stack。</p>
-<ul>
-<li>文本段包含机器指令。由编译器将Swift代码编译成机器码。文本段只读。</li>
-<li>数据段用来存储Swift静态变量，常量，元数据。程序启动时，公共数据初始化值将存储在这个位置。</li>
-<li>栈段粗才能临时数据。方法参数和本地变量。当我们调用方法时，将在栈区域开辟一段内存直到方法调用结束这段内存将释放。以及一些值类型数据将存储在Stack。</li>
-<li>堆存储所有引用对象，以及一些“假”的值对象（定义的结构体里包含class对象）。</li>
-</ul>
-<h3 id="值类型装箱"><a href="#值类型装箱" class="headerlink" title="值类型装箱"></a>值类型装箱</h3><ol>
-<li>当遵循某协议时 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Bar</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Baz</span>: <span class="title">Bar</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li>当和引用类型混合时 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="type">A</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span> </span>&#123; &#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">c</span> = <span class="type">C</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结构体B,C 都分配在堆内存中。</span></span><br></pre></td></tr></table></figure></li>
-<li>使用泛型 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Bas</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> x: <span class="type">T</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">init</span>(xx: <span class="type">T</span>) &#123;</span><br><span class="line">       x = xx</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>Swift的闭包模型是所有局部变量都被引用。</li>
-<li>Inout 参数<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(x: <span class="keyword">inout</span> Int)</span></span> &#123;</span><br><span class="line">     x += <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="拷贝成本"><a href="#拷贝成本" class="headerlink" title="拷贝成本"></a>拷贝成本</h3>私有类型如整形，浮点型拷贝时不需要花费RAM内存，一些扩展类型如字符串，数组，set集合，字典等拷贝时需要进行复制。而引用类型由于不直接存储数据，拷贝时候多数是指针拷贝，而不是真正地内容拷贝。如果一个结构体包含引用类型时，而打破了值语义，那么如果要维持值语义，拷贝时候需要针对该对象是否引用计数为1的情况下，重新创建一份对象进行赋值。</li>
-</ol>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ref</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyStruct</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ref1 = <span class="type">Ref</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> ref1 = <span class="type">Ref</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="type">MyStruct</span>()</span><br><span class="line"><span class="keyword">let</span> anotherA = a</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"struct self:"</span>, <span class="type">CFGetRetainCount</span>(a <span class="keyword">as</span> <span class="type">CFTypeRef</span>))  <span class="comment">//1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"struct ref1:"</span>, <span class="type">CFGetRetainCount</span>(a.ref1)) <span class="comment">//3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="type">MyClass</span>()</span><br><span class="line"><span class="keyword">let</span> anotherB = b</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"class self:"</span>, <span class="type">CFGetRetainCount</span>(b)) <span class="comment">//3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"class ref1:"</span>, <span class="type">CFGetRetainCount</span>(b.ref1)) <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
-<p>总结：</p>
-<ul>
-<li>值类型内部包含引用类型，打破了值语义，结构体将存储在堆上。赋值时将带来引用计数更大花销，引用对象可能被多个地方引用。实际业务可能受到影响。</li>
-<li>具有动态行为的值类型（如数组和字符串）应采用写时复制来分摊复制成本。写复制可重写get方法，根据是否引用唯一计数来决定是直接引用还是复制一份。</li>
-<li>当使用泛型或者协议时的值类型将发生装箱操作给内存带来更大花销。</li>
-</ul>
-<h3 id="写复制"><a href="#写复制" class="headerlink" title="写复制"></a>写复制</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bar: <span class="type">String</span> = <span class="string">"bar"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">FooHolder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> _foo: <span class="type">Foo</span> = <span class="type">Foo</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> foo: <span class="type">Foo</span> &#123;</span><br><span class="line">            <span class="keyword">mutating</span> <span class="keyword">get</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> isKnownUniquelyReferenced(&amp;_foo) &#123;</span><br><span class="line">                    <span class="keyword">return</span> _foo</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">let</span> newFoo = <span class="type">Foo</span>()</span><br><span class="line">                    newFoo.bar = _foo.bar</span><br><span class="line">                    _foo = newFoo</span><br><span class="line">                    <span class="keyword">return</span> _foo</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">set</span> &#123;</span><br><span class="line">                _foo = newValue</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> intValue: <span class="type">Int</span> = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fooHolder = <span class="type">FooHolder</span>()</span><br><span class="line"><span class="keyword">var</span> fooHolder2 = fooHolder</span><br><span class="line"></span><br><span class="line">fooHolder2.foo.bar = <span class="string">"bar2"</span></span><br><span class="line">fooHolder2.intValue = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fooHolder.intValue)</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="built_in">print</span>(fooHolder2.intValue)</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fooHolder.foo.bar)</span><br><span class="line"><span class="comment">// bar</span></span><br><span class="line"><span class="built_in">print</span>(fooHolder2.foo.bar)</span><br><span class="line"><span class="comment">// bar2</span></span><br></pre></td></tr></table></figure>
+<p>值类型涉及到值拷贝，引用类型涉及到内存分配，引用计数。接下来我们大致了解一下内存段。<br>
       
     </div>
     
+      
+        <div class="button readmore">
+          <a href="/2021/07/16/ValueTypes/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
       
     
   </section>
@@ -2018,119 +2114,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/07/06/generics/">
-      用泛型和协议构建可伸缩性组件
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="http://littleWhale.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://qyanblog.oss-cn-shenzhen.aliyuncs.com/blog_avatar.JPG">
-    <p>高颖</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/iOS/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>iOS</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2021年7月6日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1.3k字</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：5分钟</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在App开发中，数据层往往会做本地缓存，以便在网络不好的情况下能够先显示本地缓存数据。接下来将讲解到如何设计本地数据源中间件来实现业务数据的读取。在讲解之前我们会先了解一下简单泛型在Swift中的应用，结合associated types, 你也可以在协议中使用泛型。</p>
-<p>在介绍之前，我刚提到我想要对泛型数据存储在本地，然后还需要一个远程数据接口API提供数据以便在本地数据没有的情况下调用。假设我需要用户信息数据：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> localDataStore = <span class="type">UserDataStore</span>()</span><br><span class="line"><span class="keyword">let</span> remoteDataStore = <span class="type">UserApi</span>()</span><br><span class="line"><span class="keyword">let</span> dataStore = <span class="type">CacheBackedDataStore</span>(localDataStore, remoteDataStore)</span><br><span class="line"></span><br><span class="line">dataStore.fetch(userID) &#123; result <span class="keyword">in</span></span><br><span class="line">  <span class="comment">// handle result</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2021/07/06/generics/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -2237,7 +2220,7 @@
           <li><a class="flat-box"
             title="/categories/iOS/" href="/categories/iOS/"
             id="categoriesiOS"
-            ><div class='name'>iOS</div><div class='badge'>(37)</div></a></li>
+            ><div class='name'>iOS</div><div class='badge'>(38)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"
